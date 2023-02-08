@@ -1,0 +1,18 @@
+{
+    "name": "Title.Installer",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1a9cb46e2049bdd438b2ce2f41d19273",
+        "GUID:1ce4379757ae3804ca5876b9b410cc89",
+        "GUID:96f25d618919efa45b6d235ae74b899a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
