@@ -5,9 +5,9 @@ namespace Robo
 {
     public class TitleView : MonoBehaviour, ITitleView
     {
-        [SerializeField] private AnimatedButton startButton;
-        [SerializeField] private AnimatedButton settingsButton;
-        [SerializeField] private AnimatedButton exitButton;
+        [SerializeField] private AnimatedButton startButton;   //ゲーム開始ボタン
+        [SerializeField] private AnimatedButton settingsButton;//設定ボタン
+        [SerializeField] private AnimatedButton exitButton;    //ゲーム終了ボタン
 
         public event Action OnClickStartButton;
         public event Action OnClickSettingsButton;
