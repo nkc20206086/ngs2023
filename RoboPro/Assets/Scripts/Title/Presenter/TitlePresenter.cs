@@ -5,8 +5,8 @@
         public TitlePresenter(ITitleModel model, ITitleView view)
         {
             view.OnClickStartButton += model.Start;
-            view.OnClickStartButton += model.ShowSettings;
-            view.OnClickStartButton += model.Exit;
+            view.OnClickSettingsButton += model.ShowSettings;
+            view.OnClickExitButton += model.Exit;
         }
     }
 }

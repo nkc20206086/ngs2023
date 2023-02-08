@@ -15,6 +15,7 @@ namespace Robo
 
         private void Start()
         {
+            //ボタンがクリックされたときに呼ばれるイベントをボタンに追加
             startButton.OnClick += OnClickStartButton;
             settingsButton.OnClick += OnClickSettingsButton;
             exitButton.OnClick += OnClickExitButton;

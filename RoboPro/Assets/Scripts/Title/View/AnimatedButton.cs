@@ -8,6 +8,8 @@ namespace Robo
     public class AnimatedButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Animator animator;
+
+        //クリックやマウスエンターしたときのアニメーショントリガー名
         [SerializeField] private string clickAnimTriggerName = "OnClick";
         [SerializeField] private string enterAnimTriggerName = "OnEnter";
         [SerializeField] private string exitAnimTriggerName = "OnExit";
