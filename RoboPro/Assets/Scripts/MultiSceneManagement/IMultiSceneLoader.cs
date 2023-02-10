@@ -6,6 +6,15 @@ namespace Robo
 {
     public interface IMultiSceneLoader
     {
+        /// <summary>シーンを追加したときに呼ばれるコールバック</summary>
+        event Action<SceneID> OnAddScene;
+
+        /// <summary>シーンを削除したときに呼ばれるコールバック</summary>
+        event Action<SceneID> OnUnloadScene;
+
+        /// <summary>シーンをアクティブにしたときに呼ばれるコールバック</summary>
+        event Action<SetActiveSceneArgs> OnActiveScene;    
+        
         /// <summary>シーン追加</summary>
         UniTask AddScene(SceneID id, bool autoChangeActiveScene);
 
