@@ -2,8 +2,11 @@
     "name": "RoboPro.Audio.Presenter",
     "rootNamespace": "",
     "references": [
-        "GUID:4dd92ba21a9ebfe4382a293f78d1a809",
+        "GUID:8b68a5da5e57f6f429aa082e13645cf5",
+        "GUID:6d11fd2c4b53d3d4485d52948abff7d1",
         "GUID:2dd42d9c3a10bb544b178dcb7877dfbf",
+        "GUID:859f3b55137e42143b4ff1f40dba8642",
+        "GUID:4dd92ba21a9ebfe4382a293f78d1a809",
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],

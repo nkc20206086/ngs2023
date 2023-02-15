@@ -5,11 +5,14 @@ namespace Robo
     public class AudioSettingsPresenter
     {
         [Inject]
-        public AudioSettingsPresenter(IAudioSettings model, IAudioSettingsView view)
+        public AudioSettingsPresenter(IAudioSettings settings, IAudioPlayer player)
         {
-            model.OnSetMasterVolume += view.SetMasterVolume;
-            model.OnSetBGMVolume += view.SetBGMVolume;
-            model.OnSetSEVolume += view.SetSEVolume;
+            settings.OnSetMasterVolume += player.SetMasterVolume;
+            settings.OnSetBGMVolume += player.SetBGMVolume;
+            settings.OnSetSEVolume += player.SetSEVolume;
+
+            var settingsData = settings.GetSettingsData();
+            player.Initalize(new AudioPlayerData(settingsData.MasterVolume, settingsData.BGMVolume, settingsData.SEVolume));
         }
     }
 }
