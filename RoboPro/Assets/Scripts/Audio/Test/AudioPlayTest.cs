@@ -1,47 +1,45 @@
-using Robo;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Zenject;
+using UnityEngine.SceneManagement;
 
 public class AudioPlayTest : MonoBehaviour
 {
-    [SerializeField] 
-    private List<CueSheetType> sheetTypes = new List<CueSheetType>();
-    
-    [Inject]
-    private IAudioPlayer audioPlayer;
-
-    private void Start()
+    private void Awake()
     {
-        audioPlayer.Initalize(new AudioPlayerData(1, 1, 1));
-        audioPlayer.LoadSheets(sheetTypes);
+        DontDestroyOnLoad(this);    
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            audioPlayer.PlaySE(CueSheetType.Player, "shutter");
+            SceneManager.LoadSceneAsync("AudioTest", LoadSceneMode.Additive);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            audioPlayer.PlaySE(CueSheetType.Menu, "sci_fi");
+            SceneManager.LoadSceneAsync("AudioTest2", LoadSceneMode.Additive);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            audioPlayer.PlaySE(CueSheetType.Stage, "rex");
+            if (IsLoaded("AudioTest")) SceneManager.UnloadSceneAsync("AudioTest");
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            audioPlayer.PlayBGMFade(CueSheetType.yuboku, 1000, 1000, true);
+            if (IsLoaded("AudioTest2")) SceneManager.UnloadSceneAsync("AudioTest2");
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+    }
+
+    private bool IsLoaded(string sceneName)
+    {
+        var sceneCount = SceneManager.sceneCount;
+
+        for (var i = 0; i < sceneCount; i++)
         {
-            audioPlayer.PlayBGMFade(CueSheetType.youkou, 1000, 1000, true);
+            var scene = SceneManager.GetSceneAt(i);
+
+            if (scene.name == sceneName && scene.isLoaded) return true;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            audioPlayer.StopBGM();
-        }
+
+        return false;
     }
 }

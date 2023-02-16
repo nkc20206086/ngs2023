@@ -9,12 +9,29 @@ namespace Robo
         [SerializeField]
         private List<CueSheetType> sheetTypes;
 
+        [HideInInspector]
+        public bool isSceneLoadToPlayBGM = false;
+
+        [HideInInspector]
+        public CueSheetType sceneLoadToPlayBGM;
+
+        [HideInInspector]
+        public int bgmFadeMilliSecond = 1000;
+
+        [HideInInspector]
+        public bool crossFadeBGM = true;
+
         [Inject]
         private IAudioPlayer audioPlayer;
 
-        private void Start()
+        private async void Start()
         {
-            audioPlayer.LoadSheets(sheetTypes);
+            await audioPlayer.LoadSheets(sheetTypes);
+
+            if(isSceneLoadToPlayBGM)
+            {
+                audioPlayer.PlayBGMFade(sceneLoadToPlayBGM, bgmFadeMilliSecond, bgmFadeMilliSecond, crossFadeBGM);
+            }
         }
 
         private void OnDestroy()
