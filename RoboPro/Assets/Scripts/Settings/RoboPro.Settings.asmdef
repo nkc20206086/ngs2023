@@ -1,9 +1,7 @@
 {
-    "name": "RoboPro.Screen.Installer",
+    "name": "RoboPro.Settings",
     "rootNamespace": "",
     "references": [
-        "GUID:2f2b3d40fd278204492a20f36aa3ebae",
-        "GUID:68bd3f8784a1c694b9cae83be9b3b7a5",
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
     ],
     "includePlatforms": [],
