@@ -6,18 +6,23 @@ namespace Robo
 {
     public class SceneAudioImporter : MonoBehaviour
     {
+        /// <summary>読み込むキューシート一覧</summary>
         [SerializeField]
         private List<CueSheetType> sheetTypes;
 
+        /// <summary>シーンをロードしたときにBGMを鳴らすかどうか</summary>
         [HideInInspector]
         public bool isSceneLoadToPlayBGM = false;
 
+        /// <summary>シーンロードしたときに鳴らすBGM</summary>
         [HideInInspector]
         public CueSheetType sceneLoadToPlayBGM;
 
+        /// <summary>BGMのフェードイン、アウトの時間(ms)</summary>
         [HideInInspector]
         public int bgmFadeMilliSecond = 1000;
 
+        /// <summary>BGMをクロスフェードさせるかどうか</summary>
         [HideInInspector]
         public bool crossFadeBGM = true;
 
@@ -26,8 +31,10 @@ namespace Robo
 
         private async void Start()
         {
+            //シーンが生成された後、キューシートをロードする
             await audioPlayer.LoadSheets(sheetTypes);
 
+            //BGMを鳴らす
             if(isSceneLoadToPlayBGM)
             {
                 audioPlayer.PlayBGMFade(sceneLoadToPlayBGM, bgmFadeMilliSecond, bgmFadeMilliSecond, crossFadeBGM);
@@ -36,6 +43,7 @@ namespace Robo
 
         private void OnDestroy()
         {
+            //シーンがアンロードされるとき、キューシートをアンロードする
             audioPlayer.UnloadSheets(sheetTypes);
         }
     }
