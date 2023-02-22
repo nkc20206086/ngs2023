@@ -9,9 +9,27 @@ namespace Robo
         [SerializeField] private AnimatedButton settingsButton;//設定ボタン
         [SerializeField] private AnimatedButton exitButton;    //ゲーム終了ボタン
 
-        public event Action OnClickStartButton;
-        public event Action OnClickSettingsButton;
-        public event Action OnClickExitButton;
+        private event Action OnClickStartButton;
+        private event Action OnClickSettingsButton;
+        private event Action OnClickExitButton;
+
+        event Action ITitleView.OnClickStartButton
+        {
+            add => OnClickStartButton += value;
+            remove => OnClickStartButton -= value;
+        }
+
+        event Action ITitleView.OnClickSettingsButton
+        {
+            add => OnClickSettingsButton += value;
+            remove => OnClickSettingsButton -= value;
+        }
+
+        event Action ITitleView.OnClickExitButton
+        {
+            add => OnClickExitButton += value;
+            remove => OnClickExitButton -= value;
+        }
 
         private void Start()
         {

@@ -5,26 +5,44 @@ namespace Robo
 {
     public class TitleModel : ITitleModel
     {
-        public event Action OnStart;
-        public event Action OnShowSettings;
-        public event Action OnExit;
+        private event Action OnStart;
+        private event Action OnShowSettings;
+        private event Action OnExit;
+
+        event Action ITitleModel.OnStart
+        {
+            add => OnStart += value;
+            remove => OnStart -= value;
+        }
+
+        event Action ITitleModel.OnShowSettings
+        {
+            add => OnShowSettings += value;
+            remove => OnShowSettings -= value;
+        }
+
+        event Action ITitleModel.OnExit
+        {
+            add => OnExit += value;
+            remove => OnExit -= value;
+        }
 
         //ゲーム開始
-        public void Start()
+        void ITitleModel.Start()
         {
             OnStart?.Invoke();
             Debug.Log("Start");
         }
 
         //設定画面を開く
-        public void ShowSettings()
+        void ITitleModel.ShowSettings()
         {
             OnShowSettings?.Invoke();
             Debug.Log("Show");
         }
 
         //ゲーム終了
-        public void Exit()
+        void ITitleModel.Exit()
         {
             OnExit?.Invoke();
             Debug.Log("Exit");
