@@ -12,19 +12,19 @@ namespace Robo
         }
 
         //停止
-        public void Stop(bool ignoresReleaseTime)
+        void IAudioPlayBack.Stop(bool ignoresReleaseTime)
         {
             playBack.Stop(ignoresReleaseTime);
         }
 
         //ポーズ
-        public void Pause(bool ignoresReleaseTime)
+        void IAudioPlayBack.Pause(bool ignoresReleaseTime)
         {
             playBack.Pause(ignoresReleaseTime);
         }
 
         //ポーズから復帰し、再開する
-        public void Resume()
+        void IAudioPlayBack.Resume()
         {
             playBack.Resume(CriAtomEx.ResumeMode.AllPlayback);
         }
