@@ -9,17 +9,17 @@ namespace Robo
         public event Action<int> OnSetResolution;
         public event Action<bool> OnSetIsFullScreen;
 
-        public void SetResolution(int id)
+        void IScreenSettings.SetResolution(int id)
         {
             OnSetResolution?.Invoke(id);
         }
 
-        public void SetIsFullScreen(bool isFullScreen)
+        void IScreenSettings.SetIsFullScreen(bool isFullScreen)
         {
             OnSetIsFullScreen?.Invoke(isFullScreen);
         }
 
-        public Resolution GetNowResolution()
+        Resolution IScreenSettings.GetNowResolution()
         {
             Resolution res = new Resolution();
             res.width = Screen.width;
@@ -27,17 +27,17 @@ namespace Robo
             return res;
         }
 
-        public Resolution GetResolution(int id)
+        Resolution IScreenSettings.GetResolution(int id)
         {
             return Screen.resolutions[id];
         }
 
-        public Resolution[] GetResolutions()
+        Resolution[] IScreenSettings.GetResolutions()
         {
             return Screen.resolutions;
         }
 
-        public IGetSettingsData GetSettingsData()
+        IGetSettingsData IScreenSettings.GetSettingsData()
         {
             return OnGetSettingsData();
         }

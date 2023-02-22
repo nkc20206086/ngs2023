@@ -13,10 +13,34 @@ namespace Robo
         [SerializeField]
         private Dropdown screenResolutionsDropdown;
 
-        public event Func<IGetSettingsData> GetSettingsData;
-        public event Func<Resolution[]> GetResolutions;
-        public event Action<bool> OnSetIsFullScreen;
-        public event Action<int> OnSetScreenResolution;
+        private event Func<IGetSettingsData> GetSettingsData;
+        private event Func<Resolution[]> GetResolutions;
+        private event Action<bool> OnSetIsFullScreen;
+        private event Action<int> OnSetScreenResolution;
+
+        event Func<IGetSettingsData> IScreenSettingsEditView.GetSettingsData
+        {
+            add => GetSettingsData += value;
+            remove => GetSettingsData -= value;
+        }
+
+        event Func<Resolution[]> IScreenSettingsEditView.GetResolutions
+        {
+            add => GetResolutions += value;
+            remove => GetResolutions -= value;
+        }
+
+        event Action<bool> IScreenSettingsEditView.OnSetIsFullScreen
+        {
+            add => OnSetIsFullScreen += value;
+            remove => OnSetIsFullScreen -= value;
+        }
+
+        event Action<int> IScreenSettingsEditView.OnSetScreenResolution
+        {
+            add => OnSetScreenResolution += value;
+            remove => OnSetScreenResolution -= value;
+        }
 
         public void Start()
         {

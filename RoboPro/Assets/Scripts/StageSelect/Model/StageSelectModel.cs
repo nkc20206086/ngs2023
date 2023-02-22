@@ -13,14 +13,14 @@ namespace Robo
         private int length;
 
         //初期化
-        public void Initalize(StageSelectModelArgs args)
+        void IStageSelectModel.Initalize(StageSelectModelArgs args)
         {
             length = args.StageLength;
             OnInitalize?.Invoke(args);
         }
 
         //ステージを選択s
-        public void Select(int index)
+        void IStageSelectModel.Select(int index)
         {
             if (index >= length || index < 0)
             {
@@ -33,19 +33,19 @@ namespace Robo
         }
 
         //次のステージを選択
-        public void SelectNext()
+        void IStageSelectModel.SelectNext()
         {
-            Select(stageIndex + 1);
+            ((IStageSelectModel)this).Select(stageIndex + 1);
         }
 
         //前のステージを選択
-        public void SelectPrevious()
+        void IStageSelectModel.SelectPrevious()
         {
-            Select(stageIndex - 1);
+            ((IStageSelectModel)this).Select(stageIndex - 1);
         }
 
         //ステージをプレイ
-        public void Play()
+        void IStageSelectModel.Play()
         {
             UnityEngine.Debug.Log("ステージ"+ stageIndex + "をプレイ");
             OnPlay?.Invoke();

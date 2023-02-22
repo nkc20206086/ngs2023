@@ -9,8 +9,20 @@ namespace Robo
         [SerializeField] private Button saveButton;
         [SerializeField] private Button loadButton;
 
-        public event Action OnSave;
-        public event Action OnLoad;
+        private event Action OnSave;
+        private event Action OnLoad;
+
+        event Action ISettingsEditView.OnSave
+        {
+            add => OnSave += value;
+            remove => OnSave -= value;
+        }
+
+        event Action ISettingsEditView.OnLoad
+        {
+            add => OnLoad += value;
+            remove => OnLoad -= value;
+        }
 
         private void Start()
         {

@@ -4,27 +4,51 @@ namespace Robo
 {
     public class AudioSettings : IAudioSettings
     {
-        public event Func<IGetSettingsData> OnGetSettingsData;
-        public event Action<float> OnSetMasterVolume;
-        public event Action<float> OnSetBGMVolume;
-        public event Action<float> OnSetSEVolume;
+        private event Func<IGetSettingsData> OnGetSettingsData;
+        private event Action<float> OnSetMasterVolume;
+        private event Action<float> OnSetBGMVolume;
+        private event Action<float> OnSetSEVolume;
 
-        public void SetMasterVolume(float volume)
+        event Func<IGetSettingsData> IAudioSettings.OnGetSettingsData
+        {
+            add => OnGetSettingsData += value;
+            remove => OnGetSettingsData -= value;
+        }
+
+        event Action<float> IAudioSettings.OnSetMasterVolume
+        {
+            add => OnSetMasterVolume += value;
+            remove => OnSetMasterVolume -= value;
+        }
+
+        event Action<float> IAudioSettings.OnSetBGMVolume
+        {
+            add => OnSetBGMVolume += value;
+            remove => OnSetBGMVolume -= value;
+        }
+
+        event Action<float> IAudioSettings.OnSetSEVolume
+        {
+            add => OnSetSEVolume += value;
+            remove => OnSetSEVolume -= value;
+        }
+
+        void IAudioSettings.SetMasterVolume(float volume)
         {
             OnSetMasterVolume?.Invoke(volume);
         }
 
-        public void SetBGMVolume(float volume)
+        void IAudioSettings.SetBGMVolume(float volume)
         {
             OnSetBGMVolume?.Invoke(volume);
         }
 
-        public void SetSEVolume(float volume)
+        void IAudioSettings.SetSEVolume(float volume)
         {
             OnSetSEVolume?.Invoke(volume);
         }
 
-        public IGetSettingsData GetSettingsData()
+        IGetSettingsData IAudioSettings.GetSettingsData()
         {
             return OnGetSettingsData();
         }

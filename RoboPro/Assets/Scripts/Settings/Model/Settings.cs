@@ -31,7 +31,7 @@ namespace Robo
             screen.OnSetIsFullScreen += (isFullScreen) => data.IsFullScreen = isFullScreen;
             screen.OnGetSettingsData += GetData;
 
-            Load();
+            ((ISettings)this).Load();
         }
 
         //セーブファイルまでのディレクトリ、またはファイルがなければ生成する
@@ -47,7 +47,7 @@ namespace Robo
             }
         }
 
-        public void Save()
+        void ISettings.Save()
         {
             CheckExistsFile();
             string json = JsonUtility.ToJson(data);
@@ -64,7 +64,7 @@ namespace Robo
             }
         }
 
-        public void Load()
+        void ISettings.Load()
         {
             CheckExistsFile();
             try 

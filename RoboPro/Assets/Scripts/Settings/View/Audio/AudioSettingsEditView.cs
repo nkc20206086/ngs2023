@@ -13,16 +13,40 @@ namespace Robo
         [SerializeField]
         private Slider se_volume_slider;
 
-        public event Func<IGetSettingsData> GetSettingsData;
-        public event Action<float> OnSetMasterVolume;
-        public event Action<float> OnSetBGMVolume;
-        public event Action<float> OnSetSEVolume;
+        private event Func<IGetSettingsData> GetSettingsData;
+        private event Action<float> OnSetMasterVolume;
+        private event Action<float> OnSetBGMVolume;
+        private event Action<float> OnSetSEVolume;
 
         public enum AudioType
         {
             Master,
             BGM,
             SE,
+        }
+
+        event Func<IGetSettingsData> IAudioSettingsEditView.GetSettingsData
+        {
+            add => GetSettingsData += value;
+            remove => GetSettingsData -= value;
+        }
+
+        event Action<float> IAudioSettingsEditView.OnSetMasterVolume
+        {
+            add => OnSetMasterVolume += value;
+            remove => OnSetMasterVolume -= value;
+        }
+
+        event Action<float> IAudioSettingsEditView.OnSetBGMVolume
+        {
+            add => OnSetBGMVolume += value;
+            remove => OnSetBGMVolume -= value;
+        }
+
+        event Action<float> IAudioSettingsEditView.OnSetSEVolume
+        {
+            add => OnSetSEVolume += value;
+            remove => OnSetSEVolume -= value;
         }
 
         private void Start()
