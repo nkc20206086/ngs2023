@@ -11,13 +11,31 @@ namespace Robo
         [SerializeField] private Transform elementsParent;
         [SerializeField] private float moveDuration = 0.25f;
 
-        public event Action OnSelectNextKey;
-        public event Action OnSelectPreviousKey;
-        public event Action OnPlay;
+        private event Action OnSelectNextKey;
+        private event Action OnSelectPreviousKey;
+        private event Action OnPlay;
 
         private List<StageSelectElementView> elements = new List<StageSelectElementView>();
 
-        public void Initalize(StageSelectModelArgs args)
+        event Action IStageSelectView.OnSelectNextKey
+        {
+            add => OnSelectNextKey += value;
+            remove => OnSelectNextKey -= value;
+        }
+
+        event Action IStageSelectView.OnSelectPreviousKey
+        {
+            add => OnSelectPreviousKey += value;
+            remove => OnSelectPreviousKey -= value;
+        }
+
+        event Action IStageSelectView.OnPlay
+        {
+            add => OnPlay += value;
+            remove => OnPlay -= value;
+        }
+
+        void IStageSelectView.Initalize(StageSelectModelArgs args)
         {
             for(int i = 0; i < args.StageLength;i++)
             {
@@ -28,14 +46,14 @@ namespace Robo
         }
 
         //ステージ選択
-        public void Select(int idx)
+        void IStageSelectView.Select(int idx)
         {
             Vector3 position = elements[idx].transform.localPosition;
             elementsParent.DOLocalMoveX(-position.x, moveDuration);
         }
 
         //選択不可能範囲に移動すると警告が出る
-        public void SelectError(int idx)
+        void IStageSelectView.SelectError(int idx)
         {
             Debug.Log("これ以上進めない");
         }
