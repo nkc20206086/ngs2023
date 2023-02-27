@@ -1,9 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace Robo
 {
-    public interface IStageSelectView 
+    public interface IStageSelectView
     {
+        IReadOnlyList<StageSelectElementInfo> Infos { get; }
+        IReadOnlyList<StageSelectElementView> Elements { get; }
+
+        event Action<int> OnSelect;
+        event Action<int> OnDeselect;
         event Action OnSelectNextKey;
         event Action OnSelectPreviousKey;
         event Action OnPlay;
