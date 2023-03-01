@@ -27,11 +27,12 @@ public class TestPlayerMove : MonoBehaviour
             moveFlg = false;
         }
 
+        PlayerController();
+
         AnimationTest();
-        Controller();
     }
 
-    private void Controller()
+    private void PlayerController()
     {
         // カメラの向きを基準にした正面方向のベクトル
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -45,7 +46,7 @@ public class TestPlayerMove : MonoBehaviour
         // プレイヤーの向きを入力の向きに変更
         transform.LookAt(transform.position + moveZ + moveX);
 
-        // Move は指定したベクトルだけ移動させる命令
+        // 正面に進む
         if (moveFlg == true)
         {
             gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
