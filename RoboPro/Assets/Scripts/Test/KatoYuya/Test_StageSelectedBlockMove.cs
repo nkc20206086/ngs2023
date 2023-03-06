@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Test_StageSelectedBlockMove : MonoBehaviour
 {
+    private readonly float blockHighestPos = 10f;
     [SerializeField]
     private GameObject blockObj;
 
@@ -24,6 +26,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
     private Vector3[] randomPos;
     private Vector3[] makedPos;
+    private int currentCubeNum;
+    private float[] heights;
+    private Vector2Int[] makedPosRand;
     private Vector3 objSize;
     private List<Matrix4x4> instData = new List<Matrix4x4>();
 
@@ -34,6 +39,24 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     {
         instanceNum = stageSize.x * stageSize.y;
 
+        InitBlock();
+
+        InitGenerate(instanceNum);
+
+        randomPos = new Vector3[instanceNum];
+
+        for (int i = 0; i < instanceNum; i++)
+        {
+            float randomPosX = (Random.Range(-1f, 1f)) * 10f;
+            float randomPosY = (Random.Range(-1f, 1f)) * 10f;
+            float randomPosZ = (Random.Range(-1f, 1f)) * 10f;
+
+            randomPos[i] = new Vector3(randomPosX, randomPosY, randomPosZ);
+        }
+    }
+
+    private void InitBlock()
+    {
         MeshRenderer[] meshRenderers = blockObj.GetComponentsInChildren<MeshRenderer>();
         materials = new Material[meshRenderers.Length];
         for (int i = 0; i < materials.Length; i++)
@@ -48,24 +71,41 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
         {
             meshes[i] = meshFilters[i].sharedMesh;
         }
+    }
 
+    private void InitGenerate(int instanceNum)
+    {
         makedPos = new Vector3[instanceNum];
-        randomPos = new Vector3[instanceNum];
-        for (int i = 0; i < instanceNum; i++)
+        makedPosRand = new Vector2Int[instanceNum];    // ƒ‰ƒ“ƒ_ƒ€‚É¶¬‚·‚é‡”Ô‚ðŒˆ‚ß‚é   makedPosSeed‚Æ‚©‚É‚µ‚½‚¢‚©‚È
+        for (int i = 0; i < stageSize.x; i++)
         {
-            float randomPosX = (Random.Range(-1f, 1f)) * 10f;
-            float randomPosY = (Random.Range(-1f, 1f)) * 10f;
-            float randomPosZ = (Random.Range(-1f, 1f)) * 10f;
-
-            randomPos[i] = new Vector3(randomPosX, randomPosY, randomPosZ);
+            for (int j = 0; j < stageSize.y; j++)
+            {
+                makedPosRand[i * stageSize.x + j] = new Vector2Int(i + 1, j + 1);
+            }
         }
+        System.Random rand = new System.Random();
+        makedPosRand = makedPosRand.OrderBy(x => rand.Next()).ToArray();
 
+        currentCubeNum = 0;
+        heights = Enumerable.Repeat(blockHighestPos, instanceNum).ToArray();
         objSize = blockObj.transform.localScale;
     }
 
-    void Update()
+    private void StageDestroy(float activateTime)
     {
 
+    }
+
+    private void StageGenerate(float activateTime)
+    {
+
+    }
+
+
+
+    void Update()
+    {
         instData.Clear();
         
         int num = 0;
@@ -75,7 +115,7 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
             {
                 makedPos[num].x = Mathf.Lerp(i - stageSize.x * .5f - .5f, randomPos[num].x, stageBreakRatio);
                 makedPos[num].y = Mathf.Lerp(0, randomPos[num].y, stageBreakRatio);
-                makedPos[num].z = Mathf.Lerp(j - stageSize.x * .5f - .5f, randomPos[num].z, stageBreakRatio);
+                makedPos[num].z = Mathf.Lerp(j - stageSize.y * .5f - .5f, randomPos[num].z, stageBreakRatio);
                 num++;
             }
         }
@@ -86,21 +126,37 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
         if(stageBreakRatio == 1f)
         {
-            int num2 = 0;
-            for (int i = 1; i <= stageSize.x; i++)
+            for (int i = 1; i <= instanceNum; i++)
             {
-                for (int j = 1; j <= stageSize.y; j++)
+                makedPos[i - 1].x = makedPosRand[i - 1].x - stageSize.x * .5f - .5f;
+                makedPos[i - 1].y = heights[i-1];
+                makedPos[i - 1].z = makedPosRand[i - 1].y - stageSize.y * .5f - .5f;
+
+                objSize.x = 1f;
+                objSize.y = 1f;
+                objSize.z = 1f;
+
+                if (i == instanceNum) upSet = true;
+            }
+
+            if (currentCubeNum < instanceNum)
+            {
+                heights[currentCubeNum] = Mathf.Max(heights[currentCubeNum] - 2f, 0f);
+                makedPos[currentCubeNum].y = heights[currentCubeNum];
+                if (makedPos[currentCubeNum].y <= 0f)
                 {
-                    makedPos[num2].x = i - stageSize.x * .5f - .5f;
-                    makedPos[num2].y = Mathf.Lerp((num2 + Mathf.Lerp(10f, 0f, stageCreateRatio)), 0f, stageCreateRatio);
-                    makedPos[num2].z = j - stageSize.x * .5f - .5f;
-                    num2++;
+                    currentCubeNum++;
                 }
             }
 
-            objSize.x = Mathf.Lerp(0, 1, stageCreateRatio);
-            objSize.y = Mathf.Lerp(0, 1, stageCreateRatio);
-            objSize.z = Mathf.Lerp(0, 1, stageCreateRatio);
+            //if(upSet)
+            //{
+            //    
+            //}
+
+            objSize.x = 1f;
+            objSize.y = 1f;
+            objSize.z = 1f;
         }
 
         for (int i = 0; i < instanceNum; i++)
