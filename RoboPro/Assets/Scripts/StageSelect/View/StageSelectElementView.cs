@@ -25,14 +25,11 @@ namespace Robo
         [Inject]
         private IStageSelectElementInfoView elementInfoView;
 
-        public StageSelectElementInfo Info { get; private set; }
-
         private int index;
 
-        public void Initalize(StageSelectElementInfo info, int idx)
+        public void Initalize(StageSelectElementInfo info, int index)
         {
-            Info = info;
-            index = idx;
+            this.index = index;
             icon.sprite = info.StageIcon;
         }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+//ステージセレクトに必要なデータをInjectしてステージセレクトを初期化するテストクラス
+//StageSelectシーンで使用中
 public class Test : MonoBehaviour
 {
     [Inject] 

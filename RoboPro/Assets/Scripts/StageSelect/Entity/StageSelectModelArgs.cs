@@ -7,7 +7,7 @@ namespace Robo
         //ステージの長さ
         public readonly IReadOnlyList<StageSelectElementInfo> Infos;
 
-        public StageSelectModelArgs(List<StageSelectElementInfo> elements)
+        public StageSelectModelArgs(IReadOnlyList<StageSelectElementInfo> elements)
         {
             this.Infos = elements;
         }
