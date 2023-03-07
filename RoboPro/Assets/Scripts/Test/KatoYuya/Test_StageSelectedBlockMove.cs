@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
 
 public class Test_StageSelectedBlockMove : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
 
     [SerializeField]
-    private Vector2Int stageSize;
+    private Vector3Int stageSize;
 
     [SerializeField]
     private bool upSet = false;
@@ -28,8 +29,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     private Vector3[] makedPos;
     private int currentCubeNum;
     private float[] heights;
-    private Vector2Int[] makedPosRand;
+    private Vector3Int[] makedPosRand;
     private Vector3 objSize;
+    private Vector3[] objSizes;
     private List<Matrix4x4> instData = new List<Matrix4x4>();
 
     private Mesh[] meshes = new Mesh[0];
@@ -37,7 +39,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
     void Start()
     {
-        instanceNum = stageSize.x * stageSize.y;
+        //instanceNum = stageSize.x * stageSize.y;
+
+        instanceNum = 5 * 5 * 5;
 
         InitBlock();
 
@@ -55,6 +59,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 生成するブロックオブジェクトの情報で初期化
+    /// </summary>
     private void InitBlock()
     {
         MeshRenderer[] meshRenderers = blockObj.GetComponentsInChildren<MeshRenderer>();
@@ -73,95 +80,89 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 生成に必要な情報を初期化
+    /// </summary>
+    /// <param name="instanceNum">ブロックの個数</param>
     private void InitGenerate(int instanceNum)
     {
         makedPos = new Vector3[instanceNum];
-        makedPosRand = new Vector2Int[instanceNum];    // ランダムに生成する順番を決める   makedPosSeedとかにしたいかな
+        makedPosRand = new Vector3Int[instanceNum];    // ランダムに生成する順番を決める   makedPosSeedとかにしたいかな
+        int[] makedPosRandX = new int[stageSize.x];
+        for (int i = 0; i < makedPosRandX.Length; i++)
+        {
+            makedPosRandX[i] = i;
+        }
+        Shuffle(ref makedPosRandX);
+
+        int[] makedPosRandZ = new int[stageSize.z];
+        for (int i = 0; i < makedPosRandZ.Length; i++)
+        {
+            makedPosRandZ[i] = i;
+        }
+        Shuffle(ref makedPosRandZ);
+
+        Vector2Int[] makedPosXZ = new Vector2Int[stageSize.x * stageSize.z];
+        makedPosXZ = MakedPosRandXZ(ref makedPosXZ);
+
+        int num = 0;
         for (int i = 0; i < stageSize.x; i++)
         {
             for (int j = 0; j < stageSize.y; j++)
             {
-                makedPosRand[i * stageSize.x + j] = new Vector2Int(i + 1, j + 1);
+                for (int k = 0; k < stageSize.z; k++)
+                {
+                    //makedPosRand[num] = new Vector3Int(makedPosRandX[j], (stageSize.y - i), makedPosRandZ[k]);
+                    makedPosRand[num] = new Vector3Int(makedPosXZ[j * stageSize.x + k].x, (stageSize.y - i), makedPosXZ[j * stageSize.x + k].y);
+
+                    Debug.Log(makedPosRand[num] + "BBB");
+                    num++;
+                }
             }
         }
-        System.Random rand = new System.Random();
-        makedPosRand = makedPosRand.OrderBy(x => rand.Next()).ToArray();
-
+        
         currentCubeNum = 0;
         heights = Enumerable.Repeat(blockHighestPos, instanceNum).ToArray();
         objSize = blockObj.transform.localScale;
+        objSizes = Enumerable.Repeat(objSize, instanceNum).ToArray();
     }
 
-    private void StageDestroy(float activateTime)
+    private Vector2Int[] MakedPosRandXZ(ref Vector2Int[] array)
     {
-
-    }
-
-    private void StageGenerate(float activateTime)
-    {
-
-    }
-
-
-
-    void Update()
-    {
-        instData.Clear();
-        
-        int num = 0;
-        for (int i = 1; i <= stageSize.x; i++)
+        for (int i = 0; i < stageSize.x; i++)
         {
-            for (int j = 1; j <= stageSize.y; j++)
+            for (int j = 0; j < stageSize.z; j++)
             {
-                makedPos[num].x = Mathf.Lerp(i - stageSize.x * .5f - .5f, randomPos[num].x, stageBreakRatio);
-                makedPos[num].y = Mathf.Lerp(0, randomPos[num].y, stageBreakRatio);
-                makedPos[num].z = Mathf.Lerp(j - stageSize.y * .5f - .5f, randomPos[num].z, stageBreakRatio);
-                num++;
+                array[i * stageSize.x + j] = new Vector2Int(i, j);
             }
         }
+        System.Random random = new System.Random();
+        array = array.OrderBy(x => random.Next()).ToArray();
 
-        objSize.x = Mathf.Lerp(1, 0, stageBreakRatio);
-        objSize.y = Mathf.Lerp(1, 0, stageBreakRatio);
-        objSize.z = Mathf.Lerp(1, 0, stageBreakRatio);
+        return array;
+    }
 
-        if(stageBreakRatio == 1f)
+    private void Shuffle(ref int[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
         {
-            for (int i = 1; i <= instanceNum; i++)
-            {
-                makedPos[i - 1].x = makedPosRand[i - 1].x - stageSize.x * .5f - .5f;
-                makedPos[i - 1].y = heights[i-1];
-                makedPos[i - 1].z = makedPosRand[i - 1].y - stageSize.y * .5f - .5f;
-
-                objSize.x = 1f;
-                objSize.y = 1f;
-                objSize.z = 1f;
-
-                if (i == instanceNum) upSet = true;
-            }
-
-            if (currentCubeNum < instanceNum)
-            {
-                heights[currentCubeNum] = Mathf.Max(heights[currentCubeNum] - 2f, 0f);
-                makedPos[currentCubeNum].y = heights[currentCubeNum];
-                if (makedPos[currentCubeNum].y <= 0f)
-                {
-                    currentCubeNum++;
-                }
-            }
-
-            //if(upSet)
-            //{
-            //    
-            //}
-
-            objSize.x = 1f;
-            objSize.y = 1f;
-            objSize.z = 1f;
+            int temp = array[i];
+            int rand = Random.Range(0, array.Length);
+            array[i] = array[rand];
+            array[rand] = temp;
         }
+    }
 
+    /// <summary>
+    /// ステージを描画する
+    /// </summary>
+    /// <param name="instanceNum">ブロックの個数</param>
+    private void StageRender(int instanceNum)
+    {
         for (int i = 0; i < instanceNum; i++)
         {
-            instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSize));
+            //instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSize));
+            instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSizes[i]));
         }
 
         if (instData.Count != 0)
@@ -169,14 +170,76 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
             for (int i = 0; i < meshes.Length; i++)
             {
                 var rparams = new RenderParams(materials[i]);
-
                 Graphics.RenderMeshInstanced(rparams, meshes[i], 0, instData);
             }
         }
     }
 
-    private void StageBreak()
+    /// <summary>
+    /// アニメーションありでステージを生成
+    /// </summary>
+    public void StageGenerateAnimate()
     {
 
+    }
+
+    /// <summary>
+    /// アニメーション無しでステージを生成
+    /// </summary>
+    /// <param name="instanceNum">ブロックの個数</param>
+    public void StageGenerateNonAnimate(int instanceNum)
+    {
+        instData.Clear();
+
+        for (int i = 0; i < instanceNum; i++)
+        {
+            makedPos[i].x = makedPosRand[i].x - stageSize.x * 0.5f + 0.5f;
+            makedPos[i].y = makedPosRand[i].y - stageSize.y * 0.5f + 0.5f;
+            makedPos[i].z = makedPosRand[i].z - stageSize.z * 0.5f + 0.5f;
+
+            heights[i] = makedPos[i].y;
+        }
+        
+        StageRender(instanceNum);
+    }
+
+    /// <summary>
+    /// ステージを破壊する
+    /// </summary>
+    /// <param name="activateTime">破壊にかかる時間</param>
+    public void StageDestroy(float activateTime, int instanceNum)
+    {
+        float moveSpeed = 5f;
+        instData.Clear();
+
+        for (int i = 0; i < instanceNum; i++)
+        {
+            float hight = Mathf.Clamp(instanceNum * blockHighestPos * (stageBreakRatio - i / (float)instanceNum), heights[i], blockHighestPos);
+            float diff = Mathf.Abs(makedPos[i].y - hight);
+            makedPos[i].y = hight;
+
+            float size = Mathf.Lerp(1f, 0f, diff / blockHighestPos);
+            objSizes[i] = new Vector3(size, size, size);
+        }
+        StageRender(instanceNum);
+    }
+
+    void Update()
+    {
+
+        if (upSet)
+        {
+            stageBreakRatio = Mathf.Min(stageBreakRatio + .005f, 1f);
+            StageDestroy(2f, instanceNum);
+        }
+        else
+        {
+            StageGenerateNonAnimate(5*5*5);
+        }
+    }
+
+    private void StageBreak()
+    {
+        
     }
 }

@@ -274,7 +274,7 @@ MonoBehaviour:
     type: 3}
   stageBreakRatio: 0
   stageCreateRatio: 0
-  stageSize: {x: 5, y: 5}
+  stageSize: {x: 5, y: 5, z: 5}
   upSet: 0
 --- !u!4 &1840917953
 Transform:
