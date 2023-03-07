@@ -105,12 +105,12 @@ namespace Robo
         }
 
         //SE‚ð–Â‚ç‚·
-        IAudioPlayBack IAudioPlayer.PlaySE(CueSheetType sheetType, string cueName)
+        IAudioPlayback IAudioPlayer.PlaySE(CueSheetType sheetType, string cueName)
         {
             if(cueSheets.ContainsKey(sheetType))
             {
                 sePlayer.SetCue(cueSheets[sheetType].acb, cueName);
-                return new AudioPlayBack(sePlayer.Start());
+                return new AudioPlayback(sePlayer.Start());
             }
             return null;
         }

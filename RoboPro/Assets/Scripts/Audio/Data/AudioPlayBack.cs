@@ -2,29 +2,29 @@
 
 namespace Robo
 {
-    public class AudioPlayBack : IAudioPlayBack
+    public class AudioPlayback : IAudioPlayback
     {
         private readonly CriAtomExPlayback playBack;
 
-        public AudioPlayBack(CriAtomExPlayback playBack)
+        public AudioPlayback(CriAtomExPlayback playBack)
         {
             this.playBack = playBack;
         }
 
         //停止
-        void IAudioPlayBack.Stop(bool ignoresReleaseTime)
+        void IAudioPlayback.Stop(bool ignoresReleaseTime)
         {
             playBack.Stop(ignoresReleaseTime);
         }
 
         //ポーズ
-        void IAudioPlayBack.Pause(bool ignoresReleaseTime)
+        void IAudioPlayback.Pause(bool ignoresReleaseTime)
         {
             playBack.Pause(ignoresReleaseTime);
         }
 
         //ポーズから復帰し、再開する
-        void IAudioPlayBack.Resume()
+        void IAudioPlayback.Restart()
         {
             playBack.Resume(CriAtomEx.ResumeMode.AllPlayback);
         }
