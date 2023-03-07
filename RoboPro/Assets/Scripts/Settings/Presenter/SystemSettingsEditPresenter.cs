@@ -2,7 +2,7 @@
 {
     public class SystemSettingsEditPresenter 
     {
-        public SystemSettingsEditPresenter(ISystemSettings model, ISystemSettingsEditView editView)
+        public SystemSettingsEditPresenter(ISystemSettingsControllable model, ISystemSettingsEditView editView)
         {
             editView.OnSave += model.Save;
             editView.OnLoad += model.Load;

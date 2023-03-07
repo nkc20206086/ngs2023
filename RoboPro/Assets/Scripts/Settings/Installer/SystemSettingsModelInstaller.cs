@@ -8,7 +8,7 @@ namespace Robo
         {
             Container.Bind<IAudioSettings>().To<AudioSettings>().AsSingle();
             Container.Bind<IScreenSettings>().To<ScreenSettings>().AsSingle();
-            Container.Bind<ISystemSettings>().To<SystemSettings>().AsSingle().NonLazy();
+            Container.Bind<ISystemSettingsControllable>().To<SystemSettings>().AsSingle().NonLazy();
         }
     }
 }

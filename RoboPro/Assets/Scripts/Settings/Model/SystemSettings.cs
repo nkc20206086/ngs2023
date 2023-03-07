@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Robo
 {
-    public class SystemSettings : ISystemSettings
+    public class SystemSettings : ISystemSettingsControllable
     {
         public const string SAVE_DIRECTORY_PATH = "Save";
         public const string SAVE_FILE_PATH = "option.json";
@@ -31,7 +31,7 @@ namespace Robo
             screen.OnSetIsFullScreen += (isFullScreen) => data.IsFullScreen = isFullScreen;
             screen.OnGetSettingsData += GetData;
 
-            ((ISystemSettings)this).Load();
+            ((ISystemSettingsControllable)this).Load();
         }
 
         //セーブファイルまでのディレクトリ、またはファイルがなければ生成する
@@ -47,7 +47,7 @@ namespace Robo
             }
         }
 
-        void ISystemSettings.Save()
+        void ISystemSettingsControllable.Save()
         {
             CheckExistsFile();
             string json = JsonUtility.ToJson(data);
@@ -64,7 +64,7 @@ namespace Robo
             }
         }
 
-        void ISystemSettings.Load()
+        void ISystemSettingsControllable.Load()
         {
             CheckExistsFile();
             try 

@@ -2,7 +2,7 @@
 
 namespace Robo
 {
-    public interface ISystemSettings
+    public interface ISystemSettingsControllable
     {
         event Action<IGetSystemSettingsData> OnLoad;
 
