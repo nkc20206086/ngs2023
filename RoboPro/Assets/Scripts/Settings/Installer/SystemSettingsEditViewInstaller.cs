@@ -3,10 +3,10 @@ using Zenject;
 
 namespace Robo
 {
-    public class SettingsEditViewInstaller : MonoInstaller
+    public class SystemSettingsEditViewInstaller : MonoInstaller
     {
         [SerializeField]
-        private SettingsEditView settingsEditView;
+        private SystemSettingsEditView settingsEditView;
         [SerializeField]
         private AudioSettingsEditView audioSettingsEditView;
         [SerializeField]
@@ -14,13 +14,13 @@ namespace Robo
 
         public override void InstallBindings()
         {
-            Container.BindInstance<ISettingsEditView>(settingsEditView);
+            Container.BindInstance<ISystemSettingsEditView>(settingsEditView);
             Container.BindInstance<IAudioSettingsEditView>(audioSettingsEditView);
             Container.BindInstance<IScreenSettingsEditView>(screenSettingsEditView);
 
             Container.Bind<AudioSettingsEditPresenter>().AsSingle().NonLazy();
             Container.Bind<ScreenSettingsEditPresenter>().AsSingle().NonLazy();
-            Container.Bind<SettingsEditPresenter>().AsSingle().NonLazy();
+            Container.Bind<SystemSettingsEditPresenter>().AsSingle().NonLazy();
         }
     }
 }

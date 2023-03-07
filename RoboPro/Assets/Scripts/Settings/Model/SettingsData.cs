@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Robo
 {
     [System.Serializable]
-    public class SettingsData : ISetSettingsData, IGetSettingsData
+    public class SettingsData : ISetSystemSettingsData, IGetSystemSettingsData
     {
         [SerializeField]
         private float master_volume;

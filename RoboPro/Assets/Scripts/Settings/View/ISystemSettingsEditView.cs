@@ -2,7 +2,7 @@
 
 namespace Robo
 {
-    public interface ISettingsEditView
+    public interface ISystemSettingsEditView
     {
         event Action OnSave;
         event Action OnLoad;

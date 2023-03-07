@@ -13,19 +13,12 @@ namespace Robo
         [SerializeField]
         private Slider se_volume_slider;
 
-        private event Func<IGetSettingsData> GetSettingsData;
+        private event Func<IGetSystemSettingsData> GetSettingsData;
         private event Action<float> OnSetMasterVolume;
         private event Action<float> OnSetBGMVolume;
         private event Action<float> OnSetSEVolume;
 
-        public enum AudioType
-        {
-            Master,
-            BGM,
-            SE,
-        }
-
-        event Func<IGetSettingsData> IAudioSettingsEditView.GetSettingsData
+        event Func<IGetSystemSettingsData> IAudioSettingsEditView.GetSettingsData
         {
             add => GetSettingsData += value;
             remove => GetSettingsData -= value;
@@ -52,9 +45,9 @@ namespace Robo
         private void Start()
         {
             //スライダーが変更されたとき、音量を変更
-            master_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioType.Master, volume));
-            bgm_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioType.BGM, volume));
-            se_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioType.SE, volume));
+            master_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioSettingsType.Master, volume));
+            bgm_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioSettingsType.BGM, volume));
+            se_volume_slider.onValueChanged.AddListener(volume => SetAudioMixerVolume(AudioSettingsType.SE, volume));
 
             //スライダーの値を、現在の設定と同じにする
             master_volume_slider.SetValueWithoutNotify(GetSettingsData().MasterVolume);
@@ -62,17 +55,17 @@ namespace Robo
             se_volume_slider.SetValueWithoutNotify(GetSettingsData().SEVolume);
         }
 
-        private void SetAudioMixerVolume(AudioType type, float volume)
+        private void SetAudioMixerVolume(AudioSettingsType type, float volume)
         {
             switch (type)
             {
-                case AudioType.Master:
+                case AudioSettingsType.Master:
                     OnSetMasterVolume?.Invoke(volume);
                     break;
-                case AudioType.BGM:
+                case AudioSettingsType.BGM:
                     OnSetBGMVolume?.Invoke(volume);
                     break;
-                case AudioType.SE:
+                case AudioSettingsType.SE:
                     OnSetSEVolume?.Invoke(volume);
                     break;
             }

@@ -1,6 +1,6 @@
 ﻿namespace Robo
 {
-    public interface ISetSettingsData
+    public interface ISetSystemSettingsData
     {
         float MasterVolume { get; set; }
         float BGMVolume { get; set; }

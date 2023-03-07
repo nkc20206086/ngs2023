@@ -5,7 +5,7 @@ namespace Robo
 {
     public class ScreenSettings : IScreenSettings
     {
-        public event Func<IGetSettingsData> OnGetSettingsData;
+        public event Func<IGetSystemSettingsData> OnGetSettingsData;
         public event Action<int> OnSetResolution;
         public event Action<bool> OnSetIsFullScreen;
 
@@ -37,7 +37,7 @@ namespace Robo
             return Screen.resolutions;
         }
 
-        IGetSettingsData IScreenSettings.GetSettingsData()
+        IGetSystemSettingsData IScreenSettings.GetSettingsData()
         {
             return OnGetSettingsData();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Robo
 {
-    public interface IGetSettingsData
+    public interface IGetSystemSettingsData
     {
         float MasterVolume { get; }
         float BGMVolume { get; }

@@ -4,7 +4,7 @@ namespace Robo
 {
     public interface IAudioSettingsEditView
     {
-        event Func<IGetSettingsData> GetSettingsData;
+        event Func<IGetSystemSettingsData> GetSettingsData;
         event Action<float> OnSetMasterVolume;
         event Action<float> OnSetBGMVolume;
         event Action<float> OnSetSEVolume;
