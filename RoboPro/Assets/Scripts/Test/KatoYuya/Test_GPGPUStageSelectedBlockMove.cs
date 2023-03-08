@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using DG.Tweening;
+using System.Runtime.InteropServices;
 
-public class Test_StageSelectedBlockMove : MonoBehaviour
+public class Test_GPGPUStageSelectedBlockMove : MonoBehaviour
 {
     private readonly float blockHighestPos = 10f;
-    [SerializeField]
-    private GameObject blockObj;
+
+    private int instanceNum;
 
     [SerializeField, Range(0f, 1f)]
     private float stageBreakRatio;
 
-    [SerializeField, Range(0f, 1f)]
-    private float stageCreateRatio;
+    [SerializeField]
+    private ComputeShader computeShader;
 
+    [SerializeField]
+    private GameObject blockObj;
 
     [SerializeField]
     private Vector3Int stageSize;
@@ -23,7 +25,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     [SerializeField]
     private bool upSet = false;
 
-    private int instanceNum;
+    private int kernelIndex;
+    private ComputeBuffer computeBuffer;
+    private ComputeBuffer baseHeightBuffer;
 
     private Vector3[] makedPos;
     private float[] heights;
@@ -37,13 +41,23 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
     void Start()
     {
-        //instanceNum = stageSize.x * stageSize.y;
-
         instanceNum = 5 * 5 * 5;
 
         InitBlock();
-
         InitGenerate(instanceNum);
+        InitComputeShader();
+    }
+
+    private void InitComputeShader()
+    {
+        kernelIndex = computeShader.FindKernel("CSMain");
+        computeBuffer = new ComputeBuffer(instanceNum, Marshal.SizeOf<float>());
+        computeBuffer.SetData(heights);
+        computeShader.SetBuffer(kernelIndex, "cubePosBuffer", computeBuffer);
+
+        baseHeightBuffer = new ComputeBuffer(instanceNum, Marshal.SizeOf<float>());
+        baseHeightBuffer.SetData(heights);
+        computeShader.SetBuffer(kernelIndex, "baseHeight", baseHeightBuffer);
     }
 
     /// <summary>
@@ -86,16 +100,17 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
             {
                 for (int k = 0; k < stageSize.z; k++)
                 {
-                    //makedPosRand[num] = new Vector3Int(makedPosRandX[j], (stageSize.y - i), makedPosRandZ[k]);
                     makedPosRand[num] = new Vector3Int(makedPosXZ[j * stageSize.x + k].x, (stageSize.y - i), makedPosXZ[j * stageSize.x + k].y);
-
-                    Debug.Log(makedPosRand[num] + "BBB");
                     num++;
                 }
             }
         }
-        
-        heights = Enumerable.Repeat(blockHighestPos, instanceNum).ToArray();
+
+        heights = new float[instanceNum];
+        for (int i = 0; i < instanceNum; i++)
+        {
+            heights[i] = makedPosRand[i].y - stageSize.y * 0.5f + 0.5f;
+        }
         objSize = blockObj.transform.localScale;
         objSizes = Enumerable.Repeat(objSize, instanceNum).ToArray();
     }
@@ -123,7 +138,6 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     {
         for (int i = 0; i < instanceNum; i++)
         {
-            //instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSize));
             instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSizes[i]));
         }
 
@@ -135,14 +149,6 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
                 Graphics.RenderMeshInstanced(rparams, meshes[i], 0, instData);
             }
         }
-    }
-
-    /// <summary>
-    /// アニメーションありでステージを生成
-    /// </summary>
-    public void StageGenerateAnimate()
-    {
-
     }
 
     /// <summary>
@@ -161,7 +167,7 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
             heights[i] = makedPos[i].y;
         }
-        
+
         StageRender(instanceNum);
     }
 
@@ -171,12 +177,22 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     /// <param name="activateTime">破壊にかかる時間</param>
     public void StageDestroy(float activateTime, int instanceNum)
     {
-        float moveSpeed = 5f;
+        computeShader.SetInt("instanceNum", instanceNum);
+        computeShader.SetFloat("blockHighestPos", blockHighestPos);
+        computeShader.SetFloat("stageBreakRatio", stageBreakRatio);
+
+        uint sizeX, sizeY, sizeZ;
+        computeShader.GetKernelThreadGroupSizes(kernelIndex, out sizeX, out sizeY, out sizeZ);
+        computeShader.Dispatch(kernelIndex, (int)(instanceNum / sizeX), 1, 1);
+        var resultData = new float[instanceNum];
+        computeBuffer.GetData(resultData);
+
+
         instData.Clear();
 
         for (int i = 0; i < instanceNum; i++)
         {
-            float hight = Mathf.Clamp(instanceNum * blockHighestPos * (stageBreakRatio - i / (float)instanceNum), heights[i], blockHighestPos);
+            float hight = resultData[i];
             float diff = Mathf.Abs(makedPos[i].y - hight);
             makedPos[i].y = hight;
 
@@ -188,20 +204,19 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
 
     void Update()
     {
-
         if (upSet)
         {
-            stageBreakRatio = Mathf.Min(stageBreakRatio + .005f, 1f);
-            StageDestroy(2f, instanceNum);
+            StageDestroy(.2f, instanceNum);
         }
         else
         {
-            StageGenerateNonAnimate(5*5*5);
+            StageGenerateNonAnimate(instanceNum);
         }
     }
 
-    private void StageBreak()
+    private void OnDestroy()
     {
-        
+        computeBuffer.Release();
+        baseHeightBuffer.Release();
     }
 }

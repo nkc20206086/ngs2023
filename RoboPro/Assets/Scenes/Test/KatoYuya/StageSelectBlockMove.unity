@@ -251,6 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1840917953}
   - component: {fileID: 1840917952}
+  - component: {fileID: 1840917954}
   m_Layer: 0
   m_Name: StageBlock
   m_TagString: Untagged
@@ -265,7 +266,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840917951}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b0c5c301a11ed2479d027b5bc71cfb1, type: 3}
   m_Name: 
@@ -291,6 +292,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1840917954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840917951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f219b34f35154534c9d973aece420f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageBreakRatio: 0
+  computeShader: {fileID: 7200000, guid: 594b45ad1ffb51948a38ac1370634799, type: 3}
+  blockObj: {fileID: 2591887077409984108, guid: cf9d9a8d48669914dbcca712e5a431cf,
+    type: 3}
+  stageSize: {x: 5, y: 5, z: 5}
+  upSet: 0
 --- !u!1 &2094428610
 GameObject:
   m_ObjectHideFlags: 0
