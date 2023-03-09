@@ -35,6 +35,10 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     private Mesh[] meshes = new Mesh[0];
     private Material[] materials;
 
+
+
+    private bool destroyed = false;
+
     void Start()
     {
         //instanceNum = stageSize.x * stageSize.y;
@@ -42,8 +46,9 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
         instanceNum = 5 * 5 * 5;
 
         InitBlock();
-
         InitGenerate(instanceNum);
+
+        StageGenerateNonAnimate(5 * 5 * 5);
     }
 
     /// <summary>
@@ -86,10 +91,7 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
             {
                 for (int k = 0; k < stageSize.z; k++)
                 {
-                    //makedPosRand[num] = new Vector3Int(makedPosRandX[j], (stageSize.y - i), makedPosRandZ[k]);
                     makedPosRand[num] = new Vector3Int(makedPosXZ[j * stageSize.x + k].x, (stageSize.y - i), makedPosXZ[j * stageSize.x + k].y);
-
-                    Debug.Log(makedPosRand[num] + "BBB");
                     num++;
                 }
             }
@@ -123,7 +125,6 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     {
         for (int i = 0; i < instanceNum; i++)
         {
-            //instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSize));
             instData.Add(Matrix4x4.Translate(makedPos[i]) * Matrix4x4.Scale(objSizes[i]));
         }
 
@@ -166,14 +167,48 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
     }
 
     /// <summary>
+    /// ステージの描画をする
+    /// </summary>
+    public void CurrentStageRender()
+    {
+        instData.Clear();
+        StageRender(instanceNum);
+    }
+
+    /// <summary>
     /// ステージを破壊する
     /// </summary>
     /// <param name="activateTime">破壊にかかる時間</param>
+    /// <param name="instanceNum">個数</param>
     public void StageDestroy(float activateTime, int instanceNum)
     {
-        float moveSpeed = 5f;
-        instData.Clear();
+        DOTween.To(() => stageBreakRatio,
+                   (x) => stageBreakRatio = x,
+                   1f,
+                   activateTime).From(0f, true)
+               .OnUpdate(() => StageHeightCalc(instanceNum));
+    }
 
+    /// <summary>
+    /// ステージを生成する
+    /// </summary>
+    /// <param name="activateTime">生成にかかる時間</param>
+    /// <param name="instanceNum">個数</param>
+    public void StageCreate(float activateTime, int instanceNum)
+    {
+        DOTween.To(() => stageBreakRatio,
+                   (x) => stageBreakRatio = x,
+                   0f,
+                   activateTime).From(1f, true)
+               .OnUpdate(() => StageHeightCalc(instanceNum));
+    }
+
+    /// <summary>
+    /// ステージの座標を計算
+    /// </summary>
+    /// <param name="instanceNum">個数</param>
+    private void StageHeightCalc(int instanceNum)
+    {
         for (int i = 0; i < instanceNum; i++)
         {
             float hight = Mathf.Clamp(instanceNum * blockHighestPos * (stageBreakRatio - i / (float)instanceNum), heights[i], blockHighestPos);
@@ -183,25 +218,12 @@ public class Test_StageSelectedBlockMove : MonoBehaviour
             float size = Mathf.Lerp(1f, 0f, diff / blockHighestPos);
             objSizes[i] = new Vector3(size, size, size);
         }
-        StageRender(instanceNum);
     }
 
     void Update()
     {
-
-        if (upSet)
-        {
-            stageBreakRatio = Mathf.Min(stageBreakRatio + .005f, 1f);
-            StageDestroy(2f, instanceNum);
-        }
-        else
-        {
-            StageGenerateNonAnimate(5*5*5);
-        }
-    }
-
-    private void StageBreak()
-    {
-        
+        if(Input.GetKeyDown(KeyCode.Q)) StageDestroy(2f, instanceNum);
+        if(Input.GetKeyDown(KeyCode.W)) StageCreate(2f, instanceNum);
+        CurrentStageRender();
     }
 }
