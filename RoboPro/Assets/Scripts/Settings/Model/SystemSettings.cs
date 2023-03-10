@@ -8,7 +8,7 @@ namespace Robo
     public class SystemSettings : ISystemSettingsControllable
     {
         public const string SAVE_DIRECTORY_PATH = "Save";
-        public const string SAVE_FILE_PATH = "option.json";
+        public const string SAVE_FILE_PATH = "SystemSettings.json";
 
         private string saveDirectoryPath => Application.dataPath + "/" + SAVE_DIRECTORY_PATH;
         private string savePath => Application.dataPath + "/" + SAVE_DIRECTORY_PATH + "/" + SAVE_FILE_PATH;
