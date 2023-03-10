@@ -4,16 +4,9 @@ namespace Robo
 {
     public class AudioSettings : IAudioSettings
     {
-        private event Func<IGetSystemSettingsData> OnGetSettingsData;
         private event Action<float> OnSetMasterVolume;
         private event Action<float> OnSetBGMVolume;
         private event Action<float> OnSetSEVolume;
-
-        event Func<IGetSystemSettingsData> IAudioSettings.OnGetSettingsData
-        {
-            add => OnGetSettingsData += value;
-            remove => OnGetSettingsData -= value;
-        }
 
         event Action<float> IAudioSettings.OnSetMasterVolume
         {
@@ -46,11 +39,6 @@ namespace Robo
         void IAudioSettings.SetSEVolume(float volume)
         {
             OnSetSEVolume?.Invoke(volume);
-        }
-
-        IGetSystemSettingsData IAudioSettings.GetSettingsData()
-        {
-            return OnGetSettingsData();
         }
     }
 }
