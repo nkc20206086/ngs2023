@@ -25,11 +25,9 @@ namespace Robo
             audio.OnSetMasterVolume += volume => data.MasterVolume = volume;
             audio.OnSetBGMVolume += volume => data.BGMVolume = volume;
             audio.OnSetSEVolume += volume => data.SEVolume = volume;
-            audio.OnGetSettingsData += GetData;
 
             screen.OnSetResolution += (id) => data.ScreenResolutionID = id;
             screen.OnSetIsFullScreen += (isFullScreen) => data.IsFullScreen = isFullScreen;
-            screen.OnGetSettingsData += GetData;
 
             ((ISystemSettingsControllable)this).Load();
         }
