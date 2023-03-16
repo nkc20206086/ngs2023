@@ -7,37 +7,35 @@ namespace Command.Entity
     /// <summary>
     /// 数値コマンドクラス
     /// </summary>
-    public class NumCommand : CommandBase
+    public class ValueCommand : CommandBase
     {
-        private int num;    // このクラスの持つ数値
+        private int value;    // このクラスの持つ数値
 
         /// <summary>
         /// コンストラクタ(変数はコンストラクタでのみ設定可能です)
         /// </summary>
-        /// <param name="num">設定する数値</param>
-        public NumCommand(int num)
+        /// <param name="value">設定する数値</param>
+        public ValueCommand(int value)
         {
-            this.num = num;
+            this.value = value;
         }
 
         public override string GetString()
         {
-            return num.ToString();
+            return value.ToString();
         }
 
-        public override void StartUp() { }
-
-        public override CommandType ConfirmationCommandType()
+        public override CommandType ConfirmCommandType()
         {
-            return CommandType.Num;
+            return CommandType.Value;
         }
 
         /// <summary>
         /// このクラスの持つ数値を返す
         /// </summary>
-        public int numGet
+        public int valueGet
         {
-            get => num;
+            get => value;
         }
     }
 }

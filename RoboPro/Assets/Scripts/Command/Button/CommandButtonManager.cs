@@ -78,16 +78,16 @@ namespace Command
         /// メインコマンドボタンのテキストを受け取ったコマンドのものに差し替える処理
         /// </summary>
         /// <param name="commands">対象のコマンド</param>
-        public void MainButtonTextUpdate(MainCommand[] commands)
+        public void MainButtonTextRewriting(MainCommand[] commands)
         {
             for (int i = 0; i < mainCommandButtons.Length; i++) // コマンドの数だけ実行
             {
                 if (commands != null)
                 {
                     // メインコマンドボタンにそれぞれの情報を反映
-                    useMainCommandButtons[i, 0].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.NameGet();
-                    useMainCommandButtons[i, 1].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.AxisTextGet();
-                    useMainCommandButtons[i, 2].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.NumTextGet();
+                    useMainCommandButtons[i, 0].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetName();
+                    useMainCommandButtons[i, 1].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetAxisText();
+                    useMainCommandButtons[i, 2].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetValueText();
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace Command
         /// ストレージコマンドボタンのテキストを受け取ったコマンドのものに差し替える処理
         /// </summary>
         /// <param name="commands">対象のコマンド</param>
-        public void StrageButtonTextUpdate(CommandBase[] commands)
+        public void StrageButtonTextRewriting(CommandBase[] commands)
         {
             for (int i = 0; i < strageCommandButtons.Length; i++) // コマンドの数だけ実行
             { 

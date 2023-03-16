@@ -12,15 +12,15 @@ namespace Command.Entity
     {
         // 各種値が変更可能であるか
         protected bool lockMenber = false;
-        protected bool lockNumber = false;
+        protected bool lockValue = false;
         protected bool lockCoordinateAxis = false;
 
         protected string commandName;            // コマンドの名称
-        public NumCommand num;       // 数値を持ったコマンドクラス
+        public ValueCommand value;       // 数値を持ったコマンドクラス
         public AxisCommand axis;     // 軸を持ったコマンドクラス
 
-        protected int num_local;                // コマンドが用いる数値
-        protected CoordinateAxis axis_local;    // コマンドが用いる軸
+        protected int usableValue;                // コマンドが用いる数値
+        protected CoordinateAxis usableAxis;    // コマンドが用いる軸
 
         protected int capacity;                 // コマンドの容量
 
@@ -29,21 +29,20 @@ namespace Command.Entity
         /// <summary>
         /// コンストラクタ 数値直接設定用
         /// </summary>
-        /// <param name="lock_m">コマンドを変更可能かどうか</param>
-        /// <param name="lock_n">数値を変更可能かどうか</param>
-        /// <param name="lock_c">軸を変更可能かどうか</param>
+        /// <param name="lockMenber">コマンドを変更可能かどうか</param>
+        /// <param name="lockValue">数値を変更可能かどうか</param>
+        /// <param name="lockCoordinateAxis">軸を変更可能かどうか</param>
         /// <param name="commandName">コマンドの名称</param>
-        /// <param name="num">数値に用いる値</param>
+        /// <param name="value">数値に用いる値</param>
         /// <param name="axis">軸に用いる値</param>
         /// <param name="capacity">このコマンドが要する容量</param>
-        public MainCommand(bool lock_m,bool lock_n,bool lock_c,
-                          string commandName,int num,int axis,int capacity) 
+        public MainCommand(bool lockMenber,bool lockValue,bool lockCoordinateAxis,string commandName,int value,int axis,int capacity) 
         {
-            lockMenber = lock_m;
-            lockNumber = lock_n;
-            lockCoordinateAxis = lock_c;
+            this.lockMenber = lockMenber;
+            this.lockValue = lockValue;
+            this.lockCoordinateAxis = lockCoordinateAxis;
             this.commandName = commandName;
-            this.num = new NumCommand(num);
+            this.value = new ValueCommand(value);
             this.axis = new AxisCommand((CoordinateAxis)axis);
             this.capacity = capacity;
         }
@@ -55,10 +54,10 @@ namespace Command.Entity
         public MainCommand(CommandStruct status)
         {
             lockMenber = status.lockCommand;
-            lockNumber = status.lockNumber;
+            lockValue = status.lockNumber;
             lockCoordinateAxis = status.lockCoordinateAxis;
-            commandName = status.type.ToString();
-            num = new NumCommand(status.num);
+            commandName = status.commandType.ToString();
+            value = new ValueCommand(status.value);
             axis = new AxisCommand(status.axis);
             capacity = status.capacity;
         }
@@ -90,20 +89,29 @@ namespace Command.Entity
         public virtual void CommandExecute(CommandState state, Transform targetTransform) { }
 
         /// <summary>
+        /// 開始時処理
+        /// </summary>
+        public virtual void StartUp()
+        {
+            usableValue = value.valueGet;
+            usableAxis = axis.axisGet;
+        }
+
+        /// <summary>
         /// 方向を取得する関数
         /// </summary>
-        /// <returns></returns>
-        protected Vector3 GetVec()
+        /// <returns>このコマンドの持つ方向</returns>
+        protected Vector3 GetDirection()
         {
             Vector3 returnVec = Vector3.zero;
-            switch (axis_local)
+            switch (usableAxis)
             {
                 case CoordinateAxis.X: returnVec = Vector3.right; break;
                 case CoordinateAxis.Y: returnVec = Vector3.up; break;
                 case CoordinateAxis.Z: returnVec = Vector3.forward; break;
             }
 
-            if (num_local < 0) returnVec *= -1;
+            if (usableValue < 0) returnVec *= -1;
 
             return returnVec;
         }
@@ -112,7 +120,7 @@ namespace Command.Entity
         /// コマンドの名称を取得する関数
         /// </summary>
         /// <returns></returns>
-        public string NameGet()
+        public string GetName()
         {
             return commandName;
         }
@@ -121,16 +129,16 @@ namespace Command.Entity
         /// 数値のコマンドテキストを取得する関数
         /// </summary>
         /// <returns></returns>
-        public string NumTextGet()
+        public string GetValueText()
         {
-            return num != null ? num.GetString() : default;
+            return value != null ? value.GetString() : default;
         }
 
         /// <summary>
         /// 軸のコマンドテキストを取得する関数
         /// </summary>
         /// <returns></returns>
-        public string AxisTextGet()
+        public string GetAxisText()
         {
             return axis != null ? axis.GetString() : default;
         }
@@ -141,21 +149,15 @@ namespace Command.Entity
         /// <returns></returns>
         public bool CommandNullCheck()
         {
-            return num != null && axis != null;
+            return value != null && axis != null;
         }
 
         public override string GetString()
         {
-            return $"{commandName} {(axis != null ? axis.GetString() : default)} {(num != null ? num.GetString() : default)}";
+            return $"{commandName} {(axis != null ? axis.GetString() : default)} {(value != null ? value.GetString() : default)}";
         }
 
-        public override void StartUp()
-        {
-            num_local = num.numGet;
-            axis_local = axis.axisGet;
-        }
-
-        public override CommandType ConfirmationCommandType()
+        public override CommandType ConfirmCommandType()
         {
             return CommandType.Command;
         }

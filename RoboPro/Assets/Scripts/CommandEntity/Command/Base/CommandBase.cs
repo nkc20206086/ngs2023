@@ -18,15 +18,10 @@ namespace Command.Entity
         public abstract string GetString();
 
         /// <summary>
-        /// コマンド開始時関数
-        /// </summary>
-        public abstract void StartUp();
-
-        /// <summary>
         /// コマンドタイプを取得する関数
         /// </summary>
         /// <returns></returns>
-        public abstract CommandType ConfirmationCommandType();
+        public abstract CommandType ConfirmCommandType();
 
         /// <summary>
         /// コマンドベース型としてのコピーを返すクラス

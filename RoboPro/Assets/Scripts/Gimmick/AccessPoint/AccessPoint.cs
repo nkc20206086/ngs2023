@@ -5,7 +5,7 @@ using UniRx;
 
 namespace Command
 {
-    public class AccessPoint : MonoBehaviour
+    public class AccessPoint : MonoBehaviour,IGimmickAccess
     {
         [Header("デバッグ用")]
         [SerializeField]
@@ -20,22 +20,14 @@ namespace Command
         public IObserver<int> openAct;      // コマンド入れ替え実行用アクション
         public IObserver<Unit> closeAct;    // コマンド入れ替え終了用アクション
 
-        // Update is called once per frame
-        void Update()
+        void IGimmickAccess.GimmickAccess()
         {
-            if (!updatePlay) return;
+            openAct.OnNext(index);
+        }
 
-            // これらの処理はデバッグ用なので、実際に用いる場合は変更すること
-
-            if (Input.GetKeyDown(openKeyCode))
-            {
-                openAct.OnNext(index);
-            }
-
-            if (Input.GetKeyDown(closeKeyCode))
-            {
-                closeAct.OnNext(default);
-            }
+        void IGimmickAccess.RemoveAccess()
+        {
+            closeAct.OnNext(default);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Command
     {
         Command,
         Axis,
-        Num,
+        Value,
         None
     }
 }

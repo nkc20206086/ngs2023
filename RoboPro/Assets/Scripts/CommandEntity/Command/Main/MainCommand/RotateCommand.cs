@@ -45,14 +45,14 @@ namespace Command.Entity
 
             int mag = state == CommandState.MOVE_ON ? 1 : -1;                                               // “®‚©‚·”{—¦(‹tÄ¶‚Å‚ ‚ê‚Î-1‚ğ‚©‚¯“®‚©‚·•ûŒü‚ğ”½“]‚·‚é‚½‚ß)
 
-            if (Mathf.Abs(Quaternion.Angle(baseQuat, targetTransform.rotation)) > Mathf.Abs(num_local))     // w’è‚³‚ê‚½Šp“x•ª‰ñ“]‚µ‚Ä‚¢‚ê‚Î
+            if (Mathf.Abs(Quaternion.Angle(baseQuat, targetTransform.rotation)) > Mathf.Abs(usableValue))     // w’è‚³‚ê‚½Šp“x•ª‰ñ“]‚µ‚Ä‚¢‚ê‚Î
             {
-                targetTransform.eulerAngles = baseAngle + (GetVec() * Mathf.Abs(num_local) * mag) ;         // eulerAngle‚ğ‰Šú‰ñ“]’l‚É‰ñ“]‚ğ”½‰f‚µ‚½’l‚É‚·‚é
+                targetTransform.eulerAngles = baseAngle + (GetDirection() * Mathf.Abs(usableValue) * mag) ;         // eulerAngle‚ğ‰Šú‰ñ“]’l‚É‰ñ“]‚ğ”½‰f‚µ‚½’l‚É‚·‚é
                 completeAction?.Invoke();                                                                   // ƒRƒ}ƒ“ƒhŠ®—¹ƒAƒNƒVƒ‡ƒ“‚ğÀs‚·‚é
             }
             else
             {
-                targetTransform.Rotate(GetVec() * mag);                                                     // •ûŒü‚É”{—¦‚ğ”½‰f‚µ‚½’l‰ñ“]‚·‚é
+                targetTransform.Rotate(GetDirection() * mag);                                                     // •ûŒü‚É”{—¦‚ğ”½‰f‚µ‚½’l‰ñ“]‚·‚é
             }
         }
     }

@@ -17,7 +17,7 @@ namespace Command
             MainCommand command = default;  // メインコマンドのローカル変数を作成
 
             // コマンドタイプを元にコマンドを作成
-            switch (status.type)
+            switch (status.commandType)
             {
                 case MainCommandType.Move: command = new MoveCommand(status); break;
                 case MainCommandType.Rotate: command = new RotateCommand(status); break;
