@@ -14,12 +14,8 @@ namespace Robo
         [SerializeField] 
         private Sprite stageIcon;
 
-        [SerializeField] 
-        private bool isClear = false;
-
         public string StageNumber => stageNumber;
         public string StageName => stageName;
         public Sprite StageIcon => stageIcon;
-        public bool IsClear => isClear;
     }
 }

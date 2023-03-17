@@ -31,16 +31,20 @@ namespace Robo
         public event Action OnSelectNextKey;
         public event Action OnSelectPreviousKey;
         public event Action OnPlay;
+        public event Action OnSave;
 
         public IReadOnlyList<StageSelectElementInfo> Infos { get; private set; }
         public IReadOnlyList<StageSelectElementView> Elements => elements;
+        public StageSelectSaveData SaveData => saveData;
 
         private List<StageSelectElementView> elements = new List<StageSelectElementView>();
+        private StageSelectSaveData saveData;
         private int nowSelectedIndex = 0;
 
-        void IStageSelectView.Initalize(StageSelectModelArgs args)
+        void IStageSelectView.Initalize(StageSelectModelArgs args, StageSelectSaveData saveData)
         {
             Infos = args.Infos;
+            this.saveData = saveData;
             for (int i = 0; i < args.Infos.Count; i++)
             {
                 StageSelectElementView element = container.InstantiatePrefab(elementPrefab).GetComponent<StageSelectElementView>();
@@ -90,6 +94,11 @@ namespace Robo
             {
                 OnPlay?.Invoke();
             }
+        }
+
+        private void OnDestroy()
+        {
+            OnSave?.Invoke();
         }
     }
 }

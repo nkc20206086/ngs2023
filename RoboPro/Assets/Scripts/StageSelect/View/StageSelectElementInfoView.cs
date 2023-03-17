@@ -29,24 +29,24 @@ namespace Robo
 
         public Transform IconParent => stageIconPosition;
 
-        private void Start()
-        {
-            view.OnSelect += OnSelect;
-        }
-
-        private void OnSelect(int idx)
+        public void OnSelect(int idx)
         {
             var info = view.Infos[idx];
             stageNumber.text = info.StageNumber;
             stageName.text = info.StageName;
 
-            if(info.IsClear)
+            var saveData = view.SaveData.GetSaveData(info.StageNumber);
+            if(saveData == null)
             {
-                clearIcon.sprite = clearIconSprite;
+                clearIcon.sprite = notClearIconSprite;
+            }
+            else if (!saveData.IsClear)
+            {
+                clearIcon.sprite = notClearIconSprite;
             }
             else
             {
-                clearIcon.sprite = notClearIconSprite;
+                clearIcon.sprite = clearIconSprite;
             }
         }
     }

@@ -18,6 +18,7 @@ namespace Robo
             Container.Bind<StageSelectPresenter>().AsSingle().NonLazy();
 
             Container.BindInstance<IStageSelectElementInfoView>(stageSelectElementInfoView);
+            Container.Bind<StageSelectElementInfoViewPresenter>().AsSingle().NonLazy();
         }
     }
 }

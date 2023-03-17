@@ -5,5 +5,6 @@ namespace Robo
     public interface IStageSelectElementInfoView
     {
         Transform IconParent { get; }
+        void OnSelect(int idx);
     }
 }
