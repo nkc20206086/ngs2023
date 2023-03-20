@@ -7,12 +7,6 @@ namespace Command
 {
     public class AccessPoint : MonoBehaviour,IGimmickAccess
     {
-        [Header("デバッグ用")]
-        [SerializeField]
-        private KeyCode openKeyCode = KeyCode.Return;
-        [SerializeField]
-        private KeyCode closeKeyCode = KeyCode.Escape;
-
         [Header("値確認用　数値変更非推奨")]
         public int index;
         public bool updatePlay = true;

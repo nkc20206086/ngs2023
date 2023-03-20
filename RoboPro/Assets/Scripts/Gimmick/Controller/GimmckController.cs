@@ -6,17 +6,25 @@ using System.Collections.Generic;
 
 namespace Gimmick
 {
+    // 実行コマンドと管理コマンドが分かれている設計になっている
+    // これはUndoとRedoによる値の入れ替えが生じた際、実際に動かすコマンドと管理しているコマンドが異なる可能性があるため
+
     /// <summary>
     /// ギミック管理クラス
     /// </summary>
     public class GimmckController : MonoBehaviour
     {
-        public MainCommand[] controlCommand = new MainCommand[3];               // このギミックの持つメインコマンド配列
+        public MainCommand[] controlCommand = new MainCommand[3];                       // 管理コマンドの配列
 
-        private int playIndex = -1;                                             // このギミックの生成インデックス
-        private float timeCount = 0;                                            // 時間計測用変数
-        private MainCommand[] playCommand = new MainCommand[3];                 // 実行コマンドの配列
-        private List<MainCommand[]> commandArchive = new List<MainCommand[]>(); // 変更を保存していくコマンドアーカイブ
+        private int playIndex = -1;                                                     // 実行されているコマンドのインデックス
+        private float timeCount = 0;                                                    // 時間計測用変数
+        private MainCommand[] playCommand = new MainCommand[3];                         // 実行コマンドの配列
+        private List<GimmickArchive> gimmickArchives = new List<GimmickArchive>();      // 記録用構造体のリスト
+
+        // 各実行時点での原点
+        private Vector3 basePos;
+        private Quaternion baseQuat;
+        private Vector3 baseScale;
 
         [Header("値確認用 数値変更非推奨")]
         [SerializeField]
@@ -24,16 +32,19 @@ namespace Gimmick
         [SerializeField]
         private CommandState state;                                             // 動き方の状態変数
 
-        // Start is called before the first frame update
-        void Start()
+        /// <summary>
+        /// ギミックの開始時関数
+        /// </summary>
+        /// <param name="setCommands">このギミックの持つコマンド</param>
+        public void StartUp(CommandStruct[] setCommands)
         {
-            // 初期値を設定(現時点でどのようなコマンドを設定する機能をつけていないため)
-            CommandStruct st = new CommandStruct(MainCommandType.Move, false, false, false, 30, CoordinateAxis.X, 1);
-            controlCommand[0] = CommandCreater.CreateCommand(st);
-            st = new CommandStruct(MainCommandType.Rotate, false, false, false, 90, CoordinateAxis.Z, 1);
-            controlCommand[1] = CommandCreater.CreateCommand(st);
-            st = new CommandStruct(MainCommandType.Move, false, false, false, 30, CoordinateAxis.Y, 1);
-            controlCommand[2] = CommandCreater.CreateCommand(st);
+            controlCommand = new MainCommand[setCommands.Length];           // 管理コマンド初期化
+
+            for (int i = 0;i < setCommands.Length;i++)
+            {
+                // 構造体をメインコマンドクラスに変換し、管理コマンドに設定する
+                controlCommand[i] = CommandCreater.CreateCommand(setCommands[i]);
+            }
 
             state = CommandState.MOVE_ON;                                   // コマンドステートを通常移動にする
 
@@ -41,21 +52,36 @@ namespace Gimmick
 
             IndexSwitching();                                               // 実行インデックス変更用関数
 
+            basePos = transform.position;
+            baseQuat = transform.rotation;
+            baseScale = transform.localScale;
+
+            Vector3 move = Vector3.zero;
+            Quaternion rotation = baseQuat;
+            Vector3 scale = baseScale;
             // 実行コマンドリストの要素全てに初期化関数を実行
-            foreach (MainCommand command in playCommand)                    
+            foreach (MainCommand command in playCommand)
             {
-                command.StartUp();
+                switch (command.GetMainCommandType())
+                {
+                    case MainCommandType.Move:
+                        Vector3 moveValue = (Vector3)command.StartUp(basePos + move, CreateInterval);
+                        move += moveValue;
+                        break;
+                    case MainCommandType.Rotate:
+                        Quaternion rotateValue = (Quaternion)command.StartUp(rotation, CreateInterval);
+                        rotation = rotateValue;
+                        break;
+                }
             }
 
-            MainCommand[] copyCommand = new MainCommand[3];
-            for (int i = 0;i < copyCommand.Length;i++)
-            {
-                copyCommand[i] = controlCommand[i].MainCommandClone();
-            }
-
-            commandArchive.Add(copyCommand);                             // 初期コマンドをアーカイブに追加する
+            GimmickArchive gimmickArchive = new GimmickArchive(controlCommand,playCommand,transform,state,playIndex);
+            gimmickArchives.Add(gimmickArchive);
         }
 
+        /// <summary>
+        /// コマンドの実行関数
+        /// </summary>
         public void CommandUpdate()
         {
             if (!isExecutable)                  // 実行されていないなら実行可能かをチェックする
@@ -86,26 +112,20 @@ namespace Gimmick
         /// <param name="index">登録インデックス</param>
         public void AddNewCommandsToArchive(int index)
         {
-            if (index > commandArchive.Count) return;                           // 要素数を超えているなら追加できないため早期リターンする
+            if (index > gimmickArchives.Count) return;                      // 登録インデックスが要素数を超えているなら早期リターンする
 
-            MainCommand[] copyArray = new MainCommand[controlCommand.Length];   // リストに追加する用のローカル配列を作成
-
-            for (int i = 0;i < commandArchive[commandArchive.Count - 1].Length;i++)
+            if (gimmickArchives.Count != index)                             // 要素数と登録インデックスが異なるなら(超えている場合は早期リターンされるので、実質的に同じものでない場合)
             {
-                // 同じ要素番号の要素をコピーする(値が存在しないならデフォルト値を作成)
-                copyArray[i] = commandArchive[commandArchive.Count - 1][i] == null ? default : commandArchive[commandArchive.Count - 1][i].MainCommandClone(); 
-            }
-
-            if (commandArchive.Count != index)                                  // 要素番号とコマンドアーカイブの要素数が異なるなら(要素数より大きい数値は早期リターンされるため最大数か否かの判別となる)
-            {
-                for (int i = commandArchive.Count - 1;i >= index;i--)
+                for (int i = gimmickArchives.Count - 1; i >= index; i--)    
                 {
-                    // 余剰分の要素をすべて破棄する
-                    commandArchive.RemoveAt(i);                                 
+                    // 超えている要素をすべてリストから削除する
+                    gimmickArchives.RemoveAt(i);
                 }
             }
 
-            commandArchive.Add(copyArray);                                      // コピーした配列をコマンドアーカイブに加える
+            // 記録用の内容を構造体にまとめる
+            GimmickArchive gimmickArchive = new GimmickArchive(gimmickArchives[gimmickArchives.Count - 1].controlCommand, playCommand, transform, state, playIndex);
+            gimmickArchives.Add(gimmickArchive);                            // 記録をリストに追加する
         }
 
         /// <summary>
@@ -114,26 +134,20 @@ namespace Gimmick
         /// <param name="index">登録インデックス</param>
         public void AddControlCommandToArchive(int index)
         {
-            if (index > commandArchive.Count) return;                           // 要素数を超えているなら追加できないため早期リターンする
+            if (index > gimmickArchives.Count) return;                      // 登録インデックスが要素数を超えているなら早期リターンする
 
-            MainCommand[] copyArray = new MainCommand[controlCommand.Length];   // リストに追加する用のローカルの配列を作成
-
-            for (int i = 0; i < controlCommand.Length; i++)
+            if (gimmickArchives.Count != index)                             // 要素数と登録インデックスが異なるなら(超えている場合は早期リターンされるので、実質的に同じものでない場合)
             {
-                // 同じ要素番号の要素をコピーする(値が存在しないならデフォルト値を作成)
-                copyArray[i] = controlCommand[i] == null ? default : controlCommand[i].MainCommandClone();
-            }
-
-            if (commandArchive.Count != index)                                  // 要素番号と最大数が異なるなら
-            {
-                for (int i = commandArchive.Count - 1; i >= index; i--)
+                for (int i = gimmickArchives.Count - 1; i >= index; i--)
                 {
-                    // 余剰分の要素をすべて破棄する
-                    commandArchive.RemoveAt(i);
+                    // 超えている要素をすべてリストから削除する
+                    gimmickArchives.RemoveAt(i);
                 }
             }
 
-            commandArchive.Add(copyArray);                                      // コピーした配列をコマンドアーカイブに加える
+            // 記録用の内容を構造体にまとめる
+            GimmickArchive gimmickArchive = new GimmickArchive(controlCommand, playCommand, transform, state, playIndex);
+            gimmickArchives.Add(gimmickArchive);                            // 記録をリストに追加する
         }
 
         /// <summary>
@@ -142,15 +156,28 @@ namespace Gimmick
         /// <param name="index">対象のインデックス</param>
         public void OverwriteControlCommand(int index)
         {
-            MainCommand[] copyArray = new MainCommand[controlCommand.Length];   // 管理コマンド書き換え用のローカル配列を作成する
+            gimmickArchives[index].SetGimmickArchive(controlCommand,playCommand,transform,out state,out playIndex);
 
-            for (int i = 0; i < commandArchive[index].Length; i++)
+            timeCount = 0.0f;
+
+            Vector3 move = Vector3.zero;
+            Quaternion rotation = baseQuat;
+            Vector3 scale = baseScale;
+            // 実行コマンドリストの要素全てに初期化関数を実行
+            foreach (MainCommand command in playCommand)
             {
-                // 書き換え用配列にコマンドアーカイブの[指定インデックス][要素番号]の内容をコピーして入れていく(値が存在しないならデフォルト値を設定)
-                copyArray[i] = commandArchive[index][i] == null ? default : commandArchive[index][i].MainCommandClone(); 
+                switch (command.GetMainCommandType())
+                {
+                    case MainCommandType.Move:
+                        Vector3 moveValue = (Vector3)command.StartUp(basePos + move, CreateInterval);
+                        move += moveValue;
+                        break;
+                    case MainCommandType.Rotate:
+                        Quaternion rotateValue = (Quaternion)command.StartUp(rotation, CreateInterval);
+                        rotation = rotateValue;
+                        break;
+                }
             }
-
-            controlCommand = copyArray;                                         // 管理コマンドを書き換え用配列に変更
         }
 
         /// <summary>
@@ -178,9 +205,6 @@ namespace Gimmick
                 state = CommandState.MOVE_ON;       // コマンドステートを通常移動に変更
                 CheckExecutable();                  // 実行可能であるかを確認 
             }
-
-            // 対象のコマンドの有効化処理を行う
-            playCommand[playIndex]?.ActionActivate(CreateInterval, gameObject);
         }
 
         /// <summary>
@@ -218,13 +242,24 @@ namespace Gimmick
                 isExecutable = true;                                            // 実行可能に変更
                 Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
 
+                Vector3 move = Vector3.zero;
+                Quaternion rotation = baseQuat;
+                Vector3 scale = baseScale;
                 // 実行コマンドリストの要素全てに初期化関数を実行
                 foreach (MainCommand command in playCommand)
                 {
-                    command.StartUp();
+                    switch (command.GetMainCommandType())
+                    {
+                        case MainCommandType.Move:
+                            Vector3 moveValue = (Vector3)command.StartUp(basePos + move,CreateInterval);
+                            move += moveValue;
+                            break;
+                        case MainCommandType.Rotate:
+                            Quaternion rotateValue = (Quaternion)command.StartUp(rotation,CreateInterval);
+                            rotation = rotateValue;
+                            break;
+                    }
                 }
-
-                playCommand[0]?.ActionActivate(CreateInterval, gameObject);     // 先頭要素に有効化関数を実行
             }
         }
     }

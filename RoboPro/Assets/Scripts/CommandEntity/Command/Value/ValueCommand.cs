@@ -33,7 +33,7 @@ namespace Command.Entity
         /// <summary>
         /// ‚±‚ÌƒNƒ‰ƒX‚Ì‚Â”’l‚ğ•Ô‚·
         /// </summary>
-        public int valueGet
+        public int getValue
         {
             get => value;
         }

@@ -72,16 +72,6 @@ namespace Command.Entity
         }
 
         /// <summary>
-        /// コマンド実行開始時に実行すべき関数
-        /// </summary>
-        /// <param name="completeAction">コマンド要件完了時に実行するアクション</param>
-        /// <param name="obj">コマンドによる変更を反映するオブジェクト</param>
-        public virtual void ActionActivate(Action completeAction,GameObject obj) 
-        {
-            this.completeAction = completeAction;
-        }
-
-        /// <summary>
         /// コマンド実行関数
         /// </summary>
         /// <param name="state">どういった状況で動かすか</param>
@@ -91,10 +81,21 @@ namespace Command.Entity
         /// <summary>
         /// 開始時処理
         /// </summary>
-        public virtual void StartUp()
+        public virtual object StartUp(object target,Action completeAction)
         {
-            usableValue = value.valueGet;
-            usableAxis = axis.axisGet;
+            usableValue = value.getValue;
+            usableAxis = axis.getAxis;
+            this.completeAction = completeAction;
+            return default;
+        }
+
+        /// <summary>
+        /// メインコマンドタイプ取得用関数
+        /// </summary>
+        /// <returns></returns>
+        public virtual MainCommandType GetMainCommandType()
+        {
+            return MainCommandType.None;
         }
 
         /// <summary>

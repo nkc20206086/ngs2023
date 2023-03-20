@@ -33,7 +33,7 @@ namespace Command.Entity
         /// <summary>
         /// ‚±‚ÌƒNƒ‰ƒX‚Ì‚Â²‚ğ•Ô‚·
         /// </summary>
-        public CoordinateAxis axisGet
+        public CoordinateAxis getAxis
         {
             get => axis;
         }
