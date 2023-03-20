@@ -1,53 +1,85 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Robo
 {
     public class StageSelectModel : IStageSelectModel
     {
-        public event Action<StageSelectModelArgs> OnInitalize;
-        public event Action<int> OnSelect;
-        public event Action<int> OnSelectError;
-        public event Action OnPlay;
+        private event Action<StageSelectModelArgs> OnInitalize;
+        private event Action<int> OnSelect;
+        private event Action<int> OnCannotSelect;
+        private event Action OnPlay;
 
-        private int stageIndex;
-        private int length;
+        private int nowSelectedIndex;
+        private List<StageSelectElementInfo> infos = new List<StageSelectElementInfo>();
+
+        event Action<StageSelectModelArgs> IStageSelectModel.OnInitalize
+        {
+            add => OnInitalize += value;
+            remove => OnInitalize -= value;
+        }
+
+        event Action<int> IStageSelectModel.OnSelect
+        {
+            add => OnSelect += value;
+            remove => OnSelect -= value;
+        }
+
+        event Action<int> IStageSelectModel.OnSelectError
+        {
+            add => OnCannotSelect += value;
+            remove => OnCannotSelect -= value;
+        }
+
+        event Action IStageSelectModel.OnPlay
+        {
+            add => OnPlay += value;
+            remove => OnPlay -= value;
+        }
 
         //初期化
-        public void Initalize(StageSelectModelArgs args)
+        void IStageSelectModel.Initalize(StageSelectModelArgs args)
         {
-            length = args.StageLength;
+            infos.AddRange(args.Infos);
             OnInitalize?.Invoke(args);
+            ((IStageSelectModel)this).Select(0);
         }
 
         //ステージを選択s
-        public void Select(int index)
+        void IStageSelectModel.Select(int index)
         {
-            if (index >= length || index < 0)
+            if (index >= infos.Count || index < 0)
             {
-                OnSelectError?.Invoke(index);
+                OnCannotSelect?.Invoke(index);
                 return;
             }
 
-            stageIndex = index;
-            OnSelect?.Invoke(stageIndex);
+            nowSelectedIndex = index;
+            OnSelect?.Invoke(nowSelectedIndex);
         }
 
         //次のステージを選択
-        public void SelectNext()
+        void IStageSelectModel.SelectNext()
         {
-            Select(stageIndex + 1);
+            //現在のステージをクリアしていない場合、次へ進めない
+            if (!infos[nowSelectedIndex].IsClear)
+            {
+                OnCannotSelect?.Invoke(nowSelectedIndex + 1);
+                return;
+            }
+            ((IStageSelectModel)this).Select(nowSelectedIndex + 1);
         }
 
         //前のステージを選択
-        public void SelectPrevious()
+        void IStageSelectModel.SelectPrevious()
         {
-            Select(stageIndex - 1);
+            ((IStageSelectModel)this).Select(nowSelectedIndex - 1);
         }
 
         //ステージをプレイ
-        public void Play()
+        void IStageSelectModel.Play()
         {
-            UnityEngine.Debug.Log("ステージ"+ stageIndex + "をプレイ");
+            UnityEngine.Debug.Log("ステージ"+ nowSelectedIndex + "をプレイ");
             OnPlay?.Invoke();
         }
     }
