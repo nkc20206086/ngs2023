@@ -7,6 +7,9 @@ public class TestObjectViewCamera : MonoBehaviour
     [SerializeField] 
     private ObjectView.ObjectViewCameraController controller;
 
+    [SerializeField]
+    private GameObject axisObj;
+
     private ObjectView.ObjectViewObjectCopy objectCopy;
 
     private Vector3 myPos;
@@ -27,6 +30,7 @@ public class TestObjectViewCamera : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q))
         {
             copyObj = objectCopy.MakeObjectCopy(meshFilter, meshRenderer, this.gameObject.name, transform);
+            axisObj.transform.position = copyObj.transform.position;
             controller.SetCameraPos(copyObj.transform);
         }
 
