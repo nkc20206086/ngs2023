@@ -14,7 +14,7 @@ namespace ObjectView
         /// <param name="meshFilter">meshFilter</param>
         /// <param name="meshRenderer">meshRenderer</param>
         /// <param name="objName">オブジェクト名</param>
-        /// <param name="initPos">生成位置</param>
+        /// <param name="transform">transform</param>
         public GameObject MakeObjectCopy(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform transform)
         {
             GameObject copyObj = ObjectCopy(meshFilter, meshRenderer, objName);
@@ -40,6 +40,10 @@ namespace ObjectView
             return copyObj;
         }
 
+        /// <summary>
+        /// レイヤー番号を設定する
+        /// </summary>
+        /// <param name="obj">GameObject</param>
         private void SetCopyObjLayer(GameObject obj)
         {
             obj.layer = LayerMask.NameToLayer("ObjectView");
