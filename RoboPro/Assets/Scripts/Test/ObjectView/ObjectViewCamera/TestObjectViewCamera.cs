@@ -10,31 +10,30 @@ public class TestObjectViewCamera : MonoBehaviour
     private ObjectView.ObjectViewObjectCopy objectCopy;
 
     private Vector3 myPos;
+    MeshFilter meshFilter;
+    MeshRenderer meshRenderer;
+    private GameObject copyObj;
 
     void Start()
     {
         myPos = this.gameObject.transform.position;
         objectCopy = new ObjectView.ObjectViewObjectCopy();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            controller.SetCameraPos(this.gameObject.transform);
+            copyObj = objectCopy.MakeObjectCopy(meshFilter, meshRenderer, this.gameObject.name, transform);
+            controller.SetCameraPos(copyObj.transform);
         }
 
         if(Input.GetKey(KeyCode.W))
         {
             float angle = 3f;
-            controller.SetCameraRotate(myPos, angle);
-        }
-
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            MeshFilter meshFilter = GetComponent<MeshFilter>();
-            MeshRenderer meshRenderer= GetComponent<MeshRenderer>();
-            objectCopy.ObjectCopy(meshFilter, meshRenderer, this.gameObject.name);
+            controller.SetCameraRotate(copyObj.transform.position, angle);
         }
     }
 }
