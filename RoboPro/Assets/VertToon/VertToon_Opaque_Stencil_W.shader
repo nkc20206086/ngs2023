@@ -1,4 +1,4 @@
-Shader "VertToon/Opaque"
+Shader "VertToon/Opaque_Stencil_W"
 {
     Properties
     {
@@ -8,7 +8,7 @@ Shader "VertToon/Opaque"
         [Toggle] _UseVertColor("Use vertex Color", int) = 1
 
         // OtherSetting
-        [Enum(Off,0, Front,1, Back,2)] _CullingMode("Culling", int) = 0
+        [Enum(Off,0 ,Front,1, Back,2)] _CullingMode("Culling", int) = 0
         [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 4
     }
 
@@ -34,6 +34,13 @@ Shader "VertToon/Opaque"
             Cull [_CullingMode]
             ZWrite ON
             ZTest [_ZTest]
+
+            Stencil
+            {
+                Ref 1
+                Comp Always
+                Pass Replace
+            }
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -79,7 +86,7 @@ Shader "VertToon/Opaque"
                 "LightMode" = "DepthOnly"
             }
 
-            Cull Off
+            Cull [_CullingMode]
             ZWrite On
             ColorMask 0
 
