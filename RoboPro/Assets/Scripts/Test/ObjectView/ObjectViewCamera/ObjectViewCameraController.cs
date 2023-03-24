@@ -1,31 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectView
 {
-    public class ObjectViewCameraController : MonoBehaviour
+    public class ObjectViewCameraController : MonoBehaviour, IObjectViewCameraControllable
     {
-        private const float cameraDistance = 10f;
-        private Vector3 startDir = new Vector3(1f, 1f, 1f);
+        /// <summary>
+        /// 対象までの距離
+        /// </summary>
+        private readonly float cameraDistance = 10f;
+
+        /// <summary>
+        /// 最初に向いてる角度
+        /// </summary>
+        private readonly Vector3 startDir = new Vector3(1f, 1f, 1f);
 
         [SerializeField] 
         private GameObject cameraObj;
 
-        private void Start()
-        {
-            
-        }
-
-        public void SetCameraPos(Transform targetTransform)
+        /// <summary>
+        /// カメラの位置を設定する
+        /// </summary>
+        /// <param name="targetTransform">対象のTransform</param>
+        void IObjectViewCameraControllable.SetCameraPos(Transform targetTransform)
         {
             cameraObj.transform.position = targetTransform.transform.position;
             cameraObj.transform.position += startDir * cameraDistance;
             cameraObj.transform.LookAt(targetTransform);
         }
 
-        // TODO : カメラ担当に任せる
-        public void SetCameraRotate(Vector3 targetPos, float angle)
+        // TODO : カメラ担当に任せる。カメラを回転させるプログラムを作成する
+        void IObjectViewCameraControllable.SetCameraRotate(Vector3 targetPos, float angle)
         {
             cameraObj.transform.RotateAround(targetPos, Vector3.up, angle);
         }

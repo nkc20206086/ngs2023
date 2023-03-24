@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectView
 {
-    public class ObjectViewObjectCopy
+    public class ObjectViewObjectCopy : IObjectViewObjectCopyable
     {
         private readonly string copiedObjSuffixName = "_ObjectViewCopy";
 
@@ -15,7 +13,7 @@ namespace ObjectView
         /// <param name="meshRenderer">meshRenderer</param>
         /// <param name="objName">オブジェクト名</param>
         /// <param name="transform">transform</param>
-        public GameObject MakeObjectCopy(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform transform)
+        GameObject IObjectViewObjectCopyable.MakeObjectCopy(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform transform)
         {
             GameObject copyObj = ObjectCopy(meshFilter, meshRenderer, objName);
             SetCopyObjLayer(copyObj);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ObjectView;
 
 /// <summary>
 /// 作ったプログラムを動作させるための仮プログラム
@@ -8,12 +9,14 @@ using UnityEngine;
 public class TestObjectViewCamera : MonoBehaviour
 {
     [SerializeField] 
-    private ObjectView.ObjectViewCameraController controller;
+    private ObjectViewCameraController controller;
+    private IObjectViewCameraControllable controllable;
 
     [SerializeField]
     private GameObject axisObj;
 
-    private ObjectView.ObjectViewObjectCopy objectCopy;
+    private ObjectViewObjectCopy objectCopy;
+    private IObjectViewObjectCopyable objectCopyable;
 
     private Vector3 myPos;
     MeshFilter meshFilter;
@@ -23,7 +26,12 @@ public class TestObjectViewCamera : MonoBehaviour
     void Start()
     {
         myPos = this.gameObject.transform.position;
-        objectCopy = new ObjectView.ObjectViewObjectCopy();
+
+        objectCopy = new ObjectViewObjectCopy();
+        objectCopyable = objectCopy;
+
+        controllable = controller.GetComponent<IObjectViewCameraControllable>();
+
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
@@ -32,15 +40,15 @@ public class TestObjectViewCamera : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            copyObj = objectCopy.MakeObjectCopy(meshFilter, meshRenderer, this.gameObject.name, transform);
+            copyObj = objectCopyable.MakeObjectCopy(meshFilter, meshRenderer, this.gameObject.name, transform);
             axisObj.transform.position = copyObj.transform.position;
-            controller.SetCameraPos(copyObj.transform);
+            controllable.SetCameraPos(copyObj.transform);
         }
 
         if(Input.GetKey(KeyCode.W))
         {
             float angle = 3f;
-            controller.SetCameraRotate(copyObj.transform.position, angle);
+            controllable.SetCameraRotate(copyObj.transform.position, angle);
         }
     }
 }
