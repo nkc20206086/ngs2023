@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 作ったプログラムを動作させるための仮プログラム
+/// </summary>
 public class TestObjectViewCamera : MonoBehaviour
 {
     [SerializeField] 
