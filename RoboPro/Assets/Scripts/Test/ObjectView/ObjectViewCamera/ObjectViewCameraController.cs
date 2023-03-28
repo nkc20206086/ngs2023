@@ -21,7 +21,7 @@ namespace ObjectView
         /// ƒJƒƒ‰‚ÌˆÊ’u‚ğİ’è‚·‚é
         /// </summary>
         /// <param name="targetTransform">‘ÎÛ‚ÌTransform</param>
-        void IObjectViewCameraControllable.SetCameraPos(Transform targetTransform)
+        public void SetCameraPos(Transform targetTransform)
         {
             cameraObj.transform.position = targetTransform.transform.position;
             cameraObj.transform.position += startDir * cameraDistance;

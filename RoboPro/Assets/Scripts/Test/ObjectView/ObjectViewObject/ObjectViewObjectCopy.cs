@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ObjectView
 {
-    public class ObjectViewObjectCopy : IObjectViewObjectCopyable
+    public class ObjectViewObjectCopy
     {
         private readonly string copiedObjSuffixName = "_ObjectViewCopy";
 
@@ -13,7 +13,7 @@ namespace ObjectView
         /// <param name="meshRenderer">meshRenderer</param>
         /// <param name="objName">オブジェクト名</param>
         /// <param name="transform">transform</param>
-        GameObject IObjectViewObjectCopyable.MakeObjectCopy(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform transform)
+        public GameObject MakeObjectCopy(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform transform)
         {
             GameObject copyObj = ObjectCopy(meshFilter, meshRenderer, objName);
             SetCopyObjLayer(copyObj);
