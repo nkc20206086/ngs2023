@@ -5,7 +5,7 @@ namespace ObjectView
     /// <summary>
     /// オブジェクトビューでオブジェクト見た目を生成するスクリプト
     /// </summary>
-    public class ObjectViewObjectController : MonoBehaviour
+    public class ObjectViewObjectController : MonoBehaviour, IObjectViewObjectControllable
     {
         [SerializeField]
         private ObjectViewCameraController cameraController;
@@ -29,7 +29,7 @@ namespace ObjectView
         /// <param name="meshRenderer">meshRenderer</param>
         /// <param name="objName">オブジェクトの名前</param>
         /// <param name="objTransform">transform</param>
-        public void MakeObjectViewObj(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform objTransform)
+        void IObjectViewObjectControllable.MakeObjectViewObj(MeshFilter meshFilter, MeshRenderer meshRenderer, string objName, Transform objTransform)
         {
             copyObj = objectCopy.MakeObjectCopy(meshFilter, meshRenderer, objName, objTransform);
             axisObj.transform.position = copyObj.transform.position;
