@@ -1,15 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using MVPModule;
 
 namespace InteractUI
 {
-	/// <summary>
-	/// インタラクトするための操作を教えるためのUIを表示する
-	/// </summary>
-	public class InteractUIController : MonoBehaviour, IInteractUIControllable
+    /// <summary>
+    /// インタラクトするための操作を教えるためのUIを表示する
+    /// </summary>
+    public class InteractUIController : MonoBehaviour, IInteractUIControllable
 	{
 		[SerializeField]
 		private Canvas interactUICanvas;

@@ -686,8 +686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b37690d922db8a4fa32c7542146158a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactUICanvas: {fileID: 0}
-  interactUIImage: {fileID: 0}
+  interactUICanvas: {fileID: 140092074}
+  interactUIImage: {fileID: 355846218}
   keyBindingSpriteAssets: []
 --- !u!1 &355846216
 GameObject:
