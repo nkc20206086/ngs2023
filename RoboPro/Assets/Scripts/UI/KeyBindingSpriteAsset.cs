@@ -9,9 +9,32 @@ namespace InteractUI
 	public class KeyBindingSpriteAsset : ScriptableObject
 	{
 		[SerializeField]
-		public Sprite keyboardInteractSprite;
+		private InteractKinds interactKind;
+		public InteractKinds interactKindsProp => interactKind;
 
 		[SerializeField]
-		public Sprite controllerInteractSprite;
+		private Sprite keyboardInteractSprite;
+		public Sprite keyboardInteractSpriteProp => keyboardInteractSprite;
+
+		[SerializeField]
+		private Sprite controllerInteractSprite;
+		public Sprite controllerInteractSpriteProp => controllerInteractSprite;
+
+		/// <summary>
+		/// コントローラーごとの画像を返す
+		/// </summary>
+		/// <param name="controllerType">コントローラーの種類</param>
+		public Sprite GetKeyBindingSprite(ControllerType controllerType)
+        {
+            switch (controllerType)
+            {
+                case ControllerType.keyboard:
+					return keyboardInteractSpriteProp;
+                case ControllerType.controller:
+					return controllerInteractSpriteProp;
+                default:
+                    return null;
+            }
+        }
 	}
 }

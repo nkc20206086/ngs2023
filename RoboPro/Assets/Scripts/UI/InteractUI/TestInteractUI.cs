@@ -7,6 +7,9 @@ public class TestInteractUI : MonoBehaviour
 {
     [SerializeField]
     private ControllerType controllerType = ControllerType.keyboard;
+
+    [SerializeField]
+    private InteractUIController view;
     void Start()
     {
         
@@ -14,19 +17,26 @@ public class TestInteractUI : MonoBehaviour
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            view.ShowUI(controllerType, InteractKinds.decideKey);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            view.HideUI();
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    Vector3 offset = new Vector3(0f, 1f, 0f);
+    private void OnTriggerStay(Collider other)
     {
-        Debug.Log("AAA");
-        InteractUIView view = other.gameObject.GetComponent<InteractUIView>();
-        view.ShowUI(controllerType);
+        view.SetPosition(other.transform.position + offset);
+        view.ShowUI(controllerType, InteractKinds.decideKey);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        InteractUIView view = other.gameObject.GetComponent<InteractUIView>();
         view.HideUI();
     }
 }
