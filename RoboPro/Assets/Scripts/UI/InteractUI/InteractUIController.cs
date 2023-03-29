@@ -9,7 +9,7 @@ namespace InteractUI
 	/// <summary>
 	/// インタラクトするための操作を教えるためのUIを表示する
 	/// </summary>
-	public class InteractUIController : MonoBehaviour
+	public class InteractUIController : MonoBehaviour, IInteractUIControllable
 	{
 		[SerializeField]
 		private Canvas interactUICanvas;
@@ -28,24 +28,15 @@ namespace InteractUI
 			currentInteractKind = InteractKinds.none;
 			currentKeyBindingSpriteAsset = null;
 
-			HideUI();
+			((IInteractUIControllable)this).HideUI();
 		}
 
-		/// <summary>
-		/// UIの場所を設定する
-		/// </summary>
-		/// <param name="pos">UIの位置</param>
-		public void SetPosition(Vector3 pos)
+		void IInteractUIControllable.SetPosition(Vector3 pos)
         {
 			gameObject.transform.position = pos;
         }
-
-		/// <summary>
-		/// UIを表示する
-		/// </summary>
-		/// <param name="controllerType">コントローラーの種類</param>
-		/// <param name="interactKind">インタラクトの種類</param>
-		public void ShowUI(ControllerType controllerType, InteractKinds interactKind)
+		
+		void IInteractUIControllable.ShowUI(ControllerType controllerType, InteractKinds interactKind)
         {
 			bool isNotSetinteractKind = interactKind == InteractKinds.none;
 			if (isNotSetinteractKind)
@@ -73,10 +64,7 @@ namespace InteractUI
 			interactUICanvas.enabled = true;
 		}
 
-		/// <summary>
-		/// UIを非表示にする
-		/// </summary>
-		public void HideUI()
+		void IInteractUIControllable.HideUI()
         {
 			interactUICanvas.enabled = false;
 		}
