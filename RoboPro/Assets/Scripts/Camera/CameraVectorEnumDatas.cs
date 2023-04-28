@@ -6,6 +6,9 @@ namespace MainCamera
 {
     public class CameraVectorEnumDatas
     {
+        /// <summary>
+        /// ƒJƒƒ‰‚ÌŠp“xEnum
+        /// </summary>
         public enum CameraVectorEnum
         {
             vector_0,

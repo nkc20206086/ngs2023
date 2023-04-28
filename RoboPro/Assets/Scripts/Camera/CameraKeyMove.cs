@@ -6,7 +6,7 @@ using Cinemachine;
 
 namespace MainCamera
 {
-    public class CameraClickMove : MonoBehaviour
+    public class CameraKeyMove : MonoBehaviour
     {
         private InputControls inputActions;
         private CinemachineInputProvider cinemachineInputProvider;
@@ -20,9 +20,9 @@ namespace MainCamera
             inputActions = new InputControls();
             inputActions.Enable();
 
-            //右クリックされたときにInputActionを入れてカメラを動かす
-            inputActions.MainCamera.Click.performed += context => cinemachineInputProvider.XYAxis = actionReference;
-            inputActions.MainCamera.Click.canceled += context => cinemachineInputProvider.XYAxis = null;
+            //上下左右キーを押されたときにInputActionを入れてカメラを動かす
+            inputActions.MainCamera.Move.performed += context => cinemachineInputProvider.XYAxis = actionReference;
+            inputActions.MainCamera.Move.canceled += context => cinemachineInputProvider.XYAxis = null;
         }
     }
 }

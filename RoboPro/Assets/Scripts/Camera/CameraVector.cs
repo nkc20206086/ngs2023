@@ -22,16 +22,20 @@ namespace MainCamera
             cameraVectorYArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum.vector_360];
             cameraVectorXArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum.vector_360];
 
+            //カメラのY角度補正値を計算
             for (int i = 0; i < cameraVectorYArray.Length; i++)
             {
+                //0度から45度ずつ計算
                 rad = angleY * Mathf.Deg2Rad;
                 Vector3 direction = new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad));
                 cameraVectorYArray[i] = direction;
                 angleY += settingAngle;
             }
 
+            //カメラのX角度補正値を計算
             for (int i = 0; i < cameraVectorXArray.Length; i++)
             {
+                //45度から45度ずつ計算
                 angleX += settingAngle;
                 rad = angleX * Mathf.Deg2Rad;
                 Vector3 direction = new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad));
@@ -39,6 +43,10 @@ namespace MainCamera
             }
         }
 
+        /// <summary>
+        /// カメラがどのポイントを向いているかの計算
+        /// </summary>
+        /// <returns></returns>
         public int CameraVectorGetter()
         {
             // カメラの角度の取得
@@ -63,11 +71,19 @@ namespace MainCamera
             return cameraPoint;
         }
 
+        /// <summary>
+        /// カメラY補正値を渡す関数
+        /// </summary>
+        /// <returns></returns>
         Vector3 ICameraVectorGetter.VectorYGetter()
         {
             return cameraVectorYArray[CameraVectorGetter()];
         }
 
+        /// <summary>
+        /// カメラX補正値を渡す関数
+        /// </summary>
+        /// <returns></returns>
         Vector3 ICameraVectorGetter.VectorXGetter()
         {
             return cameraVectorXArray[CameraVectorGetter()];
