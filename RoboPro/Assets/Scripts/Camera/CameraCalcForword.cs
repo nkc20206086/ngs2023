@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MainCamera
 {
-    public class CameraVector : MonoBehaviour, ICameraVectorGetter
+    public class CameraCalcForword : MonoBehaviour, ICameraVectorGetter
     {
         private CameraVectorEnumDatas cameraVectorEnumDatas;
         private Vector3[] cameraVectorYArray;
