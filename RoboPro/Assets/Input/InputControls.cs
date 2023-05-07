@@ -134,6 +134,98 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player"",
+            ""id"": ""70e2956d-ce4f-48e7-84b8-e917ea3a36b3"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""95359727-809e-4fee-a7d0-a194bec117a9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Value"",
+                    ""id"": ""a297f9dd-e207-400b-8cd4-39ea953d7b0d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""9fa31f71-0eba-4917-91c1-c9e564fe5534"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ac145760-579f-48d2-89e2-b5ec6a63dd9b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Key&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8e6ed6a6-773b-4ad7-8460-454cee668edd"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Key&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2ea8974c-cf07-4f5f-8910-e3eea636e217"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Key&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""47976f5b-5aa6-4c86-adf1-65cc000083fd"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Key&Mouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c5d59405-9674-4cb7-9c97-c5a8d091295e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Key&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -160,6 +252,10 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_MainCamera_Move = m_MainCamera.FindAction("Move", throwIfNotFound: true);
         m_MainCamera_Click = m_MainCamera.FindAction("Click", throwIfNotFound: true);
         m_MainCamera_Look = m_MainCamera.FindAction("Look", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -264,6 +360,47 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         }
     }
     public MainCameraActions @MainCamera => new MainCameraActions(this);
+
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_Interact;
+    public struct PlayerActions
+    {
+        private @InputControls m_Wrapper;
+        public PlayerActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyMouseSchemeIndex = -1;
     public InputControlScheme KeyMouseScheme
     {
@@ -278,5 +415,10 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IPlayerActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
