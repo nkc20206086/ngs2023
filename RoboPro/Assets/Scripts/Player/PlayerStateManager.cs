@@ -39,6 +39,7 @@ namespace Player
         private void Update()
         {
             inputVec = inputActions.Player.Move.ReadValue<Vector2>();
+            Debug.Log(inputVec);
 
             //ƒ{ƒ^ƒ“‚ð‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»•Ê
             isMove = inputActions.Player.Move.IsPressed();
@@ -57,7 +58,7 @@ namespace Player
                     }
                 case PlayerStateEnum.Move:
                     {
-                        playerMove.Act_Move(isMove,isInteract);
+                        playerMove.Act_Move(isMove,isInteract,inputVec);
                         break;
                     }
                 case PlayerStateEnum.Dizzy:
