@@ -10,6 +10,8 @@ namespace Player
     {
         private Rigidbody rigidbody;
         private Animator animator;
+        private GroundChecker groundChecker;
+        private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         private ICameraVectorGetter cameraVectorGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -23,6 +25,8 @@ namespace Player
         {
             rigidbody = GetComponent<Rigidbody>();
             animator = GetComponentInChildren<Animator>();
+            groundChecker = GetComponent<GroundChecker>();
+            colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
             cameraVectorGetter = camera.GetComponent<ICameraVectorGetter>();
         }
@@ -51,8 +55,11 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.Stay);
             }
 
-            if(isInteract)
+            if(groundChecker.CheckGround(moveForward) == false)
             {
+                animator.SetBool("Flg_Walk", false);
+                rigidbody.velocity = Vector3.zero;
+                colliCheck.ColiCheck();
                 stateChangeEvent(PlayerStateEnum.Dizzy);
             }
         }

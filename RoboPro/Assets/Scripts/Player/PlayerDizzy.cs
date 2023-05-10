@@ -8,6 +8,7 @@ namespace Player
     public class PlayerDizzy : MonoBehaviour,IStateChange
     {
         private Rigidbody rigidbody;
+        private Animator animator;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
@@ -16,6 +17,7 @@ namespace Player
         void Start()
         {
             rigidbody = GetComponent<Rigidbody>();
+            animator = GetComponentInChildren<Animator>();
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -24,6 +26,7 @@ namespace Player
             if(isMove)
             {
                 //Debug.Log("‚Ó‚ç‚Â‚«");
+                animator.SetBool("Flg_Cliff", true);
                 if (isInteract)
                 {
                     stateChangeEvent(PlayerStateEnum.Fall);
@@ -31,12 +34,9 @@ namespace Player
             }
             else
             {
+                animator.SetBool("Flg_Cliff", false);
                 stateChangeEvent(PlayerStateEnum.Stay);
             }
-
-            
-
-            
         }
     }
 
