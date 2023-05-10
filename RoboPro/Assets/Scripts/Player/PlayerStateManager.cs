@@ -39,7 +39,7 @@ namespace Player
         private void Update()
         {
             inputVec = inputActions.Player.Move.ReadValue<Vector2>();
-            Debug.Log(inputVec);
+            //Debug.Log(inputVec);
 
             //ƒ{ƒ^ƒ“‚ð‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»•Ê
             isMove = inputActions.Player.Move.IsPressed();
@@ -48,6 +48,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            Debug.Log(stateGetter.StateGetter());
             //Statemachine
             switch (stateGetter.StateGetter())
             {

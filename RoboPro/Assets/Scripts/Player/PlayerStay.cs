@@ -21,6 +21,7 @@ namespace Player
 
         public void Act_Stay(bool isMove, bool isInteract)
         {
+            
             //Debug.Log("‘Ò‚Â");
             if(isMove)
             {
