@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MVPModule;
+
+#ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME#: MonoModelBase<#TypeName#>
+{
+	public override void PropertyValueChange(#TypeName# value) 
+	{#NOTRIM#
+		property.Value = value; 
+	}
+}
+#ROOTNAMESPACEEND#
