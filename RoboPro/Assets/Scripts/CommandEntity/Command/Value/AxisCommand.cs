@@ -25,7 +25,7 @@ namespace Command.Entity
             return axis.ToString(); // enum‚ð•¶Žš—ñ‰»‚µ‚½‚à‚Ì‚ð•Ô‚·
         }
 
-        public override CommandType ConfirmCommandType()
+        public override CommandType GetCommandType()
         {
             return CommandType.Axis;
         }

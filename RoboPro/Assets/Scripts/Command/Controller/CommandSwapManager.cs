@@ -19,7 +19,7 @@ namespace Command
         private CommandType swapCommandType;
 
         [SerializeField,Tooltip("ストレージコマンドを管理するクラス")]
-        private CommandStorage storage;
+        private CommandStorage commandStorage;
 
         [SerializeField,Tooltip("コマンドボタンを管理するクラス")]
         private CommandButtonManager buttonManager;
@@ -40,7 +40,7 @@ namespace Command
         private void TextRewriting()
         {
             buttonManager.MainButtonTextRewriting(mainCommands);                 // ボタン管理クラスにメインコマンドボタンのテキスト更新を依頼
-            buttonManager.StrageButtonTextRewriting(storage.controlCommand);     // ボタン管理クラスにストレージコマンドボタンのテキスト更新を依頼
+            buttonManager.StrageButtonTextRewriting(commandStorage.controlCommand);     // ボタン管理クラスにストレージコマンドボタンのテキスト更新を依頼
         }
 
         /// <summary>
@@ -49,19 +49,19 @@ namespace Command
         private void CommandSwap()
         {
             if (mainIndexNum < 0 || storageIndexNum < 0) return;                                               // どちらかのインデックスが0未満であるなら早期リターンする
-            if (mainCommands[mainIndexNum] == null && storage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
+            if (mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
 
             // 入れ替えタイプがメインコマンドであるなら
             if (swapCommandType == CommandType.Command)
             {
                 // メインコマンドとストレージコマンドのコマンドタイプが一致しているか、片方がnullである場合
-                if ((mainCommands[mainIndexNum] == null && storage.controlCommand[storageIndexNum].ConfirmCommandType() == CommandType.Command) || 
-                    (storage.controlCommand[storageIndexNum] == null && mainCommands[mainIndexNum] != null) || 
-                    mainCommands[mainIndexNum] != null && storage.controlCommand[storageIndexNum].ConfirmCommandType() == CommandType.Command)
+                if ((mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum].GetCommandType() == CommandType.Command) || 
+                    (commandStorage.controlCommand[storageIndexNum] == null && mainCommands[mainIndexNum] != null) || 
+                    mainCommands[mainIndexNum] != null && commandStorage.controlCommand[storageIndexNum].GetCommandType() == CommandType.Command)
                 {
                     MainCommand main = mainCommands[mainIndexNum];                                          // メインコマンドをローカルに保存
-                    mainCommands[mainIndexNum] = storage.controlCommand[storageIndexNum] as MainCommand;    // 対象のメインコマンドにストレージコマンドをダウンキャストして代入
-                    storage.controlCommand[storageIndexNum] = main;                                         // ストレージコマンドにローカルに保存したメインコマンドを代入
+                    mainCommands[mainIndexNum] = commandStorage.controlCommand[storageIndexNum] as MainCommand;    // 対象のメインコマンドにストレージコマンドをダウンキャストして代入
+                    commandStorage.controlCommand[storageIndexNum] = main;                                         // ストレージコマンドにローカルに保存したメインコマンドを代入
 
                     TextRewriting();                                                                        // テキスト更新
 
@@ -76,21 +76,21 @@ namespace Command
             {
                 if (mainCommands[mainIndexNum] == null) return;                                               // 対象のメインコマンドに値がないなら早期リターンする
                 
-                if (storage.controlCommand[storageIndexNum] == null ||                                        // ストレージコマンドに値がないか
-                    swapCommandType == storage.controlCommand[storageIndexNum].ConfirmCommandType())     // ストレージコマンドのコマンドタイプが入れ替えタイプと一致しているなら
+                if (commandStorage.controlCommand[storageIndexNum] == null ||                                        // ストレージコマンドに値がないか
+                    swapCommandType == commandStorage.controlCommand[storageIndexNum].GetCommandType())     // ストレージコマンドのコマンドタイプが入れ替えタイプと一致しているなら
                 {
                     // 各コマンドタイプに応じてダウンキャストをし、値を入れ替える
                     switch (swapCommandType)
                     {
                         case CommandType.Value:
                             ValueCommand num = mainCommands[mainIndexNum].value;
-                            mainCommands[mainIndexNum].value = storage.controlCommand[storageIndexNum] as ValueCommand;
-                            storage.controlCommand[storageIndexNum] = num;
+                            mainCommands[mainIndexNum].value = commandStorage.controlCommand[storageIndexNum] as ValueCommand;
+                            commandStorage.controlCommand[storageIndexNum] = num;
                             break;
                         case CommandType.Axis:
                             AxisCommand axis = mainCommands[mainIndexNum].axis;
-                            mainCommands[mainIndexNum].axis = storage.controlCommand[storageIndexNum] as AxisCommand;
-                            storage.controlCommand[storageIndexNum] = axis;
+                            mainCommands[mainIndexNum].axis = commandStorage.controlCommand[storageIndexNum] as AxisCommand;
+                            commandStorage.controlCommand[storageIndexNum] = axis;
                             break;
                     }
 
@@ -118,7 +118,7 @@ namespace Command
         /// 有効化処理
         /// </summary>
         /// <param name="obj">入れ替え対象のメインコマンド配列</param>
-        public void SwitchActivation(MainCommand[] obj)
+        public void SwapActivation(MainCommand[] obj)
         {
             mainCommands = obj;                // メインコマンド配列をクラス内に保存
 
@@ -132,7 +132,7 @@ namespace Command
         /// 無効化処理
         /// </summary>
         /// <returns>変更が行われたか</returns>
-        public bool SwitchInvalidation()
+        public bool SwapInvalidation()
         {
             buttonManager.CanvasHide();                     // ボタン表示キャンバスを非表示にする
 
