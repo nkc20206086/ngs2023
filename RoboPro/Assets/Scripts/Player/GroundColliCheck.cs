@@ -8,7 +8,15 @@ namespace Player
     {
         Vector3 hitNormalVec = new Vector3();
         GameObject groundObj;
-
+        [SerializeField] float CorrectionValue;
+        private void Update()
+        {
+            //if(Input.GetKeyDown(KeyCode.Return))
+            if (groundObj != null)
+            {
+                ColiCheck();
+            }
+        }
         public void ColiCheck()
         {
             //プレイヤーは上を向いているに違いないため地面ベクトルからY軸を削除したベクトルを出す。
@@ -24,16 +32,16 @@ namespace Player
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, transform.up);
                         break;
                     default:
                         break;
@@ -45,82 +53,79 @@ namespace Player
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, transform.up);
                         break;
                     default:
                         break;
                 }
             }
             //地面のY軸の表で衝突していた場合
-            if (hitNormalVec == groundObj.transform.up)
+            else if (/*hitNormalVec == groundObj.transform.up*/isVectorEpuals(hitNormalVec, groundObj.transform.up))
             {
-                Debug.Log("upが一緒だった");
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, groundObj.transform.up);
-
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, transform.up);
                         break;
                     default:
                         break;
                 }
             }
             //地面のY軸の裏で衝突していた場合
-            else if (hitNormalVec == -groundObj.transform.up)
+            else if (hitNormalVec == -groundObj.transform.up/*isVectorEpuals(hitNormalVec,-groundObj.transform.position)*/)
             {
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, groundObj.transform.up);
-
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.right, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.right, transform.up);
                         break;
                     default:
                         break;
                 }
             }
             //地面のX軸の表で衝突していた場合
-            if (hitNormalVec == groundObj.transform.right)
+            else if (hitNormalVec == groundObj.transform.right)
             {
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, transform.up);
                         break;
                     default:
                         break;
@@ -132,16 +137,16 @@ namespace Player
                 switch (AngleToDirection(angle))
                 {
                     case Directions.Down:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Right:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.up, transform.up);
                         break;
                     case Directions.Up:
-                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(groundObj.transform.forward, transform.up);
                         break;
                     case Directions.Left:
-                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, groundObj.transform.up);
+                        transform.rotation = Quaternion.LookRotation(-groundObj.transform.up, transform.up);
                         break;
                     default:
                         break;
@@ -149,20 +154,26 @@ namespace Player
             }
             else
             {
-                Debug.LogError("予定外の地面ベクトルを検知 vec="+ hitNormalVec);
-                Debug.LogError("予定外の地面ベクトルを検知 playerright="+ groundObj.transform.right);
-                Debug.LogError("予定外の地面ベクトルを検知 playerUp="+ groundObj.transform.up);
-                Debug.LogError("予定外の地面ベクトルを検知 playerright="+ groundObj.transform.forward);
+                Debug.LogError("予定外の地面ベクトルを検知 vec=" + hitNormalVec);
+                Debug.LogError("予定外の地面ベクトルを検知 playerright=" + groundObj.transform.right);
+                Debug.LogError("予定外の地面ベクトルを検知 playerUp=" + groundObj.transform.up);
+                Debug.LogError("予定外の地面ベクトルを検知 playerright=" + groundObj.transform.forward);
             }
         }
         private Directions AngleToDirection(float angle)
         {
-            float angle360 = Mathf.Repeat(angle, 360);
-            angle360 -= 45;
-            int a = (int)angle360 / 90;
-            return (Directions)a;
+            float angle360 = Mathf.Repeat(angle - 45, 360);
+            int num = (int)Mathf.Abs((angle360 / 90));
+            return (Directions)num;
         }
-
+        private bool isVectorEpuals(Vector3 normal, Vector3 pos)
+        {
+            //bool a = Mathf.Approximately( Mathf.Floor(vector3.x,))&& Mathf.Floor(vector3.y), Mathf.Floor(vector3.z)
+            bool b = Mathf.Approximately(Mathf.Floor(normal.x), Mathf.Floor(pos.x)) &&
+                Mathf.Approximately(Mathf.Floor(normal.y), Mathf.Floor(pos.y)) &&
+                Mathf.Approximately(Mathf.Floor(normal.z), Mathf.Floor(pos.z));
+            return b;
+        }
         enum Directions
         {
             Down, Right, Up, Left
@@ -174,8 +185,10 @@ namespace Player
         private void OnCollisionEnter(Collision collision)
         {
             //接触した面の法線ベクトルを取得  レイでもできる
+            //hitNormalVec = new Vector3(Mathf.Floor(collision.contacts[0].normal.x), Mathf.Floor(collision.contacts[0].normal.y), Mathf.Floor(collision.contacts[0].normal.z));
             hitNormalVec = collision.contacts[0].normal;
             groundObj = collision.gameObject;
+            
         }
 
     }

@@ -48,7 +48,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            Debug.Log(stateGetter.StateGetter());
+            //Debug.Log(stateGetter.StateGetter());
             //Statemachine
             switch (stateGetter.StateGetter())
             {
