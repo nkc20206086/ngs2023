@@ -10,6 +10,7 @@ namespace Player
         Move,
         Dizzy,
         Fall,
+        ThroughFall,
         Access,
         Die,
         Count

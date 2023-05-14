@@ -8,6 +8,7 @@ namespace Player
     public class PlayerDizzy : MonoBehaviour,IStateChange
     {
         private Rigidbody rigidbody;
+        private GroundChecker groundChecker;
         private Animator animator;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -17,6 +18,7 @@ namespace Player
         void Start()
         {
             rigidbody = GetComponent<Rigidbody>();
+            groundChecker = GetComponent<GroundChecker>();
             animator = GetComponentInChildren<Animator>();
             stateGetter = GetComponent<IStateGetter>();
         }
@@ -29,6 +31,7 @@ namespace Player
                 animator.SetBool("Flg_Cliff", true);
                 if (isInteract)
                 {
+                   // Debug.Log("ç~ÇËÇÈ");
                     stateChangeEvent(PlayerStateEnum.Fall);
                 }
             }
@@ -36,6 +39,13 @@ namespace Player
             {
                 animator.SetBool("Flg_Cliff", false);
                 stateChangeEvent(PlayerStateEnum.Stay);
+            }
+
+            //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
+            if (groundChecker.LandingCheck() == false)
+            {
+                stateChangeEvent(PlayerStateEnum.ThroughFall);
+                animator.SetBool("Flg_Fall", true);
             }
         }
     }
