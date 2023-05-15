@@ -23,7 +23,7 @@ namespace InteractUI
 
 		private void Start()
 		{
-			currentInteractKind = InteractKinds.none;
+			currentInteractKind = InteractKinds.None;
 			currentKeyBindingSpriteAsset = null;
 
 			((IInteractUIControllable)this).HideUI();
@@ -36,7 +36,7 @@ namespace InteractUI
 		
 		void IInteractUIControllable.ShowUI(ControllerType controllerType, InteractKinds interactKind)
         {
-			bool isNotSetinteractKind = interactKind == InteractKinds.none;
+			bool isNotSetinteractKind = interactKind == InteractKinds.None;
 			if (isNotSetinteractKind)
             {
 				return;

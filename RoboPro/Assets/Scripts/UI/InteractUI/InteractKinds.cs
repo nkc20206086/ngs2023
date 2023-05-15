@@ -5,8 +5,8 @@ namespace InteractUI
     /// </summary>
     public enum InteractKinds
     {
-        decideKey,
-        returnKey,
-        none,
+        DecideKey,
+        ReturnKey,
+        None,
     }
 }

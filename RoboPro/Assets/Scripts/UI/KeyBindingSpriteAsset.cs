@@ -28,9 +28,9 @@ namespace InteractUI
         {
             switch (controllerType)
             {
-                case ControllerType.keyboard:
+                case ControllerType.Keyboard:
 					return keyboardInteractSpriteProp;
-                case ControllerType.controller:
+                case ControllerType.Controller:
 					return controllerInteractSpriteProp;
                 default:
                     return null;

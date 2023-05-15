@@ -3,6 +3,6 @@
 /// </summary>
 public enum ControllerType
 {
-	keyboard,
-	controller,
+	Keyboard,
+	Controller,
 }
