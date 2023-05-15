@@ -1,0 +1,18 @@
+{
+    "name": "RoboPro.StageSelect.Presenter",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b2a15e3e6eb714f41bcf0c2279f1bf9c",
+        "GUID:d21178737e50db641b1146d49fe128a9",
+        "GUID:0072f45768c38fa4ca0df03665ad0ef2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
