@@ -41,7 +41,6 @@ namespace Player
             inputVec = inputActions.Player.Move.ReadValue<Vector2>();
             //Debug.Log(inputVec);
 
-            if (stateGetter.StateGetter() == PlayerStateEnum.Fall) return;
             //ƒ{ƒ^ƒ“‚ð‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»•Ê
             isMove = inputActions.Player.Move.IsPressed();
             isInteract = inputActions.Player.Interact.WasPressedThisFrame();
@@ -49,6 +48,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+            //Debug.Log(stateGetter.StateGetter());
             //Statemachine
             switch (stateGetter.StateGetter())
             {
@@ -70,11 +70,6 @@ namespace Player
                 case PlayerStateEnum.Fall:
                     {
                         playerFall.Act_Fall();
-                        break;
-                    }
-                case PlayerStateEnum.ThroughFall:
-                    {
-                        playerFall.Act_ThroughFall();
                         break;
                     }
                 case PlayerStateEnum.Access:
