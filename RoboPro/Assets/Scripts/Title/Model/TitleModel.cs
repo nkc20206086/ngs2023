@@ -11,6 +11,7 @@ namespace Robo
         private event Action OnExit;
 
         private IMultiSceneLoader multiSceneLoader;
+
         private bool isLoadingStageSelect = false;
 
         [Inject] 
@@ -44,6 +45,7 @@ namespace Robo
             if (isLoadingStageSelect) return;
             isLoadingStageSelect = true;
 
+            //ステージセレクト画面を読み込む
             await multiSceneLoader.AddScene(SceneID.StageSelect, true);
             await multiSceneLoader.UnloadScene(SceneID.Title);
             OnStart?.Invoke();
@@ -51,8 +53,9 @@ namespace Robo
         }
 
         //設定画面を開く
-        void ITitleModel.ShowSettings()
+        async void ITitleModel.ShowSettings()
         {
+            await multiSceneLoader.AddScene(SceneID.Settings, true);
             OnShowSettings?.Invoke();
             Debug.Log("Show");
         }
