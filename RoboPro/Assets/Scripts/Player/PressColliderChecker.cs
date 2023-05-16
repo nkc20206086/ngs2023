@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PressCheck : MonoBehaviour
+public class PressColliderChecker : MonoBehaviour
 {
     [SerializeField] private float offsetX = 0.1f;
     [SerializeField] private float offsetY = 0.1f;
@@ -79,21 +79,27 @@ public class PressCheck : MonoBehaviour
         
         if((hits[0] != null || hits[1] != null) && (hits[2] != null || hits[3] != null))
         {
-            OnPress?.Invoke(hits[0], hits[1]);
-            OnPressX?.Invoke(hits[0], hits[1]);
-            Debug.Log("XŽ²ƒqƒbƒg");
+            Collider col_1 = hits[0] != null ? hits[0] : hits[1];
+            Collider col_2 = hits[2] != null ? hits[2] : hits[3];
+
+            OnPress?.Invoke(col_1, col_2);
+            OnPressX?.Invoke(col_1, col_2);
         }
         if ((hits[4] != null || hits[5] != null) && (hits[6] != null || hits[7] != null))
         {
-            OnPress?.Invoke(hits[2], hits[3]);
-            OnPressY?.Invoke(hits[2], hits[3]);
-            Debug.Log("YŽ²ƒqƒbƒg");
+            Collider col_1 = hits[4] != null ? hits[4] : hits[5];
+            Collider col_2 = hits[6] != null ? hits[6] : hits[7];
+
+            OnPress?.Invoke(col_1, col_2);
+            OnPressY?.Invoke(col_1, col_2);
         }
         if ((hits[8] != null || hits[9] != null) && (hits[10] != null || hits[11] != null))
         {
-            OnPress?.Invoke(hits[4], hits[5]);
-            OnPressZ?.Invoke(hits[4], hits[5]);
-            Debug.Log("ZŽ²ƒqƒbƒg");
+            Collider col_1 = hits[8] != null ? hits[8] : hits[9];
+            Collider col_2 = hits[10] != null ? hits[10] : hits[11];
+
+            OnPress?.Invoke(col_1, col_2);
+            OnPressZ?.Invoke(col_1, col_2);
         }
     }
 }
