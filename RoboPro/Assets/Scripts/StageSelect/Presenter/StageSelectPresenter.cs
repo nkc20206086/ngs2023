@@ -11,6 +11,7 @@ namespace Robo
             view.OnSelectNextKey += model.SelectNext;
             view.OnSelectPreviousKey += model.SelectPrevious;
             view.OnPlay += model.Play;
+            view.OnSave += model.Save;
         }
     }
 }
