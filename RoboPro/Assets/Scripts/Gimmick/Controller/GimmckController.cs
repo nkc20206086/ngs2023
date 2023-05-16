@@ -93,15 +93,11 @@ namespace Gimmick
         /// </summary>
         public void CommandUpdate()
         {
-            if (!isExecutable)                  // 実行されていないなら実行可能かをチェックする
-            {
-                // CheckExecutable();
-                return;
-            }
+            if (!isExecutable) return;          // 実行不可であれば早期リターンする
 
-            if (playCommand.Length >= CommandUtility.spcialCommandNumber)
+            if (playCommand.Length >= CommandUtility.specialCommandNumber)
             {
-                SpcialCommandUpdate();
+                SpecialCommandUpdate();
             }
 
             if (timeCount > 0)                  // 時間計測用変数が0以上の数値を持つなら
@@ -170,7 +166,7 @@ namespace Gimmick
         /// <param name="index">対象のインデックス</param>
         public void OverwriteControlCommand(int index)
         {
-            gimmickArchives[index].SetGimmickArchive(controlCommand,playCommand,out playIndex);
+            gimmickArchives[index].SetGimmickArchive(controlCommand,playCommand,playIndex);
 
             timeCount = 0.0f;
 
@@ -250,20 +246,6 @@ namespace Gimmick
                     isExecutable = false;
                 }
             }
-
-            // 変更点：順再生=>逆再生はループしない
-
-            //if (CommandUtility.commandCount <= playIndex)   // 実行インデックスが管理コマンドの数を超えたら              
-            //{
-            //    state = CommandState.RETURN;                // コマンドステートを反転移動にする
-            //    playIndex--;                                // 実行インデックスを減算する
-            //}
-            //else if (playIndex < 0)                         // 実行インデックスが0未満であるなら
-            //{
-            //    playIndex = 0;                              // 実行インデックスを0に設定
-            //    state = CommandState.MOVE_ON;               // コマンドステートを通常移動に変更
-            //    CheckExecutable();                          // 実行可能であるかを確認 
-            //}
         }
 
         /// <summary>
@@ -331,7 +313,7 @@ namespace Gimmick
         /// <summary>
         /// SPコマンドによる効果の関数
         /// </summary>
-        protected virtual void SpcialCommandUpdate() 
+        protected virtual void SpecialCommandUpdate() 
         {
             if (playCommand[3] == null) return;
             if (playCommand[3].GetMainCommandType() == MainCommandType.Move)

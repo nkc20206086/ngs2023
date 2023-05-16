@@ -50,7 +50,7 @@ namespace Gimmick
         /// <param name="control">管理コマンド</param>
         /// <param name="play">実行コマンド</param>
         /// <param name="playIndex">実行インデックス</param>
-        public void SetGimmickArchive(MainCommand[] control,MainCommand[] play,out int playIndex)
+        public void SetGimmickArchive(MainCommand[] control,MainCommand[] play,int playIndex)
         {
             // 管理コマンドに記録内容のコピーを渡す
             for (int i = 0;i < controlCommand.Length;i++)

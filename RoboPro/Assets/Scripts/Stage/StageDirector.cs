@@ -45,7 +45,7 @@ namespace Stage
             uiManager.redo = redo;
 
             Subject<Unit> play = new Subject<Unit>();
-            play.Subscribe(gimmickDirector.Play);
+            play.Subscribe(gimmickDirector.StartCommandAction);
             uiManager.play = play;
         }
     }

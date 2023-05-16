@@ -138,7 +138,7 @@ namespace Gimmick
             }
         }
 
-        public void Play(Unit unit)
+        public void StartCommandAction(Unit unit)
         {
             if (isExecute) return;
             isExecute = true;
