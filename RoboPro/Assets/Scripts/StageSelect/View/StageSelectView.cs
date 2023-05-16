@@ -2,40 +2,76 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Robo
 {
     public class StageSelectView : MonoBehaviour, IStageSelectView
     {
-        [SerializeField] private StageSelectElementView elementPrefab;
-        [SerializeField] private Transform elementsParent;
-        [SerializeField] private float moveDuration = 0.25f;
+        [SerializeField] 
+        private StageSelectElementView elementPrefab;
+        
+        [SerializeField] 
+        private Transform elementsParent;
+        
+        [SerializeField] 
+        private float moveDuration = 0.25f;
+        
+        [SerializeField] 
+        private float putDistance = 5;
+        
+        [SerializeField] 
+        private Ease moveEase = Ease.OutCirc;
 
+        [Inject]
+        private DiContainer container;
+
+        public event Action<int> OnSelect;
+        public event Action<int> OnDeselect;
         public event Action OnSelectNextKey;
         public event Action OnSelectPreviousKey;
         public event Action OnPlay;
+        public event Action OnSave;
+
+        public IReadOnlyList<StageSelectElementInfo> Infos { get; private set; }
+        public IReadOnlyList<StageSelectElementView> Elements => elements;
+        public StageSelectSaveData SaveData => saveData;
 
         private List<StageSelectElementView> elements = new List<StageSelectElementView>();
+        private StageSelectSaveData saveData;
+        private int nowSelectedIndex = 0;
 
-        public void Initalize(StageSelectModelArgs args)
+        void IStageSelectView.Initalize(StageSelectModelArgs args, StageSelectSaveData saveData)
         {
-            for(int i = 0; i < args.StageLength;i++)
+            Infos = args.Infos;
+            this.saveData = saveData;
+            for (int i = 0; i < args.Infos.Count; i++)
             {
-                StageSelectElementView element = Instantiate(elementPrefab);
-                element.transform.SetParent(elementsParent);
+                StageSelectElementView element = container.InstantiatePrefab(elementPrefab).GetComponent<StageSelectElementView>();
                 elements.Add(element);
+
+                element.Initalize(args.Infos[i], i);
+                element.transform.SetParent(elementsParent);
+                element.transform.localPosition = new Vector3(putDistance * i, 0, 0);
+
+                OnSelect += (idx) => element.OnSelect(idx);
+                OnDeselect += (idx) => element.OnDeselect(idx);
             }
         }
 
         //ステージ選択
-        public void Select(int idx)
+        void IStageSelectView.Select(int idx)
         {
-            Vector3 position = elements[idx].transform.localPosition;
-            elementsParent.DOLocalMoveX(-position.x, moveDuration);
+            Transform element = elements[idx].transform;
+            elementsParent.DOLocalMoveX(-element.localPosition.x, moveDuration).SetEase(moveEase);
+
+            OnDeselect?.Invoke(nowSelectedIndex);
+            OnSelect?.Invoke(idx);
+            nowSelectedIndex = idx;
         }
 
         //選択不可能範囲に移動すると警告が出る
-        public void SelectError(int idx)
+        void IStageSelectView.SelectError(int idx)
         {
             Debug.Log("これ以上進めない");
         }
@@ -58,6 +94,11 @@ namespace Robo
             {
                 OnPlay?.Invoke();
             }
+        }
+
+        private void OnDestroy()
+        {
+            OnSave?.Invoke();
         }
     }
 }

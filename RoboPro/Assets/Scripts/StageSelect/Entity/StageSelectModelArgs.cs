@@ -1,13 +1,15 @@
-﻿namespace Robo
+﻿using System.Collections.Generic;
+
+namespace Robo
 {
     public class StageSelectModelArgs
     {
         //ステージの長さ
-        public readonly int StageLength;
+        public readonly IReadOnlyList<StageSelectElementInfo> Infos;
 
-        public StageSelectModelArgs(int stageLength)
+        public StageSelectModelArgs(IReadOnlyList<StageSelectElementInfo> elements)
         {
-            StageLength = stageLength;
+            this.Infos = elements;
         }
     }
 }
