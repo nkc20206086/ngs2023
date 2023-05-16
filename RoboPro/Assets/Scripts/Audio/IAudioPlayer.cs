@@ -15,7 +15,7 @@ namespace Robo
         void UnloadSheets(List<CueSheetType> sheetTypes);
 
         /// <summary>SE‚ð–Â‚ç‚·</summary>
-        IAudioPlayBack PlaySE(CueSheetType sheetType, string cueName);
+        IAudioPlayback PlaySE(CueSheetType sheetType, string cueName);
 
         /// <summary>BGM‚ð–Â‚ç‚·</summary>
         void PlayBGM(CueSheetType sheetType);
