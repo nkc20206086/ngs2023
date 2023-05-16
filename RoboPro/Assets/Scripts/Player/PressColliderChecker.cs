@@ -73,7 +73,6 @@ public class PressColliderChecker : MonoBehaviour
             if (Physics.SphereCast(rays[i], 0.01f, out RaycastHit hit, maxDistance, targetMask))
             {
                 hits[i] = hit.collider;
-                Debug.Log(i);
             }
         }
         
