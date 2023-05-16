@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ladder : MonoBehaviour, ILadderTouchable
 {
     [SerializeField]
-    float checkRayLength;
+    private float checkRayLength;
     [SerializeField]
-    LayerMask checkGroundMask;
+    private LayerMask checkGroundMask;
     [SerializeField]
-    bool debugMode;
-    BoxCollider boxCollider;
+    private bool debugMode;
+    private BoxCollider boxCollider;
+    void Start()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
     bool ILadderTouchable.IsUsable()
     {
         //レイを出す地点を作成
@@ -49,8 +51,5 @@ public class Ladder : MonoBehaviour, ILadderTouchable
 
         return (leftUpHit || rightUpHit || leftDownHit || rightDownHit);
     }
-    void Start()
-    {
-        boxCollider = GetComponent<BoxCollider>();
-    }
+   
 }
