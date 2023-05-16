@@ -11,6 +11,8 @@ namespace AyahaShader.VertToon
         private MaterialProperty foamColor;
         private MaterialProperty height;
 
+        private bool otherSettingFoldoutOpen = false;
+
 
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] prop)
         {
@@ -41,6 +43,18 @@ namespace AyahaShader.VertToon
                 materialEditor.ShaderProperty(height, new GUIContent("Height"));
             }
             EditorGUI.indentLevel--;
+
+            // OtherSetting
+            otherSettingFoldoutOpen = VertToonCustomUI.Foldout("OtherSetting", otherSettingFoldoutOpen);
+            if (otherSettingFoldoutOpen)
+            {
+                EditorGUI.indentLevel++;
+                using (new EditorGUILayout.VerticalScope(GUI.skin.box))
+                {
+                    materialEditor.RenderQueueField();
+                }
+                EditorGUI.indentLevel--;
+            }
         }
 
         private void FindProperties(MaterialProperty[] prop)
