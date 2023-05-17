@@ -8,7 +8,7 @@ public class GroundChecker : MonoBehaviour
     private Vector3 originVector;
     private bool floorFlg;
     private bool downFloorFlg;
-    private bool floatFlg;
+
     private bool dizzyGroundFlg;
     [SerializeField]
     private float rayLength;
@@ -26,11 +26,12 @@ public class GroundChecker : MonoBehaviour
     /// <returns></returns>
     public bool LandingCheck()
     {
+        bool floatingFlg;
         Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
         RaycastHit ray = new RaycastHit();
-        floatFlg = Physics.Raycast(playerPosition, Vector3.down ,out ray,landingLength,layerMask);
+        floatingFlg = Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, layerMask);
         Debug.DrawRay(playerPosition, Vector3.down * landingLength);
-        return floatFlg;
+        return floatingFlg;
     }
 
     /// <summary>

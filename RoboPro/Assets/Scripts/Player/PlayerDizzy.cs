@@ -32,7 +32,7 @@ namespace Player
                 if (isInteract)
                 {
                    // Debug.Log("ç~ÇËÇÈ");
-                    stateChangeEvent(PlayerStateEnum.Fall);
+                    stateChangeEvent(PlayerStateEnum.StepOff);
                 }
             }
             else

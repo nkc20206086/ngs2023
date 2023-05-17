@@ -11,10 +11,7 @@ namespace Player
         private Animator animator;
         private PlayerCore playerCore;
         private GroundChecker groundChecker;
-        private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-
-        private bool throughFallFlg;
 
         private Vector2 jumpVec;
 
@@ -25,7 +22,6 @@ namespace Player
             playerCore = GetComponent<PlayerCore>();
             groundChecker = GetComponent<GroundChecker>();
             animator = GetComponentInChildren<Animator>();
-            stateGetter = GetComponent<IStateGetter>();
 
             jumpVec = playerCore.JumpPowerGetter();
         }
@@ -35,8 +31,17 @@ namespace Player
         /// </summary>
         public void Act_Fall()
         {
-            animator.SetBool("Flg_StepOff", true);
-            animator.SetBool("Flg_Cliff", false);
+            animator.SetBool("Flg_Fall", true);
+
+            //飛び降りるための小ジャンプ
+            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
+
+            //falseだったら空中にいる
+            if(groundChecker.LandingCheck() == false)
+            {
+                //空中落下中ステートに変更
+                stateChangeEvent(PlayerStateEnum.Falling);
+            }
         }
 
         /// <summary>
@@ -44,21 +49,22 @@ namespace Player
         /// </summary>
         public void Act_ThroughFall()
         {
-            if (throughFallFlg) return;
-            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
             animator.SetBool("Flg_Fall", true);
-            throughFallFlg = true;
+            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
+            stateChangeEvent(PlayerStateEnum.Falling);
         }
 
         /// <summary>
-        /// 落下終了関数
+        /// 落下中
         /// </summary>
-        public void Finish_FallChange()
+        public void Act_Falling()
         {
-            stateChangeEvent(PlayerStateEnum.Stay);
-            throughFallFlg = false;
-            animator.SetBool("Flg_Landing", false);
-            animator.SetBool("Flg_StepOff", false);
+            //trueになったら地面に着地している
+            if (groundChecker.LandingCheck())
+            {
+                //着地ステートに変更
+                stateChangeEvent(PlayerStateEnum.Landing);
+            }
         }
     }
 }
