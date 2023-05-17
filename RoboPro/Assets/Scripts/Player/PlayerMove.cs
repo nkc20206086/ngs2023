@@ -38,29 +38,44 @@ namespace Player
         /// <param name="isInteract"></param>
         public void Act_Move(bool isMove, bool isInteract,Vector2 vec)
         {
-            //Debug.Log("動く");
-            moveForward = cameraVectorGetter.VectorYGetter() * vec.y + cameraVectorGetter.VectorXGetter() * vec.x;
-            moveForward = moveForward.normalized;
-
-            if (isMove)
+            //床にいるかどうかを判定する
+            if (groundChecker.LandingCheck() == false)
             {
-                animator.SetBool("Flg_Walk", true);
-                transform.LookAt(transform.position + moveForward);
-                rigidbody.velocity = new Vector3(transform.forward.x * stateGetter.SpeedGetter(), rigidbody.velocity.y, transform.forward.z * stateGetter.SpeedGetter());
+                //Move中に落下しているということはふらつきを無視している　→　ThroughFall
+                animator.SetBool("Flg_Walk", false);
+                stateChangeEvent(PlayerStateEnum.ThroughFall);
             }
             else
             {
-                animator.SetBool("Flg_Walk", false);
-                rigidbody.velocity = Vector3.zero;
-                stateChangeEvent(PlayerStateEnum.Stay);
-            }
+                moveForward = cameraVectorGetter.VectorYGetter() * vec.y + cameraVectorGetter.VectorXGetter() * vec.x;
+                moveForward = moveForward.normalized;
 
-            if(groundChecker.CheckGround(moveForward) == false)
-            {
-                animator.SetBool("Flg_Walk", false);
-                rigidbody.velocity = Vector3.zero;
-                colliCheck.ColiCheck();
-                stateChangeEvent(PlayerStateEnum.Dizzy);
+                if (isMove)
+                {
+                    animator.SetBool("Flg_Walk", true);
+                    transform.LookAt(transform.position + moveForward);
+                    rigidbody.velocity = new Vector3(transform.forward.x * stateGetter.SpeedGetter(), rigidbody.velocity.y, transform.forward.z * stateGetter.SpeedGetter());
+                }
+                else
+                {
+                    animator.SetBool("Flg_Walk", false);
+                    rigidbody.velocity = Vector3.zero;
+                    stateChangeEvent(PlayerStateEnum.Stay);
+                }
+
+                //目の前が崖か判定
+                if (groundChecker.CheckGround(moveForward) == false)
+                {
+                    //自分の乗っている床でふらつけるかどうかの判定
+                    if (groundChecker.DizzyGroundFlg() == false)
+                    {
+                        //ふらつくステートに変更
+                        animator.SetBool("Flg_Walk", false);
+                        rigidbody.velocity = Vector3.zero;
+                        //colliCheck.ColiCheck();
+                        stateChangeEvent(PlayerStateEnum.Dizzy);
+                    }
+                }
             }
         }
     }

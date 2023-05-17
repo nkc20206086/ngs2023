@@ -11,7 +11,9 @@ namespace Player
         private PlayerMove playerMove;
         private PlayerAccess playerAccess;
         private PlayerDizzy playerDizzy;
+        private PlayerStepOff playerStepOff;
         private PlayerFall playerFall;
+        private PlayerLanding playerLanding;
         private IStateGetter stateGetter;
 
         private InputControls inputActions;
@@ -27,7 +29,9 @@ namespace Player
             playerMove = GetComponent<PlayerMove>();
             playerAccess = GetComponent<PlayerAccess>();
             playerDizzy = GetComponent<PlayerDizzy>();
+            playerStepOff = GetComponent<PlayerStepOff>();
             playerFall = GetComponent<PlayerFall>();
+            playerLanding = GetComponent<PlayerLanding>();
             stateGetter = GetComponent<IStateGetter>();
 
             inputActions = new InputControls();
@@ -48,7 +52,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            //Debug.Log(stateGetter.StateGetter());
+            Debug.Log(stateGetter.StateGetter());
             //Statemachine
             switch (stateGetter.StateGetter())
             {
@@ -67,9 +71,29 @@ namespace Player
                         playerDizzy.Act_Dizzy(isMove,isInteract);
                         break;
                     }
+                case PlayerStateEnum.StepOff:
+                    {
+                        playerStepOff.Act_StepOff();
+                        break;
+                    }
                 case PlayerStateEnum.Fall:
                     {
                         playerFall.Act_Fall();
+                        break;
+                    }
+                case PlayerStateEnum.ThroughFall:
+                    {
+                        playerFall.Act_ThroughFall();
+                        break;
+                    }
+                case PlayerStateEnum.Falling:
+                    {
+                        playerFall.Act_Falling();
+                        break;
+                    }
+                case PlayerStateEnum.Landing:
+                    {
+                        playerLanding.Act_Landing();
                         break;
                     }
                 case PlayerStateEnum.Access:
