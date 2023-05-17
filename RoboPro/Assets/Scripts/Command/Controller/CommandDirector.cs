@@ -7,7 +7,7 @@ namespace Command
     public class CommandDirector : MonoBehaviour
     {
         [SerializeField,Tooltip("コマンド入れ替えクラス")]
-        private CommandSwapManager commandSwitchManager;
+        private CommandSwapManager commandSwapManager;
 
         /// <summary>
         /// コマンド入れ替えを有効化する
@@ -17,7 +17,7 @@ namespace Command
         public void CommandActivation(MainCommand[] mainCommands)
         {
             // 入れ替えクラスを有効化する
-            commandSwitchManager.SwitchActivation(mainCommands);
+            commandSwapManager.SwapActivation(mainCommands);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Command
         public bool CommandInvalidation()
         {
             // 入れ替えクラスを無効化し、変更の有無を受け取り送信
-            bool retValue = commandSwitchManager.SwitchInvalidation();
+            bool retValue = commandSwapManager.SwapInvalidation();
             return retValue;
         }
     }

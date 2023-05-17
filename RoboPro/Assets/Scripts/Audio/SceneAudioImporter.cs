@@ -4,6 +4,8 @@ using Zenject;
 
 namespace Robo
 {
+    //キューシートを読み込んで、シーン上でSEやBGMを鳴らせるようにするクラス
+    //逆に、このクラスがないシーンでは音を鳴らすことができない
     public class SceneAudioImporter : MonoBehaviour
     {
         /// <summary>読み込むキューシート一覧</summary>

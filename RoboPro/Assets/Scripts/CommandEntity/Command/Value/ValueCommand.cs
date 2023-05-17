@@ -25,7 +25,7 @@ namespace Command.Entity
             return value.ToString();
         }
 
-        public override CommandType ConfirmCommandType()
+        public override CommandType GetCommandType()
         {
             return CommandType.Value;
         }
