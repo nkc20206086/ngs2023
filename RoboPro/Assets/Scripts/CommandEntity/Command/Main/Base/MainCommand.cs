@@ -81,7 +81,7 @@ namespace Command.Entity
         /// <summary>
         /// äJénéûèàóù
         /// </summary>
-        public virtual object StartUp(object target,Action completeAction)
+        public virtual object InitCommand(object target,Action completeAction)
         {
             usableValue = value.getValue;
             usableAxis = axis.getAxis;
@@ -158,7 +158,7 @@ namespace Command.Entity
             return $"{commandName} {(axis != null ? axis.GetString() : default)} {(value != null ? value.GetString() : default)}";
         }
 
-        public override CommandType ConfirmCommandType()
+        public override CommandType GetCommandType()
         {
             return CommandType.Command;
         }

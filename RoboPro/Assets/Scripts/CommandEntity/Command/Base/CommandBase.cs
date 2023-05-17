@@ -21,7 +21,7 @@ namespace Command.Entity
         /// コマンドタイプを取得する関数
         /// </summary>
         /// <returns></returns>
-        public abstract CommandType ConfirmCommandType();
+        public abstract CommandType GetCommandType();
 
         /// <summary>
         /// コマンドベース型としてのコピーを返すクラス

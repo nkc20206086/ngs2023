@@ -20,27 +20,39 @@ namespace Gimmick
 
         [Header("デバッグ用　本来であれば生成済みのものは利用しない")]
         [SerializeField]
-        private List<GimmckController> instanceGimmick;
+        private List<GimmckController> instanceGimmickController;
         [SerializeField]
         private List<AccessPoint> accessPoints;
 
         [Header("値確認用　数値変更非推奨")]
         [SerializeField]
-        private int archiveIndex = 0;                                       // 現在のセーブ状況の何番目を実行しているかのインデックス(以下セーブ参照インデックスと呼ぶ)
+        private int archiveIndex = 0;           // 現在のセーブ状況の何番目を実行しているかのインデックス(以下セーブ参照インデックスと呼ぶ)
         [SerializeField]
-        private int swapIndex = -1;                                         // 入れ替え中のギミックインデックス
+        private int swappingGimmickIndex = -1;  // 入れ替え中のギミックインデックス
         [SerializeField]
-        private int maxArchiveCount = 0;                                    // 記録している入れ替えの数
+        private int maxArchiveCount = 0;      　// 記録している入れ替えの数
 
-        private bool isPlaySwitch = false;                                  // コマンド入れ替え実行中であるかを管理する変数 
+        private bool isSwapping = false;        // コマンド入れ替え実行中であるかを管理する変数 
+        private bool isExecute = false;
+        private CommandState state = CommandState.INACTIVE;
 
         private void Update()
         {
-            if (isPlaySwitch) return;                 // 入れ替え中であれば処理しない
-
-            foreach (GimmckController gimmckController in instanceGimmick)
+            if (isExecute)
             {
-                gimmckController.CommandUpdate();   // 各ギミックのコマンドを実行する
+                if (isSwapping) return;                 // 入れ替え中であれば処理しない
+
+                foreach (GimmckController gimmckController in instanceGimmickController)
+                {
+                    gimmckController.CommandUpdate();   // 各ギミックのコマンドを実行する
+                }
+
+                foreach (GimmckController gimmckController in instanceGimmickController)
+                {
+                    if (gimmckController.GetExecutionStatus) return;
+                }
+
+                isExecute = false;
             }
         }
 
@@ -50,7 +62,7 @@ namespace Gimmick
         public void GimmickInstance(List<CommandStruct[]> setCommandList)
         {
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
-            for (int i = 0;i <  instanceGimmick.Count;i++)
+            for (int i = 0;i <  instanceGimmickController.Count;i++)
             {
                 Subject<int> openAct = new Subject<int>();
                 openAct.Subscribe(Swap);
@@ -61,7 +73,7 @@ namespace Gimmick
 
                 accessPoints[i].index = i;
 
-                instanceGimmick[i].StartUp(setCommandList[i]);
+                instanceGimmickController[i].StartUp(setCommandList[i]);
             }
         }
 
@@ -71,13 +83,14 @@ namespace Gimmick
         /// <param name="index">実行インデックス</param>
         private void Swap(int index)
         {
-            if (isPlaySwitch) return;         // 入れ替え実行中であるなら早期リターンする
-            isPlaySwitch = true;              // 入れ替え実行中に変更
+            if (isExecute) return;
+            if (isSwapping) return;         // 入れ替え実行中であるなら早期リターンする
+            isSwapping = true;              // 入れ替え実行中に変更
 
-            swapIndex = index;                // ギミック入れ替えインデックスを設定
+            swappingGimmickIndex = index;                // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            commandDirector.CommandActivation(instanceGimmick[index].controlCommand);
+            commandDirector.CommandActivation(instanceGimmickController[index].controlCommand);
 
             maxArchiveCount++;          // 記録数加算
             archiveIndex++;             // セーブ参照インデックスを加算
@@ -88,47 +101,68 @@ namespace Gimmick
         /// </summary>
         private void Close(Unit unit)
         {
-            if (!isPlaySwitch) return;                                                  // 入れ替え実行中でないなら早期リターンする
-            isPlaySwitch = false;                                                       // 入れ替え終了に変更
+            if (!isSwapping) return;                                                            // 入れ替え実行中でないなら早期リターンする
+            isSwapping = false;                                                                 // 入れ替え終了に変更
 
-            bool isSwitch = commandDirector.CommandInvalidation();                      // コマンド管理クラスに処理の終了を依頼し、入れ替えの有無をローカル変数に保存する
+            bool isSwap = commandDirector.CommandInvalidation();                                // コマンド管理クラスに処理の終了を依頼し、入れ替えの有無をローカル変数に保存する
 
-            if (!isSwitch)                                                              // コマンド入れ替えが行われていないなら
+            if (!isSwap)                                                                        // コマンド入れ替えが行われていないなら
             {
-                maxArchiveCount--;                                                      // 記録数減算
-                archiveIndex--;                                                         // セーブ参照インデックスを減算
+                maxArchiveCount--;                                                              // 記録数減算
+                archiveIndex--;                                                                 // セーブ参照インデックスを減算
             }
-            else　                                                                      // 入れ替えが実行されているなら
+            else　                                                                              // 入れ替えが実行されているなら
             {
-                for (int i = 0;i < instanceGimmick.Count;i++)                           // ギミック数分回す
+                for (int i = 0;i < instanceGimmickController.Count;i++)                         // ギミック数分回す
                 {
-                    if (i == swapIndex)                                                 // 現在の入れ替えインデックスと同一のものなら
+                    if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
                     {
-                        instanceGimmick[i].AddControlCommandToArchive(archiveIndex);    // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
+                        instanceGimmickController[i].AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
                     }
                     else
                     {
-                        instanceGimmick[i].AddNewCommandsToArchive(archiveIndex);       // コマンドアーカイブに前回と同様の内容を追加する
+                        instanceGimmickController[i].AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
                     }
                 }
 
-                maxArchiveCount = archiveIndex;
-                storage.AddArchiveCommand(archiveIndex, storage.controlCommand);        //ストレージコマンドのアーカイブを追加する
+                maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
+                storage.AddArchiveCommand(archiveIndex, storage.controlCommand);                // ストレージコマンドのアーカイブを追加する
+
+                isExecute = false;
+                state = CommandState.INACTIVE;
+
+                foreach (GimmckController gimmck in instanceGimmickController)
+                {
+                    gimmck.IntializeAction();
+                }
+            }
+        }
+
+        public void StartCommandAction(Unit unit)
+        {
+            if (isExecute) return;
+            isExecute = true;
+            state = state != CommandState.MOVE_ON ? CommandState.MOVE_ON : CommandState.RETURN;
+
+            foreach (GimmckController gimmckController in instanceGimmickController)
+            {
+                gimmckController.StartingAction(state);
             }
         }
 
         /// <summary>
         /// 一手戻る
         /// </summary>
-        public void Undo()
+        public void Undo(Unit unit)
         {
-            if (archiveIndex <= 0 || isPlaySwitch) return;    // セーブ参照インデックスが0よりも小さいか、入れ替え実行中であれば早期リターンする
+            if (archiveIndex <= 0 || isSwapping) return;     // セーブ参照インデックスが0よりも小さいか、入れ替え実行中であれば早期リターンする
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
             // 減算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmckController gimmck in instanceGimmick)
+            foreach (GimmckController gimmck in instanceGimmickController)
             {
+                gimmck.IntializeAction();
                 gimmck.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
@@ -137,15 +171,16 @@ namespace Gimmick
         /// <summary>
         /// 一手進む
         /// </summary>
-        public void Redo()
+        public void Redo(Unit unit)
         {
-            if (archiveIndex >= maxArchiveCount - 1|| isPlaySwitch) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+            if (archiveIndex >= maxArchiveCount - 1|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                       // セーブ参照インデックスを加算する
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmckController gimmck in instanceGimmick)
+            foreach (GimmckController gimmck in instanceGimmickController)
             {
+                gimmck.IntializeAction();
                 gimmck.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);

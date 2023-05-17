@@ -12,7 +12,7 @@ public class TestPlayer_Command : MonoBehaviour
     {
         if (!access)
         {
-            Vector3 vec = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * 5 * Time.deltaTime;
+            Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * 5 * Time.deltaTime;
 
             transform.position += vec;
         }
