@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using Zenject;
 using UniRx;
 using Command;
 using Command.Entity;
 using Gimmick.Interface;
+using ScanMode;
 
 namespace Gimmick
 {
     /// <summary>
     /// ギミック関連の処理を管理するクラス
     /// </summary>
-    public class GimmickDirector : MonoBehaviour,IGimmickAccess
+    public class GimmickDirector : MonoBehaviour, IGimmickAccess
     {
-        [SerializeField,Tooltip("ストレージコマンド管理クラス")]
+        [SerializeField, Tooltip("ストレージコマンド管理クラス")]
         private CommandStorage storage;
 
-        [SerializeField,Tooltip("コマンド管理クラス")]
+        [SerializeField, Tooltip("コマンド管理クラス")]
         private CommandDirector commandDirector;
 
         [Header("デバッグ用　本来であれば生成済みのものは利用しない")]
@@ -24,6 +27,9 @@ namespace Gimmick
         private List<GimmckController> instanceGimmickController;
         [SerializeField]
         private List<AccessPoint> accessPoints;
+
+        [Inject]
+        private IScanModeLaserManageable laserManageable;
 
         [Header("値確認用　数値変更非推奨")]
         [SerializeField]
@@ -67,13 +73,18 @@ namespace Gimmick
         /// </summary>
         public void GimmickInstance(List<CommandStruct[]> setCommandList)
         {
+            List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
+
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
             for (int i = 0;i <  instanceGimmickController.Count;i++)
             {
                 accessPoints[i].index = i;
+                laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform,instanceGimmickController[i].transform,accessPoints[i].color));
 
                 instanceGimmickController[i].StartUp(setCommandList[i]);
             }
+
+            laserManageable.LaserInit(laserInfoList);
         }
 
         /// <summary>

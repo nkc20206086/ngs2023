@@ -11,5 +11,6 @@ namespace Command
 
         [Header("値確認用　数値変更非推奨")]
         public int index;
+        public Color color;
     }
 }
