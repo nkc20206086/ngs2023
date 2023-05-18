@@ -16,15 +16,15 @@ namespace Command.Entity
         /// <param name="status">設定用構造体</param>
         public MoveCommand(CommandStruct status) : base(status) { }
 
-        public override object StartUp(object target, Action completeAction)
+        public override object InitCommand(object target, Action completeAction)
         {
+            // 各項目を現在の状態で再設定
             this.completeAction = completeAction;
             usableValue = value.getValue;
             usableAxis = axis.getAxis;
 
-            basePos = (Vector3)target;
-
-            return GetDirection() * value.getValue;
+            basePos = (Vector3)target;                          // 引数から座標を取得し、移動前座標に保存する
+            return GetDirection() * Mathf.Abs(value.getValue);  // 移動量を返す
         }
 
         public override void CommandExecute(CommandState state, Transform targetTransform)
@@ -35,7 +35,7 @@ namespace Command.Entity
             {
                 if (Vector3.Distance(basePos, targetTransform.position) > Mathf.Abs(usableValue))   // 原点からの移動距離が設定数値を超えているなら
                 {
-                    targetTransform.position = basePos + (GetDirection() * usableValue);            // 対象の位置を対象の座標に変更
+                    targetTransform.position = basePos + (GetDirection() * Mathf.Abs(usableValue)); // 対象の位置を対象の座標に変更
                     completeAction?.Invoke();                                                       // コマンド完了時処理を実行
                 }
                 else                                                                                // まだ移動距離が設定数値を超えていないなら

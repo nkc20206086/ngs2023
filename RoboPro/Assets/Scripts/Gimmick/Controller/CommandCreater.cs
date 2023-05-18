@@ -21,6 +21,7 @@ namespace Command
             {
                 case MainCommandType.Move: command = new MoveCommand(status); break;
                 case MainCommandType.Rotate: command = new RotateCommand(status); break;
+                case MainCommandType.Scale: command = new ScaleCommand(status); break;
             }
 
             return command; // ì¬‚µ‚½ƒRƒ}ƒ“ƒh‚ğ•Ô‚·

@@ -7,5 +7,6 @@ namespace Robo
         StageSelect,
         Stage,
         UI,
+        Settings,
     }
 }

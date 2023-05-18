@@ -12,10 +12,10 @@ namespace Player
         private void Update()
         {
             //if(Input.GetKeyDown(KeyCode.Return))
-            if (groundObj != null)
-            {
-                ColiCheck();
-            }
+            //if (groundObj != null)
+            //{
+            //    ColiCheck();
+            //}
         }
         public void ColiCheck()
         {
