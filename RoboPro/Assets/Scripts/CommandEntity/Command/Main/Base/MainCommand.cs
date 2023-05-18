@@ -155,7 +155,7 @@ namespace Command.Entity
 
         public override string GetString()
         {
-            return $"{commandName} {(axis != null ? axis.GetString() : default)} {(value != null ? value.GetString() : default)}";
+            return commandName;
         }
 
         public override CommandType GetCommandType()
