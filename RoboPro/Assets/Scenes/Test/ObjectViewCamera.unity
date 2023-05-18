@@ -750,7 +750,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8600000, guid: ebd67a3a1d215c0469be724fd40f3743, type: 2}
   m_TargetDisplay: 0
@@ -948,7 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1260331292}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Obj2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1052,7 +1052,7 @@ GameObject:
   - component: {fileID: 1478009248}
   - component: {fileID: 1478009247}
   - component: {fileID: 1478009246}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1149,7 +1149,7 @@ GameObject:
   - component: {fileID: 1587480060}
   - component: {fileID: 1587480059}
   - component: {fileID: 1587480058}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1246,7 +1246,7 @@ GameObject:
   - component: {fileID: 1595304733}
   - component: {fileID: 1595304732}
   - component: {fileID: 1595304731}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
