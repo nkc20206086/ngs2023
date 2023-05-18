@@ -13,7 +13,7 @@ namespace ScanMode
 
         private List<GameObject> laserObjList = new List<GameObject>();
 
-        public void LaserInit(List<ScanModeLaserTargetInfo> laserInfoList)
+        void IScanModeLaserManageable.LaserInit(List<ScanModeLaserTargetInfo> laserInfoList)
         {
             for (int i = 0; i < laserInfoList.Count; i++)
             {
@@ -40,7 +40,7 @@ namespace ScanMode
             }
         }
 
-        public void ShowLaser()
+        void IScanModeLaserManageable.ShowLaser()
         {
             for (int i = 0; i < laserObjList.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace ScanMode
             }
         }
 
-        public void ClearLaserData()
+        void IScanModeLaserManageable.ClearLaserData()
         {
             laserObjList.Clear();
         }
