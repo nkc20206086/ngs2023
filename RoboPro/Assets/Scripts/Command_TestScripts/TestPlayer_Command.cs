@@ -19,7 +19,7 @@ public class TestPlayer_Command : MonoBehaviour
 
         transform.position += vec;
 
-        int index = gimmickAccess.AcquisitionOfHitAccessPoint(transform.position);
+        int index = gimmickAccess.GetAccessPointIndex(transform.position);
 
         if (index >= 0)
         {

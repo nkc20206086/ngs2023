@@ -9,7 +9,7 @@ namespace Gimmick.Interface
         /// </summary>
         /// <param name="position">対象の位置</param>
         /// <returns>実行結果(-1の場合は有効なものはありません)</returns>
-        public int AcquisitionOfHitAccessPoint(Vector3 position);
+        public int GetAccessPointIndex(Vector3 position);
 
         /// <summary>
         /// コマンド入れ替え処理実行

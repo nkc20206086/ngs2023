@@ -166,7 +166,7 @@ namespace Gimmick
             storage.OverwriteControlCommand(archiveIndex);
         }
 
-        int IGimmickAccess.AcquisitionOfHitAccessPoint(Vector3 position)
+        int IGimmickAccess.GetAccessPointIndex(Vector3 position)
         {
             int retIndex = -1;                           // 返却インデックス
             float minDistance = AccessPoint.MAX_RADIUS;  // 計測した最短の距離
