@@ -9,7 +9,11 @@ namespace Player
         Stay,
         Move,
         Dizzy,
+        StepOff,
         Fall,
+        ThroughFall,
+        Falling,
+        Landing,
         Access,
         Die,
         Count

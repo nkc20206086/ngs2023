@@ -1,13 +1,18 @@
 ﻿namespace Robo
 {
+    //キューシートは、各シーンごとに使われるオーディオファイルを分別するために使用される
+    //タイトル画面で使われる効果音はTitleというジャンルに分けられる
+    //BGMは例外で、BGM名ごとに管理されている
     public enum CueSheetType
     {
+        //SEが使用されるシーン名
         Title = 0,
         StageSelect = 1,
         Stage = 2,
         Player = 3,
         Menu = 4,
 
+        //BGM名
         yuboku = 1000,
         future = 1001,
         youkou = 1002,
