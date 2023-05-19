@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Player
 {
     interface IStateGetter
@@ -13,5 +15,11 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public float SpeedGetter();
+
+        /// <summary>
+        /// ƒWƒƒƒ“ƒv‚Ì‚‚³‚Æ•‚ğæ“¾
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 JumpPowerGetter();
     }
 }

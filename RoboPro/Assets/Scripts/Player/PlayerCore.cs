@@ -9,7 +9,12 @@ namespace Player
         private Rigidbody rigidbody;
         private IStateChange[] stateChangeArray = new IStateChange[(int)PlayerStateEnum.Count];
         private PlayerStateEnum state;
-        public float moveSpeed;
+
+        [SerializeField]
+        private float moveSpeed;
+
+        [SerializeField]
+        private Vector2 jumpPower;
 
         // Start is called before the first frame update
         void Start()
@@ -27,7 +32,7 @@ namespace Player
         {
             //ステートを変更
             state = newStateEnum;
-            Debug.Log(state + "ステートに変更されました");
+            //Debug.Log(state + "ステートに変更されました");
         }
 
         PlayerStateEnum IStateGetter.StateGetter()
@@ -38,6 +43,11 @@ namespace Player
         float IStateGetter.SpeedGetter()
         {
             return moveSpeed;
+        }
+
+        public Vector2 JumpPowerGetter()
+        {
+            return jumpPower;
         }
     }
 }
