@@ -13,6 +13,9 @@ namespace ScanMode
 
         private List<GameObject> laserObjList = new List<GameObject>();
 
+        private MaterialPropertyBlock mpb;
+        private static string colorProp = "_Color";
+
         void IScanModeLaserManageable.LaserInit(List<ScanModeLaserTargetInfo> laserInfoList)
         {
             for (int i = 0; i < laserInfoList.Count; i++)
@@ -22,6 +25,7 @@ namespace ScanMode
                 laserObjList.Add(laser);
             }
 
+            SetLaserColor(laserInfoList);
             SetLaserPos(laserInfoList);
             HideLaser();
         }
@@ -37,6 +41,24 @@ namespace ScanMode
                 laserObjList[i].transform.localScale = new Vector3(length, laserWidth, laserWidth);
                 Vector3 center = (laserInfoList[i].t0.position + laserInfoList[i].t1.position) * 0.5f;
                 laserObjList[i].transform.position = center;
+            }
+        }
+
+        /// <summary>
+        /// レーザーの色を設定する
+        /// </summary>
+        /// <param name="laserInfoList">レーザー情報のList</param>
+        private void SetLaserColor(List<ScanModeLaserTargetInfo> laserInfoList)
+        {
+            mpb = new MaterialPropertyBlock();
+            for (int i = 0; i < laserObjList.Count; i++)
+            {
+                MeshRenderer[] renderers = laserObjList[i].GetComponentsInChildren<MeshRenderer>();
+                for (int j = 0; j < renderers.Length; j++)
+                {
+                    mpb.SetColor(colorProp, laserInfoList[i].color);
+                    renderers[j].SetPropertyBlock(mpb);
+                }
             }
         }
 
