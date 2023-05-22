@@ -24,6 +24,15 @@ public class GoalView : MonoBehaviour
         goal.OnClear += OnClear;
     }
 
+    private void Update()
+    {
+        // 現オブジェクトからメインカメラ方向のベクトルを取得する
+        Vector3 direction = Camera.main.transform.position - slider.transform.position;
+
+        // オブジェクトをベクトル方向に従って回転させる
+        slider.transform.rotation = Quaternion.LookRotation(direction);
+    }
+
     private void OnChangeInteractingTime(float value)
     {
         if (isClear) return;
