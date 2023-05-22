@@ -53,6 +53,7 @@ public class Goal : MonoBehaviour
 
     private void Clear()
     {
+        if (isClear) return;
         Debug.Log("Clear");
         isClear = true;
         OnClear?.Invoke();

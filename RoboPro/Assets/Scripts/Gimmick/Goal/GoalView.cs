@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GoalView : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class GoalView : MonoBehaviour
 
     [SerializeField]
     private Slider slider;
+
+    [SerializeField]
+    private ParticleSystem particle;
+
+    [Inject]
+    private IVCameraTargetChanger vCameraChanger;
 
     private bool isClear = false;
 
@@ -55,5 +62,8 @@ public class GoalView : MonoBehaviour
     {
         isClear = true;
         animator.SetTrigger("Hide");
+
+        vCameraChanger.ChangeCameraTarget(VCameraType.Goal);
+        particle.Play();
     }
 }
