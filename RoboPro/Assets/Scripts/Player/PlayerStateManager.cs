@@ -6,7 +6,6 @@ namespace Player
 {
     public class PlayerStateManager : MonoBehaviour
     {
-        private PlayerCore playerCore;
         private PlayerStay playerStay;
         private PlayerMove playerMove;
         private PlayerAccess playerAccess;
@@ -14,6 +13,9 @@ namespace Player
         private PlayerStepOff playerStepOff;
         private PlayerFall playerFall;
         private PlayerLanding playerLanding;
+        private PlayerLadderStepOn playerLadderStepOn;
+        private PlayerLadderClimb playerLadderClimb;
+        private PlayerFinishLadderClimb playerFinishLadderClimb;
         private IStateGetter stateGetter;
 
         private InputControls inputActions;
@@ -24,7 +26,6 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            playerCore = GetComponent<PlayerCore>();
             playerStay = GetComponent<PlayerStay>();
             playerMove = GetComponent<PlayerMove>();
             playerAccess = GetComponent<PlayerAccess>();
@@ -32,18 +33,18 @@ namespace Player
             playerStepOff = GetComponent<PlayerStepOff>();
             playerFall = GetComponent<PlayerFall>();
             playerLanding = GetComponent<PlayerLanding>();
+            playerLadderStepOn = GetComponent<PlayerLadderStepOn>();
+            playerLadderClimb = GetComponent<PlayerLadderClimb>();
+            playerFinishLadderClimb = GetComponent<PlayerFinishLadderClimb>();
             stateGetter = GetComponent<IStateGetter>();
 
             inputActions = new InputControls();
             inputActions.Enable();
-
-            
         }
 
         private void Update()
         {
             inputVec = inputActions.Player.Move.ReadValue<Vector2>();
-            //Debug.Log(inputVec);
 
             //ƒ{ƒ^ƒ“‚ð‰Ÿ‚³‚ê‚Ä‚¢‚é‚©”»•Ê
             isMove = inputActions.Player.Move.IsPressed();
@@ -52,7 +53,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            Debug.Log(stateGetter.StateGetter());
+            //Debug.Log(stateGetter.StateGetter());
             //Statemachine
             switch (stateGetter.StateGetter())
             {
@@ -99,6 +100,21 @@ namespace Player
                 case PlayerStateEnum.Access:
                     {
                         playerAccess.Act_Access();
+                        break;
+                    }
+                case PlayerStateEnum.LadderStepOn_Climb:
+                    {
+                        playerLadderStepOn.Act_StepOn();
+                        break;
+                    }
+                case PlayerStateEnum.LaddderClimb:
+                    {
+                        playerLadderClimb.Act_Climb();
+                        break;
+                    }
+                case PlayerStateEnum.LadderFinish_Climb:
+                    {
+                        playerFinishLadderClimb.Act_FinishClimb();
                         break;
                     }
                 case PlayerStateEnum.Die:

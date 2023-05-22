@@ -9,6 +9,7 @@ namespace Player
     {
         private Rigidbody rigidbody;
         private GroundChecker groundChecker;
+        private LadderChecker ladderChecker;
         private Animator animator;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -19,6 +20,7 @@ namespace Player
         {
             rigidbody = GetComponent<Rigidbody>();
             groundChecker = GetComponent<GroundChecker>();
+            ladderChecker = GetComponent<LadderChecker>();
             animator = GetComponentInChildren<Animator>();
             stateGetter = GetComponent<IStateGetter>();
         }
@@ -35,6 +37,24 @@ namespace Player
             if(isInteract)
             {
                 stateChangeEvent(PlayerStateEnum.Access);
+            }
+
+            Debug.Log(ladderChecker.LadderClimbCheck());
+            Debug.Log(ladderChecker.LadderDownCheck());
+            if(ladderChecker.LadderClimbCheck())
+            {
+                if(isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
+                }
+            }
+
+            if(ladderChecker.LadderDownCheck())
+            {
+                if (isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderDown);
+                }
             }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
