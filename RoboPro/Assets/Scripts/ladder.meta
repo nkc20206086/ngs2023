@@ -1,6 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a1e16b8ec2b615341b6c4112be01089c
 folderAsset: yes
+=======
+<<<<<<< HEAD:RoboPro/Assets/Scenes/Test/Test_StageCameraScnee_Shibata.unity.meta
+guid: a9b279ff6d04c0c4fb61d5ddb4f9a24b
+=======
+guid: 194ca242964e55b45af023c955b1702d
+folderAsset: yes
+>>>>>>> feature/feature_Ladder_Move:RoboPro/Assets/Scripts/ladder.meta
+>>>>>>> feature/feature_Ladder_Move
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -15,7 +15,11 @@ TagManager:
   - Player
   - DizzyGround
   - UnDizzyGround
+<<<<<<< HEAD
   - ObjectView
+=======
+  - InteractObject
+>>>>>>> feature/feature_Ladder_Move
   - 
   - 
   - 
