@@ -6,9 +6,13 @@ namespace Player
 {
     public class PlayerCore : MonoBehaviour,IStateGetter
     {
+        private Animator animator;
         private Rigidbody rigidbody;
         private IStateChange[] stateChangeArray = new IStateChange[(int)PlayerStateEnum.Count];
         private PlayerStateEnum state;
+
+        [SerializeField]
+        private float ladderUpDownSpeed;
 
         [SerializeField]
         private float moveSpeed;
@@ -19,6 +23,7 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            animator = GetComponentInChildren<Animator>();
             rigidbody = GetComponent<Rigidbody>();
             stateChangeArray = GetComponents<IStateChange>();
             foreach(IStateChange stateChange in stateChangeArray)
@@ -48,6 +53,21 @@ namespace Player
         public Vector2 JumpPowerGetter()
         {
             return jumpPower;
+        }
+
+        public float LadderUpDownSpeed()
+        {
+            return ladderUpDownSpeed;
+        }
+
+        public Animator PlayerAnimatorGeter()
+        {
+            return animator;
+        }
+
+        public Rigidbody rigidbodyGetter()
+        {
+            return rigidbody;
         }
     }
 }

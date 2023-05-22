@@ -6,11 +6,12 @@ using MainCamera;
 
 namespace Player
 {
-    public class PlayerMove : MonoBehaviour,IStateChange
+    public class PlayerMove : MonoBehaviour, IStateChange
     {
         private Rigidbody rigidbody;
         private Animator animator;
         private GroundChecker groundChecker;
+        private LadderChecker ladderChecker;
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         private ICameraVectorGetter cameraVectorGetter;
@@ -26,6 +27,7 @@ namespace Player
             rigidbody = GetComponent<Rigidbody>();
             animator = GetComponentInChildren<Animator>();
             groundChecker = GetComponent<GroundChecker>();
+            ladderChecker = GetComponent<LadderChecker>();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
             cameraVectorGetter = camera.GetComponent<ICameraVectorGetter>();
@@ -36,7 +38,7 @@ namespace Player
         /// </summary>
         /// <param name="isMove"></param>
         /// <param name="isInteract"></param>
-        public void Act_Move(bool isMove, bool isInteract,Vector2 vec)
+        public void Act_Move(bool isMove, bool isInteract, Vector2 vec)
         {
             //床にいるかどうかを判定する
             if (groundChecker.LandingCheck() == false)
@@ -62,12 +64,34 @@ namespace Player
                     rigidbody.velocity = Vector3.zero;
                     stateChangeEvent(PlayerStateEnum.Stay);
                 }
+                
+                //登る梯子の検知
+                if (ladderChecker.LadderClimbCheck())
+                {
+                    if (isInteract)
+                    {
+                        stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
+                    }
+                }
+
+                //下る梯子の検知
+                if (ladderChecker.LadderDownCheck())
+                {
+                    if (isInteract)
+                    {
+                        stateChangeEvent(PlayerStateEnum.LadderDown);
+                    }
+                }
 
                 //目の前が崖か判定
                 if (groundChecker.CheckGround(moveForward) == false)
                 {
+                    if(ladderChecker.LadderClimbCheck() || ladderChecker.LadderDownCheck())
+                    {
+                        rigidbody.velocity = Vector3.zero;
+                    }
                     //自分の乗っている床でふらつけるかどうかの判定
-                    if (groundChecker.DizzyGroundFlg() == false)
+                    else if (groundChecker.DizzyGroundFlg() == false)
                     {
                         //ふらつくステートに変更
                         animator.SetBool("Flg_Walk", false);

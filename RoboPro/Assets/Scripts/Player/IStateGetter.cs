@@ -5,6 +5,18 @@ namespace Player
     interface IStateGetter
     {
         /// <summary>
+        /// Animatorを取得
+        /// </summary>
+        /// <returns></returns>
+        public Animator PlayerAnimatorGeter();
+
+        /// <summary>
+        /// Rigidbodyを取得
+        /// </summary>
+        /// <returns></returns>
+        public Rigidbody rigidbodyGetter();
+
+        /// <summary>
         /// 現在の状態を取得
         /// </summary>
         /// <returns></returns>
@@ -15,6 +27,12 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public float SpeedGetter();
+
+        /// <summary>
+        /// 梯子の上り下りのスピードを取得
+        /// </summary>
+        /// <returns></returns>
+        public float LadderUpDownSpeed();
 
         /// <summary>
         /// ジャンプの高さと幅を取得
