@@ -7,14 +7,14 @@ namespace Player
 {
     public class PlayerStepOff : MonoBehaviour,IStateChange
     {
-        private Animator animator;
+        private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
 
         // Start is called before the first frame update
         void Start()
         {
-            animator = GetComponentInChildren<Animator>();
+            stateGetter = GetComponent<IStateGetter>();
         }
 
         /// <summary>
@@ -22,8 +22,8 @@ namespace Player
         /// </summary>
         public void Act_StepOff()
         {
-            animator.SetBool("Flg_StepOff", true);
-            animator.SetBool("Flg_Cliff", false);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_StepOff", true);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", false);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Player
         /// </summary>
         public void Finish_StepOff()
         {
-            animator.SetBool("Flg_StepOff", false);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_StepOff", false);
             stateChangeEvent(PlayerStateEnum.Fall);
         }
     }

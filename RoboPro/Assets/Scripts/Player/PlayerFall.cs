@@ -7,10 +7,7 @@ namespace Player
 {
     public class PlayerFall : MonoBehaviour, IStateChange
     {
-        private Rigidbody rigidbody;
-        private Animator animator;
-        private PlayerCore playerCore;
-        private GroundChecker groundChecker;
+        private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         private Vector2 jumpVec;
@@ -18,12 +15,9 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            playerCore = GetComponent<PlayerCore>();
-            groundChecker = GetComponent<GroundChecker>();
-            animator = GetComponentInChildren<Animator>();
+            stateGetter = GetComponent<IStateGetter>();
 
-            jumpVec = playerCore.JumpPowerGetter();
+            jumpVec = stateGetter.JumpPowerGetter();
         }
 
         /// <summary>
@@ -31,13 +25,13 @@ namespace Player
         /// </summary>
         public void Act_Fall()
         {
-            animator.SetBool("Flg_Fall", true);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
 
             //飛び降りるための小ジャンプ
-            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
+            stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y, transform.forward.z * jumpVec.x);
 
             //falseだったら空中にいる
-            if(groundChecker.LandingCheck() == false)
+            if(stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
                 //空中落下中ステートに変更
                 stateChangeEvent(PlayerStateEnum.Falling);
@@ -49,8 +43,8 @@ namespace Player
         /// </summary>
         public void Act_ThroughFall()
         {
-            animator.SetBool("Flg_Fall", true);
-            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
+            stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, stateGetter.RigidbodyGetter().velocity.y, transform.forward.z * jumpVec.x);
             stateChangeEvent(PlayerStateEnum.Falling);
         }
 
@@ -60,7 +54,7 @@ namespace Player
         public void Act_Falling()
         {
             //trueになったら地面に着地している
-            if (groundChecker.LandingCheck())
+            if (stateGetter.GroundCheckGetter().LandingCheck())
             {
                 //着地ステートに変更
                 stateChangeEvent(PlayerStateEnum.Landing);
