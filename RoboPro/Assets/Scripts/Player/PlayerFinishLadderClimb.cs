@@ -29,12 +29,11 @@ namespace Player
             capsuleCollider.isTrigger = true;
             if (isGetOff == false)
             {
-                stateGetter.rigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y * 2, transform.forward.z * jumpVec.x);
-                Debug.Log("èIóπ");
+                stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y * 2, transform.forward.z * jumpVec.x);
                 isGetOff = true;
             }
             
-            if(stateGetter.rigidbodyGetter().velocity.y < 0)
+            if(stateGetter.RigidbodyGetter().velocity.y < 0)
             {
                 isGetOff = false;
                 capsuleCollider.isTrigger = false;

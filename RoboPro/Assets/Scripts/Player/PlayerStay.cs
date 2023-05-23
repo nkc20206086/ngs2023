@@ -7,21 +7,12 @@ namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
-        private Rigidbody rigidbody;
-        private GroundChecker groundChecker;
-        private LadderChecker ladderChecker;
-        private Animator animator;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-
 
         // Start is called before the first frame update
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            groundChecker = GetComponent<GroundChecker>();
-            ladderChecker = GetComponent<LadderChecker>();
-            animator = GetComponentInChildren<Animator>();
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -34,14 +25,7 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.Move);
             }
 
-            if(isInteract)
-            {
-                stateChangeEvent(PlayerStateEnum.Access);
-            }
-
-            Debug.Log(ladderChecker.LadderClimbCheck());
-            Debug.Log(ladderChecker.LadderDownCheck());
-            if(ladderChecker.LadderClimbCheck())
+            if (stateGetter.LadderCheckGetter().LadderClimbCheck())
             {
                 if(isInteract)
                 {
@@ -49,7 +33,7 @@ namespace Player
                 }
             }
 
-            if(ladderChecker.LadderDownCheck())
+            if(stateGetter.LadderCheckGetter().LadderDownCheck())
             {
                 if (isInteract)
                 {
@@ -57,11 +41,23 @@ namespace Player
                 }
             }
 
+            //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+
+            //if (index >= 0)
+            //{
+            //    if (isInteract)
+            //    {
+            //        stateChangeEvent(PlayerStateEnum.Access);
+            //        stateGetter.GimmickAccessGetter().Access(index);
+            //        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
+            //    }
+            //}
+
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
-            if (groundChecker.LandingCheck() == false)
+            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
                 stateChangeEvent(PlayerStateEnum.ThroughFall);
-                animator.SetBool("Flg_Fall", true);
+                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
             }
         }
     }
