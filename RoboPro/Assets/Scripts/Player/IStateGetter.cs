@@ -32,7 +32,7 @@ namespace Player
         /// 梯子の上り下りのスピードを取得
         /// </summary>
         /// <returns></returns>
-        public float LadderUpDownSpeed();
+        public float LadderUpDownSpeedGetter();
 
         /// <summary>
         /// ジャンプの高さと幅を取得
