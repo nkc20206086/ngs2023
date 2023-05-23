@@ -50,7 +50,7 @@ namespace Player
         public bool Complete_LadderClimbCheck()
         {
             RaycastHit ladderRay = new RaycastHit();
-            Vector3 completeLadderRayVec = new Vector3(transform.position.x, transform.position.y + capsuleCollider.height, transform.position.z);
+            Vector3 completeLadderRayVec = new Vector3(transform.position.x, transform.position.y + capsuleCollider.height -0.5f, transform.position.z);
             Physics.Raycast(completeLadderRayVec, transform.forward, out ladderRay, ladderRayLength, layerMask);
             Debug.DrawRay(completeLadderRayVec, transform.forward * ladderRayLength);
             if(ladderRay.collider == null)

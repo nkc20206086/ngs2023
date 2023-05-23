@@ -9,8 +9,8 @@ namespace Player
     {
         private Rigidbody rigidbody;
         private Animator animator;
-        private PlayerCore playerCore;
         private GroundChecker groundChecker;
+        private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         private Vector2 jumpVec;
@@ -19,11 +19,11 @@ namespace Player
         void Start()
         {
             rigidbody = GetComponent<Rigidbody>();
-            playerCore = GetComponent<PlayerCore>();
             groundChecker = GetComponent<GroundChecker>();
             animator = GetComponentInChildren<Animator>();
+            stateGetter = GetComponent<IStateGetter>();
 
-            jumpVec = playerCore.JumpPowerGetter();
+            jumpVec = stateGetter.JumpPowerGetter();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Player
             animator.SetBool("Flg_Fall", true);
 
             //îÚÇ—ç~ÇËÇÈÇΩÇﬂÇÃè¨ÉWÉÉÉìÉv
-            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, rigidbody.velocity.y, transform.forward.z * jumpVec.x);
+            rigidbody.velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y, transform.forward.z * jumpVec.x);
 
             //falseÇæÇ¡ÇΩÇÁãÛíÜÇ…Ç¢ÇÈ
             if(groundChecker.LandingCheck() == false)

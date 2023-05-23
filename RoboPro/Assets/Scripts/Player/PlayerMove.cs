@@ -70,6 +70,7 @@ namespace Player
                 {
                     if (isInteract)
                     {
+                        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
                         stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
                     }
                 }

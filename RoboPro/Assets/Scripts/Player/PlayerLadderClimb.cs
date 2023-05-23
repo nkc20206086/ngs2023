@@ -26,7 +26,7 @@ namespace Player
         public void Act_Climb()
         {
             animator.SetBool("Flg_Ladder_Climb", true);
-            rigidbody.velocity = new Vector3(0, stateGetter.LadderUpDownSpeed(), 0);
+            rigidbody.velocity = new Vector3(0, stateGetter.LadderUpDownSpeedGetter(), 0);
 
             Debug.Log(ladderChecker.Complete_LadderClimbCheck());
             if (ladderChecker.Complete_LadderClimbCheck()) return;
