@@ -21,7 +21,7 @@ public class Goal : MonoBehaviour
 
     private void Update()
     {
-        //ƒvƒŒƒCƒ„[‚ÆƒS[ƒ‹‚ÉÚG‚µAˆê•bŠÔƒCƒ“ƒ^ƒ‰ƒNƒg‚·‚é‚ÆƒNƒŠƒA‚Æ‚È‚é
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚´ãƒ¼ãƒ«ã«æŽ¥è§¦ã—ã€ä¸€ç§’é–“ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã™ã‚‹ã¨ã‚¯ãƒªã‚¢ã¨ãªã‚‹
         if (isHitPlayer && inputActions.Player.Interact.IsPressed())
         {
             if (interactTime >= 1)
@@ -36,7 +36,7 @@ public class Goal : MonoBehaviour
             }
         }
         else
-        //ƒCƒ“ƒ^ƒ‰ƒNƒg‚ð‰ðœ‚·‚é‚ÆA™X‚É•b”‚ªŒ¸­‚·‚é
+        //ã‚¤ãƒ³ã‚¿ãƒ©ã‚¯ãƒˆã‚’è§£é™¤ã™ã‚‹ã¨ã€å¾ã€…ã«ç§’æ•°ãŒæ¸›å°‘ã™ã‚‹
         if(!isClear)
         {
             if (interactTime > 0)
@@ -54,7 +54,6 @@ public class Goal : MonoBehaviour
     private void Clear()
     {
         if (isClear) return;
-        Debug.Log("Clear");
         isClear = true;
         OnClear?.Invoke();
     }
