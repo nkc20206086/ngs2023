@@ -1,6 +1,8 @@
+using Gimmick.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
@@ -12,6 +14,10 @@ namespace Player
         private float moveSpeed;
         [SerializeField]
         private Vector2 jumpPower;
+
+        [Inject]
+        private IGimmickAccess gimmickAccess;
+
         [HideInInspector]
         public Animator animator;
         [HideInInspector]
@@ -19,6 +25,8 @@ namespace Player
 
         private IStateChange[] stateChangeArray = new IStateChange[(int)PlayerStateEnum.Count];
         private PlayerStateEnum state;
+        private GroundChecker groundChecker;
+        private LadderChecker ladderChecker;
 
         // Start is called before the first frame update
         void Start()
@@ -30,6 +38,8 @@ namespace Player
             {
                 stateChange.stateChangeEvent += StateChanger;
             }
+            groundChecker = GetComponent<GroundChecker>();
+            ladderChecker = GetComponent<LadderChecker>();
         }
 
         /// <param name="newStateEnum"></param>
@@ -55,7 +65,7 @@ namespace Player
             return animator;
         }
 
-        Rigidbody IStateGetter.rigidbodyGetter()
+        Rigidbody IStateGetter.RigidbodyGetter()
         {
             return rigidbody;
         }
@@ -68,6 +78,21 @@ namespace Player
         Vector2 IStateGetter.JumpPowerGetter()
         {
             return jumpPower;
+        }
+
+        IGimmickAccess IStateGetter.GimmickAccessGetter()
+        {
+            return gimmickAccess;
+        }
+
+        GroundChecker IStateGetter.GroundCheckGetter()
+        {
+            return groundChecker;
+        }
+
+        LadderChecker IStateGetter.LadderCheckGetter()
+        {
+            return ladderChecker;
         }
     }
 }

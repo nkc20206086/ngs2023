@@ -1,3 +1,4 @@
+using Gimmick.Interface;
 using UnityEngine;
 
 namespace Player
@@ -14,13 +15,31 @@ namespace Player
         /// Rigidbodyを取得
         /// </summary>
         /// <returns></returns>
-        public Rigidbody rigidbodyGetter();
+        public Rigidbody RigidbodyGetter();
 
         /// <summary>
         /// 現在の状態を取得
         /// </summary>
         /// <returns></returns>
         public PlayerStateEnum StateGetter();
+
+        /// <summary>
+        /// アクセスポイントの取得
+        /// </summary>
+        /// <returns></returns>
+        public IGimmickAccess GimmickAccessGetter();
+
+        /// <summary>
+        /// 床判定クラスの取得
+        /// </summary>
+        /// <returns></returns>
+        public GroundChecker GroundCheckGetter();
+
+        /// <summary>
+        /// 梯子判定クラスの取得
+        /// </summary>
+        /// <returns></returns>
+        public LadderChecker LadderCheckGetter();
 
         /// <summary>
         /// 移動スピードを取得

@@ -7,14 +7,14 @@ namespace Player
 {
     public class PlayerLanding : MonoBehaviour,IStateChange
     {
-        private Animator animator;
+        private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
 
         // Start is called before the first frame update
         void Start()
         {
-            animator = GetComponentInChildren<Animator>();
+            stateGetter = GetComponentInChildren<IStateGetter>();
         }
 
         /// <summary>
@@ -22,8 +22,8 @@ namespace Player
         /// </summary>
         public void Act_Landing()
         {
-            animator.SetBool("Flg_Landing", true);
-            animator.SetBool("Flg_Fall", false);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Landing", true);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Player
         /// </summary>
         public void Finish_Landing()
         {
-            animator.SetBool("Flg_Landing", false);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Landing", false);
             stateChangeEvent(PlayerStateEnum.Stay);
         }
     }
