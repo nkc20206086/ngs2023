@@ -12,14 +12,14 @@ namespace Command
         private MainCommandType CommandType;
         [SerializeField,Tooltip("コマンドを移動可能であるか")]
         private bool LockCommand;
+        [SerializeField, Tooltip("コマンドで使用する数値")]
+        private int Value;
         [SerializeField,Tooltip("コマンド内の数値を移動可能であるか")]
         private bool LockNumber;
+        [SerializeField, Tooltip("コマンドで使用する軸")]
+        private CoordinateAxis Axis;
         [SerializeField,Tooltip("コマンド内の軸を移動可能であるか")]
         private bool LockCoordinateAxis;
-        [SerializeField,Tooltip("コマンドで使用する数値")]
-        private int Value;
-        [SerializeField,Tooltip("コマンドで使用する軸")]
-        private CoordinateAxis Axis;
 
         // 各種ゲットプロパティ
         public MainCommandType commandType { get => CommandType; } 
