@@ -8,6 +8,7 @@ namespace Player
     {
         private float dir = 1f;
         private Vector3 originVector;
+        private Vector3 rayPosition;
         private bool floorFlg;
         private bool downFloorFlg;
 
@@ -15,9 +16,9 @@ namespace Player
         [SerializeField]
         private float rayLength;
         [SerializeField]
-        private float fallRayLength;
-        [SerializeField]
         private float landingLength;
+        [SerializeField]
+        private float liveRayLength;
 
         [SerializeField]
         private LayerMask layerMask;
@@ -49,8 +50,26 @@ namespace Player
             //原点から90度下向きにレイを出す
             floorFlg = Physics.Raycast(originVector, -transform.up, rayLength);
 
-            Debug.DrawRay(originVector, -transform.up * rayLength);
+            Debug.DrawRay(originVector, Vector3.down * rayLength);
             return floorFlg;
+        }
+
+        public bool CheckDeathHeight()
+        {
+            bool deathFlg;
+            
+            RaycastHit ray = new RaycastHit();
+
+            rayPosition = transform.position;
+            rayPosition.x += transform.forward.x * 0.5f;
+            rayPosition.z += transform.forward.z * 0.5f;
+            
+            Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength);
+            Debug.DrawRay(rayPosition, Vector3.down * liveRayLength);
+
+            //Nullなら死ぬから飛び降りれない
+            if (ray.collider == null) return true;
+            return false;
         }
 
         /// <summary>

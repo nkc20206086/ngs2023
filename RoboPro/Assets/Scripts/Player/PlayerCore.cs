@@ -14,6 +14,8 @@ namespace Player
         private float moveSpeed;
         [SerializeField]
         private Vector2 jumpPower;
+        [SerializeField]
+        private float deathHeight;
 
         [Inject]
         private IGimmickAccess gimmickAccess;
@@ -93,6 +95,11 @@ namespace Player
         LadderChecker IStateGetter.LadderCheckGetter()
         {
             return ladderChecker;
+        }
+
+        float IStateGetter.DeathHeigthGetter()
+        {
+            return deathHeight;
         }
     }
 }

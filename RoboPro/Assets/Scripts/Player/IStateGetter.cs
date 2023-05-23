@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    interface IStateGetter
+    public interface IStateGetter
     {
         /// <summary>
         /// Animator‚ğæ“¾
@@ -58,5 +58,11 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public Vector2 JumpPowerGetter();
+
+        /// <summary>
+        /// €‚Ê‚‚³‚ğæ“¾
+        /// </summary>
+        /// <returns></returns>
+        public float DeathHeigthGetter();
     }
 }

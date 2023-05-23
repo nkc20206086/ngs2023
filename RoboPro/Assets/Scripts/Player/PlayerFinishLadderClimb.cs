@@ -29,6 +29,8 @@ namespace Player
             capsuleCollider.isTrigger = true;
             if (isGetOff == false)
             {
+                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Ladder_Climb", false);
+                stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_JumpOff_Climb");
                 stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y * 2, transform.forward.z * jumpVec.x);
                 isGetOff = true;
             }
@@ -38,7 +40,6 @@ namespace Player
                 isGetOff = false;
                 capsuleCollider.isTrigger = false;
                 stateChangeEvent(PlayerStateEnum.Stay);
-                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Ladder_Climb", false);
             }
         }
     }
