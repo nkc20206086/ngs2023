@@ -77,18 +77,18 @@ namespace Player
                 }
 
                 //アクセスポイントの何番が近くにあるか
-                //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+                int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
 
-                //if (index >= 0)
-                //{
-                //    if (isInteract)
-                //    {
-                //        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
-                //        stateChangeEvent(PlayerStateEnum.Access);
-                //        //アクセスポイントに接続する
-                //        stateGetter.GimmickAccessGetter().Access(index);
-                //    }
-                //}
+                if (index >= 0)
+                {
+                    if (isInteract)
+                    {
+                        //アクセスポイントに接続する
+                        transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
+                        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
+                        stateChangeEvent(PlayerStateEnum.Access);
+                    }
+                }
 
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)

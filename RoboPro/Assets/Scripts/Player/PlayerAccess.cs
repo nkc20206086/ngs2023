@@ -23,7 +23,7 @@ namespace Player
         {
             //Debug.Log("アクセスポイントにアクセスしました");
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
-            stateChangeEvent(PlayerStateEnum.Stay);
+            //stateChangeEvent(PlayerStateEnum.Stay);
         }
     }
 }
