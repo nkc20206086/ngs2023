@@ -196,9 +196,9 @@ namespace Gimmick
             return retIndex;
         }
 
-        void IGimmickAccess.Access(int index)
+        Vector3 IGimmickAccess.Access(int index)
         {
-            if (isSwapping) return;         // 入れ替え実行中であるなら早期リターンする
+            if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
@@ -208,6 +208,8 @@ namespace Gimmick
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
+
+            return accessPoints[index].transform.position;
         }
     }
 }
