@@ -28,7 +28,7 @@ namespace Player
         {
             RaycastHit ladderRay = new RaycastHit();
             Physics.Raycast(transform.position, transform.forward, out ladderRay, ladderRayLength, layerMask);
-            Debug.DrawRay(transform.position, transform.forward * ladderRayLength);
+            //Debug.DrawRay(transform.position, transform.forward * ladderRayLength);
             if (ladderRay.collider == null || ladderRay.collider.gameObject.layer != 10) return false;
             return true;
         }
@@ -42,7 +42,7 @@ namespace Player
             RaycastHit ladderRay = new RaycastHit();
             Vector3 ladderRayVec = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
             Physics.Raycast(ladderRayVec, transform.forward, out ladderRay, ladderRayLength, layerMask);
-            Debug.DrawRay(ladderRayVec, transform.forward * ladderRayLength);
+            //Debug.DrawRay(ladderRayVec, transform.forward * ladderRayLength);
             if (ladderRay.collider == null || ladderRay.collider.gameObject.layer != 10) return false;
             return true;
         }

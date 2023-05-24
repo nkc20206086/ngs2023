@@ -11,6 +11,7 @@ namespace Player
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         private Vector2 jumpVec;
+        //落ち始めのY座標を保存する変数
         private float startFallYVector;
         private bool isThroughFall;
 
@@ -45,6 +46,7 @@ namespace Player
         /// </summary>
         public void Act_ThroughFall()
         {
+            //落ち始めの高さを保存
             startFallYVector = transform.position.y;
             isThroughFall = true;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
@@ -60,11 +62,14 @@ namespace Player
             //trueになったら地面に着地している
             if (stateGetter.GroundCheckGetter().LandingCheck())
             {
+                //ふらつきを無視した判定か
                 if(isThroughFall)
                 {
+                    //落ち始めの高さと今の高さを計算
                     float fallingYVector = startFallYVector - transform.position.y;
                     isThroughFall = false;
-                    if (stateGetter.DeathHeigthGetter() < fallingYVector)
+                    //死ぬ高さから落ちたか
+                    if (stateGetter.DeathHeightGetter() < fallingYVector)
                     {
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
                         stateChangeEvent(PlayerStateEnum.Die);

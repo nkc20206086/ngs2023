@@ -97,7 +97,7 @@ namespace Player
             return ladderChecker;
         }
 
-        float IStateGetter.DeathHeigthGetter()
+        float IStateGetter.DeathHeightGetter()
         {
             return deathHeight;
         }

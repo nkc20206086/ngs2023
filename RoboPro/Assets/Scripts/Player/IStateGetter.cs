@@ -63,6 +63,6 @@ namespace Player
         /// €‚Ê‚‚³‚ğæ“¾
         /// </summary>
         /// <returns></returns>
-        public float DeathHeigthGetter();
+        public float DeathHeightGetter();
     }
 }

@@ -50,10 +50,13 @@ namespace Player
             //原点から90度下向きにレイを出す
             floorFlg = Physics.Raycast(originVector, -transform.up, rayLength);
 
-            Debug.DrawRay(originVector, Vector3.down * rayLength);
             return floorFlg;
         }
 
+        /// <summary>
+        /// 死亡する高さか判定
+        /// </summary>
+        /// <returns></returns>
         public bool CheckDeathHeight()
         {
             bool deathFlg;
@@ -65,7 +68,6 @@ namespace Player
             rayPosition.z += transform.forward.z * 0.5f;
             
             Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength);
-            Debug.DrawRay(rayPosition, Vector3.down * liveRayLength);
 
             //Nullなら死ぬから飛び降りれない
             if (ray.collider == null) return true;
