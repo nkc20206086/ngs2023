@@ -7,14 +7,12 @@ namespace Player
 {
     public class PlayerAccess : MonoBehaviour,IStateChange
     {
-        private Rigidbody rigidbody;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         // Start is called before the first frame update
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -24,7 +22,7 @@ namespace Player
         public void Act_Access()
         {
             //Debug.Log("アクセスポイントにアクセスしました");
-
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
             stateChangeEvent(PlayerStateEnum.Stay);
         }
     }
