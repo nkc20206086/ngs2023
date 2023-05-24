@@ -41,17 +41,18 @@ namespace Player
                 }
             }
 
-            //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            Debug.Log(index);
+            if (index >= 0)
+            {
+                if (isInteract)
+                {
+                    transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
 
-            //if (index >= 0)
-            //{
-            //    if (isInteract)
-            //    {
-            //        stateChangeEvent(PlayerStateEnum.Access);
-            //        stateGetter.GimmickAccessGetter().Access(index);
-            //        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
-            //    }
-            //}
+                    stateChangeEvent(PlayerStateEnum.Access);
+                    stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
+                }
+            }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
