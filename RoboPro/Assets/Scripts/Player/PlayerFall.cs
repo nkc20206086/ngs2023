@@ -11,6 +11,9 @@ namespace Player
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         private Vector2 jumpVec;
+        //落ち始めのY座標を保存する変数
+        private float startFallYVector;
+        private bool isThroughFall;
 
         // Start is called before the first frame update
         void Start()
@@ -31,7 +34,7 @@ namespace Player
             stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, transform.up.y * jumpVec.y, transform.forward.z * jumpVec.x);
 
             //falseだったら空中にいる
-            if(stateGetter.GroundCheckGetter().LandingCheck() == false)
+            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
                 //空中落下中ステートに変更
                 stateChangeEvent(PlayerStateEnum.Falling);
@@ -43,6 +46,9 @@ namespace Player
         /// </summary>
         public void Act_ThroughFall()
         {
+            //落ち始めの高さを保存
+            startFallYVector = transform.position.y;
+            isThroughFall = true;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
             stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, stateGetter.RigidbodyGetter().velocity.y, transform.forward.z * jumpVec.x);
             stateChangeEvent(PlayerStateEnum.Falling);
@@ -56,8 +62,28 @@ namespace Player
             //trueになったら地面に着地している
             if (stateGetter.GroundCheckGetter().LandingCheck())
             {
-                //着地ステートに変更
-                stateChangeEvent(PlayerStateEnum.Landing);
+                //ふらつきを無視した判定か
+                if(isThroughFall)
+                {
+                    //落ち始めの高さと今の高さを計算
+                    float fallingYVector = startFallYVector - transform.position.y;
+                    isThroughFall = false;
+                    //死ぬ高さから落ちたか
+                    if (stateGetter.DeathHeightGetter() < fallingYVector)
+                    {
+                        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
+                        stateChangeEvent(PlayerStateEnum.Die);
+                    }
+                    else
+                    {
+                        stateChangeEvent(PlayerStateEnum.Landing);
+                    }
+                }
+                else
+                { 
+                    stateChangeEvent(PlayerStateEnum.Landing);
+                }
+
             }
         }
     }

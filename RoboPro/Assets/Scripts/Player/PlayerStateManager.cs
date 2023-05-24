@@ -16,6 +16,7 @@ namespace Player
         private PlayerLadderStepOn playerLadderStepOn;
         private PlayerLadderClimb playerLadderClimb;
         private PlayerFinishLadderClimb playerFinishLadderClimb;
+        private PlayerDie playerDie;
         private IStateGetter stateGetter;
 
         private InputControls inputActions;
@@ -36,6 +37,7 @@ namespace Player
             playerLadderStepOn = GetComponent<PlayerLadderStepOn>();
             playerLadderClimb = GetComponent<PlayerLadderClimb>();
             playerFinishLadderClimb = GetComponent<PlayerFinishLadderClimb>();
+            playerDie = GetComponent<PlayerDie>();
             stateGetter = GetComponent<IStateGetter>();
 
             inputActions = new InputControls();
@@ -119,6 +121,7 @@ namespace Player
                     }
                 case PlayerStateEnum.Die:
                     {
+                        playerDie.Act_Die();
                         break;
                     }
             }

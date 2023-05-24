@@ -192,7 +192,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54749977}
-  m_LocalRotation: {x: 0.38268346, y: -1e-45, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: 1e-45, z: -0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -471,7 +471,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700537674}
-  m_LocalRotation: {x: 0.36581522, y: -0.000000016013763, z: 0.0000000062943566, w: 0.9306875}
+  m_LocalRotation: {x: 0.36581522, y: 0.000000016013763, z: -0.0000000062943566, w: 0.9306875}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -986,7 +986,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036750973}
-  m_LocalRotation: {x: 0.36581522, y: -0.000000032027526, z: 0.000000012588711, w: 0.9306875}
+  m_LocalRotation: {x: 0.36581522, y: 0.000000032027526, z: -0.000000012588711, w: 0.9306875}
   m_LocalPosition: {x: 0, y: 13, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1279,8 +1279,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077405808}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.11, y: 0.35, z: 5.02}
-  m_LocalScale: {x: 0.67336005, y: 4, z: 0.071008004}
+  m_LocalPosition: {x: -0.11, y: -0.57, z: 5.02}
+  m_LocalScale: {x: 0.67336005, y: 2, z: 0.071008004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1446,6 +1446,7 @@ MonoBehaviour:
   ladderUpDownSpeed: 0
   moveSpeed: 0
   jumpPower: {x: 0, y: 0}
+  deathHeight: 0
   animator: {fileID: 0}
   rigidbody: {fileID: 0}
 --- !u!114 &1366500296
@@ -1590,7 +1591,7 @@ GameObject:
   - component: {fileID: 1617697300}
   - component: {fileID: 1617697299}
   - component: {fileID: 1617697298}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1668,7 +1669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617697297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8400002, z: 10.12}
+  m_LocalPosition: {x: 0, y: 0, z: 10.12}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1871,7 +1872,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006175299}
-  m_LocalRotation: {x: 0.34887102, y: -0, z: -0, w: 0.9371708}
+  m_LocalRotation: {x: 0.34887102, y: 1e-45, z: -1e-45, w: 0.9371708}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1988,6 +1989,7 @@ GameObject:
   - component: {fileID: 6708536350958802559}
   - component: {fileID: 6708536350958802558}
   - component: {fileID: 6708536350958802560}
+  - component: {fileID: 6708536350958802561}
   - component: {fileID: 6708536350958802553}
   - component: {fileID: 6708536350958802557}
   - component: {fileID: 6708536350958802554}
@@ -2074,6 +2076,7 @@ MonoBehaviour:
   ladderUpDownSpeed: 3
   moveSpeed: 5
   jumpPower: {x: 1.2, y: 2}
+  deathHeight: 3.2
   animator: {fileID: 0}
   rigidbody: {fileID: 0}
 --- !u!114 &6708536350958802550
@@ -2131,8 +2134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLength: 0.5
-  fallRayLength: 0
   landingLength: 0.15
+  liveRayLength: 3.1
   layerMask:
     serializedVersion: 2
     m_Bits: 768
@@ -2222,6 +2225,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 525dae5f5b976844189180ae6012ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6708536350958802561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708536350958802543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9f7a016508c5b4cb25be27e646ab0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7786710086594917587

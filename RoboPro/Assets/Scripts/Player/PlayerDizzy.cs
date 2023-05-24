@@ -23,6 +23,7 @@ namespace Player
             {
                 //Debug.Log("‚Ó‚ç‚Â‚«");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
+                if (stateGetter.GroundCheckGetter().CheckDeathHeight()) return;
                 if (isInteract)
                 {
                    // Debug.Log("~‚è‚é");
