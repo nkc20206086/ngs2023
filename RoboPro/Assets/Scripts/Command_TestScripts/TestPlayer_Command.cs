@@ -1,52 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using Gimmick;
+using Gimmick.Interface;
 
 public class TestPlayer_Command : MonoBehaviour
 {
-    private bool access = false;
+    [Inject]
     private IGimmickAccess gimmickAccess;
+    private bool access = false;
+    private GimmickDirector director;
 
     // Update is called once per frame
     void Update()
     {
-        if (!access)
-        {
-            Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * 5 * Time.deltaTime;
+        Vector3 vec = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")) * 5 * Time.deltaTime;
 
-            transform.position += vec;
-        }
+        transform.position += vec;
 
+        int index = gimmickAccess.GetAccessPointIndex(transform.position);
 
-        if (gimmickAccess != null)
+        if (index >= 0)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                gimmickAccess.GimmickAccess();
-                access = true;
+                gimmickAccess.Access(index);
             }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                gimmickAccess.RemoveAccess();
-                access = false;
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 6 && gimmickAccess == null)
-        {
-            gimmickAccess = other.GetComponent<IGimmickAccess>();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == 6)
-        {
-            gimmickAccess = null;
         }
     }
 }

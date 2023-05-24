@@ -1,18 +1,33 @@
+using UnityEngine;
+
 namespace Command
 {
     /// <summary>
     /// コマンド生成時に利用する構造体
     /// </summary>
+    [System.Serializable]
     public struct CommandStruct
     {
-        public MainCommandType commandType { get; private set; }       // メインコマンドタイプ
+        [SerializeField,Tooltip("このコマンドがどの種類であるか")]
+        private MainCommandType CommandType;
+        [SerializeField,Tooltip("コマンドを移動可能であるか")]
+        private bool LockCommand;
+        [SerializeField, Tooltip("コマンドで使用する数値")]
+        private int Value;
+        [SerializeField,Tooltip("コマンド内の数値を移動可能であるか")]
+        private bool LockNumber;
+        [SerializeField, Tooltip("コマンドで使用する軸")]
+        private CoordinateAxis Axis;
+        [SerializeField,Tooltip("コマンド内の軸を移動可能であるか")]
+        private bool LockCoordinateAxis;
 
-        public bool lockCommand { get; private set; }           // コマンドが変更可能かどうか
-        public bool lockNumber { get; private set; }            // 数値が変更可能かどうか
-        public bool lockCoordinateAxis { get; private set; }    // 軸を変更可能かどうか
-        public int value { get; private set; }                    // 用いる数値
-        public CoordinateAxis axis { get; private set; }        // 用いる軸
-        public int capacity { get; private set; }               // このコマンドの容量
+        // 各種ゲットプロパティ
+        public MainCommandType commandType { get => CommandType; } 
+        public bool lockCommand { get => LockCommand; }
+        public bool lockNumber { get => LockNumber; }
+        public bool lockCoordinateAxis { get => LockCoordinateAxis; }
+        public int value { get => Value; }
+        public CoordinateAxis axis { get => Axis; }
 
         /// <summary>
         /// コンストラクタ(コンストラクタによる引数でのみ変数を変更できます)
@@ -23,18 +38,16 @@ namespace Command
         /// <param name="lockCoordinateAxis">軸を変更可能かどうか</param>
         /// <param name="num">用いる数値</param>
         /// <param name="axis">用いる軸</param>
-        /// <param name="capacity">このコマンドの容量</param>
         public CommandStruct(MainCommandType commandType,
             bool lockCommand,bool lockNumber,bool lockCoordinateAxis,
             int num,CoordinateAxis axis,int capacity)
         {
-            this.commandType = commandType;
-            this.lockCommand = lockCommand;
-            this.lockNumber = lockNumber;
-            this.lockCoordinateAxis = lockCoordinateAxis;
-            this.value = num;
-            this.axis = axis;
-            this.capacity = capacity;
+            CommandType = commandType;
+            LockCommand = lockCommand;
+            LockNumber = lockNumber;
+            LockCoordinateAxis = lockCoordinateAxis;
+            Value = num;
+            Axis = axis;
         }
     }
 

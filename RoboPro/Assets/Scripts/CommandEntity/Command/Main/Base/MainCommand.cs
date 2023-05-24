@@ -22,8 +22,6 @@ namespace Command.Entity
         protected int usableValue;                // コマンドが用いる数値
         protected CoordinateAxis usableAxis;    // コマンドが用いる軸
 
-        protected int capacity;                 // コマンドの容量
-
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
 
         /// <summary>
@@ -44,7 +42,6 @@ namespace Command.Entity
             this.commandName = commandName;
             this.value = new ValueCommand(value);
             this.axis = new AxisCommand((CoordinateAxis)axis);
-            this.capacity = capacity;
         }
 
         /// <summary>
@@ -59,7 +56,6 @@ namespace Command.Entity
             commandName = status.commandType.ToString();
             value = new ValueCommand(status.value);
             axis = new AxisCommand(status.axis);
-            capacity = status.capacity;
         }
 
         /// <summary>
@@ -155,7 +151,7 @@ namespace Command.Entity
 
         public override string GetString()
         {
-            return $"{commandName} {(axis != null ? axis.GetString() : default)} {(value != null ? value.GetString() : default)}";
+            return commandName;
         }
 
         public override CommandType GetCommandType()

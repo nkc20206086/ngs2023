@@ -15,6 +15,11 @@ namespace Player
         Falling,
         Landing,
         Access,
+        LadderStepOn_Climb,
+        LadderStepOn_Down,
+        LaddderClimb,
+        LadderDown,
+        LadderFinish_Climb,
         Die,
         Count
     }
