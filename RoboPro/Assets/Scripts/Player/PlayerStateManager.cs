@@ -20,6 +20,7 @@ namespace Player
         private IStateGetter stateGetter;
 
         private InputControls inputActions;
+        Vector3 defaultScale = Vector3.zero;
         private Vector2 inputVec;
         private bool isMove;
         private bool isInteract;
@@ -27,6 +28,8 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            defaultScale = transform.lossyScale;
+
             playerStay = GetComponent<PlayerStay>();
             playerMove = GetComponent<PlayerMove>();
             playerAccess = GetComponent<PlayerAccess>();
@@ -51,11 +54,16 @@ namespace Player
             //ボタンを押されているか判別
             isMove = inputActions.Player.Move.IsPressed();
             isInteract = inputActions.Player.Interact.WasPressedThisFrame();
+
+            //足元のオブジェクトを親オブジェクトにする
+            stateGetter.GroundCheckGetter().CheckParentGround();
+            //DefaultScaleCalc();
         }
 
         private void FixedUpdate()
         {
             //Debug.Log(stateGetter.StateGetter());
+
             //Statemachine
             switch (stateGetter.StateGetter())
             {
@@ -125,6 +133,23 @@ namespace Player
                         break;
                     }
             }
+            //AnyStateとしてどのStateでも処理を行う
+            DefaultScaleCalc();
+        }
+
+        /// <summary>
+        /// LocalScaleを計算する関数
+        /// </summary>
+        private void DefaultScaleCalc()
+        {
+            Vector3 lossScale = transform.lossyScale;
+            Vector3 localScale = transform.localScale;
+
+            //プレイヤーのLocalScaleを常に均一にする
+            transform.localScale = new Vector3(
+                    localScale.x / lossScale.x * defaultScale.x,
+                    localScale.y / lossScale.y * defaultScale.y,
+                    localScale.z / lossScale.z * defaultScale.z);
         }
     }
 }
