@@ -6,7 +6,7 @@ namespace Command
     /// コマンド生成時に利用する構造体
     /// </summary>
     [System.Serializable]
-    public struct CommandStruct
+    public class CommandContainer
     {
         [SerializeField,Tooltip("このコマンドがどの種類であるか")]
         private MainCommandType CommandType;
@@ -38,7 +38,7 @@ namespace Command
         /// <param name="lockCoordinateAxis">軸を変更可能かどうか</param>
         /// <param name="num">用いる数値</param>
         /// <param name="axis">用いる軸</param>
-        public CommandStruct(MainCommandType commandType,
+        public CommandContainer(MainCommandType commandType,
             bool lockCommand,bool lockNumber,bool lockCoordinateAxis,
             int num,CoordinateAxis axis,int capacity)
         {
