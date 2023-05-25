@@ -42,12 +42,14 @@ public class Goal : MonoBehaviour
             if (interactTime > 0)
             {
                 interactTime -= Time.deltaTime;
+                OnChangeInteractingTime?.Invoke(interactTime);
             }
             else
+            if(interactTime != 0)
             {
                 interactTime = 0;
+                OnChangeInteractingTime?.Invoke(interactTime);
             }
-            OnChangeInteractingTime?.Invoke(interactTime);
         }
     }
 
