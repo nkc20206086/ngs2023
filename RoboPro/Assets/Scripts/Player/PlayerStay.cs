@@ -7,19 +7,14 @@ namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
-        private Rigidbody rigidbody;
-        private GroundChecker groundChecker;
-        private Animator animator;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-
+        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            groundChecker = GetComponent<GroundChecker>();
-            animator = GetComponentInChildren<Animator>();
+            defaultScale = transform.lossyScale;
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -32,16 +27,40 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.Move);
             }
 
-            if(isInteract)
+            if (stateGetter.LadderCheckGetter().LadderClimbCheck())
             {
-                stateChangeEvent(PlayerStateEnum.Access);
+                if(isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
+                }
+            }
+
+            if(stateGetter.LadderCheckGetter().LadderDownCheck())
+            {
+                if (isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderDown);
+                }
+            }
+
+            int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            if (index >= 0)
+            {
+                if (isInteract)
+                {
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    pos.y = this.transform.position.y;
+                    transform.LookAt(pos);
+
+                    stateChangeEvent(PlayerStateEnum.Access);
+                }
             }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
-            if (groundChecker.LandingCheck() == false)
+            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
                 stateChangeEvent(PlayerStateEnum.ThroughFall);
-                animator.SetBool("Flg_Fall", true);
+                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
             }
         }
     }

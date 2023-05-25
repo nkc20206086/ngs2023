@@ -1,15 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:RoboPro/Assets/Prefabs/Camera.meta
-guid: 6546f6dc806526841ba6b9358793e322
-folderAsset: yes
-=======
-guid: 2d4b3e6d1ad0059469db95a462bdaf8f
->>>>>>> develop:RoboPro/Assets/Scenes/Root.unity.meta
-=======
+
 guid: a64f8ca772d29fd4188a9bde2233428f
 folderAsset: yes
->>>>>>> develop
 DefaultImporter:
   externalObjects: {}
   userData: 

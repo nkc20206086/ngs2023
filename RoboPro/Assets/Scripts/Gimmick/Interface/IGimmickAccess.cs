@@ -15,6 +15,6 @@ namespace Gimmick.Interface
         /// コマンド入れ替え処理実行
         /// </summary>
         /// <param name="index">実行インデックス</param>
-        public void Access(int index);
+        public Vector3 Access(int index);
     }
 }

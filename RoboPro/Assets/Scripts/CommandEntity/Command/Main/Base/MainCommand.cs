@@ -11,9 +11,9 @@ namespace Command.Entity
     public class MainCommand : CommandBase
     {
         // 各種値が変更可能であるか
-        protected bool lockMenber = false;
-        protected bool lockValue = false;
-        protected bool lockCoordinateAxis = false;
+        public bool lockMenber { get; protected set; }
+        public bool lockValue { get; protected set; }
+        public bool lockCoordinateAxis { get; protected set; }
 
         protected string commandName;            // コマンドの名称
         public ValueCommand value;       // 数値を持ったコマンドクラス
@@ -22,9 +22,9 @@ namespace Command.Entity
         protected int usableValue;                // コマンドが用いる数値
         protected CoordinateAxis usableAxis;    // コマンドが用いる軸
 
-        protected int capacity;                 // コマンドの容量
-
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
+
+
 
         /// <summary>
         /// コンストラクタ 数値直接設定用
@@ -44,14 +44,13 @@ namespace Command.Entity
             this.commandName = commandName;
             this.value = new ValueCommand(value);
             this.axis = new AxisCommand((CoordinateAxis)axis);
-            this.capacity = capacity;
         }
 
         /// <summary>
         /// コンストラクタ　構造体設定用
         /// </summary>
         /// <param name="status">設定用構造体</param>
-        public MainCommand(CommandStruct status)
+        public MainCommand(CommandContainer status)
         {
             lockMenber = status.lockCommand;
             lockValue = status.lockNumber;
@@ -59,7 +58,6 @@ namespace Command.Entity
             commandName = status.commandType.ToString();
             value = new ValueCommand(status.value);
             axis = new AxisCommand(status.axis);
-            capacity = status.capacity;
         }
 
         /// <summary>
@@ -162,6 +160,5 @@ namespace Command.Entity
         {
             return CommandType.Command;
         }
-
     }
 }

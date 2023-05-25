@@ -8,15 +8,6 @@ namespace Player
     {
         Vector3 hitNormalVec = new Vector3();
         GameObject groundObj;
-        [SerializeField] float CorrectionValue;
-        private void Update()
-        {
-            //if(Input.GetKeyDown(KeyCode.Return))
-            //if (groundObj != null)
-            //{
-            //    ColiCheck();
-            //}
-        }
         public void ColiCheck()
         {
             //プレイヤーは上を向いているに違いないため地面ベクトルからY軸を削除したベクトルを出す。

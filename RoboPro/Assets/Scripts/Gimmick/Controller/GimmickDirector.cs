@@ -21,11 +21,8 @@ namespace Gimmick
 
         [SerializeField, Tooltip("コマンド管理クラス")]
         private CommandDirector commandDirector;
-
-        [Header("デバッグ用　本来であれば生成済みのものは利用しない")]
-        [SerializeField]
-        private List<GimmckController> instanceGimmickController;
-        [SerializeField]
+       
+        [SerializeField, Tooltip("使用するアクセスポイント")]
         private List<AccessPoint> accessPoints;
 
         [Inject]
@@ -40,7 +37,7 @@ namespace Gimmick
         private int maxArchiveCount = 0;      　// 記録している入れ替えの数
 
         private bool isSwapping = false;        // コマンド入れ替え実行中であるかを管理する変数 
-        private bool isExecute = false;
+        private bool isExecute = false;         // 実行可能であるか
         private CommandState state = CommandState.INACTIVE;
 
         private void Update()
@@ -49,39 +46,39 @@ namespace Gimmick
             {
                 if (!isSwapping)
                 {
-                    foreach (GimmckController gimmckController in instanceGimmickController)
+                    foreach (AccessPoint accessPoint in accessPoints)
                     {
-                        gimmckController.CommandUpdate();   // 各ギミックのコマンドを実行する
+                        accessPoint.controlGimmick.CommandUpdate();   // 各ギミックのコマンドを実行する
                     }
 
-                    foreach (GimmckController gimmckController in instanceGimmickController)
+                    foreach (AccessPoint accessPoint in accessPoints)
                     {
-                        if (gimmckController.GetExecutionStatus) return;
+                        if (accessPoint.controlGimmick.GetExecutionStatus) return;
                     }
 
                     isExecute = false;
                 }
             }
-            else if (isSwapping && Input.GetKeyDown(KeyCode.Escape))
+
+            if (isSwapping && Input.GetKeyDown(KeyCode.Escape))
             {
-                Close(default);
+                Close();
             }
         }
 
         /// <summary>
         /// ギミックインスタンス処理
         /// </summary>
-        public void GimmickInstance(List<CommandStruct[]> setCommandList)
+        public void GimmickInstance()
         {
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
 
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
-            for (int i = 0;i <  instanceGimmickController.Count;i++)
+            for (int i = 0;i <  accessPoints.Count;i++)
             {
-                accessPoints[i].index = i;
-                laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform,instanceGimmickController[i].transform,accessPoints[i].color));
+                laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform,accessPoints[i].controlGimmick.transform,accessPoints[i].color));
 
-                instanceGimmickController[i].StartUp(setCommandList[i]);
+                accessPoints[i].GimmickActivate();
             }
 
             laserManageable.LaserInit(laserInfoList);
@@ -90,7 +87,7 @@ namespace Gimmick
         /// <summary>
         /// コマンド入れ替え処理終了
         /// </summary>
-        private void Close(Unit unit)
+        private void Close()
         {
             if (!isSwapping) return;                                                            // 入れ替え実行中でないなら早期リターンする
             isSwapping = false;                                                                 // 入れ替え終了に変更
@@ -104,27 +101,26 @@ namespace Gimmick
             }
             else　                                                                              // 入れ替えが実行されているなら
             {
-                for (int i = 0;i < instanceGimmickController.Count;i++)                         // ギミック数分回す
+                for (int i = 0;i < accessPoints.Count;i++)                         // ギミック数分回す
                 {
                     if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
                     {
-                        instanceGimmickController[i].AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
+                        accessPoints[i].controlGimmick.AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
                     }
                     else
                     {
-                        instanceGimmickController[i].AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
+                        accessPoints[i].controlGimmick.AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
                     }
                 }
 
                 maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
                 storage.AddArchiveCommand(archiveIndex, storage.controlCommand);                // ストレージコマンドのアーカイブを追加する
 
-                isExecute = false;
                 state = CommandState.INACTIVE;
 
-                foreach (GimmckController gimmck in instanceGimmickController)
+                foreach (AccessPoint accessPoint in accessPoints)
                 {
-                    gimmck.IntializeAction();
+                    accessPoint.controlGimmick.IntializeAction();
                 }
             }
         }
@@ -135,9 +131,9 @@ namespace Gimmick
             isExecute = true;
             state = state != CommandState.MOVE_ON ? CommandState.MOVE_ON : CommandState.RETURN;
 
-            foreach (GimmckController gimmckController in instanceGimmickController)
+            foreach (AccessPoint accessPoint in accessPoints)
             {
-                gimmckController.StartingAction(state);
+                accessPoint.controlGimmick.StartingAction(state);
             }
         }
 
@@ -151,10 +147,10 @@ namespace Gimmick
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
             // 減算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmckController gimmck in instanceGimmickController)
+            foreach (AccessPoint accessPoint in accessPoints)
             {
-                gimmck.IntializeAction();
-                gimmck.OverwriteControlCommand(archiveIndex);
+                accessPoint.controlGimmick.IntializeAction();
+                accessPoint.controlGimmick.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -169,10 +165,10 @@ namespace Gimmick
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmckController gimmck in instanceGimmickController)
+            foreach (AccessPoint accessPoint in accessPoints)
             {
-                gimmck.IntializeAction();
-                gimmck.OverwriteControlCommand(archiveIndex);
+                accessPoint.controlGimmick.IntializeAction();
+                accessPoint.controlGimmick.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -180,7 +176,7 @@ namespace Gimmick
         int IGimmickAccess.GetAccessPointIndex(Vector3 position)
         {
             int retIndex = -1;                           // 返却インデックス
-            float minDistance = AccessPoint.MAX_RADIUS;  // 計測した最短の距離
+            float minDistance = AccessPoint.RADIUS;  // 計測した最短の距離
 
             for (int i = 0; i < accessPoints.Count; i++)
             {
@@ -200,19 +196,20 @@ namespace Gimmick
             return retIndex;
         }
 
-        void IGimmickAccess.Access(int index)
+        Vector3 IGimmickAccess.Access(int index)
         {
-            if (isExecute) return;
-            if (isSwapping) return;         // 入れ替え実行中であるなら早期リターンする
+            if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            commandDirector.CommandActivation(instanceGimmickController[index].controlCommand);
+            commandDirector.CommandActivation(accessPoints[index].controlGimmick.controlCommand);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
+
+            return accessPoints[index].transform.position;
         }
     }
 }
