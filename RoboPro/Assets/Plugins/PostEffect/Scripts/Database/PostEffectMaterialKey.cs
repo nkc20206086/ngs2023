@@ -5,5 +5,6 @@ namespace Utility
         Default,
         SimpleFade,
         Compression,
+        ImageFade
     }
 }
