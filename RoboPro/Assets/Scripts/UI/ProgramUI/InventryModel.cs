@@ -10,9 +10,9 @@ public class InventryModel : MonoBehaviour
     public event Action<CommandBase[]> UIEvent;
     private void Start()
     {
-        CommandStruct st0 = new CommandStruct(MainCommandType.Move,false,false,false,-5,CoordinateAxis.X,0);
-        CommandStruct st1 = new CommandStruct(MainCommandType.Rotate,false,false,false,1,CoordinateAxis.Y,0);
-        CommandStruct st2 = new CommandStruct(MainCommandType.Scale,false,false,false,1,CoordinateAxis.Z,0);
+        CommandContainer st0 = new CommandContainer(MainCommandType.Move,false,false,false,-5,CoordinateAxis.X,0);
+        CommandContainer st1 = new CommandContainer(MainCommandType.Rotate,false,false,false,1,CoordinateAxis.Y,0);
+        CommandContainer st2 = new CommandContainer(MainCommandType.Scale,false,false,false,1,CoordinateAxis.Z,0);
 
         CommandBase[] commands = new CommandBase[3];
         commands[0] = CommandCreater.CreateCommand(st0);

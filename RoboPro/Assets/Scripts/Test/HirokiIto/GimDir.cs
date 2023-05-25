@@ -71,14 +71,13 @@ namespace Gimmick
         /// <summary>
         /// ギミックインスタンス処理
         /// </summary>
-        public void GimmickInstance(List<CommandStruct[]> setCommandList)
+        public void GimmickInstance(List<CommandContainer[]> setCommandList)
         {
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
 
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
             for (int i = 0; i < instanceGimmickController.Count; i++)
             {
-                accessPoints[i].index = i;
                 laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform, instanceGimmickController[i].transform, accessPoints[i].color));
 
                 instanceGimmickController[i].StartUp(setCommandList[i]);
@@ -180,7 +179,7 @@ namespace Gimmick
         int IGimmickAccess.GetAccessPointIndex(Vector3 position)
         {
             int retIndex = -1;                           // 返却インデックス
-            float minDistance = AccessPoint.MAX_RADIUS;  // 計測した最短の距離
+            float minDistance = AccessPoint.RADIUS;  // 計測した最短の距離
 
             for (int i = 0; i < accessPoints.Count; i++)
             {
@@ -200,19 +199,20 @@ namespace Gimmick
             return retIndex;
         }
 
-        void IGimmickAccess.Access(int index)
+        Vector3 IGimmickAccess.Access(int index)
         {
-            if (isExecute) return;
-            if (isSwapping) return;         // 入れ替え実行中であるなら早期リターンする
+            if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            commandDirector.CommandActivation(instanceGimmickController[index].controlCommand);
+            commandDirector.CommandActivation(accessPoints[index].controlGimmick.controlCommand);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
+
+            return accessPoints[index].transform.position;
         }
     }
 }

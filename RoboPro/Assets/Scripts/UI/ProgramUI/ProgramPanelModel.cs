@@ -10,9 +10,9 @@ public class ProgramPanelModel : MonoBehaviour
     public event Action<MainCommand[]> UIEvent;
     private void Start()
     {
-        CommandStruct st0 = new CommandStruct(MainCommandType.Move, false, false, false, 1, CoordinateAxis.NONE, 0);
-        CommandStruct st1 = new CommandStruct(MainCommandType.Rotate, false, false, false, -1, CoordinateAxis.Y, 0);
-        CommandStruct st2 = new CommandStruct(MainCommandType.Scale, false, false, false, 1, CoordinateAxis.Z, 0);
+        CommandContainer st0 = new CommandContainer(MainCommandType.Move, false, false, false, 1, CoordinateAxis.NONE, 0);
+        CommandContainer st1 = new CommandContainer(MainCommandType.Rotate, false, false, false, -1, CoordinateAxis.Y, 0);
+        CommandContainer st2 = new CommandContainer(MainCommandType.Scale, false, false, false, 1, CoordinateAxis.Z, 0);
 
         MainCommand[] commands = new MainCommand[3];
         commands[0] = null;
