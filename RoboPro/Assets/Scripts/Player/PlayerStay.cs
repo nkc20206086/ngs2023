@@ -9,10 +9,12 @@ namespace Player
     {
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
+        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
+            defaultScale = transform.lossyScale;
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -41,17 +43,18 @@ namespace Player
                 }
             }
 
-            //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            if (index >= 0)
+            {
+                if (isInteract)
+                {
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    pos.y = this.transform.position.y;
+                    transform.LookAt(pos);
 
-            //if (index >= 0)
-            //{
-            //    if (isInteract)
-            //    {
-            //        stateChangeEvent(PlayerStateEnum.Access);
-            //        stateGetter.GimmickAccessGetter().Access(index);
-            //        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
-            //    }
-            //}
+                    stateChangeEvent(PlayerStateEnum.Access);
+                }
+            }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
