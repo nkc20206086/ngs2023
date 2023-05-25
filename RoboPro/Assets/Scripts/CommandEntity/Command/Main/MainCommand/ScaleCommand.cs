@@ -100,5 +100,10 @@ namespace Command.Entity
         {
             return MainCommandType.Scale;
         }
+
+        public override string GetString()
+        {
+            return "КgСе";
+        }
     }
 }

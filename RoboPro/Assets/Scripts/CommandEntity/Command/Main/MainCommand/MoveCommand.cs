@@ -61,6 +61,11 @@ namespace Command.Entity
         {
             return MainCommandType.Move;
         }
+
+        public override string GetString()
+        {
+            return "ˆÚ“®";
+        }
     }
 }
 

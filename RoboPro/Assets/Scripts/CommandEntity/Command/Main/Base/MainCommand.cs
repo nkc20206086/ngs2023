@@ -24,8 +24,6 @@ namespace Command.Entity
 
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
 
-
-
         /// <summary>
         /// コンストラクタ 数値直接設定用
         /// </summary>
