@@ -17,7 +17,7 @@ namespace Command.Entity
         /// コンストラクタ　構造体設定用
         /// </summary>
         /// <param name="status">設定用構造体</param>
-        public ScaleCommand(CommandStruct status) : base(status) { }
+        public ScaleCommand(CommandContainer status) : base(status) { }
 
         public override object InitCommand(object target, Action completeAction)
         {

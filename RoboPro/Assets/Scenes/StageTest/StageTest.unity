@@ -3151,6 +3151,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412443531}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &414494929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8364930203270304535, guid: 1f885d5769317474b97341458b1bb09b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8364930202453100417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &414494933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414494929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d1b6a19c3050a4a966a9c619c16581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageJson: {fileID: 4900000, guid: 2d92e83f641e3494ba441fd7625c0f6e, type: 3}
+  blockDB: {fileID: 11400000, guid: 05e147f5714b0b94eaa910d5bcfc2234, type: 2}
 --- !u!1 &416019268
 GameObject:
   m_ObjectHideFlags: 0
@@ -12701,5 +12721,10 @@ PrefabInstance:
       propertyPath: usableCommand3.LockCoordinateAxis
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8364930203270304534, guid: 1f885d5769317474b97341458b1bb09b,
+        type: 3}
+      propertyPath: stageData
+      value: 
+      objectReference: {fileID: 4900000, guid: 2d92e83f641e3494ba441fd7625c0f6e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f885d5769317474b97341458b1bb09b, type: 3}

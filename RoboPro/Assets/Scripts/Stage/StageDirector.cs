@@ -19,9 +19,15 @@ namespace Stage
         [SerializeField, Tooltip("ステージが扱うのボタン管理クラス")]
         private StageUIManager uiManager;
 
+        [SerializeField]
+        private TextAsset stageData;
+
         // Start is called before the first frame update
         void Start()
         {
+            StageDataCreater stageDataCreater = GetComponent<StageDataCreater>();
+            stageDataCreater.StageCreate();
+
             gimmickDirector.GimmickInstance();  // ギミック管理クラスにギミック生成を依頼
 
             Subject<Unit> undo = new Subject<Unit>();
