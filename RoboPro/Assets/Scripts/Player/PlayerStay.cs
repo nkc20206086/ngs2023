@@ -9,10 +9,12 @@ namespace Player
     {
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
+        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
+            defaultScale = transform.lossyScale;
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -42,15 +44,15 @@ namespace Player
             }
 
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-            Debug.Log(index);
             if (index >= 0)
             {
                 if (isInteract)
                 {
-                    transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    pos.y = this.transform.position.y;
+                    transform.LookAt(pos);
 
                     stateChangeEvent(PlayerStateEnum.Access);
-                    stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
                 }
             }
 

@@ -8,21 +8,24 @@ namespace Player
 {
     public class PlayerMove : MonoBehaviour, IStateChange
     {
+
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         private ICameraVectorGetter cameraVectorGetter;
+
         public event Action<PlayerStateEnum> stateChangeEvent;
 
         private Vector3 moveForward;
-        [SerializeField]
-        private GameObject camera;
+
+        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
+            defaultScale = transform.lossyScale;
+            cameraVectorGetter = Locator<ICameraVectorGetter>.GetT();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
-            cameraVectorGetter = camera.GetComponent<ICameraVectorGetter>();
         }
 
         /// <summary>
@@ -83,9 +86,13 @@ namespace Player
                 {
                     if (isInteract)
                     {
-                        //アクセスポイントに接続する
-                        transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
+
+                        //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
+
                         stateChangeEvent(PlayerStateEnum.Access);
                     }
                 }
