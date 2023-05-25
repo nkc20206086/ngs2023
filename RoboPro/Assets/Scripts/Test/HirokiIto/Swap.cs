@@ -55,9 +55,9 @@ namespace Command
             if (swapCommandType == CommandType.Command)
             {
                 // メインコマンドとストレージコマンドのコマンドタイプが一致しているか、片方がnullである場合
-                if ((mainCommands[mainIndexNum] == null && storage.controlCommand[storageIndexNum].ConfirmCommandType() == CommandType.Command) ||
+                if ((mainCommands[mainIndexNum] == null && storage.controlCommand[storageIndexNum].GetCommandType() == CommandType.Command) ||
                     (storage.controlCommand[storageIndexNum] == null && mainCommands[mainIndexNum] != null) ||
-                    mainCommands[mainIndexNum] != null && storage.controlCommand[storageIndexNum].ConfirmCommandType() == CommandType.Command)
+                    mainCommands[mainIndexNum] != null && storage.controlCommand[storageIndexNum].GetCommandType() == CommandType.Command)
                 {
                     MainCommand main = mainCommands[mainIndexNum];                                          // メインコマンドをローカルに保存
                     mainCommands[mainIndexNum] = storage.controlCommand[storageIndexNum] as MainCommand;    // 対象のメインコマンドにストレージコマンドをダウンキャストして代入
@@ -77,7 +77,7 @@ namespace Command
                 if (mainCommands[mainIndexNum] == null) return;                                               // 対象のメインコマンドに値がないなら早期リターンする
 
                 if (storage.controlCommand[storageIndexNum] == null ||                                        // ストレージコマンドに値がないか
-                    swapCommandType == storage.controlCommand[storageIndexNum].ConfirmCommandType())     // ストレージコマンドのコマンドタイプが入れ替えタイプと一致しているなら
+                    swapCommandType == storage.controlCommand[storageIndexNum].GetCommandType())     // ストレージコマンドのコマンドタイプが入れ替えタイプと一致しているなら
                 {
                     // 各コマンドタイプに応じてダウンキャストをし、値を入れ替える
                     switch (swapCommandType)

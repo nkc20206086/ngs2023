@@ -34,6 +34,8 @@ namespace Command
         /// <param name="st">ストレージコマンドを入れ替える際実行するアクション</param>
         public void Intialize(Action<int> sw, Action<int> ma, Action<int> st)
         {
+
+            Debug.Log("Ini");
             useMainCommandButtons = new Button[mainCommandButtons.Length, COMMAND_COUNT];   // メインコマンド使用ボタン変数を初期化
             useStrageCommandButtons = new Button[strageCommandButtons.Length, COMMAND_COUNT];   // ストレージコマンド使用ボタン変数を初期化
 
@@ -52,7 +54,7 @@ namespace Command
                 }
             }
 
-            for (int i = 0; i < strageCommandButtons.Length; i++)                             // メインコマンドの数だけ実行
+            for (int i = 0; i < strageCommandButtons.Length; i++)                             // ストレージコマンドの数だけ実行
             {
                 // !インデックスをローカル変数に入れなおしているものがあります。これはAddLisnerで使用する変数が可変した際、その変更が反映されてしまうためです。
                 int mainIndex = i;                                                          // メインインデックスをローカルで保存
