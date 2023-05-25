@@ -17,13 +17,13 @@ namespace Gimmick
         public Color color;
 
         [SerializeField, Tooltip("使用コマンド1")]
-        private CommandStruct usableCommand1;
+        private CommandContainer usableCommand1;
         [SerializeField, Tooltip("使用コマンド2")]
-        private CommandStruct usableCommand2;
+        private CommandContainer usableCommand2;
         [SerializeField, Tooltip("使用コマンド3")]
-        private CommandStruct usableCommand3;
+        private CommandContainer usableCommand3;
         [SerializeField, Tooltip("スペシャルコマンド")]
-        private CommandStruct specialCommand;
+        private CommandContainer specialCommand;
 
         public GimmckController controlGimmick
         {
@@ -36,7 +36,7 @@ namespace Gimmick
         public void GimmickActivate()
         {
             // ギミックに渡すための配列を作成する
-            CommandStruct[] usableCommands = new CommandStruct[CommandUtility.commandCount + 1];
+            CommandContainer[] usableCommands = new CommandContainer[CommandUtility.commandCount + 1];
             usableCommands[0] = usableCommand1;
             usableCommands[1] = usableCommand2;
             usableCommands[2] = usableCommand3;

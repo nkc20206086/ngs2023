@@ -16,6 +16,11 @@ namespace MainCamera
         private float angleX = 45;
         private float rad = 0;
 
+        private void Awake()
+        {
+            Locator<ICameraVectorGetter>.Bind(this);
+        }
+
         // Start is called before the first frame update
         void Start()
         {

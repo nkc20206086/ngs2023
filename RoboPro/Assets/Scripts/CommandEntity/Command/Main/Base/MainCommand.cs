@@ -11,9 +11,9 @@ namespace Command.Entity
     public class MainCommand : CommandBase
     {
         // 各種値が変更可能であるか
-        protected bool lockMenber = false;
-        protected bool lockValue = false;
-        protected bool lockCoordinateAxis = false;
+        public bool lockMenber { get; protected set; }
+        public bool lockValue { get; protected set; }
+        public bool lockCoordinateAxis { get; protected set; }
 
         protected string commandName;            // コマンドの名称
         public ValueCommand value;       // 数値を持ったコマンドクラス
@@ -48,7 +48,7 @@ namespace Command.Entity
         /// コンストラクタ　構造体設定用
         /// </summary>
         /// <param name="status">設定用構造体</param>
-        public MainCommand(CommandStruct status)
+        public MainCommand(CommandContainer status)
         {
             lockMenber = status.lockCommand;
             lockValue = status.lockNumber;
@@ -158,6 +158,5 @@ namespace Command.Entity
         {
             return CommandType.Command;
         }
-
     }
 }

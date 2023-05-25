@@ -11,8 +11,8 @@ namespace Player
         private Vector3 rayPosition;
         private bool floorFlg;
         private bool downFloorFlg;
-
         private bool dizzyGroundFlg;
+        private string parentGroundName;
         [SerializeField]
         private float rayLength;
         [SerializeField]
@@ -22,6 +22,15 @@ namespace Player
 
         [SerializeField]
         private LayerMask layerMask;
+
+        Vector3 parentScale;
+        Vector3 parentOldScale;
+        Vector3 defaultScale;
+
+        private void Start()
+        {
+            defaultScale = transform.lossyScale;
+        }
 
         /// <summary>
         /// ’…’n‚µ‚Ä‚¢‚é‚©”»’è
@@ -88,6 +97,24 @@ namespace Player
             if (ray.collider == null || ray.collider.gameObject.layer != 8) return true;
 
             return false;
+        }
+
+        public void  CheckParentGround()
+        {
+            Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
+            RaycastHit ray = new RaycastHit();
+            Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, layerMask);
+
+            if (ray.collider == null || ray.collider.gameObject.transform.localScale == parentOldScale) return;
+            parentOldScale = ray.collider.gameObject.transform.localScale;
+            //parentGroundName = ray.collider.gameObject.name;
+            //gameObject.transform.SetParent(ray.collider.gameObject.transform, false);
+            gameObject.transform.parent = ray.collider.gameObject.transform;
+        }
+
+        public Vector3 ParentScaleGetter()
+        {
+            return parentScale;
         }
     }
 }
