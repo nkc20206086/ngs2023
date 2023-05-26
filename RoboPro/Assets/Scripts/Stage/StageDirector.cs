@@ -9,7 +9,7 @@ using Command;
 namespace Stage
 {
     /// <summary>
-    /// ステージ関連の処理を管理するクラス
+    /// ステージ関連の処理を管理するクラス(現在は特に記述することがない)
     /// </summary>
     public class StageDirector : MonoBehaviour
     {
@@ -19,16 +19,16 @@ namespace Stage
         [SerializeField, Tooltip("ステージが扱うのボタン管理クラス")]
         private StageUIManager uiManager;
 
+        [SerializeField]
+        private TextAsset stageData;
+
         // Start is called before the first frame update
         void Start()
         {
-            Dictionary<BlockID, List<GameObject>> obj = new Dictionary<BlockID, List<GameObject>>();
-            List<AccessPointData> datas = new List<AccessPointData>();
-
             StageDataCreater stageDataCreater = GetComponent<StageDataCreater>();
-            stageDataCreater.StageCreate(obj,ref datas);
+            stageDataCreater.StageCreate();
 
-            gimmickDirector.GimmickInstance(obj, datas);  // ギミック管理クラスにギミック生成を依頼
+            gimmickDirector.GimmickInstance();  // ギミック管理クラスにギミック生成を依頼
 
             Subject<Unit> undo = new Subject<Unit>();
             undo.Subscribe(gimmickDirector.Undo);

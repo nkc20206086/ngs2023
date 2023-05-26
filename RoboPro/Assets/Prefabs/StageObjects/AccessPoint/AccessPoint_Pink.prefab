@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7730642059293234775}
   - component: {fileID: 6694348421258615282}
   - component: {fileID: 8864189222580514104}
-  - component: {fileID: -8790475483035404171}
   m_Layer: 0
   m_Name: AccessPoint_Pink
   m_TagString: Untagged
@@ -85,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8790475483035404171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6918392496983526637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &7836958808240329826
 PrefabInstance:
   m_ObjectHideFlags: 0

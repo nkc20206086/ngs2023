@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8028402493853421270}
-  - component: {fileID: 1811034208396323157}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Block_Road_Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,19 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1811034208396323157
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545770709494930542}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &7661238890313386673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112,11 +98,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Block_Road_Dark
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 658c53c62b1ff82449f936be00200a7b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 658c53c62b1ff82449f936be00200a7b, type: 3}

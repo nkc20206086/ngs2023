@@ -9,18 +9,18 @@ public class ProgramPanelView : MonoBehaviour
     /// <summary>
     /// キャンバスを表示する
     /// </summary>
-    public void CanvasShow(bool showflg)
+    public void CanvasShow()
     {
-        if (showflg)
-        {
-            programPanelCanvas.SetActive(true);
-            programPanelCanvas.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.2f);
-        }
-        else
-        {
-            /// キャンバスを非表示にする
-            programPanelCanvas.transform.DOScale(Vector3.zero, 0.2f).OnComplete(CanvasCloseComplete);
-        }
+        programPanelCanvas.SetActive(true);
+        programPanelCanvas.transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.2f);
+    }
+
+    /// <summary>
+    /// キャンバスを非表示にする
+    /// </summary>
+    public void CanvasHide()
+    {
+        programPanelCanvas.transform.DOScale(Vector3.zero, 0.2f).OnComplete(CanvasCloseComplete);
     }
 
     private void CanvasCloseComplete()
