@@ -111,10 +111,5 @@ namespace Player
             //gameObject.transform.SetParent(ray.collider.gameObject.transform, false);
             gameObject.transform.parent = ray.collider.gameObject.transform;
         }
-
-        public Vector3 ParentScaleGetter()
-        {
-            return parentScale;
-        }
     }
 }
