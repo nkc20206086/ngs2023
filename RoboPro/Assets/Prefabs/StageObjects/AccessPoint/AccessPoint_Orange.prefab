@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7118282179807429185}
   - component: {fileID: 6153865944820436452}
   - component: {fileID: 8251187364806113582}
-  - component: {fileID: -580177814097192462}
   m_Layer: 0
   m_Name: AccessPoint_Orange
   m_TagString: Untagged
@@ -85,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-580177814097192462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7602893388267526395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &7296832573538091124
 PrefabInstance:
   m_ObjectHideFlags: 0
