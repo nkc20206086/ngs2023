@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MainCamera
 {
-    interface ICameraVectorGetter
+    public interface ICameraVectorGetter
     {
         /// <summary>
         /// ƒJƒƒ‰‚ÌY’l‚ğ“n‚·
