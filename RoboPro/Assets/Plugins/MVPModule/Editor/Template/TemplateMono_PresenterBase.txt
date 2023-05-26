@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MVPModule;
+using UniRx;
+
+#ROOTNAMESPACEBEGIN#
+public class #SCRIPTNAME#: MonoPresenterBase<#TypeName#>
+{
+        protected override void ObservableConnect()
+        {#NOTRIM#
+            base.ObservableConnect();
+        }
+}
+#ROOTNAMESPACEEND#

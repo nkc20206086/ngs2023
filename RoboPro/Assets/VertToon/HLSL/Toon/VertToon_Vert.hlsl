@@ -9,8 +9,11 @@ Varyings vert(Attributes v)
     UNITY_TRANSFER_INSTANCE_ID(v, o);
 
     // pos
-    o.positionHCS = TransformObjectToHClip(v.positionOS.xyz);
-    
+    VertexPositionInputs vertexInput = GetVertexPositionInputs(v.positionOS.xyz);
+    o.positionHCS = vertexInput.positionCS;
+    // o.screenPos = vertexInput.positionNDC;
+    // o.posWS = vertexInput.positionWS;
+
     // uv
     o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
@@ -23,7 +26,7 @@ Varyings vert(Attributes v)
     o.lightDirWS.xyz = light.direction.xyz;
     
     // vertColor
-    o.vertColor.rgb = (float3)1.;
+    o.vertColor = (float4)1.;
     o.vertColor.rgb *= dlColor;
     if(_UseVertColor)
     {
@@ -31,7 +34,7 @@ Varyings vert(Attributes v)
     }
 
     // Color
-    o.vertColor.rgb *= _Color.rgb;
+    o.vertColor *= _Color;
     
     return o;
 }

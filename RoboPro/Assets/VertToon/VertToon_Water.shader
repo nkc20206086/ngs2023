@@ -11,12 +11,18 @@ Shader "VertToon/Water"
         Tags
         {
             "RenderPipeline" = "UniversalPipeline"
-            "RenderType" = "Transparent"
+            "RenderType" = "Opaque"
             "IgnoreProjector" = "True"
-            "Queue" = "Transparent"
+            "Queue" = "Geometry"
+        }
+        Stencil
+        {
+            Ref 2
+            Comp NotEqual
         }
         LOD 100
 
+        // ForwardPass
         Pass
         {
             Name "Universal Forward"
@@ -41,16 +47,18 @@ Shader "VertToon/Water"
                 float3 positionVS : TEXCOORD1;
             };
 
-            uniform float3 _WaterColor;
-            uniform float3 _FoamColor;
-            uniform float _Height;
+            CBUFFER_START(UnityPerMaterial)
+                uniform float3 _WaterColor;
+                uniform float3 _FoamColor;
+                uniform float _Height;
+            CBUFFER_END
 
             Varyings vert (Attributes v)
             {
                 Varyings o = (Varyings)0;
 
                 // positions
-                VertexPositionInputs vertexInput = GetVertexPositionInputs(v.positionOS);
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(v.positionOS.xyz);
                 o.positionHCS = vertexInput.positionCS;
                 o.positionVS = vertexInput.positionVS;
                 o.screenPos = vertexInput.positionNDC;

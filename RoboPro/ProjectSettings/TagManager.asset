@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - AccessPoint
+  - Player
+  - DizzyGround
+  - UnDizzyGround
+  - ObjectView
   - 
   - 
   - 
