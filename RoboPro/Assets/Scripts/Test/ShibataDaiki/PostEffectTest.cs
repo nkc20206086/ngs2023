@@ -32,5 +32,17 @@ public class PostEffectTest : MonoBehaviour
             postEffector.SetMaterial(PostEffectMaterialKey.SimpleFade);
             postEffector.Fade(FadeType.In, 1, DG.Tweening.Ease.Linear);
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
+            postEffector.Fade(FadeType.Out, 1, DG.Tweening.Ease.Linear);
+        }
+        else
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
+            postEffector.Fade(FadeType.In, 1, DG.Tweening.Ease.Linear);
+        }
     }
 }

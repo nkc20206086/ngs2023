@@ -39,7 +39,7 @@ namespace Gimmick
         /// ギミックの開始時関数
         /// </summary>
         /// <param name="setCommands">このギミックの持つコマンド</param>
-        public void StartUp(CommandStruct[] setCommands)
+        public void StartUp(CommandContainer[] setCommands)
         {
             controlCommand = new MainCommand[setCommands.Length];           // 管理コマンド初期化
             playCommand = new MainCommand[setCommands.Length];

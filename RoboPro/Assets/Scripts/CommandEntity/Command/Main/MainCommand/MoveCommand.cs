@@ -14,7 +14,7 @@ namespace Command.Entity
         /// コンストラクタ　構造体設定用
         /// </summary>
         /// <param name="status">設定用構造体</param>
-        public MoveCommand(CommandStruct status) : base(status) { }
+        public MoveCommand(CommandContainer status) : base(status) { }
 
         public override object InitCommand(object target, Action completeAction)
         {
@@ -60,6 +60,11 @@ namespace Command.Entity
         public override MainCommandType GetMainCommandType()
         {
             return MainCommandType.Move;
+        }
+
+        public override string GetString()
+        {
+            return "移動";
         }
     }
 }
