@@ -19,17 +19,29 @@ namespace Player
         private float landingLength;
         [SerializeField]
         private float liveRayLength;
+        [SerializeField]
+        private int splitHeightVectorNum;
 
         [SerializeField]
         private LayerMask layerMask;
+        private CapsuleCollider capsuleCollider;
 
-        Vector3 parentScale;
-        Vector3 parentOldScale;
-        Vector3 defaultScale;
+        private float[] splitHeightVectorArray;
+        private bool isCheckWall;
+        private Vector3 parentOldScale;
 
         private void Start()
         {
-            defaultScale = transform.lossyScale;
+            capsuleCollider = GetComponent<CapsuleCollider>();
+            //分割数分の配列を用意(Y = 0からなので+1)
+            splitHeightVectorArray = new float[splitHeightVectorNum + 1];
+            //1分割の高さを計算
+            float splitVec = capsuleCollider.height / splitHeightVectorNum;
+
+            for (int i = 0; i < splitHeightVectorNum + 1; i++)
+            {
+                splitHeightVectorArray[i] = splitVec * i;
+            }
         }
 
         /// <summary>
@@ -63,6 +75,39 @@ namespace Player
         }
 
         /// <summary>
+        /// 目の前に壁があるのかを判定
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckWall()
+        {
+            //Rayの発射位置の設定
+            Vector3 splitVec = transform.position;
+            splitVec.x += transform.forward.x * 0.2f;
+            splitVec.z += transform.forward.z * 0.2f;
+
+            RaycastHit ray = new RaycastHit();
+            for(int i = 0; i < splitHeightVectorArray.Length;i++)
+            {
+                //Y値を計算した値に設定
+                splitVec.y = splitHeightVectorArray[i];
+                //コライダーの直径分Rayを発射
+                Physics.Raycast(splitVec, transform.forward,out ray,capsuleCollider.radius * 2);
+                Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 2);
+                //1本でもRayが引っかかったら壁あり即break
+                if (ray.collider == null)
+                {
+                    isCheckWall = false;
+                }
+                else
+                {
+                    isCheckWall = true;
+                    break;
+                }
+            }
+            return isCheckWall;
+        }
+
+        /// <summary>
         /// 死亡する高さか判定
         /// </summary>
         /// <returns></returns>
@@ -76,7 +121,7 @@ namespace Player
             rayPosition.x += transform.forward.x * 0.5f;
             rayPosition.z += transform.forward.z * 0.5f;
             
-            Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength);
+            Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength,layerMask);
 
             //Nullなら死ぬから飛び降りれない
             if (ray.collider == null) return true;
@@ -107,8 +152,6 @@ namespace Player
 
             if (ray.collider == null || ray.collider.gameObject.transform.localScale == parentOldScale) return;
             parentOldScale = ray.collider.gameObject.transform.localScale;
-            //parentGroundName = ray.collider.gameObject.name;
-            //gameObject.transform.SetParent(ray.collider.gameObject.transform, false);
             gameObject.transform.parent = ray.collider.gameObject.transform;
         }
     }

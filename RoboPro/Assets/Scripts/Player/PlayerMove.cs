@@ -39,6 +39,7 @@ namespace Player
         /// <param name="isInteract"></param>
         public void Act_Move(bool isMove, bool isInteract, Vector2 vec)
         {
+            stateGetter.GroundCheckGetter().CheckWall();
             //床にいるかどうかを判定する
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
@@ -84,26 +85,26 @@ namespace Player
                 }
 
                 //アクセスポイントの何番が近くにあるか
-                int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-                if (index >= 0)
-                {
-                    //UI表示
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    interactUIControllable.SetPosition(pos);
-                    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
-                    if (isInteract)
-                    {
-                        //アクセスポイントに接続する
-                        pos.y = this.transform.position.y;
-                        transform.LookAt(pos);
+                //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+                //if (index >= 0)
+                //{
+                //    //UI表示
+                //    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                //    interactUIControllable.SetPosition(pos);
+                //    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
+                //    if (isInteract)
+                //    {
+                //        //アクセスポイントに接続する
+                //        pos.y = this.transform.position.y;
+                //        transform.LookAt(pos);
 
-                        stateChangeEvent(PlayerStateEnum.Access);
-                    }
-                }
-                else
-                {
-                    interactUIControllable.HideUI();
-                }
+                //        stateChangeEvent(PlayerStateEnum.Access);
+                //    }
+                //}
+                //else
+                //{
+                //    interactUIControllable.HideUI();
+                //}
                 
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
