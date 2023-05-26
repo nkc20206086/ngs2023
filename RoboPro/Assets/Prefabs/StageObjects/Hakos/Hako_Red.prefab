@@ -8,13 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 757712756188842104}
-  - component: {fileID: 4407955490221590493}
-  - component: {fileID: 1930007257789297431}
-  - component: {fileID: 8602132131101834954}
-  - component: {fileID: 5278107574138548950}
-  m_Layer: 8
+  - component: {fileID: 2594800595142972930}
+  - component: {fileID: 1417876258954877351}
+  - component: {fileID: 3767746763539606893}
+  m_Layer: 0
   m_Name: Hako_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,30 +83,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<< HEAD
---- !u!114 &8602132131101834954
-MonoBehaviour:
-=======
 --- !u!1 &8162566722657410493
 GameObject:
->>>>>>> develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 128421927883330242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playIndex: -1
-  isExecutable: 0
-  state: 0
---- !u!65 &5278107574138548950
-BoxCollider:
-=======
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3192966708666869389}
@@ -122,20 +101,10 @@ BoxCollider:
   m_IsActive: 1
 --- !u!4 &3192966708666869389
 Transform:
->>>>>>> develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 128421927883330242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 1, z: 0}
-=======
   m_GameObject: {fileID: 8162566722657410493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -146,4 +115,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> develop

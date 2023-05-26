@@ -8,13 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 6104483099087169163}
-  - component: {fileID: 7140633802756876590}
-  - component: {fileID: 4970944663439056356}
-  - component: {fileID: 5614599754564442271}
-  - component: {fileID: 7619238736969473732}
-  m_Layer: 8
+  - component: {fileID: 527663954638992626}
+  - component: {fileID: 3530109656385452887}
+  - component: {fileID: 1664519105095864221}
+  m_Layer: 0
   m_Name: Hako_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,30 +83,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<< HEAD
---- !u!114 &5614599754564442271
-MonoBehaviour:
-=======
 --- !u!1 &1635468382116816160
 GameObject:
->>>>>>> develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 6916591855992257585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playIndex: -1
-  isExecutable: 0
-  state: 0
---- !u!65 &7619238736969473732
-BoxCollider:
-=======
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8921784682222701330}
@@ -122,20 +101,10 @@ BoxCollider:
   m_IsActive: 1
 --- !u!4 &8921784682222701330
 Transform:
->>>>>>> develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 6916591855992257585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 1, z: 0}
-=======
   m_GameObject: {fileID: 1635468382116816160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -146,4 +115,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> develop
