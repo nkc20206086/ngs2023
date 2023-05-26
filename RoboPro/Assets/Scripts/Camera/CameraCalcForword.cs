@@ -18,7 +18,7 @@ namespace MainCamera
 
         private void Awake()
         {
-            Locator<ICameraVectorGetter>.Bind(this);
+            //Locator<ICameraVectorGetter>.Bind(this);
         }
 
         // Start is called before the first frame update
