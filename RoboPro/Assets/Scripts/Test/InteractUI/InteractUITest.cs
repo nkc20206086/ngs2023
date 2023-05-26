@@ -33,7 +33,7 @@ public class InteractUITest : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
             num += 0.001f;
-            interact.SetFillAmount(num);
+            //interact.SetFillAmount(num);
         }
 
         if (Input.GetMouseButtonDown(1))
