@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2347126495222843144}
   - component: {fileID: 1674618373799233709}
   - component: {fileID: 3519993843320994919}
+  - component: {fileID: -6230860768670328103}
   m_Layer: 0
   m_Name: Hako_Yellow
   m_TagString: Untagged
@@ -83,3 +84,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-6230860768670328103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159692609490394546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playIndex: -1
+  isExecutable: 0
+  state: 0

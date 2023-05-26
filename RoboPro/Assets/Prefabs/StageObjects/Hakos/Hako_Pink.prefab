@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1602555950333749247}
   - component: {fileID: 2419197917171279962}
   - component: {fileID: 465631052963716240}
+  - component: {fileID: 8830040617487059940}
   m_Layer: 0
   m_Name: Hako_Pink
   m_TagString: Untagged
@@ -83,3 +84,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8830040617487059940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123091575023385925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playIndex: -1
+  isExecutable: 0
+  state: 0

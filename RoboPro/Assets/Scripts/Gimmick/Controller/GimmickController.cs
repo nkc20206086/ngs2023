@@ -12,7 +12,7 @@ namespace Gimmick
     /// <summary>
     /// ギミック管理クラス
     /// </summary>
-    public class GimmckController : MonoBehaviour
+    public class GimmickController : MonoBehaviour
     {
         public MainCommand[] controlCommand = new MainCommand[CommandUtility.commandCount]; // 管理コマンドの配列
 
@@ -50,9 +50,14 @@ namespace Gimmick
                 controlCommand[i] = CommandCreater.CreateCommand(setCommands[i]);
             }
 
-            state = CommandState.MOVE_ON;                                   // コマンドステートを通常移動にする
-
             Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
+
+            if (setCommands.Length <= 0)
+            {
+                isExecutable = false;
+                return;
+            }
+            state = CommandState.MOVE_ON;                                   // コマンドステートを通常移動にする
 
             IndexSwitching();                                               // 実行インデックス変更用関数
 
@@ -60,29 +65,7 @@ namespace Gimmick
             baseQuat = transform.rotation;
             baseScale = transform.localScale;
 
-            Vector3 move = Vector3.zero;
-            Quaternion rotation = baseQuat;
-            Vector3 scale = baseScale;
-
-            // 実行コマンドリストの要素全てに初期化関数を実行
-            for (int i = 0; i < CommandUtility.commandCount; i++)
-            {
-                switch (playCommand[i].GetMainCommandType())
-                {
-                    case MainCommandType.Move:
-                        Vector3 moveValue = (Vector3)playCommand[i].InitCommand(basePos + move, CreateInterval);
-                        move += moveValue;
-                        break;
-                    case MainCommandType.Rotate:
-                        Quaternion rotateValue = (Quaternion)playCommand[i].InitCommand(rotation, CreateInterval);
-                        rotation = rotateValue;
-                        break;
-                    case MainCommandType.Scale:
-                        Vector3 scaleValue = (Vector3)playCommand[i].InitCommand(scale, CreateInterval);
-                        scale = scaleValue;
-                        break;
-                }
-            }
+            CommandCalc();
 
             GimmickArchive gimmickArchive = new GimmickArchive(controlCommand,playCommand,playIndex);
             gimmickArchives.Add(gimmickArchive);
@@ -170,29 +153,7 @@ namespace Gimmick
 
             timeCount = 0.0f;
 
-            Vector3 move = Vector3.zero;
-            Quaternion rotation = baseQuat;
-            Vector3 scale = baseScale;
-
-            // 実行コマンドリストの要素全てに初期化関数を実行
-            for (int i = 0; i < CommandUtility.commandCount; i++)
-            {
-                switch (playCommand[i].GetMainCommandType())
-                {
-                    case MainCommandType.Move:
-                        Vector3 moveValue = (Vector3)playCommand[i].InitCommand(basePos + move, CreateInterval);
-                        move += moveValue;
-                        break;
-                    case MainCommandType.Rotate:
-                        Quaternion rotateValue = (Quaternion)playCommand[i].InitCommand(rotation, CreateInterval);
-                        rotation = rotateValue;
-                        break;
-                    case MainCommandType.Scale:
-                        Vector3 scaleValue = (Vector3)playCommand[i].InitCommand(scale, CreateInterval);
-                        scale = scaleValue;
-                        break;
-                }
-            }
+            CommandCalc();
         }
 
         public void StartingAction(CommandState playState)
@@ -207,7 +168,7 @@ namespace Gimmick
             {
                 if (state != CommandState.MOVE_ON) return;
                 isExecutable = true;
-                playIndex = CommandUtility.commandCount - 1;
+                playIndex = playCommand.Length - 1;
             }
 
             state = playState;
@@ -231,9 +192,9 @@ namespace Gimmick
             if (state == CommandState.MOVE_ON)              // 通常移動であればインデックスを加算
             {
                 playIndex++;
-                if (CommandUtility.commandCount <= playIndex)
+                if (playCommand.Length <= playIndex)
                 {
-                    playIndex = CommandUtility.commandCount - 1;
+                    playIndex = playCommand.Length - 1;
                     isExecutable = false;
                 }
             }
@@ -269,9 +230,8 @@ namespace Gimmick
             }
             else　                                   
             {
-
                 // 管理コマンドの要素に実行不可であるものが含まれれば、実行不可に変更し早期リターンする
-                for (int i = 0;i < CommandUtility.commandCount;i++)
+                for (int i = 0;i < playCommand.Length;i++)
                 {
                     if (controlCommand[i] == null || !controlCommand[i].CommandNullCheck())
                     {
@@ -284,29 +244,7 @@ namespace Gimmick
                 isExecutable = true;                                            // 実行可能に変更
                 Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
 
-                Vector3 move = Vector3.zero;
-                Quaternion rotation = baseQuat;
-                Vector3 scale = baseScale;
-
-                // 実行コマンドリストの要素全てに初期化関数を実行
-                for (int i = 0; i < CommandUtility.commandCount; i++)
-                {
-                    switch (playCommand[i].GetMainCommandType())
-                    {
-                        case MainCommandType.Move:
-                            Vector3 moveValue = (Vector3)playCommand[i].InitCommand(basePos + move, CreateInterval);
-                            move += moveValue;
-                            break;
-                        case MainCommandType.Rotate:
-                            Quaternion rotateValue = (Quaternion)playCommand[i].InitCommand(rotation, CreateInterval);
-                            rotation = rotateValue;
-                            break;
-                        case MainCommandType.Scale:
-                            Vector3 scaleValue = (Vector3)playCommand[i].InitCommand(scale, CreateInterval);
-                            scale = scaleValue;
-                            break;
-                    }
-                }
+                CommandCalc();
             }
         }
 
@@ -319,6 +257,33 @@ namespace Gimmick
             if (playCommand[3].GetMainCommandType() == MainCommandType.Move)
             {
                 GetComponent<Renderer>().material.color = Color.red;
+            }
+        }
+
+        private void CommandCalc()
+        {
+            Vector3 move = Vector3.zero;
+            Quaternion rotation = baseQuat;
+            Vector3 scale = baseScale;
+
+            // 実行コマンドリストの要素全てに初期化関数を実行
+            for (int i = 0; i < playCommand.Length; i++)
+            {
+                switch (playCommand[i].GetMainCommandType())
+                {
+                    case MainCommandType.Move:
+                        Vector3 moveValue = (Vector3)playCommand[i].InitCommand(basePos + move, CreateInterval);
+                        move += moveValue;
+                        break;
+                    case MainCommandType.Rotate:
+                        Quaternion rotateValue = (Quaternion)playCommand[i].InitCommand(rotation, CreateInterval);
+                        rotation = rotateValue;
+                        break;
+                    case MainCommandType.Scale:
+                        Vector3 scaleValue = (Vector3)playCommand[i].InitCommand(scale, CreateInterval);
+                        scale = scaleValue;
+                        break;
+                }
             }
         }
     }

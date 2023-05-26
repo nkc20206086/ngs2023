@@ -40,19 +40,19 @@ namespace Command.Entity
                 }
                 else                                                                                // まだ移動距離が設定数値を超えていないなら
                 {
-                    targetTransform.position += GetDirection();                                     // 座標値を倍率を反映した数値分移動する
+                    targetTransform.position += GetDirection() * 0.1f;                                     // 座標値を倍率を反映した数値分移動する
                 }
             }
             else
             {
-                if (Vector3.Distance(basePos, targetTransform.position) < 1)                        // 原点からの移動距離が設定数値を超えているなら
+                if (Vector3.Distance(basePos, targetTransform.position) < 0.3f)                        // 原点からの移動距離が設定数値を超えているなら
                 {
                     targetTransform.position = basePos;                                             // 対象の位置を対象の座標に変更
                     completeAction?.Invoke();                                                       // コマンド完了時処理を実行
                 }
                 else                                                                                // まだ移動距離が設定数値を超えていないなら
                 {
-                    targetTransform.position += GetDirection() * -1;                                // 座標値を倍率を反映した数値分移動する
+                    targetTransform.position += GetDirection() * -0.1f;                                // 座標値を倍率を反映した数値分移動する
                 }
             }
         }

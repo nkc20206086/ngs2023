@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7399087558753765330}
   - component: {fileID: 5836961416254900343}
   - component: {fileID: 8567528960636239037}
+  - component: {fileID: 2140412181802244048}
   m_Layer: 0
   m_Name: Hako_Purple
   m_TagString: Untagged
@@ -83,3 +84,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2140412181802244048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918742401868864872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playIndex: -1
+  isExecutable: 0
+  state: 0
