@@ -15,12 +15,6 @@ GameObject:
   - component: {fileID: 5614599754564442271}
   - component: {fileID: 7619238736969473732}
   m_Layer: 8
-=======
-  - component: {fileID: 527663954638992626}
-  - component: {fileID: 3530109656385452887}
-  - component: {fileID: 1664519105095864221}
-  m_Layer: 0
->>>>>>> develop
   m_Name: Hako_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}

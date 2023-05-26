@@ -15,12 +15,6 @@ GameObject:
   - component: {fileID: -2867032642740767060}
   - component: {fileID: 6733966606276334129}
   m_Layer: 8
-=======
-  - component: {fileID: 223821078460499622}
-  - component: {fileID: 3797932517138172163}
-  - component: {fileID: 1391613150008049097}
-  m_Layer: 0
->>>>>>> develop
   m_Name: Hako_SkyBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

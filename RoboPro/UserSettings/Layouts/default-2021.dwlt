@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Project
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 27
+  controlID: 140
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 18
+  controlID: 59
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 64
+  controlID: 141
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -763,7 +763,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 0
+    m_VSlider: 1
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -776,20 +776,20 @@ MonoBehaviour:
       y: 21
       width: 830
       height: 379
-    m_Scale: {x: 0.3509259, y: 0.35092592}
-    m_Translation: {x: 414.99997, y: 189.5}
+    m_Scale: {x: 0.37037036, y: 0.37037036}
+    m_Translation: {x: 415, y: 189.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1182.5858
-      y: -540
-      width: 2365.1716
-      height: 1080
+      x: -1120.5
+      y: -511.65002
+      width: 2241
+      height: 1023.30005
     m_MinimalGUI: 1
-  m_defaultScale: 0.35092592
+  m_defaultScale: 0.37037036
   m_LastWindowPixelSize: {x: 830, y: 400}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
@@ -860,23 +860,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1cf9ffff
-      m_LastClickedID: -1764
-      m_ExpandedIDs: 7ce6fbff64e9fbff76e9fbffd6e9fbffeee9fbfff8e9fbfff6ecfbff16edfbff38edfbff40edfbffce81fcff24b7fdff0ad9fdfff03efeffc644feff9a6dfeff4673feff4684ffff4e84ffff14fbffff16fbffff
+      m_SelectedIDs: 90980000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 16fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: StageBase
-        m_OriginalName: StageBase
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1260
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 11}
       m_SearchString: 
@@ -957,7 +957,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/StageDatas
+    - Assets/Prefabs/StageObjects/Hakos
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -972,7 +972,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: 2e850000
     m_LastClickedID: 34094
-    m_ExpandedIDs: 00000000347f0000367f0000387f00003a7f00003c7f00003e7f0000407f0000427f0000447f0000467f0000487f00004a7f00004c7f00004e7f0000507f0000527f0000547f0000567f0000587f0000
+    m_ExpandedIDs: 000000006e97000070970000729700007497000076970000789700007a9700007c9700007e97000080970000829700008497000086970000889700008a9700008c9700008e97000090970000929700009497000096970000989700009a9700009c9700009e970000a0970000a2970000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 960}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000347f0000367f0000387f00003a7f00003c7f0000407f0000427f0000467f0000487f00004a7f00004c7f00004e7f0000507f0000527f0000547f0000587f0000d27f0000da7f0000f67f0000f87f000044800000a4aa0000a8aa0000aaaa0000acaa00005abe0000
+    m_ExpandedIDs: ffffffff000000006e97000070970000729700007497000076970000789700007a9700007c9700007e97000080970000829700008497000086970000889700008a9700008c9700008e97000090970000929700009497000096970000989700009a9700009c9700009e970000a0970000a2970000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

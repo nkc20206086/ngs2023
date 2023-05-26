@@ -15,10 +15,6 @@ GameObject:
   - component: {fileID: 8830040617487059940}
   - component: {fileID: -618204690950113832}
   m_Layer: 8
-=======
-  - component: {fileID: 528540305826926672}
-  m_Layer: 0
->>>>>>> develop
   m_Name: Hako_Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}

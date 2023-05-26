@@ -8,19 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 1358656988988999228}
   - component: {fileID: 2699117152975554969}
   - component: {fileID: 185148454888373587}
   - component: {fileID: -1248269666521489778}
   - component: {fileID: -7542028605665493615}
   m_Layer: 8
-=======
-  - component: {fileID: 3637594605279301139}
-  - component: {fileID: 420117414555140534}
-  - component: {fileID: 2463602972854269308}
-  m_Layer: 0
->>>>>>> develop
   m_Name: Hako_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,18 +85,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<< HEAD
 --- !u!114 &-1248269666521489778
 MonoBehaviour:
-=======
---- !u!1 &6722020873291689716
-GameObject:
->>>>>>> develop
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 1842319666878012550}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -115,7 +102,6 @@ GameObject:
   state: 0
 --- !u!65 &-7542028605665493615
 BoxCollider:
-=======
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7748429343257962667}

@@ -15,12 +15,6 @@ GameObject:
   - component: {fileID: -5394701158028275400}
   - component: {fileID: 2376975943533641870}
   m_Layer: 8
-=======
-  - component: {fileID: 3133760448541290422}
-  - component: {fileID: 2076864296984764435}
-  - component: {fileID: 4266727829764773081}
-  m_Layer: 0
->>>>>>> develop
   m_Name: Hako_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
