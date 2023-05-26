@@ -2,11 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using InteractUI;
 
 namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
+        [Inject]
+        private IInteractUIControllable interactUIControllable;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -46,14 +50,20 @@ namespace Player
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
             if (index >= 0)
             {
+                Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                interactUIControllable.SetPosition(pos);
+                interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
                 if (isInteract)
                 {
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                     pos.y = this.transform.position.y;
                     transform.LookAt(pos);
 
                     stateChangeEvent(PlayerStateEnum.Access);
                 }
+            }
+            else
+            {
+                interactUIControllable.HideUI();
             }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
