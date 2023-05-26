@@ -66,9 +66,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goal: {fileID: 5401220845805765086}
   animator: {fileID: 5401220845805765024}
-  slider: {fileID: 5401220846519783656}
   interactingEffect: {fileID: 8780466224543967387}
   clearEffect: {fileID: 2867192394501186018}
+  uiOffset: {x: 0, y: 0, z: 0}
+  interactAsset: {fileID: 11400000, guid: cf2355f946dedf3448f8926dd77cca32, type: 2}
 --- !u!95 &5401220845805765024
 Animator:
   serializedVersion: 4
@@ -428,7 +429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5401220847385407920
 RectTransform:
   m_ObjectHideFlags: 0
