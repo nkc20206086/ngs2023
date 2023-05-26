@@ -17,6 +17,7 @@ namespace Player
         //アクセス終了時処理
         public void AccessEnd()
         {
+            Debug.Log("終了");
             accessEndEvent();
         }
     }
