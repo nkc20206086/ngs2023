@@ -16,6 +16,8 @@ namespace Player
         private Vector2 jumpPower;
         [SerializeField]
         private float deathHeight;
+        [SerializeField]
+        private float playerUI_Yvector;
 
         [Inject]
         private IGimmickAccess gimmickAccess;
@@ -100,6 +102,11 @@ namespace Player
         float IStateGetter.DeathHeightGetter()
         {
             return deathHeight;
+        }
+
+        float IStateGetter.PlayerUI_OffsetYGetter()
+        {
+            return playerUI_Yvector;
         }
     }
 }
