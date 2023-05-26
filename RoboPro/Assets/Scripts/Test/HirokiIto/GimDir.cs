@@ -24,7 +24,7 @@ namespace Gimmick
 
         [Header("デバッグ用　本来であれば生成済みのものは利用しない")]
         [SerializeField]
-        private List<GimmickController> instanceGimmickController;
+        private List<GimmckController> instanceGimmickController;
         [SerializeField]
         private List<AccessPoint> accessPoints;
 
@@ -49,12 +49,12 @@ namespace Gimmick
             {
                 if (!isSwapping)
                 {
-                    foreach (GimmickController gimmckController in instanceGimmickController)
+                    foreach (GimmckController gimmckController in instanceGimmickController)
                     {
                         gimmckController.CommandUpdate();   // 各ギミックのコマンドを実行する
                     }
 
-                    foreach (GimmickController gimmckController in instanceGimmickController)
+                    foreach (GimmckController gimmckController in instanceGimmickController)
                     {
                         if (gimmckController.GetExecutionStatus) return;
                     }
@@ -121,7 +121,7 @@ namespace Gimmick
                 isExecute = false;
                 state = CommandState.INACTIVE;
 
-                foreach (GimmickController gimmck in instanceGimmickController)
+                foreach (GimmckController gimmck in instanceGimmickController)
                 {
                     gimmck.IntializeAction();
                 }
@@ -134,7 +134,7 @@ namespace Gimmick
             isExecute = true;
             state = state != CommandState.MOVE_ON ? CommandState.MOVE_ON : CommandState.RETURN;
 
-            foreach (GimmickController gimmckController in instanceGimmickController)
+            foreach (GimmckController gimmckController in instanceGimmickController)
             {
                 gimmckController.StartingAction(state);
             }
@@ -150,7 +150,7 @@ namespace Gimmick
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
             // 減算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmickController gimmck in instanceGimmickController)
+            foreach (GimmckController gimmck in instanceGimmickController)
             {
                 gimmck.IntializeAction();
                 gimmck.OverwriteControlCommand(archiveIndex);
@@ -168,7 +168,7 @@ namespace Gimmick
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
-            foreach (GimmickController gimmck in instanceGimmickController)
+            foreach (GimmckController gimmck in instanceGimmickController)
             {
                 gimmck.IntializeAction();
                 gimmck.OverwriteControlCommand(archiveIndex);
@@ -207,11 +207,7 @@ namespace Gimmick
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-
-            foreach (GimmickController gimmick in accessPoints[index].controlGimmicks)
-            {
-                commandDirector.CommandActivation(gimmick.controlCommand);
-            }
+            commandDirector.CommandActivation(accessPoints[index].controlGimmick.controlCommand);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
