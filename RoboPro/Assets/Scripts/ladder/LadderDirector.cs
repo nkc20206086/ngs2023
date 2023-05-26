@@ -15,8 +15,7 @@ namespace Ladder
 
         private void Start()
         {
-            var objs = GetComponents<ILadderTouchable>();
-            foreach (var item in objs)
+            foreach (ILadderTouchable item in FindObjectsOfType<LadderController>())
             {
                 ladderControllers.Add(item);
             }
@@ -29,6 +28,7 @@ namespace Ladder
             Vector3 climbPos = new Vector3();
             ClimbType climbType = ClimbType.Error;
             LadderClimbData ladderClimbData;
+            Debug.Log("count=" + ladderControllers.Count);
             for (int i = 0; i < ladderControllers.Count; i++)
             {
                 //はしごデータを取得
@@ -43,19 +43,20 @@ namespace Ladder
                         climbType = ladderControllers[i].IsUsable(playerTransform).climbType;
                     }
                 }
+
             }
-            LadderClimbData resultData = new LadderClimbData(minIndex != -1, climbPos, climbType, minIndex, minLength);
-            return resultData;
+            Debug.Log($"一番近いはしご" + minLength);
+            //一番近いはしごとの距離が触れる距離かどうか
+            if (canClimbLength >= minLength)
+            {
+                LadderClimbData resultData = new LadderClimbData(true, climbPos, climbType, minIndex, minLength);
+                return resultData;
+            }
+            else
+            {
+                return LadderClimbData.errorData;
+            }
+            return LadderClimbData.errorData;
         }
-
-        //Vector3 ILadderClimbable.ClimbLadder(LadderClimbData ladderClimbData)
-        //{
-        //    if (ladderClimbData.climbType == ClimbType.Error) return;
-        //    else if (ladderClimbData.climbType==ClimbType.Up)
-        //    {
-
-        //    }
-        //    else if()
-        //}
     }
 }

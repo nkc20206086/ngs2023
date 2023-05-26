@@ -34,11 +34,7 @@ namespace Ladder
         }
         private void Update()
         {
-            //test
-            foreach (var item in ladders)
-            {
-                item.UpGroundCheck();
-            }
+
         }
         private void InstanceLadder()
         {
@@ -118,7 +114,7 @@ namespace Ladder
             float degree = rad * Mathf.Rad2Deg;
             return Mathf.Repeat(degree, 360);
         }
-      
+
 
         LadderClimbData ILadderTouchable.IsUsable(Transform playerTrans)
         {

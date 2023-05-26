@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkUpRayLength: 1
-  checkSideRayLength: 1
+  checkSideRayLength: 0.5
   climbableHigh: 1
   climableForwardLegth: 1
   dropableHigh: 1

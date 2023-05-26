@@ -4,12 +4,12 @@ using Ladder;
 public class LadderInstaller : MonoInstaller
 {
     [SerializeField] 
-    private GameObject ladderClimbable;
+    private GameObject ladderDirector;
     public override void InstallBindings()
     {
         Container.
             BindInterfacesTo<LadderDirector>().
-            FromComponentOn(ladderClimbable).
+            FromComponentOn(ladderDirector).
             AsCached();
     }
 }
