@@ -1,10 +1,8 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 using Zenject;
 using UniRx;
 using Command;
-using Command.Entity;
 
 namespace Gimmick
 {
@@ -12,31 +10,24 @@ namespace Gimmick
     {
         public const float RADIUS = 1.5f;   // 当たり判定の有効範囲の半径
 
+        [SerializeField, Tooltip("紐づけるギミック")]
+        private GimmckController gimmckController;
+
         [Tooltip("APとギミックを繋ぐラインの色")]
         public Color color;
 
-        private MainCommand[] mainCommands = new MainCommand[4];
-        private List<GimmickController> gimmickControllers;
-        private List<CommandContainer> usableCommands = new List<CommandContainer>();
+        [SerializeField, Tooltip("使用コマンド1")]
+        private CommandContainer usableCommand1;
+        [SerializeField, Tooltip("使用コマンド2")]
+        private CommandContainer usableCommand2;
+        [SerializeField, Tooltip("使用コマンド3")]
+        private CommandContainer usableCommand3;
+        [SerializeField, Tooltip("スペシャルコマンド")]
+        private CommandContainer specialCommand;
 
-        public List<GimmickController> controlGimmicks
+        public GimmckController controlGimmick
         {
-            get => gimmickControllers;
-        }
-
-        public void StartUp(AccessPointData data)
-        {
-            usableCommands = data.Commands;
-        }
-
-        public void GimmickSubscrive(List<GameObject> objList)
-        {
-            gimmickControllers ??= new List<GimmickController>();
-
-            foreach (GameObject obj in objList)
-            {
-                gimmickControllers.Add(obj.GetComponent<GimmickController>());
-            }
+            get => gimmckController;
         }
 
         /// <summary>
@@ -44,19 +35,14 @@ namespace Gimmick
         /// </summary>
         public void GimmickActivate()
         {
-            // ギミック管理クラスの開始関数を実行
-            foreach (GimmickController gimmick in gimmickControllers)
-            {
-                gimmick.StartUp(usableCommands.ToArray());
-            }
-        }
+            // ギミックに渡すための配列を作成する
+            CommandContainer[] usableCommands = new CommandContainer[CommandUtility.commandCount + 1];
+            usableCommands[0] = usableCommand1;
+            usableCommands[1] = usableCommand2;
+            usableCommands[2] = usableCommand3;
+            usableCommands[3] = specialCommand;
 
-        public void ControlGimmicksUpdate()
-        {
-            foreach (GimmickController gimmick in gimmickControllers)
-            {
-                gimmick.CommandUpdate();
-            }
+            gimmckController.StartUp(usableCommands);   // ギミック管理クラスの開始関数を実行
         }
     }
 }

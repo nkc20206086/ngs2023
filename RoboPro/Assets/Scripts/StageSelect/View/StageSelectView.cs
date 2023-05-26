@@ -23,6 +23,9 @@ namespace Robo
         [SerializeField] 
         private Ease moveEase = Ease.OutCirc;
 
+        [SerializeField]
+        private StagePreview preview;
+
         [Inject]
         private DiContainer container;
 
@@ -53,15 +56,27 @@ namespace Robo
                 element.Initalize(args.Infos[i], i);
                 element.transform.SetParent(elementsParent);
                 element.transform.localPosition = new Vector3(putDistance * i, 0, 0);
-
-                OnSelect += (idx) => element.OnSelect(idx);
-                OnDeselect += (idx) => element.OnDeselect(idx);
             }
+            OnSelect += StageSelectElementOnSelect;
+            OnDeselect += StageSelectElementOnDeselect;
+        }
+
+        private void StageSelectElementOnSelect(int idx)
+        {
+            elements[idx].OnSelect(idx);
+            preview.transform.position = elements[idx].transform.position;
+            preview.CreatePreview(Infos[idx].StageData);
+        }
+        
+        private void StageSelectElementOnDeselect(int idx)
+        {
+            elements[idx].OnDeselect(idx);
         }
 
         //ステージ選択
         void IStageSelectView.Select(int idx)
         {
+            if (idx == nowSelectedIndex) return;
             Transform element = elements[idx].transform;
             elementsParent.DOLocalMoveX(-element.localPosition.x, moveDuration).SetEase(moveEase);
 
