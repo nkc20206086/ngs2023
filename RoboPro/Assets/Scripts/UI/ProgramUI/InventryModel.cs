@@ -21,4 +21,9 @@ public class InventryModel : MonoBehaviour
 
         UIEvent(commands);
     }
+
+    public void Test(int main, int sub)
+    {
+        Debug.Log(main + "," + sub);
+    }
 }
