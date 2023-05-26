@@ -5,13 +5,15 @@ public class Goal : MonoBehaviour
 {
     private bool isHitPlayer = false;
     private InputControls inputActions;
-    private float interactTime = 0;
+    private float interactingTime = 0;
     private bool isClear = false;
 
     public event Action<float> OnChangeInteractingTime;
     public event Action OnHitGoal;
     public event Action OnExitGoal;
     public event Action OnClear;
+
+    public float InteractingTime => interactingTime;
 
     private void Start()
     {
@@ -24,14 +26,14 @@ public class Goal : MonoBehaviour
         //プレイヤーとゴールに接触し、一秒間インタラクトするとクリアとなる
         if (isHitPlayer && inputActions.Player.Interact.IsPressed())
         {
-            if (interactTime >= 1)
+            if (interactingTime >= 1)
             {
                 Clear();
             }
             else
             {
-                interactTime += Time.deltaTime;
-                OnChangeInteractingTime?.Invoke(interactTime);
+                interactingTime += Time.deltaTime;
+                OnChangeInteractingTime?.Invoke(interactingTime);
                 Debug.Log("Interact");
             }
         }
@@ -39,16 +41,16 @@ public class Goal : MonoBehaviour
         //インタラクトを解除すると、徐々に秒数が減少する
         if(!isClear)
         {
-            if (interactTime > 0)
+            if (interactingTime > 0)
             {
-                interactTime -= Time.deltaTime;
-                OnChangeInteractingTime?.Invoke(interactTime);
+                interactingTime -= Time.deltaTime;
+                OnChangeInteractingTime?.Invoke(interactingTime);
             }
             else
-            if(interactTime != 0)
+            if(interactingTime != 0)
             {
-                interactTime = 0;
-                OnChangeInteractingTime?.Invoke(interactTime);
+                interactingTime = 0;
+                OnChangeInteractingTime?.Invoke(interactingTime);
             }
         }
     }
