@@ -44,7 +44,7 @@ namespace Ladder
             //    isHit = TopCheck();
             //}
             //SideCheck();
-            
+
             return isHit || SideCheck() || ClimbableCheck();
         }
         private bool SideCheck()
@@ -108,7 +108,7 @@ namespace Ladder
                 transform.position.x,
                 transform.position.y + transform.lossyScale.y * boxCollider.size.y + climbableHigh,
                 transform.position.z);
-            //Debug.DrawRay(rayStartPos, -transform.forward * climableForwardLegth, Color.green);
+            if(debugMode) Debug.DrawRay(rayStartPos, -transform.forward * climableForwardLegth, Color.green);
             bool forwordCheck = Physics.Raycast(rayStartPos, -transform.forward, climableForwardLegth, checkGroundMask);
             //当たっていたら登れない
             if (forwordCheck) return false;
@@ -118,10 +118,23 @@ namespace Ladder
                 transform.position.x,
                 transform.position.y + transform.lossyScale.y * boxCollider.size.y + 0.1f,
                 transform.position.z + transform.lossyScale.z * boxCollider.size.z + 0.2f);
-            Debug.DrawRay(downCheckStartPos, -transform.up * dropableHigh, Color.black);
+            if (debugMode) Debug.DrawRay(downCheckStartPos, -transform.up * dropableHigh, Color.black);
             bool dropableCheck = Physics.Raycast(downCheckStartPos, -transform.up, dropableHigh, checkGroundMask);
             return !dropableCheck;
         }
+        /// <summary>
+        /// プレイヤーとはしごの間に障害物がないか確認
+        /// </summary>
+        /// <returns></returns>
+        public bool PlayerOnLadderCheck(Vector3 playerPos, Vector3 ladderPos)
+        {
+
+            bool result = Physics.Linecast(playerPos, ladderPos, checkGroundMask);
+            if (debugMode) Debug.DrawLine(playerPos, ladderPos, Color.red);
+            return !result;
+        }
+
+        #region 使わないかも
         private bool TopCheck()
         {
             //レイを出す地点を作成
@@ -159,5 +172,6 @@ namespace Ladder
             }
             return (leftUpHit || rightUpHit || leftDownHit || rightDownHit);
         }
+        #endregion
     }
 }

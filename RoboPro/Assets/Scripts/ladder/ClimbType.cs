@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ladder
 {
-    enum ClimbType
+    public enum ClimbType
     {
         Up,Down,Error
     }

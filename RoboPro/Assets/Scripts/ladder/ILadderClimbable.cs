@@ -9,6 +9,7 @@ namespace Ladder
 {
     interface ILadderClimbable
     {
-        public int GetLadderClimableIndex(Transform playerTransform);
+        public LadderClimbData GetLadderClimableData(Transform playerTransform);
+        //public Vector3 ClimbLadder(LadderClimbData ladderClimbData);
     }
 }

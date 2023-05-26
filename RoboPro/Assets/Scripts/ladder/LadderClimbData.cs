@@ -7,30 +7,22 @@ using UnityEngine;
 
 namespace Ladder
 {
-    struct LadderClimbData
+    public struct LadderClimbData
     {
-        public bool climableLadder;
-        public Vector3 climbPos;
-        public ClimbType climbType;
+        public readonly bool isClimableLadder;
+        public readonly Vector3 climbPos;
+        public readonly ClimbType climbType;
+        public readonly int ladderIndex;
+        public readonly float ladderToPlayerLength;
+        public readonly static LadderClimbData errorData = new LadderClimbData(false,Vector3.one,ClimbType.Error,-1,-1); 
 
-        public LadderClimbData(bool climableLadder, Vector3 climbPos, ClimbType climbType)
+        public LadderClimbData(bool climableLadder, Vector3 climbPos, ClimbType climbType, int ladderIndex, float ladderToPlayerLength)
         {
-            this.climableLadder = climableLadder;
+            this.isClimableLadder = climableLadder;
             this.climbPos = climbPos;
             this.climbType = climbType;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is LadderClimbData data &&
-                   climableLadder == data.climableLadder &&
-                   climbPos.Equals(data.climbPos) &&
-                   climbType == data.climbType;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(climableLadder, climbPos, climbType);
+            this.ladderIndex = ladderIndex;
+            this.ladderToPlayerLength = ladderToPlayerLength;
         }
     }
 }
