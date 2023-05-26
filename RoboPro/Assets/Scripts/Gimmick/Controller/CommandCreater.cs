@@ -12,7 +12,7 @@ namespace Command
         /// </summary>
         /// <param name="status">生成元のコマンド構造体</param>
         /// <returns>生成したコマンド構造体</returns>
-        public static MainCommand CreateCommand(CommandStruct status)
+        public static MainCommand CreateCommand(CommandContainer status)
         {
             MainCommand command = default;  // メインコマンドのローカル変数を作成
 
