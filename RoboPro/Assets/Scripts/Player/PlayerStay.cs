@@ -11,6 +11,9 @@ namespace Player
     {
         [Inject]
         private IInteractUIControllable interactUIControllable;
+
+        [SerializeField]
+        private ScriptableObject scriptableObjectUI;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -52,7 +55,7 @@ namespace Player
             {
                 Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                 interactUIControllable.SetPosition(pos);
-                interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
+                //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                 if (isInteract)
                 {
                     pos.y = this.transform.position.y;

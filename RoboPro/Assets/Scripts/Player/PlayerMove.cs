@@ -13,6 +13,9 @@ namespace Player
         [Inject]
         private IInteractUIControllable interactUIControllable;
 
+        [SerializeField]
+        ScriptableObject scriptableObjectUI;
+
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         private ICameraVectorGetter cameraVectorGetter;
@@ -39,6 +42,7 @@ namespace Player
         /// <param name="isInteract"></param>
         public void Act_Move(bool isMove, bool isInteract, Vector2 vec)
         {
+            stateGetter.GroundCheckGetter().CheckWall();
             //床にいるかどうかを判定する
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
@@ -90,7 +94,7 @@ namespace Player
                     //UI表示
                     Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                     interactUIControllable.SetPosition(pos);
-                    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
+                    //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                     if (isInteract)
                     {
                         //アクセスポイントに接続する
@@ -104,7 +108,7 @@ namespace Player
                 {
                     interactUIControllable.HideUI();
                 }
-                
+
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
                 {
