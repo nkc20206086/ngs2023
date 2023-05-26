@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1312951707154697497}
   - component: {fileID: 2708722805725053628}
   - component: {fileID: 176667620247680630}
+  - component: {fileID: 2608335141348680042}
   m_Layer: 0
   m_Name: AccessPoint_Blue
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2608335141348680042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833908650683570083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1563369066564177708
 PrefabInstance:
   m_ObjectHideFlags: 0

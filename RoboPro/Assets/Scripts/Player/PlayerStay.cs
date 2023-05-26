@@ -11,6 +11,9 @@ namespace Player
     {
         [Inject]
         private IInteractUIControllable interactUIControllable;
+
+        [SerializeField]
+        private ScriptableObject scriptableObjectUI;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -47,16 +50,19 @@ namespace Player
                 }
             }
 
+            //アクセスポイントの何番が近くにあるか
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
             if (index >= 0)
             {
-                Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                interactUIControllable.SetPosition(pos);
-                interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
+                //UI表示
+                //Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                //interactUIControllable.SetPosition(pos);
+                //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                 if (isInteract)
                 {
-                    pos.y = this.transform.position.y;
-                    transform.LookAt(pos);
+                    //アクセスポイントに接続する
+                    //pos.y = this.transform.position.y;
+                    transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
 
                     stateChangeEvent(PlayerStateEnum.Access);
                 }

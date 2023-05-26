@@ -7,14 +7,15 @@ namespace Player
 {
     public class PlayerAccess : MonoBehaviour,IStateChange
     {
+        [SerializeField]
+        private AccessManager accessManager;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-        private AccessManager accessManager;
 
         // Start is called before the first frame update
         void Start()
         {
-            accessManager = Locator<AccessManager>.GetT();
+            accessManager = accessManager.GetComponent<AccessManager>();
             stateGetter = GetComponent<IStateGetter>();
             accessManager.accessEndEvent += Finish_Access;
         }

@@ -80,7 +80,7 @@ namespace Command
         /// <param name="commands">対象のコマンド</param>
         public void MainButtonTextRewriting(MainCommand[] commands)
         {
-            for (int i = 0; i < mainCommandButtons.Length; i++) // コマンドの数だけ実行
+            for (int i = 0; i < commands.Length; i++) // コマンドの数だけ実行
             {
                 if (commands != null)
                 {
