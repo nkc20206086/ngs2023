@@ -33,7 +33,11 @@ namespace Stage
                 {
                     for (int x = 0;x < data.Blocks.Blocks[z].Blocks[y].Blocks.Count;x++)
                     {
-                        Instantiate(blockDB.GetPrefab(data.Blocks.Blocks[z].Blocks[y].Blocks[x], x + y + z), new Vector3(x,y,z), Quaternion.identity);
+                        GameObject prefabs = blockDB.GetPrefab(data.Blocks.Blocks[z].Blocks[y].Blocks[x], x + y + z);
+                        if (prefabs != null)
+                        {
+                            Instantiate(prefabs, new Vector3(x, y, z), Quaternion.identity);
+                        }
                     }
                 }
             }

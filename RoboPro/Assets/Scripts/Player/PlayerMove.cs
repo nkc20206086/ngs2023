@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MainCamera;
+using Zenject;
+using InteractUI;
 
 namespace Player
 {
     public class PlayerMove : MonoBehaviour, IStateChange
     {
+        [Inject]
+        private IInteractUIControllable interactUIControllable;
 
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
@@ -81,22 +85,26 @@ namespace Player
 
                 //アクセスポイントの何番が近くにあるか
                 int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-
                 if (index >= 0)
                 {
+                    //UI表示
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    interactUIControllable.SetPosition(pos);
+                    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
                     if (isInteract)
                     {
-                        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
-
                         //アクセスポイントに接続する
-                        Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                         pos.y = this.transform.position.y;
                         transform.LookAt(pos);
 
                         stateChangeEvent(PlayerStateEnum.Access);
                     }
                 }
-
+                else
+                {
+                    interactUIControllable.HideUI();
+                }
+                
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
                 {

@@ -65,5 +65,10 @@ namespace Command.Entity
         {
             return MainCommandType.Rotate;
         }
+
+        public override string GetString()
+        {
+            return "‰ñ“]";
+        }
     }
 }

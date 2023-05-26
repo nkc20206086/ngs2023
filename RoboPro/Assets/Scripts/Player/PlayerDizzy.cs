@@ -1,3 +1,4 @@
+using InteractUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace Player
     {
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-
 
         // Start is called before the first frame update
         void Start()
@@ -23,6 +23,7 @@ namespace Player
             {
                 //Debug.Log("‚Ó‚ç‚Â‚«");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
+
                 if (stateGetter.GroundCheckGetter().CheckDeathHeight()) return;
                 if (isInteract)
                 {

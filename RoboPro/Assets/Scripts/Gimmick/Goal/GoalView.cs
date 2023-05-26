@@ -16,7 +16,10 @@ public class GoalView : MonoBehaviour
     private Slider slider;
 
     [SerializeField]
-    private ParticleSystem particle;
+    private ParticleSystem interactingEffect;
+
+    [SerializeField]
+    private ParticleSystem clearEffect;
 
     [Inject]
     private IVCameraTargetChanger vCameraChanger;
@@ -44,18 +47,22 @@ public class GoalView : MonoBehaviour
     {
         if (isClear) return;
         slider.SetValueWithoutNotify(value);
+        interactingEffect.Play();
+        Debug.Log("OK");
     }
 
     private void OnHitGoal()
     {
         if (isClear) return;
         animator.SetTrigger("Show");
+        interactingEffect.gameObject.SetActive(true);
     }
 
     private void OnExitGoal()
     {
         if (isClear) return;
         animator.SetTrigger("Hide");
+        interactingEffect.gameObject.SetActive(false);
     }
 
     private void OnClear()
@@ -64,6 +71,6 @@ public class GoalView : MonoBehaviour
         animator.SetTrigger("Hide");
 
         vCameraChanger.ChangeCameraTarget(VCameraType.Goal);
-        particle.Play();
+        clearEffect.Play();
     }
 }
