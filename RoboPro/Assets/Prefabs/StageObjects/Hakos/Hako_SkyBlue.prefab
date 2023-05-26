@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 62193966287764832}
   - component: {fileID: 2826011363989637546}
   - component: {fileID: -2867032642740767060}
-  m_Layer: 0
+  - component: {fileID: 6733966606276334129}
+  m_Layer: 8
   m_Name: Hako_SkyBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,3 +100,16 @@ MonoBehaviour:
   playIndex: -1
   isExecutable: 0
   state: 0
+--- !u!65 &6733966606276334129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339497709921527935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}

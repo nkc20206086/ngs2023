@@ -49,6 +49,7 @@ namespace Command
         private void CommandSwap()
         {
             if (mainIndexNum < 0 || storageIndexNum < 0) return;                                               // どちらかのインデックスが0未満であるなら早期リターンする
+            if (mainIndexNum >= mainCommands.Length) return;
             if (mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
 
             // 入れ替えタイプがメインコマンドであるなら

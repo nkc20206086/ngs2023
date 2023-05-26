@@ -1,16 +1,18 @@
 using UnityEngine;
 using CommandUI;
+using Command;
 
 public class ProgramPresenter : MonoBehaviour
 {
     [SerializeField] ProgramCommandView programCommandView;
     [SerializeField] InventryCommandView inventryCommandView;
-    [SerializeField] InventryModel inventryModel;
-    [SerializeField] ProgramPanelModel programPanelModel;
+    [SerializeField] CommandDirector commandDirector;
+    //[SerializeField] InventryModel inventryModel;
+    //[SerializeField] ProgramPanelModel programPanelModel;
 
     private void Awake()
     {
-        programPanelModel.UIEvent += programCommandView.ProgramCommandTextChange;//MainCommand[]を送るイベント+=inventryCommandView.InventryTextChange;
-        inventryModel.UIEvent += inventryCommandView.InventryTextChange;//CommandBase[]を送るイベント+=inventryCommandView.InventryTextChange;
+        commandDirector.UIEvent_MainCommands += programCommandView.ProgramCommandTextChange;//MainCommand[]を送るイベント+=inventryCommandView.InventryTextChange;
+        commandDirector.UIEvent_StorageCommands += inventryCommandView.InventryTextChange;//CommandBase[]を送るイベント+=inventryCommandView.InventryTextChange;
     }
 }
