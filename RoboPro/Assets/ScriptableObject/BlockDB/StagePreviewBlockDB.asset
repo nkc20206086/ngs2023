@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e348c48b29ae8894d9596e7a0cc00fcb, type: 3}
+  m_Name: StagePreviewBlockDB
+  m_EditorClassIdentifier: 
+  datas:
+  - id: 9
+    obj_Odd: {fileID: 919132149155446097, guid: 29d6f16301ec82044977fc01df5f5e8a,
+      type: 3}
+    obj_Even: {fileID: 919132149155446097, guid: 29d6f16301ec82044977fc01df5f5e8a,
+      type: 3}
+  - id: 1
+    obj_Odd: {fileID: 9178274040306548017, guid: 16121d5298b593e4a8901f3d73647688,
+      type: 3}
+    obj_Even: {fileID: 1936919057414380738, guid: 4026fd14820dda643a1a6335f1dc8cde,
+      type: 3}
+  - id: 2
+    obj_Odd: {fileID: 379540155421562012, guid: 53110f397a48aea43adbbd5ec6ba8957,
+      type: 3}
+    obj_Even: {fileID: 8784774862093050486, guid: 35e15e5de265d6c4ebdc9db32797da46,
+      type: 3}
+  - id: 3
+    obj_Odd: {fileID: 6999784083415838333, guid: b019f3b789e06b744ba4b64f45dfc081,
+      type: 3}
+    obj_Even: {fileID: 8283490307672860614, guid: d8ae68f965b15e44cb0aa9607ea97611,
+      type: 3}
+  - id: 4
+    obj_Odd: {fileID: 8111978305822660572, guid: a3aa45e0f9f433d4097ab3e97eb3d277,
+      type: 3}
+    obj_Even: {fileID: 919132149155446097, guid: 5d71cda29aba8f045a43332ec9b59300,
+      type: 3}
+  - id: 5
+    obj_Odd: {fileID: 5461972841161094138, guid: d3e2f1979db50b64c944443f521bdb30,
+      type: 3}
+    obj_Even: {fileID: 2415474473504089001, guid: 71a3d6de54e5fbf4681ba09c7f2e6e19,
+      type: 3}
+  - id: 6
+    obj_Odd: {fileID: 2621450925909319820, guid: 3fd3db78fd846454d921c99dec49ef8b,
+      type: 3}
+    obj_Even: {fileID: 3913249060681027244, guid: 796d5f8e27ff6514492ef2e9503cc2a5,
+      type: 3}
+  - id: 7
+    obj_Odd: {fileID: 6413437491115524291, guid: cdc8d3cf7d6a7e342a46c451789d25b9,
+      type: 3}
+    obj_Even: {fileID: 6413437491115524291, guid: cdc8d3cf7d6a7e342a46c451789d25b9,
+      type: 3}
+  - id: 8
+    obj_Odd: {fileID: 6945078696206703059, guid: 219cf512a4eae2d4d9053d4e9a31f61f,
+      type: 3}
+    obj_Even: {fileID: 6945078696206703059, guid: 219cf512a4eae2d4d9053d4e9a31f61f,
+      type: 3}
+  - id: 9
+    obj_Odd: {fileID: 3047188276056357890, guid: a279dfd52154e6d449479f860bb4f19d,
+      type: 3}
+    obj_Even: {fileID: 3047188276056357890, guid: a279dfd52154e6d449479f860bb4f19d,
+      type: 3}
