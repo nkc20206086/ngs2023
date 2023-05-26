@@ -737,12 +737,12 @@ PrefabInstance:
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -767,12 +767,12 @@ PrefabInstance:
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -7e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 4e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791864335709, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -802,12 +802,12 @@ PrefabInstance:
     - target: {fileID: 7410071792160936836, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016013756
+      value: 0.000000016013763
       objectReference: {fileID: 0}
     - target: {fileID: 7410071792160936836, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000062943535
+      value: -0.0000000062943566
       objectReference: {fileID: 0}
     - target: {fileID: 7410071792558675500, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -947,8 +947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactUICanvas: {fileID: 1665859665}
   interactUIImage: {fileID: 1665859666}
-  keyBindingSpriteAssets:
-  - {fileID: 11400000, guid: da3dbbfedf8e26d42b9bf82fdcd4a45c, type: 2}
+  interactUIText: {fileID: 0}
+  holdImage: {fileID: 0}
 --- !u!4 &1119131894
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,12 +1128,12 @@ PrefabInstance:
     - target: {fileID: 1162411736121202471, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000032027522
+      value: 0.000000032027526
       objectReference: {fileID: 0}
     - target: {fileID: 1162411736121202471, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000125887105
+      value: -0.000000012588711
       objectReference: {fileID: 0}
     - target: {fileID: 1162411737203839240, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}

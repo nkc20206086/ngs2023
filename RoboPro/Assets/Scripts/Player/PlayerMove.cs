@@ -13,6 +13,9 @@ namespace Player
         [Inject]
         private IInteractUIControllable interactUIControllable;
 
+        [SerializeField]
+        ScriptableObject scriptableObjectUI;
+
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         private ICameraVectorGetter cameraVectorGetter;
@@ -85,27 +88,27 @@ namespace Player
                 }
 
                 //アクセスポイントの何番が近くにあるか
-                //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-                //if (index >= 0)
-                //{
-                //    //UI表示
-                //    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                //    interactUIControllable.SetPosition(pos);
-                //    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
-                //    if (isInteract)
-                //    {
-                //        //アクセスポイントに接続する
-                //        pos.y = this.transform.position.y;
-                //        transform.LookAt(pos);
+                int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+                if (index >= 0)
+                {
+                    //UI表示
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    interactUIControllable.SetPosition(pos);
+                    //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
+                    if (isInteract)
+                    {
+                        //アクセスポイントに接続する
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
 
-                //        stateChangeEvent(PlayerStateEnum.Access);
-                //    }
-                //}
-                //else
-                //{
-                //    interactUIControllable.HideUI();
-                //}
-                
+                        stateChangeEvent(PlayerStateEnum.Access);
+                    }
+                }
+                else
+                {
+                    interactUIControllable.HideUI();
+                }
+
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
                 {

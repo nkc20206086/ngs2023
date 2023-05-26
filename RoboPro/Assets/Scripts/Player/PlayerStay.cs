@@ -11,6 +11,9 @@ namespace Player
     {
         [Inject]
         private IInteractUIControllable interactUIControllable;
+
+        [SerializeField]
+        private ScriptableObject scriptableObjectUI;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -47,24 +50,24 @@ namespace Player
                 }
             }
 
-            //int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-            //if (index >= 0)
-            //{
-            //    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-            //    interactUIControllable.SetPosition(pos);
-            //    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
-            //    if (isInteract)
-            //    {
-            //        pos.y = this.transform.position.y;
-            //        transform.LookAt(pos);
+            int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            if (index >= 0)
+            {
+                Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                interactUIControllable.SetPosition(pos);
+                //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
+                if (isInteract)
+                {
+                    pos.y = this.transform.position.y;
+                    transform.LookAt(pos);
 
-            //        stateChangeEvent(PlayerStateEnum.Access);
-            //    }
-            //}
-            //else
-            //{
-            //    interactUIControllable.HideUI();
-            //}
+                    stateChangeEvent(PlayerStateEnum.Access);
+                }
+            }
+            else
+            {
+                interactUIControllable.HideUI();
+            }
 
             //è∞Ç…Ç¢ÇÈÇ©Ç«Ç§Ç©ÇîªíËÇ∑ÇÈ
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
