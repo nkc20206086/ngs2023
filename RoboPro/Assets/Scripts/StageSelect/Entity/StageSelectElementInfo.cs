@@ -14,8 +14,12 @@ namespace Robo
         [SerializeField] 
         private Sprite stageIcon;
 
+        [SerializeField]
+        private TextAsset stageJsonData;
+
         public string StageNumber => stageNumber;
         public string StageName => stageName;
         public Sprite StageIcon => stageIcon;
+        public StageData StageData => JsonUtility.FromJson<StageData>(stageJsonData.text);
     }
 }
