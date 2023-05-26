@@ -12,12 +12,19 @@ public class StagePreview : MonoBehaviour
     [SerializeField] private GameObject[] blindBlocks;
     [SerializeField] private float createBlocktime_1 = 0.5f;
     [SerializeField] private float createBlocktime_2 = 0.5f;
-    [SerializeField] private float blindBlockMovePower = 2;
+    [SerializeField] private float blindBlockMovePowerMin = 2;
+    [SerializeField] private float blindBlockMovePowerMax = 2;
 
     private List<GameObject> blocks = new List<GameObject>();
+    private List<Tween> tweens = new List<Tween>();
 
-    public void ChangeBlind()
+    public void CreatePreview(StageData data)
     {
+        for(int i = 0; i < tweens.Count; i++)
+        {
+            tweens[i].Kill();
+        }
+        tweens.Clear();
         for (int i = 0; i < blocks.Count;i++)
         {
             blindBlocks[i].transform.localScale = blocks[i].transform.localScale;
@@ -25,11 +32,6 @@ public class StagePreview : MonoBehaviour
             Destroy(blocks[i]);
         }
         blocks.Clear();
-    }
-
-    public void CreatePreview(StageData data)
-    {
-        ChangeBlind();
 
         float xMax = 0;
         float yMax = 0;
@@ -58,8 +60,7 @@ public class StagePreview : MonoBehaviour
             }
         }
 
-
-        Vector3 stageSize = new Vector3(xMax * positionMultiply.x, yMax * positionMultiply.y, zMax * positionMultiply.z);
+        Vector3 stageSize = new Vector3(xMax * positionMultiply.x, yMax * positionMultiply.y, zMax * positionMultiply.z) * scale;
         transform.position -= stageSize / 2;
 
         Vector3 centerPosition = transform.position;
@@ -72,13 +73,16 @@ public class StagePreview : MonoBehaviour
             blindBlocks[i].SetActive(false);
         }
 
-        DOVirtual.DelayedCall(createBlocktime_1 + createBlocktime_2, () => 
+        Tween tw = null;
+        tw = DOVirtual.DelayedCall(createBlocktime_1 + createBlocktime_2, () => 
         {
             for (int i = 0; i < blockIndex; i++)
             {
                 blindBlocks[i].SetActive(false);
             }
+            tweens.Remove(tw);
         });
+        tweens.Add(tw);
     }
 
     private void PutBlock(BlockData blockData, int x, int y, int z, int idx, Vector3 centerPos)
@@ -98,23 +102,25 @@ public class StagePreview : MonoBehaviour
         blocks.Add(block);
 
         Vector3 firstPos = blindBlocks[idx].transform.position;
-        Vector3 secondPos = (centerPos - blindBlocks[idx].transform.position).normalized * UnityEngine.Random.Range(0f, blindBlockMovePower);
+        Vector3 secondPos = (centerPos - blindBlocks[idx].transform.position).normalized * UnityEngine.Random.Range(blindBlockMovePowerMin, blindBlockMovePowerMax);
         Tween tw = DOVirtual.Float(0, 1, createBlocktime_1, j =>
         {
             blindBlocks[idx].transform.position = Vector3.Lerp(firstPos, secondPos, j);
         });
         tw.onComplete += () =>
         {
-            Vector3 pos2 = blindBlocks[idx].transform.position;
+            Vector3 thirdPos = blindBlocks[idx].transform.position;
             Tween tw2 = DOVirtual.Float(0, 1, createBlocktime_2, j =>
             {
-                blindBlocks[idx].transform.position = Vector3.Lerp(pos2, block.transform.position, j);
+                blindBlocks[idx].transform.position = Vector3.Lerp(thirdPos, block.transform.position, j);
             });
 
             tw2.onComplete += () =>
             {
                 block.SetActive(true);
+                tweens.Remove(tw);
             };
         };
+        tweens.Add(tw);
     }
 }
