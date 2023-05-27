@@ -4,18 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using MainCamera;
 using Zenject;
-using InteractUI;
 
 namespace Player
 {
     public class PlayerMove : MonoBehaviour, IStateChange
     {
-        [Inject]
-        private IInteractUIControllable interactUIControllable;
-
-        [SerializeField]
-        ScriptableObject scriptableObjectUI;
-
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
         [Inject]
@@ -92,22 +85,15 @@ namespace Player
                 Debug.Log(index);
                 if (index >= 0)
                 {
-                    //UI表示
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    interactUIControllable.SetPosition(pos);
-                    interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                     if (isInteract)
                     {
                         //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                         pos.y = this.transform.position.y;
                         transform.LookAt(pos);
 
                         stateChangeEvent(PlayerStateEnum.Access);
                     }
-                }
-                else
-                {
-                    interactUIControllable.HideUI();
                 }
 
                 //目の前が崖か判定
