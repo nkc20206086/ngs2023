@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 527663954638992626}
   - component: {fileID: 3530109656385452887}
   - component: {fileID: 1664519105095864221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hako_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8921784682222701330}
-  - component: {fileID: -2484977980088969358}
-  - component: {fileID: 6885398126112582309}
-  m_Layer: 0
+  - component: {fileID: 7074433364738607966}
+  - component: {fileID: 8006693255504470024}
+  m_Layer: 8
   m_Name: Hako_Orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-2484977980088969358
+--- !u!65 &7074433364738607966
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &6885398126112582309
+--- !u!114 &8006693255504470024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1635468382116816160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd89d8b0031d2548ad974db903b80fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playIndex: -1
