@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3637594605279301139}
   - component: {fileID: 420117414555140534}
   - component: {fileID: 2463602972854269308}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Hako_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7748429343257962667}
   - component: {fileID: 7545747691497923608}
   - component: {fileID: -2553953586162020043}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Hako_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

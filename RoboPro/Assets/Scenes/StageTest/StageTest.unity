@@ -5589,6 +5589,16 @@ PrefabInstance:
       propertyPath: accessManager
       value: 
       objectReference: {fileID: 1878943813}
+    - target: {fileID: 3805582077870317535, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: GroundMask.m_Bits
+      value: 2816
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805582077870317535, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: parentMask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 5501754949149297675, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
         type: 3}
       propertyPath: m_RootOrder
