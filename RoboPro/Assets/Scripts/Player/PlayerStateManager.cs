@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
+using Inputs;
 
 namespace Player
 {
     public class PlayerStateManager : MonoBehaviour
     {
+        [Inject]
+        private InputManager inputManager;
+
         private PlayerStay playerStay;
         private PlayerMove playerMove;
         private PlayerAccess playerAccess;
@@ -19,7 +24,6 @@ namespace Player
         private PlayerDie playerDie;
         private IStateGetter stateGetter;
 
-        private InputControls inputActions;
         Vector3 defaultScale = Vector3.zero;
         private Vector2 inputVec;
         private bool isMove;
@@ -42,18 +46,15 @@ namespace Player
             playerFinishLadderClimb = GetComponent<PlayerFinishLadderClimb>();
             playerDie = GetComponent<PlayerDie>();
             stateGetter = GetComponent<IStateGetter>();
-
-            inputActions = new InputControls();
-            inputActions.Enable();
         }
 
         private void Update()
         {
-            inputVec = inputActions.Player.Move.ReadValue<Vector2>();
+            inputVec = inputManager.MoveReadValue();
 
             //ボタンを押されているか判別
-            isMove = inputActions.Player.Move.IsPressed();
-            isInteract = inputActions.Player.Interact.WasPressedThisFrame();
+            isMove = inputManager.IsMove();
+            isInteract = inputManager.IsInteractPerformed();
 
             //足元のオブジェクトを親オブジェクトにする
             stateGetter.GroundCheckGetter().CheckParentGround();
