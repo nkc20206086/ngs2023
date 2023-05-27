@@ -21,7 +21,7 @@ namespace Player
 
             jumpVec = stateGetter.JumpPowerGetter();
             //二点間の距離を代入(スピード調整に使う)
-            distanceVec = Vector3.Distance(transform.position, goalObj.transform.position);
+            //distanceVec = Vector3.Distance(transform.position, goalObj.transform.position);
         }
 
         // Update is called once per frame
