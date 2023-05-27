@@ -58,7 +58,6 @@ namespace Player
 
             //足元のオブジェクトを親オブジェクトにする
             stateGetter.GroundCheckGetter().CheckParentGround();
-            //DefaultScaleCalc();
         }
 
         private void FixedUpdate()
