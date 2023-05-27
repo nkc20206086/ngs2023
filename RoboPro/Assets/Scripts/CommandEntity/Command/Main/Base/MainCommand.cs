@@ -141,6 +141,24 @@ namespace Command.Entity
         }
 
         /// <summary>
+        /// コマンドの持つ値を返す
+        /// </summary>
+        /// <returns></returns>
+        public int GetValue()
+        {
+            return value.getValue;
+        }
+
+        /// <summary>
+        /// コマンドの持つ軸を返す
+        /// </summary>
+        /// <returns></returns>
+        public CoordinateAxis GetAxis()
+        {
+            return axis.getAxis;
+        }
+
+        /// <summary>
         /// コマンドクラスがnullでないかを確認する関数
         /// </summary>
         /// <returns></returns>
