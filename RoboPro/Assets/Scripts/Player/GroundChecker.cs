@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,12 +24,15 @@ namespace Player
         private int splitHeightVectorNum;
 
         [SerializeField]
-        private LayerMask layerMask;
+        private LayerMask GroundMask;
+        [SerializeField]
+        private LayerMask parentMask;
         private CapsuleCollider capsuleCollider;
 
         private float[] splitHeightVectorArray;
         private bool isCheckWall;
-        private Vector3 parentOldScale;
+        private bool parentResetFlg;
+        private string parentOldName;
 
         private void Start()
         {
@@ -53,7 +57,7 @@ namespace Player
             bool floatingFlg;
             Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
             RaycastHit ray = new RaycastHit();
-            floatingFlg = Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, layerMask);
+            floatingFlg = Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, GroundMask);
             Debug.DrawRay(playerPosition, Vector3.down * landingLength);
             return floatingFlg;
         }
@@ -81,9 +85,9 @@ namespace Player
         public bool CheckWall()
         {
             //Rayの発射位置の設定
-            Vector3 splitVec = transform.position;
-            splitVec.x += transform.forward.x * 0.2f;
-            splitVec.z += transform.forward.z * 0.2f;
+            Vector3 splitVec = gameObject.transform.position;
+            splitVec.x += gameObject.transform.forward.x * 0.2f;
+            splitVec.z += gameObject.transform.forward.z * 0.2f;
 
             RaycastHit ray = new RaycastHit();
             for(int i = 0; i < splitHeightVectorArray.Length;i++)
@@ -91,8 +95,8 @@ namespace Player
                 //Y値を計算した値に設定
                 splitVec.y = splitHeightVectorArray[i];
                 //コライダーの直径分Rayを発射
-                Physics.Raycast(splitVec, transform.forward,out ray,capsuleCollider.radius * 2);
-                Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 2);
+                Physics.Raycast(splitVec, transform.forward, out ray,capsuleCollider.radius * 2);
+                //Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 2);
                 //1本でもRayが引っかかったら壁あり即break
                 if (ray.collider == null)
                 {
@@ -117,11 +121,11 @@ namespace Player
             
             RaycastHit ray = new RaycastHit();
 
-            rayPosition = transform.position;
+            rayPosition = gameObject.transform.position;
             rayPosition.x += transform.forward.x * 0.5f;
             rayPosition.z += transform.forward.z * 0.5f;
             
-            Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength,layerMask);
+            Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength, GroundMask);
 
             //Nullなら死ぬから飛び降りれない
             if (ray.collider == null) return true;
@@ -136,23 +140,40 @@ namespace Player
         {
             Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
             RaycastHit ray = new RaycastHit();
-            Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, layerMask);
+            Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, GroundMask);
 
-            //レイヤー番号が8番なら
-            if (ray.collider == null || ray.collider.gameObject.layer != 8) return true;
+            //レイヤー番号が9番ならふらつけない
+            if (ray.collider == null || ray.collider.gameObject.layer == 9) return false;
 
-            return false;
+            return true;
         }
 
+        /// <summary>
+        /// 床が親子関係になるべき床なのかを判定する
+        /// </summary>
         public void  CheckParentGround()
         {
             Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
             RaycastHit ray = new RaycastHit();
-            Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, layerMask);
+            Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, parentMask);
 
-            if (ray.collider == null || ray.collider.gameObject.transform.localScale == parentOldScale) return;
-            parentOldScale = ray.collider.gameObject.transform.localScale;
-            gameObject.transform.parent = ray.collider.gameObject.transform;
+            //nullかつ初期化できていない
+            if (ray.collider == null)
+            {
+                if(string.IsNullOrWhiteSpace(parentOldName) == false)
+                {
+                    gameObject.transform.parent = null;
+                    parentOldName = "";
+                    parentResetFlg = true;
+                }               
+            }
+            //null、または名前が同じならreturn
+            else
+            {
+                if(ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
+                parentOldName = ray.collider.gameObject.name;
+                gameObject.transform.parent = ray.collider.gameObject.transform;
+            }
         }
     }
 }
