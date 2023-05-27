@@ -31,7 +31,6 @@ namespace Player
         void Start()
         {
             defaultScale = transform.lossyScale;
-            //cameraVectorGetter = Locator<ICameraVectorGetter>.GetT();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
         }
@@ -94,14 +93,14 @@ namespace Player
                 if (index >= 0)
                 {
                     //UI表示
-                    //Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    //interactUIControllable.SetPosition(pos);
-                    //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                    interactUIControllable.SetPosition(pos);
+                    interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                     if (isInteract)
                     {
                         //アクセスポイントに接続する
-                       // pos.y = this.transform.position.y;
-                        //transform.LookAt(pos);
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
 
                         stateChangeEvent(PlayerStateEnum.Access);
                     }

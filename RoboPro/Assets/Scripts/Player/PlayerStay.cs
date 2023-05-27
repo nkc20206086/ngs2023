@@ -55,13 +55,13 @@ namespace Player
             if (index >= 0)
             {
                 //UI表示
-                //Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                //interactUIControllable.SetPosition(pos);
-                //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
+                Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
+                interactUIControllable.SetPosition(pos);
+                interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                 if (isInteract)
                 {
                     //アクセスポイントに接続する
-                    //pos.y = this.transform.position.y;
+                    pos.y = this.transform.position.y;
                     transform.LookAt(stateGetter.GimmickAccessGetter().Access(index));
 
                     stateChangeEvent(PlayerStateEnum.Access);
