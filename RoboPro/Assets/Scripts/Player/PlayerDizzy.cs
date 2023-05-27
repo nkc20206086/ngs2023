@@ -36,11 +36,15 @@ namespace Player
                 Vector3 pos = transform.position;
                 pos.y += stateGetter.PlayerUI_OffsetYGetter();
                 interactUIControllable.SetPosition(pos);
+                interactUIControllable.ShowCrossMarkUI();
+                interactUIControllable.ShowSkullMark();
                 interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)dizzyUI);
 
                 if (stateGetter.GroundCheckGetter().CheckDeathHeight())
                 {
                     interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)alertUI);
+                    interactUIControllable.ShowCrossMarkUI();
+                    interactUIControllable.ShowSkullMark();
                 }
                 else
                 {
@@ -49,6 +53,7 @@ namespace Player
                         // Debug.Log("ç~ÇËÇÈ");
                         stateChangeEvent(PlayerStateEnum.StepOff);
                         interactUIControllable.HideUI();
+                        interactUIControllable.HideLockUI();
                     }
                 }    
             }
