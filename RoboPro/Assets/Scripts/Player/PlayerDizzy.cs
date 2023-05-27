@@ -33,7 +33,9 @@ namespace Player
             {
                 //Debug.Log("‚Ó‚ç‚Â‚«");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
-                interactUIControllable.SetPosition(transform.position);
+                Vector3 pos = transform.position;
+                pos.y += stateGetter.PlayerUI_OffsetYGetter();
+                interactUIControllable.SetPosition(pos);
                 interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)dizzyUI);
 
                 if (stateGetter.GroundCheckGetter().CheckDeathHeight())
