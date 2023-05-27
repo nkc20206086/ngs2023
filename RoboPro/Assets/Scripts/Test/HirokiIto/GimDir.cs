@@ -218,5 +218,10 @@ namespace Gimmick
 
             return accessPoints[index].transform.position;
         }
+
+        void IGimmickAccess.SetExecute(bool isExecute)
+        {
+            this.isExecute = isExecute;
+        }
     }
 }
