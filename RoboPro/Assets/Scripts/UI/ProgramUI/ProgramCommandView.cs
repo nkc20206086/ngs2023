@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Command.Entity;
+using System;
 
 namespace CommandUI
 {
@@ -16,6 +17,7 @@ namespace CommandUI
         [SerializeField] private GameObject[] programPanelValue = new GameObject[3]; //数値
         [SerializeField] private GameObject[] programPanelValuesign = new GameObject[3];//数値
 
+        public event Action<int, int> ProgramCommandIndexes;
 
         public void ProgramCommandTextChange(MainCommand[] commands)
         {
@@ -25,13 +27,13 @@ namespace CommandUI
                 {
                     switch (commands[i].GetName())
                     {
-                        case "Move": 
+                        case "移動": 
                             programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
                             break;
-                        case "Rotate":
+                        case "回転":
                             programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
                             break;
-                        case "Scale":
+                        case "拡大":
                             programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
                             break;
                     }
@@ -86,6 +88,11 @@ namespace CommandUI
                     programPanelValue[i].SetActive(false);
                 }
             }
+        }
+
+        public void ButtonIndexget(int mainIndex,int subIndex)
+        {
+            ProgramCommandIndexes(mainIndex, subIndex);
         }
     }
 }

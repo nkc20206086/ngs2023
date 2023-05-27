@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using Command.Entity;
 using Command;
+using System;
 
 namespace CommandUI
 {
@@ -16,6 +17,8 @@ namespace CommandUI
         [SerializeField] private Image[] inventryAxisColor = new Image[3]; //軸カラー
         [SerializeField] private GameObject[] inventryValue = new GameObject[3];//数値
         [SerializeField] private GameObject[] inventryValuesign = new GameObject[3];//数値
+
+        public event Action<int, int> InventryCommandIndexes;
 
         public void InventryTextChange(CommandBase[] commands)
         {
@@ -31,13 +34,13 @@ namespace CommandUI
                             //アイコン判別
                             switch (command.GetName())
                             {
-                                case "Move":
+                                case "移動":
                                     programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
                                     break;
-                                case "Rotate":
+                                case "回転":
                                     programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
                                     break;
-                                case "Scale":
+                                case "拡大":
                                     programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
                                     break;
                             }
@@ -112,6 +115,11 @@ namespace CommandUI
                     inventryValue[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        public void ButtonIndexget(int mainIndex, int subIndex)
+        {
+            InventryCommandIndexes(mainIndex, subIndex);
         }
     }
 }

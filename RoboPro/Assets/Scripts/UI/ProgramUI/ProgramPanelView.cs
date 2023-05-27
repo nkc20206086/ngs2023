@@ -6,6 +6,12 @@ public class ProgramPanelView : MonoBehaviour
 {
     [SerializeField]private GameObject programPanelCanvas;
     [SerializeField] private UnityEvent UICloseEvent = new UnityEvent();
+
+    public void Start()
+    {
+        programPanelCanvas.transform.localScale = Vector3.zero;
+        programPanelCanvas.SetActive(false);
+    }
     /// <summary>
     /// キャンバスを表示する
     /// </summary>
