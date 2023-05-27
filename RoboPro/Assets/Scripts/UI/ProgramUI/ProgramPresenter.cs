@@ -1,5 +1,6 @@
 using UnityEngine;
 using CommandUI;
+using Command;
 
 public class ProgramPresenter : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class ProgramPresenter : MonoBehaviour
     [SerializeField] InventryModel inventryModel;
     [SerializeField] ProgramPanelModel programPanelModel;
 
+    [SerializeField]
+    private CommandDirector commandDirector;
+
     private void Awake()
     {
-        programPanelModel.UIEvent += programCommandView.ProgramCommandTextChange;
-        inventryModel.UIEvent += inventryCommandView.InventryTextChange;
-        programCommandView.ProgramCommandIndexes += programPanelModel.Test;
-        inventryCommandView.InventryCommandIndexes += inventryModel.Test;
+        commandDirector.swapUI_MainCommand += programCommandView.ProgramCommandTextChange;
+        commandDirector.swapUI_Storage += inventryCommandView.InventryTextChange;
+        programCommandView.ProgramCommandIndexes += commandDirector.GetMainCommandIndexSet();
+        inventryCommandView.InventryCommandIndexes += commandDirector.GetStorageIndexSet();
+        commandDirector.showUI += programPanelView.CanvasShow;
+        commandDirector.hideUI += programPanelView.CanvasHide;
     }
 }

@@ -24,6 +24,8 @@ namespace Command.Entity
 
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
 
+        public MainCommand() { }
+
         /// <summary>
         /// コンストラクタ 数値直接設定用
         /// </summary>
@@ -146,7 +148,7 @@ namespace Command.Entity
         /// <returns></returns>
         public int GetValue()
         {
-            return value.getValue;
+            return value != null ? value.getValue : 0;
         }
 
         /// <summary>
@@ -155,7 +157,7 @@ namespace Command.Entity
         /// <returns></returns>
         public CoordinateAxis GetAxis()
         {
-            return axis.getAxis;
+            return axis != null ? axis.getAxis : CoordinateAxis.NONE;
         }
 
         /// <summary>

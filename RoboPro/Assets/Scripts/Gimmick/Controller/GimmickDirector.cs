@@ -263,7 +263,7 @@ namespace Gimmick
                 {
                     uIControllable.HideUI();
                     uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
-                    uIControllable.SetPosition(accessPoints[retIndex].transform.position);
+                    uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
                 }
                 else
                 {

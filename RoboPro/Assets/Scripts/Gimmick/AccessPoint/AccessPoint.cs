@@ -26,7 +26,14 @@ namespace Gimmick
 
         public void StartUp(AccessPointData data)
         {
-            usableCommands = data.Commands;
+            usableCommands = new List<CommandContainer>(data.Commands);
+            if (usableCommands.Count < CommandUtility.commandCount)
+            {
+                for (int i = usableCommands.Count; i <= CommandUtility.commandCount;i++)
+                {
+                    usableCommands.Add(new CommandContainer());
+                }
+            }
         }
 
         public void GimmickSubscrive(List<GameObject> objList)

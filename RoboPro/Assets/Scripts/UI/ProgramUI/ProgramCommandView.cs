@@ -25,6 +25,10 @@ namespace CommandUI
             {
                 if (commands[i] != null)
                 {
+                    ProgramCommand[i].SetActive(true);
+                    programPanelAxis[i].SetActive(true);
+                    programPanelValue[i].SetActive(true);
+
                     switch (commands[i].GetName())
                     {
                         case "移動": 
@@ -64,15 +68,17 @@ namespace CommandUI
 
                     if (commands[i].GetValueText() != "0")　//プログラム内に値があるかどうか
                     {
-                        if (int.Parse(commands[i].GetValueText()) < 0)
+                        int showValue = Mathf.Abs(commands[i].GetValue());
+
+                        if (commands[i].GetValue() < 0)
                         {
                             programPanelValuesign[i].SetActive(false);
-                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = commands[i].GetValueText(); //値を表示
+                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = showValue.ToString(); //値を表示
                         }
                         else
                         {
                             programPanelValuesign[i].SetActive(true);
-                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i].GetValueText(); //値を表示
+                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = showValue.ToString(); //値を表示
                         }
                     }
                     else
