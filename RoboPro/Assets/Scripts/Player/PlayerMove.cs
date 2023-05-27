@@ -118,7 +118,7 @@ namespace Player
                         stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                     }
                     //自分の乗っている床でふらつけるかどうかの判定
-                    else if (stateGetter.GroundCheckGetter().DizzyGroundFlg() == false)
+                    else if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
                     {
                         //ふらつくステートに変更
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
