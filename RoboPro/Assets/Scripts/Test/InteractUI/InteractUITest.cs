@@ -28,6 +28,7 @@ public class InteractUITest : MonoBehaviour
         {
             interact.SetPosition(new Vector3(.5f, 0f, 0f));
             interact.ShowUI(ControllerType.Keyboard, asset0);
+            interact.ShowCrossMarkUI();
         }
 
         if(Input.GetMouseButton(0))
