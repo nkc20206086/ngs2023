@@ -27,5 +27,20 @@ namespace InteractUI
         /// </summary>
         /// <param name="">Fillする割合</param>
         public void SetFillAmount(float value);
+
+        /// <summary>
+        /// バツ印のUIを表示する
+        /// </summary>
+        public void ShowCrossMarkUI();
+
+        /// <summary>
+        /// ドクロの付いたバツ印を表示する
+        /// </summary>
+        public void ShowSkullMark();
+
+        /// <summary>
+        /// バツ印を表すUIを非表示にする
+        /// </summary>
+        public void HideLockUI();
     }
 }
