@@ -112,7 +112,9 @@ namespace Gimmick
                 accessPoints[i].GimmickActivate();
             }
 
-            laserManageable.LaserInit(laserInfoList);
+            Debug.Log(laserInfoList == null);
+            Debug.Log(laserManageable == null);
+            //laserManageable.LaserInit(laserInfoList);
         }
 
         /// <summary>
