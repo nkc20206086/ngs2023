@@ -33,7 +33,8 @@ namespace Player
 
         public void Finish_Access()
         {
-            
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            stateChangeEvent(PlayerStateEnum.Stay);
         }
     }
 }
