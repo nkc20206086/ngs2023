@@ -989,6 +989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storage: {fileID: 1565931219}
   commandDirector: {fileID: 1071349529}
+  displayInteract: {fileID: 11400000, guid: da3dbbfedf8e26d42b9bf82fdcd4a45c, type: 2}
   archiveIndex: 0
   swappingGimmickIndex: -1
   maxArchiveCount: 0
@@ -5584,6 +5585,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player0524
       objectReference: {fileID: 0}
+    - target: {fileID: 3805582077870317522, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: scriptableObjectUI
+      value: 
+      objectReference: {fileID: 11400000, guid: da3dbbfedf8e26d42b9bf82fdcd4a45c,
+        type: 2}
+    - target: {fileID: 3805582077870317525, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: scriptableObjectUI
+      value: 
+      objectReference: {fileID: 11400000, guid: da3dbbfedf8e26d42b9bf82fdcd4a45c,
+        type: 2}
     - target: {fileID: 3805582077870317526, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
         type: 3}
       propertyPath: accessManager
