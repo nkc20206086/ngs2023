@@ -5,20 +5,20 @@ namespace InteractUI
 	/// <summary>
 	/// キーバインド画像を登録するためのスクリプト
 	/// </summary>
-    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/KeyBindingSpriteAsset")]
-	public class KeyBindingSpriteAsset : ScriptableObject
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/DisplayInteractCanvasAsset")]
+	public class DisplayInteractCanvasAsset : ScriptableObject
 	{
-		[SerializeField]
-		private InteractKinds interactKind;
-		public InteractKinds interactKindsProp => interactKind;
-
-		[SerializeField]
+		[SerializeField, Header("キーボード入力時の画像")]
 		private Sprite keyboardInteractSprite;
 		public Sprite keyboardInteractSpriteProp => keyboardInteractSprite;
 
-		[SerializeField]
+		[SerializeField, Header("コントローラー入力時の画像")]
 		private Sprite controllerInteractSprite;
 		public Sprite controllerInteractSpriteProp => controllerInteractSprite;
+
+		[SerializeField, Header("表示するテキスト")]
+		private string displayText;
+		public string displayTextProp => displayText;
 
 		/// <summary>
 		/// コントローラーごとの画像を返す

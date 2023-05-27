@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Stage
 {
@@ -13,7 +14,7 @@ namespace Stage
         [SerializeField]
         private BlockDB blockDB;
 
-        public void StageCreate()
+        public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
             string json = null;
             using (StreamReader reader = new StreamReader($"{Application.dataPath}/StageDatas/{stageJson.name}.json"))
@@ -23,9 +24,7 @@ namespace Stage
 
             var data = JsonUtility.FromJson<StageData>(json);
 
-            int zCount = data.Blocks.Blocks.Count;
-            int yCount = data.Blocks.Blocks[0].Blocks.Count;
-            int xCount = data.Blocks.Blocks[0].Blocks[0].Blocks.Count;
+            datas = data.AccessPointDatas;
 
             for (int z = 0;z < data.Blocks.Blocks.Count; z++)
             {
@@ -33,10 +32,17 @@ namespace Stage
                 {
                     for (int x = 0;x < data.Blocks.Blocks[z].Blocks[y].Blocks.Count;x++)
                     {
-                        GameObject prefabs = blockDB.GetPrefab(data.Blocks.Blocks[z].Blocks[y].Blocks[x], x + y + z);
+                        BlockID blockId = data.Blocks.Blocks[z].Blocks[y].Blocks[x];
+                        GameObject prefabs = blockDB.GetPrefab(blockId, x + y + z);
                         if (prefabs != null)
                         {
-                            Instantiate(prefabs, new Vector3(x, y, z), Quaternion.identity);
+                            GameObject instance = Instantiate(prefabs, new Vector3(x, y, z), Quaternion.identity);
+
+                            if (blockId >= BlockID.Command_Red)
+                            {
+                                if (!dictionary.ContainsKey(blockId)) dictionary[blockId] = new List<GameObject>();
+                                dictionary[blockId].Add(instance);
+                            }
                         }
                     }
                 }

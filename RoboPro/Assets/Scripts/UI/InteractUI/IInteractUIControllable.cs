@@ -14,12 +14,33 @@ namespace InteractUI
 		/// UIを表示する
 		/// </summary>
 		/// <param name="controllerType">コントローラーの種類</param>
-		/// <param name="interactKind">インタラクトの種類</param>
-        public void ShowUI(ControllerType controllerType, InteractKinds interactKind);
+		/// <param name="displayAsset">インタラクトの種類</param>
+        public void ShowUI(ControllerType controllerType, DisplayInteractCanvasAsset displayAsset);
 
         /// <summary>
 		/// UIを非表示にする
 		/// </summary>
         public void HideUI();
+
+        /// <summary>
+        /// UIのFillAmountを調整する
+        /// </summary>
+        /// <param name="">Fillする割合</param>
+        public void SetFillAmount(float value);
+
+        /// <summary>
+        /// バツ印のUIを表示する
+        /// </summary>
+        public void ShowCrossMarkUI();
+
+        /// <summary>
+        /// ドクロの付いたバツ印を表示する
+        /// </summary>
+        public void ShowSkullMark();
+
+        /// <summary>
+        /// バツ印を表すUIを非表示にする
+        /// </summary>
+        public void HideLockUI();
     }
 }

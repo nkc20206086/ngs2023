@@ -3,11 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public class PlayerDizzy : MonoBehaviour,IStateChange
     {
+        [Inject]
+        private IInteractUIControllable interactUIControllable;
+
+        [SerializeField]
+        private ScriptableObject dizzyUI;
+
+        [SerializeField]
+        private ScriptableObject alertUI;
+
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
@@ -23,17 +33,34 @@ namespace Player
             {
                 //Debug.Log("Ç”ÇÁÇ¬Ç´");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
+                Vector3 pos = transform.position;
+                pos.y += stateGetter.PlayerUI_OffsetYGetter();
+                interactUIControllable.SetPosition(pos);
+                interactUIControllable.ShowCrossMarkUI();
+                interactUIControllable.ShowSkullMark();
+                interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)dizzyUI);
 
-                if (stateGetter.GroundCheckGetter().CheckDeathHeight()) return;
-                if (isInteract)
+                if (stateGetter.GroundCheckGetter().CheckDeathHeight())
                 {
-                   // Debug.Log("ç~ÇËÇÈ");
-                    stateChangeEvent(PlayerStateEnum.StepOff);
+                    interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)alertUI);
+                    interactUIControllable.ShowCrossMarkUI();
+                    interactUIControllable.ShowSkullMark();
                 }
+                else
+                {
+                    if (isInteract)
+                    {
+                        // Debug.Log("ç~ÇËÇÈ");
+                        stateChangeEvent(PlayerStateEnum.StepOff);
+                        interactUIControllable.HideUI();
+                        interactUIControllable.HideLockUI();
+                    }
+                }    
             }
             else
             {
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", false);
+                interactUIControllable.HideUI();
                 stateChangeEvent(PlayerStateEnum.Stay);
             }
 

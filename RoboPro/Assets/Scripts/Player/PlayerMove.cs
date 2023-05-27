@@ -13,8 +13,12 @@ namespace Player
         [Inject]
         private IInteractUIControllable interactUIControllable;
 
+        [SerializeField]
+        ScriptableObject scriptableObjectUI;
+
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
+        [Inject]
         private ICameraVectorGetter cameraVectorGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -27,7 +31,6 @@ namespace Player
         void Start()
         {
             defaultScale = transform.lossyScale;
-            cameraVectorGetter = Locator<ICameraVectorGetter>.GetT();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
         }
@@ -39,6 +42,7 @@ namespace Player
         /// <param name="isInteract"></param>
         public void Act_Move(bool isMove, bool isInteract, Vector2 vec)
         {
+            stateGetter.GroundCheckGetter().CheckWall();
             //床にいるかどうかを判定する
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
@@ -85,12 +89,13 @@ namespace Player
 
                 //アクセスポイントの何番が近くにあるか
                 int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+                Debug.Log(index);
                 if (index >= 0)
                 {
                     //UI表示
                     Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                     interactUIControllable.SetPosition(pos);
-                    interactUIControllable.ShowUI(ControllerType.Keyboard, InteractKinds.ReturnKey);
+                    interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                     if (isInteract)
                     {
                         //アクセスポイントに接続する
@@ -104,7 +109,7 @@ namespace Player
                 {
                     interactUIControllable.HideUI();
                 }
-                
+
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
                 {

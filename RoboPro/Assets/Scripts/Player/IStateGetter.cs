@@ -64,5 +64,7 @@ namespace Player
         /// </summary>
         /// <returns></returns>
         public float DeathHeightGetter();
+
+        public float PlayerUI_OffsetYGetter();
     }
 }

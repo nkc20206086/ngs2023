@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace InteractUI
 {
@@ -16,17 +16,29 @@ namespace InteractUI
 		private Image interactUIImage;
 
 		[SerializeField]
-		private List<KeyBindingSpriteAsset> keyBindingSpriteAssets = new List<KeyBindingSpriteAsset>();
+		private TextMeshProUGUI interactUIText;
 
-		private InteractKinds currentInteractKind;
-		private KeyBindingSpriteAsset currentKeyBindingSpriteAsset;
+		[SerializeField]
+		private Image holdImage;
+
+		[SerializeField]
+		private Image lockImage;
+
+		[SerializeField]
+		private Sprite crossMark;
+
+		[SerializeField]
+		private Sprite skullMark;
+
+		private string beforeDisplayText;
+
+		private Sprite beforeSprite;
 
 		private void Start()
 		{
-			currentInteractKind = InteractKinds.None;
-			currentKeyBindingSpriteAsset = null;
-
+			((IInteractUIControllable)this).SetFillAmount(0f);
 			((IInteractUIControllable)this).HideUI();
+			((IInteractUIControllable)this).HideLockUI();
 		}
 
 		void IInteractUIControllable.SetPosition(Vector3 pos)
@@ -34,29 +46,22 @@ namespace InteractUI
 			gameObject.transform.position = pos;
         }
 		
-		void IInteractUIControllable.ShowUI(ControllerType controllerType, InteractKinds interactKind)
+		void IInteractUIControllable.ShowUI(ControllerType controllerType, DisplayInteractCanvasAsset displayAsset)
         {
-			bool isNotSetinteractKind = interactKind == InteractKinds.None;
-			if (isNotSetinteractKind)
+			string displayText = displayAsset.displayTextProp;
+			bool changedDisplayText = displayText != beforeDisplayText;
+			if(changedDisplayText)
             {
-				return;
-            }
+				interactUIText.text = displayText;
+				beforeDisplayText = displayText;
+			}
 
-			bool changedInteractKind = interactKind != currentInteractKind;
-			if (changedInteractKind)
+			Sprite keyBindingSprite = displayAsset.GetKeyBindingSprite(controllerType);
+			bool changedSprite = keyBindingSprite != beforeSprite;
+			if(changedSprite)
             {
-				for (int i = 0; i < keyBindingSpriteAssets.Count; i++)
-				{
-					if (keyBindingSpriteAssets[i].interactKindsProp == interactKind)
-					{
-						currentKeyBindingSpriteAsset = keyBindingSpriteAssets[i];
-						currentInteractKind = interactKind;
-						break;
-					}
-					currentKeyBindingSpriteAsset = null;
-				}
-				
-				interactUIImage.sprite = currentKeyBindingSpriteAsset?.GetKeyBindingSprite(controllerType);
+				interactUIImage.sprite = displayAsset.GetKeyBindingSprite(controllerType);
+				beforeSprite = keyBindingSprite;
 			}
 
 			interactUICanvas.enabled = true;
@@ -65,6 +70,32 @@ namespace InteractUI
 		void IInteractUIControllable.HideUI()
         {
 			interactUICanvas.enabled = false;
+		}
+
+		void IInteractUIControllable.SetFillAmount(float value)
+        {
+			value = Mathf.Clamp01(value);
+			holdImage.fillAmount = value;
+		}
+
+		void IInteractUIControllable.ShowCrossMarkUI()
+		{
+			lockImage.gameObject.SetActive(true);
+			lockImage.sprite = crossMark;
+			lockImage.enabled = true;
+		}
+
+		void IInteractUIControllable.ShowSkullMark()
+        {
+			lockImage.gameObject.SetActive(true);
+			lockImage.sprite = skullMark;
+			lockImage.enabled = true;
+		}
+
+		void IInteractUIControllable.HideLockUI()
+		{
+			lockImage.gameObject.SetActive(false);
+			lockImage.enabled = false;
 		}
 	}
 }

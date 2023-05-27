@@ -7,9 +7,6 @@ namespace UI_Utility
     /// </summary>
     public class Billboard : MonoBehaviour
     {
-        [SerializeField]
-        private Camera targetCamera;
-
         [Header("Lock Ratation")]
 
         [SerializeField]
@@ -25,13 +22,12 @@ namespace UI_Utility
 
         void Start()
         {
-            targetCamera ??= Camera.main;
             startRotation = transform.rotation.eulerAngles;
         }
 
         void Update()
         {
-            transform.forward = targetCamera.transform.forward;
+            transform.forward = Camera.main.transform.forward;
 
             LockAxis();
         }
