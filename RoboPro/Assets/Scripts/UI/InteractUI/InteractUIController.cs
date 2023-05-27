@@ -80,18 +80,21 @@ namespace InteractUI
 
 		void IInteractUIControllable.ShowCrossMarkUI()
 		{
+			lockImage.gameObject.SetActive(true);
 			lockImage.sprite = crossMark;
 			lockImage.enabled = true;
 		}
 
 		void IInteractUIControllable.ShowSkullMark()
         {
+			lockImage.gameObject.SetActive(true);
 			lockImage.sprite = skullMark;
 			lockImage.enabled = true;
 		}
 
 		void IInteractUIControllable.HideLockUI()
 		{
+			lockImage.gameObject.SetActive(false);
 			lockImage.enabled = false;
 		}
 	}
