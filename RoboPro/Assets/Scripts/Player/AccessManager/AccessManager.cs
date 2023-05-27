@@ -11,7 +11,7 @@ namespace Player
 
         private void Awake()
         {
-            Locator<AccessManager>.Bind(this);
+            //Locator<AccessManager>.Bind(this);
         }
 
         //アクセス終了時処理

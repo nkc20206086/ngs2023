@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vCameraTargetChanger: {fileID: 834509325}
-  cameraVectorGetter: {fileID: 1927825256}
+  calcForword: {fileID: 1927825256}
 --- !u!114 &378110995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -896,22 +896,22 @@ PrefabInstance:
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -3.85659e-16
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 8.7467196e-17
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000009536743
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -921,17 +921,17 @@ PrefabInstance:
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.38268343
+      value: 0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 2.6464534e-15
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 2.1460472e-16
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791864335709, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -961,12 +961,12 @@ PrefabInstance:
     - target: {fileID: 7410071792160936836, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000002773665
+      value: -0.000000016013763
       objectReference: {fileID: 0}
     - target: {fileID: 7410071792160936836, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000010902144
+      value: 0.0000000062943566
       objectReference: {fileID: 0}
     - target: {fileID: 7410071792558675500, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
@@ -1503,12 +1503,12 @@ PrefabInstance:
     - target: {fileID: 1162411736121202471, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000003922555
+      value: -0.000000032027526
       objectReference: {fileID: 0}
     - target: {fileID: 1162411736121202471, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00000001541796
+      value: 0.000000012588711
       objectReference: {fileID: 0}
     - target: {fileID: 1162411737203839240, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
@@ -1609,6 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commandSwapManager: {fileID: 8364930202870985376}
+  commandStorage: {fileID: 0}
 --- !u!1 &8364930201786045773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,36 +2283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmckController: {fileID: 8364930203611292055}
   color: {r: 0, g: 0, b: 0, a: 0}
-  usableCommand1:
-    CommandType: 2
-    LockCommand: 0
-    Value: 10
-    LockNumber: 0
-    Axis: 0
-    LockCoordinateAxis: 0
-  usableCommand2:
-    CommandType: 0
-    LockCommand: 0
-    Value: 10
-    LockNumber: 0
-    Axis: 1
-    LockCoordinateAxis: 0
-  usableCommand3:
-    CommandType: 0
-    LockCommand: 0
-    Value: 0
-    LockNumber: 0
-    Axis: 0
-    LockCoordinateAxis: 0
-  specialCommand:
-    CommandType: 0
-    LockCommand: 0
-    Value: 10
-    LockNumber: 0
-    Axis: 2
-    LockCoordinateAxis: 0
 --- !u!4 &8364930201901658427
 Transform:
   m_ObjectHideFlags: 0
@@ -4564,9 +4536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storage: {fileID: 8364930203438914694}
   commandDirector: {fileID: 8364930201786045772}
-  accessPoints:
-  - {fileID: 8364930201901658426}
-  - {fileID: 8364930202890720399}
   archiveIndex: 0
   swappingGimmickIndex: -1
   maxArchiveCount: 0
@@ -5712,36 +5681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmckController: {fileID: 8364930203055848305}
   color: {r: 0, g: 0, b: 0, a: 0}
-  usableCommand1:
-    CommandType: 2
-    LockCommand: 0
-    Value: 90
-    LockNumber: 0
-    Axis: 0
-    LockCoordinateAxis: 0
-  usableCommand2:
-    CommandType: 2
-    LockCommand: 0
-    Value: 90
-    LockNumber: 0
-    Axis: 2
-    LockCoordinateAxis: 0
-  usableCommand3:
-    CommandType: 0
-    LockCommand: 0
-    Value: 0
-    LockNumber: 0
-    Axis: 0
-    LockCoordinateAxis: 0
-  specialCommand:
-    CommandType: 0
-    LockCommand: 0
-    Value: 1
-    LockNumber: 0
-    Axis: 0
-    LockCoordinateAxis: 0
 --- !u!1 &8364930202891576712
 GameObject:
   m_ObjectHideFlags: 0
@@ -6005,9 +5945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playIndex: -1
-  isExecutable: 1
-  state: 0
 --- !u!33 &8364930203055848306
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6241,7 +6178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gimmickDirector: {fileID: 8364930202608584714}
   uiManager: {fileID: 8364930203109310156}
-  stageData: {fileID: 0}
 --- !u!1 &8364930203109310147
 GameObject:
   m_ObjectHideFlags: 0
@@ -7604,9 +7540,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db486ea24103a3e4b9588954c62c1ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playIndex: -1
-  isExecutable: 1
-  state: 0
 --- !u!114 &8364930203654070760
 MonoBehaviour:
   m_ObjectHideFlags: 0
