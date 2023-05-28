@@ -5,11 +5,11 @@ namespace Robo
     [System.Serializable]
     public class StageSelectElementInfo
     {
-        [SerializeField] 
-        private string stageNumber = "1-1";
+        [SerializeField]
+        private string stageName = "あいうえお平原";
 
         [SerializeField] 
-        private string stageName = "あいうえお平原";
+        private string stageNumber = "1-1";
 
         [SerializeField] 
         private Sprite stageIcon;
