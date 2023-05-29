@@ -117,6 +117,7 @@ namespace Robo
                 await sceneLoader.UnloadScene(SceneID.StageSelect);
                 Tween fade = postEffector.Fade(FadeType.In, goToStageFadeTime, Ease.Linear);
             };
+            //シングルトンへ登録
             GoToStageArgmentsSingleton.SetStage(Infos[nowSelectedIndex]);
         }
 
