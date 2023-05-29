@@ -10,6 +10,12 @@ public enum BlockID
     Grass = 7,
     Rock = 8,
     Rock_2 = 9,
+    Road = 10,
+    Ladder = 11,
+    Flower_Pink = 12,
+    Flower_SkyBlue = 13,
+    Flower_White = 14,
+    Flower_Yellow = 15,
 
     Command_Red = 100,
     Command_Green = 101,

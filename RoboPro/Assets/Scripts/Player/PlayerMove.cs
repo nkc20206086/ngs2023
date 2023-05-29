@@ -97,7 +97,7 @@ namespace Player
                 }
 
                 //–Ú‚Ì‘O‚ªŠR‚©”»’è
-                if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
+                if (stateGetter.GroundCheckGetter().CheckGround() == false)
                 {
                     if(stateGetter.LadderCheckGetter().LadderClimbCheck() || stateGetter.LadderCheckGetter().LadderDownCheck())
                     {
