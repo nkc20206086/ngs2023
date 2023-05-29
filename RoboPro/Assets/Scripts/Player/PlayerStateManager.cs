@@ -21,6 +21,8 @@ namespace Player
         private PlayerLadderStepOn playerLadderStepOn;
         private PlayerLadderClimb playerLadderClimb;
         private PlayerFinishLadderClimb playerFinishLadderClimb;
+        private PlayerGoalJump playerGoal;
+        private PlayerGoalDance playerGoalDance;
         private PlayerDie playerDie;
         private IStateGetter stateGetter;
 
@@ -44,6 +46,8 @@ namespace Player
             playerLadderStepOn = GetComponent<PlayerLadderStepOn>();
             playerLadderClimb = GetComponent<PlayerLadderClimb>();
             playerFinishLadderClimb = GetComponent<PlayerFinishLadderClimb>();
+            playerGoal = GetComponent<PlayerGoalJump>();
+            playerGoalDance = GetComponent<PlayerGoalDance>();
             playerDie = GetComponent<PlayerDie>();
             stateGetter = GetComponent<IStateGetter>();
         }
@@ -62,7 +66,7 @@ namespace Player
 
         private void FixedUpdate()
         {
-            Debug.Log(stateGetter.StateGetter());
+            //Debug.Log(stateGetter.StateGetter());
 
             //Statemachine
             switch (stateGetter.StateGetter())
@@ -125,6 +129,16 @@ namespace Player
                 case PlayerStateEnum.LadderFinish_Climb:
                     {
                         playerFinishLadderClimb.Act_FinishClimb();
+                        break;
+                    }
+                case PlayerStateEnum.Goal_Jump:
+                    {
+                        playerGoal.Act_GoTo_Goal();
+                        break;
+                    }
+                case PlayerStateEnum.Goal_Dance:
+                    {
+                        playerGoalDance.Act_GoalDance();
                         break;
                     }
                 case PlayerStateEnum.Die:

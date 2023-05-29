@@ -13,6 +13,7 @@ namespace Player
         private PlayerStepOff playerStepOff;
         private PlayerLanding playerLanding;
         private PlayerLadderStepOn playerLadderStepOn;
+        private PlayerGoalJump playerGoal;
 
         // Start is called before the first frame update
         void Start()
@@ -20,6 +21,7 @@ namespace Player
             playerStepOff = player.GetComponent<PlayerStepOff>();
             playerLanding = player.GetComponent<PlayerLanding>();
             playerLadderStepOn = player.GetComponent<PlayerLadderStepOn>();
+            playerGoal = player.GetComponent<PlayerGoalJump>();
         }
 
         /// <summary>
@@ -44,6 +46,16 @@ namespace Player
         public void Finish_LadderStepOnClimb_AnimatinKey()
         {
             playerLadderStepOn.Finish_StepOn();
+        }
+
+        public void Finish_GoalJump_AnimatinKey()
+        {
+            playerGoal.Finish_GoTo_Goal();
+        }
+
+        public void Finish_GoalDance_AnimatinKey()
+        {
+
         }
     }
 }

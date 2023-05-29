@@ -6,15 +6,15 @@
     public enum CueSheetType
     {
         //SEが使用されるシーン名
-        Title = 0,
-        StageSelect = 1,
-        Stage = 2,
-        Player = 3,
-        Menu = 4,
+        Command = 0,
+        Player = 1,
+        Staging = 2,
+        System = 3,
 
         //BGM名
-        yuboku = 1000,
-        future = 1001,
-        youkou = 1002,
+        ClearBGM = 1000,
+        StageBGM = 1001,
+        StageSelectBGM = 1002,
+        TitleBGM = 1003,
     }
 }
