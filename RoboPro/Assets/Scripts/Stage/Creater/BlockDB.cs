@@ -22,7 +22,6 @@ public class BlockDB : ScriptableObject
 
     public GameObject GetPrefab(BlockID id, int idx)
     {
-        Debug.Log(id);
         BlockData data = GetData(id);
         if (idx % 2 == 0)
         {

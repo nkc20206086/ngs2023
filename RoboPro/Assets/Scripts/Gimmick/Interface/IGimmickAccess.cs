@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace Gimmick.Interface
 {
@@ -22,5 +23,7 @@ namespace Gimmick.Interface
         /// </summary>
         /// <param name="isExecute">ïœçXèÛãµ</param>
         public void SetExecute(bool isExecute);
+
+        public void SetAction(Action undoAct,Action redoAct,Action saveAct);
     }
 }

@@ -80,7 +80,7 @@ namespace Gimmick
             {
                 laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform, instanceGimmickController[i].transform, accessPoints[i].color));
 
-                instanceGimmickController[i].StartUp(setCommandList[i]);
+                // instanceGimmickController[i].StartUp(setCommandList[i]);
             }
 
             laserManageable.LaserInit(laserInfoList);
@@ -107,11 +107,11 @@ namespace Gimmick
                 {
                     if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
                     {
-                        instanceGimmickController[i].AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
+                        // instanceGimmickController[i].AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
                     }
                     else
                     {
-                        instanceGimmickController[i].AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
+                        // instanceGimmickController[i].AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
                     }
                 }
 
@@ -153,7 +153,7 @@ namespace Gimmick
             foreach (GimmickController gimmck in instanceGimmickController)
             {
                 gimmck.IntializeAction();
-                gimmck.OverwriteControlCommand(archiveIndex);
+                // gimmck.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -171,7 +171,7 @@ namespace Gimmick
             foreach (GimmickController gimmck in instanceGimmickController)
             {
                 gimmck.IntializeAction();
-                gimmck.OverwriteControlCommand(archiveIndex);
+                // gimmck.OverwriteControlCommand(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -222,6 +222,11 @@ namespace Gimmick
         void IGimmickAccess.SetExecute(bool isExecute)
         {
             this.isExecute = isExecute;
+        }
+
+        void IGimmickAccess.SetAction(Action undoAct, Action redoAct, Action saveAct)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -27,6 +27,16 @@ namespace CommandUI
         {
             for (int i = 0; i < ProgramPanelLength; i++) // コマンドの数だけ実行
             {
+                if (commands[i] == null)
+                {
+                    programCommand[i].SetActive(false);
+                    programPanelAxis[i].SetActive(false);
+                    programPanelValue[i].SetActive(false);
+                    programCommandLock[i].SetActive(false);
+                    programPanelValueLock[i].SetActive(false);
+                    continue;
+                }
+
                 if (commands[i].GetMainCommandType() != MainCommandType.None)
                 {
                     programCommand[i].SetActive(true);
