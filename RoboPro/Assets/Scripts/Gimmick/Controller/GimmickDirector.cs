@@ -116,8 +116,6 @@ namespace Gimmick
                 {
                     laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform, gimmick.transform, accessPoints[i].color));
                 }
-
-                accessPoints[i].GimmickActivate();
             }
 
             laserManageable.LaserInit(laserInfoList);
@@ -142,22 +140,7 @@ namespace Gimmick
             {
                 for (int i = 0;i < accessPoints.Count;i++)                         // ギミック数分回す
                 {
-                    if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
-                    {
-                        // !
-                        foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
-                        {
-                            gimmick.AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
-                        }
-                    }
-                    else
-                    {
-                        // !
-                        foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
-                        {
-                            gimmick.AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
-                        }
-                    }
+                    accessPoints[i].ArchiveAdd(archiveIndex);
                 }
 
                 maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
@@ -208,8 +191,8 @@ namespace Gimmick
                 foreach (GimmickController gimmick in accessPoint.controlGimmicks)
                 {
                     gimmick.IntializeAction();
-                    gimmick.OverwriteControlCommand(archiveIndex);
                 }
+                accessPoint.ArchiveSet(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -230,8 +213,8 @@ namespace Gimmick
                 foreach (GimmickController gimmick in accessPoint.controlGimmicks)
                 {
                     gimmick.IntializeAction();
-                    gimmick.OverwriteControlCommand(archiveIndex);
                 }
+                accessPoint.ArchiveSet(archiveIndex);
 
             }
             storage.OverwriteControlCommand(archiveIndex);
@@ -278,17 +261,14 @@ namespace Gimmick
 
         Vector3 IGimmickAccess.Access(int index)
         {
+            if (isExecute) return Vector3.zero;
             if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            // !
-            foreach (GimmickController gimmick in accessPoints[index].controlGimmicks)
-            {
-                commandDirector.CommandActivation(gimmick.controlCommand);
-            }
+            commandDirector.CommandActivation(accessPoints[index].controlCommands);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算

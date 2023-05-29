@@ -15,9 +15,10 @@ namespace Gimmick
         [Tooltip("APとギミックを繋ぐラインの色")]
         public Color color;
 
-        private MainCommand[] mainCommands = new MainCommand[4];
         private List<GimmickController> gimmickControllers;
-        private List<CommandContainer> usableCommands = new List<CommandContainer>();
+
+        public MainCommand[] controlCommands = new MainCommand[CommandUtility.commandCount];
+        private List<MainCommand[]> archives = new List<MainCommand[]>();
 
         public List<GimmickController> controlGimmicks
         {
@@ -26,13 +27,9 @@ namespace Gimmick
 
         public void StartUp(AccessPointData data)
         {
-            usableCommands = new List<CommandContainer>(data.Commands);
-            if (usableCommands.Count < CommandUtility.commandCount)
+            for (int i = 0; i < controlCommands.Length; i++)
             {
-                for (int i = usableCommands.Count; i <= CommandUtility.commandCount;i++)
-                {
-                    usableCommands.Add(new CommandContainer());
-                }
+                controlCommands[i] = CommandCreater.CreateCommand(data.Commands[i]);
             }
         }
 
@@ -42,21 +39,10 @@ namespace Gimmick
 
             foreach (GameObject obj in objList)
             {
-                Debug.Log(obj.name);
                 gimmickControllers.Add(obj.GetComponent<GimmickController>());
             }
-        }
 
-        /// <summary>
-        /// ギミックを有効化する関数
-        /// </summary>
-        public void GimmickActivate()
-        {
-            // ギミック管理クラスの開始関数を実行
-            foreach (GimmickController gimmick in gimmickControllers)
-            {
-                gimmick.StartUp(usableCommands.ToArray());
-            }
+            ArchiveAdd(0);
         }
 
         public void ControlGimmicksUpdate()
@@ -64,6 +50,38 @@ namespace Gimmick
             foreach (GimmickController gimmick in gimmickControllers)
             {
                 gimmick.CommandUpdate();
+            }
+        }
+
+        public void ArchiveAdd(int index)
+        {
+            for (int i = archives.Count - 1;i >= index;i--)
+            {
+                archives.RemoveAt(i);
+            }
+
+            MainCommand[] mainCommands = new MainCommand[controlCommands.Length];
+
+            for (int i = 0;i < controlCommands.Length;i++)
+            {
+                mainCommands[i] = controlCommands[i] != null ? controlCommands[i].MainCommandClone() : null;
+            }
+
+            archives.Add(mainCommands);
+
+            foreach (GimmickController controller in gimmickControllers)
+            {
+                controller.CommandSet(controlCommands);
+            }
+        }
+
+        public void ArchiveSet(int index)
+        {
+            Array.Copy(archives[index],controlCommands,controlCommands.Length);
+
+            foreach (GimmickController controller in gimmickControllers)
+            {
+                controller.CommandSet(controlCommands);
             }
         }
     }

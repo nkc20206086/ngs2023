@@ -67,5 +67,31 @@ namespace Gimmick
             // 各項目を書き換える
             playIndex = this.playIndex;
         }
+        public GimmickArchive(MainCommand[] control, int playIndex)
+        {
+            MainCommand[] controlCopy = new MainCommand[control.Length];    // 管理コマンドを保存するための配列を作成
+            playCommand = default;
+
+            // 管理コマンドの内容をコピーして格納
+            for (int i = 0; i < control.Length; i++)
+            {
+                controlCopy[i] = control[i] != null ? control[i].MainCommandClone() : default;
+            }
+
+            // 各項目を記録
+            controlCommand = controlCopy;
+            this.playIndex = playIndex;
+        }
+        public void SetGimmickArchive(MainCommand[] control, int playIndex)
+        {
+            // 管理コマンドに記録内容のコピーを渡す
+            for (int i = 0; i < controlCommand.Length; i++)
+            {
+                control[i] = controlCommand[i] != null ? controlCommand[i].MainCommandClone() : default;
+            }
+
+            // 各項目を書き換える
+            playIndex = this.playIndex;
+        }
     }
 }

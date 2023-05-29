@@ -19,7 +19,7 @@ namespace Gimmick
         [SerializeField]
         private int playIndex = -1;                                                         // 実行されているコマンドのインデックス
         private float timeCount = 0;                                                        // 時間計測用変数
-        private MainCommand[] playCommand = new MainCommand[CommandUtility.commandCount];   // 実行コマンドの配列
+        public MainCommand[] playCommand = new MainCommand[CommandUtility.commandCount];   // 実行コマンドの配列
         private List<GimmickArchive> gimmickArchives = new List<GimmickArchive>();          // 記録用構造体のリスト
 
         // 各実行時点での原点
@@ -35,35 +35,13 @@ namespace Gimmick
 
         public bool GetExecutionStatus { get => isExecutable; }
 
-        /// <summary>
-        /// ギミックの開始時関数
-        /// </summary>
-        /// <param name="setCommands">このギミックの持つコマンド</param>
-        public void StartUp(CommandContainer[] setCommands)
+        private void Start()
         {
-            controlCommand = new MainCommand[setCommands.Length];           // 管理コマンド初期化
-            playCommand = new MainCommand[setCommands.Length];
-
-            for (int i = 0;i < setCommands.Length;i++)
-            {
-                // 構造体をメインコマンドクラスに変換し、管理コマンドに設定する
-                controlCommand[i] = CommandCreater.CreateCommand(setCommands[i]);
-            }
-
-            Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
-
             state = CommandState.MOVE_ON;                                   // コマンドステートを通常移動にする
-
-            IndexSwitching();                                               // 実行インデックス変更用関数
 
             basePos = transform.position;
             baseQuat = transform.rotation;
             baseScale = transform.localScale;
-
-            CommandCalc();
-
-            GimmickArchive gimmickArchive = new GimmickArchive(controlCommand,playCommand,playIndex);
-            gimmickArchives.Add(gimmickArchive);
         }
 
         /// <summary>
@@ -94,68 +72,11 @@ namespace Gimmick
             }
         }
 
-        /// <summary>
-        /// 指定インデックスのアーカイブにコマンドリストを追加する
-        /// </summary>
-        /// <param name="index">登録インデックス</param>
-        public void AddNewCommandsToArchive(int index)
-        {
-            if (index > gimmickArchives.Count) return;                      // 登録インデックスが要素数を超えているなら早期リターンする
-
-            if (gimmickArchives.Count != index)                             // 要素数と登録インデックスが異なるなら(超えている場合は早期リターンされるので、実質的に同じものでない場合)
-            {
-                for (int i = gimmickArchives.Count - 1; i >= index; i--)    
-                {
-                    // 超えている要素をすべてリストから削除する
-                    gimmickArchives.RemoveAt(i);
-                }
-            }
-
-            // 記録用の内容を構造体にまとめる
-            GimmickArchive gimmickArchive = new GimmickArchive(gimmickArchives[gimmickArchives.Count - 1].controlCommand, playCommand, playIndex);
-            gimmickArchives.Add(gimmickArchive);                            // 記録をリストに追加する
-        }
-
-        /// <summary>
-        /// 現在管理しているコマンドをコマンドアーカイブに登録する
-        /// </summary>
-        /// <param name="index">登録インデックス</param>
-        public void AddControlCommandToArchive(int index)
-        {
-            if (index > gimmickArchives.Count) return;                      // 登録インデックスが要素数を超えているなら早期リターンする
-
-            if (gimmickArchives.Count != index)                             // 要素数と登録インデックスが異なるなら(超えている場合は早期リターンされるので、実質的に同じものでない場合)
-            {
-                for (int i = gimmickArchives.Count - 1; i >= index; i--)
-                {
-                    // 超えている要素をすべてリストから削除する
-                    gimmickArchives.RemoveAt(i);
-                }
-            }
-
-            // 記録用の内容を構造体にまとめる
-            GimmickArchive gimmickArchive = new GimmickArchive(controlCommand, playCommand, playIndex);
-            gimmickArchives.Add(gimmickArchive);                            // 記録をリストに追加する
-        }
-
-        /// <summary>
-        /// 指定インデックスのコマンドアーカイブ内容を管理コマンドに反映する関数
-        /// </summary>
-        /// <param name="index">対象のインデックス</param>
-        public void OverwriteControlCommand(int index)
-        {
-            gimmickArchives[index].SetGimmickArchive(controlCommand,playCommand,playIndex);
-
-            timeCount = 0.0f;
-
-            CommandCalc();
-        }
-
         public void StartingAction(CommandState playState)
         {
             if (playState == CommandState.MOVE_ON)
             {
-                CheckExecutable();
+                CommandCalc();
                 isExecutable = true;
                 playIndex = 0;
             }
@@ -184,6 +105,18 @@ namespace Gimmick
             transform.position = basePos;
             transform.rotation = baseQuat;
             transform.localScale = baseScale;
+        }
+
+        public void CommandSet(MainCommand[] baseArray)
+        {
+            MainCommand[] newArray = new MainCommand[baseArray.Length];
+
+            for (int i = 0;i < baseArray.Length;i++)
+            {
+                newArray[i] = baseArray[i] != null ? baseArray[i].MainCommandClone() : null;
+            }
+
+            playCommand = newArray;
         }
 
         /// <summary>
@@ -229,26 +162,6 @@ namespace Gimmick
         private void CreateInterval()
         {
             timeCount = 1.0f;
-        }
-
-        /// <summary>
-        /// 実行可能であるかを確認する関数
-        /// </summary>
-        private void CheckExecutable()
-        {
-            if (controlCommand.Length <= 0)                                     // コマンド管理数が0を下回るなら
-            {
-                isExecutable = false;                                           // 実行不可に変更
-                playCommand = new MainCommand[controlCommand.Length];           // 実行コマンドの中身を空にする
-                return;
-            }
-            else　                                   
-            {
-                isExecutable = true;                                            // 実行可能に変更
-                Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
-
-                CommandCalc();
-            }
         }
 
         /// <summary>
