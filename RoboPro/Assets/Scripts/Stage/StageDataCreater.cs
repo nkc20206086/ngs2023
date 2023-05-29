@@ -3,11 +3,16 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using System.Collections.Generic;
+using Zenject;
+using Robo;
 
 namespace Stage
 {
     public class StageDataCreater: MonoBehaviour 
     {
+        [Inject] 
+        private DiContainer diContainer;
+        
         [SerializeField]
         private TextAsset stageJson;
 
@@ -15,33 +20,42 @@ namespace Stage
         private BlockDB blockDB;
 
         [SerializeField]
-        private GameObject obj;
+        private GameObject cameraTarget;
 
         public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
-            string json = null;
-            using (StreamReader reader = new StreamReader($"{Application.dataPath}/StageDatas/{stageJson.name}.json"))
+            StageData stageData = default;
+
+            if (stageJson != null)
             {
-                json = reader.ReadToEnd();
+                string json = null;
+                using (StreamReader reader = new StreamReader($"{Application.dataPath}/StageDatas/{stageJson.name}.json"))
+                {
+                    json = reader.ReadToEnd();
+                }
+
+                stageData = JsonUtility.FromJson<StageData>(json);
+            }
+            else
+            {
+                stageData = GoToStageArgmentsSingleton.Get().StageData;
             }
 
-            var data = JsonUtility.FromJson<StageData>(json);
+            datas = stageData.AccessPointDatas;
 
-            datas = data.AccessPointDatas;
+            cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
 
-            obj.transform.position = new Vector3(data.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f,data.Blocks.Blocks[0].Blocks.Count * 0.5f,data.Blocks.Blocks.Count * 0.5f);
-
-            for (int z = 0;z < data.Blocks.Blocks.Count; z++)
+            for (int z = 0;z < stageData.Blocks.Blocks.Count; z++)
             {
-                for (int y = 0;y < data.Blocks.Blocks[z].Blocks.Count;y++)
+                for (int y = 0;y < stageData.Blocks.Blocks[z].Blocks.Count;y++)
                 {
-                    for (int x = 0;x < data.Blocks.Blocks[z].Blocks[y].Blocks.Count;x++)
+                    for (int x = 0;x < stageData.Blocks.Blocks[z].Blocks[y].Blocks.Count;x++)
                     {
-                        BlockID blockId = data.Blocks.Blocks[z].Blocks[y].Blocks[x];
+                        BlockID blockId = stageData.Blocks.Blocks[z].Blocks[y].Blocks[x];
                         GameObject prefabs = blockDB.GetPrefab(blockId, x + y + z);
                         if (prefabs != null)
                         {
-                            GameObject instance = Instantiate(prefabs, new Vector3(x, y, z), Quaternion.identity);
+                            GameObject instance = diContainer.InstantiatePrefab(prefabs, new Vector3(x, y, z), Quaternion.identity, null);
 
                             if (blockId >= BlockID.Command_Red)
                             {
@@ -53,7 +67,52 @@ namespace Stage
                 }
             }
 
+            for (BlockID id = BlockID.Command_Red; id <= BlockID.Command_Black;id++)
+            {
+                if (!dictionary.ContainsKey(id)) continue;
+                for (int i = 0;i < dictionary[id].Count;i++)
+                {
+                    List<Vector3Int> positions = new List<Vector3Int>();
+
+                    for (int j = 0;j < dictionary[id].Count; j++)
+                    {
+                        positions.Add(new Vector3Int((int)dictionary[id][i].transform.position.x,
+                                                     (int)dictionary[id][i].transform.position.y,
+                                                     (int)dictionary[id][i].transform.position.z));
+                    }
+
+                    List<int> indexs = new List<int>();
+
+                    Calc(positions,indexs,i);
+
+                    if (indexs.Count > 0)
+                    {
+                        GameObject parent = new GameObject();
+                        for (int j = 0; j < indexs.Count; j++)
+                        {
+                            dictionary[id][indexs[j]].transform.SetParent(parent.transform);
+                        }
+
+                        // 子オブジェクト削除
+                    }
+                }
+            }
+
             Destroy(this);
         }
+        private void Calc(List<Vector3Int> positions, List<int> indexs,int index)
+        {
+            for (int i = 0;i < positions.Count;i++)
+            {
+                if (index == i) continue;
+                if (indexs.IndexOf(i) >= 0) continue;
+                if ((int)Vector3Int.Distance(positions[index],positions[i]) == 1)
+                {
+                    indexs.Add(i);
+                    Calc(positions,indexs,i);
+                }
+            }
+        }
     }
+
 }
