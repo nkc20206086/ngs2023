@@ -21,7 +21,7 @@ namespace Robo
             {
                 imp.sceneLoadToPlayBGM = (CueSheetType)EditorGUILayout.EnumPopup("SceneLoadToPlayBGM", imp.sceneLoadToPlayBGM);
                 imp.bgmFadeMilliSecond = EditorGUILayout.IntField("BGMFadeMilliSecond", imp.bgmFadeMilliSecond);
-                imp.crossFadeBGM = EditorGUILayout.Toggle("IsSceneLoadToPlayBGM", imp.crossFadeBGM);
+                imp.crossFadeBGM = EditorGUILayout.Toggle("CrossFadeBGM", imp.crossFadeBGM);
             }
         }
     }

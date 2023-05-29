@@ -40,7 +40,7 @@ namespace Command
         /// <param name="axis">—p‚¢‚éŽ²</param>
         public CommandContainer(MainCommandType commandType,
             bool lockCommand,bool lockNumber,bool lockCoordinateAxis,
-            int num,CoordinateAxis axis,int capacity)
+            int num,CoordinateAxis axis)
         {
             CommandType = commandType;
             LockCommand = lockCommand;
@@ -48,6 +48,16 @@ namespace Command
             LockCoordinateAxis = lockCoordinateAxis;
             Value = num;
             Axis = axis;
+        }
+
+        public CommandContainer()
+        {
+            CommandType = MainCommandType.None;
+            LockCommand = false;
+            LockNumber = false;
+            LockCoordinateAxis = false;
+            Value = 0;
+            Axis = CoordinateAxis.NONE;
         }
     }
 

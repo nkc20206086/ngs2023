@@ -52,11 +52,6 @@ namespace Gimmick
 
             Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
 
-            if (setCommands.Length <= 0)
-            {
-                isExecutable = false;
-                return;
-            }
             state = CommandState.MOVE_ON;                                   // コマンドステートを通常移動にする
 
             IndexSwitching();                                               // 実行インデックス変更用関数
@@ -161,8 +156,8 @@ namespace Gimmick
             if (playState == CommandState.MOVE_ON)
             {
                 CheckExecutable();
-
-                if (!isExecutable) return;
+                isExecutable = true;
+                playIndex = 0;
             }
             else if (playState == CommandState.RETURN)
             {
@@ -172,6 +167,9 @@ namespace Gimmick
             }
 
             state = playState;
+
+            if (playCommand[playIndex] == null ||
+                playCommand[playIndex].GetMainCommandType() == MainCommandType.None) IndexSwitching();
         }
 
         public void IntializeAction()
@@ -197,6 +195,11 @@ namespace Gimmick
                     playIndex = playCommand.Length - 1;
                     isExecutable = false;
                 }
+                else if (playCommand[playIndex] == null ||
+                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None)
+                {
+                    IndexSwitching();
+                }
             }
             else                                            // 反転移動であればインデックスを減算
             {
@@ -205,6 +208,11 @@ namespace Gimmick
                 {
                     playIndex = 0;
                     isExecutable = false;
+                }
+                else if (playCommand[playIndex] == null ||
+                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None)
+                {
+                    IndexSwitching();
                 }
             }
         }
@@ -230,17 +238,6 @@ namespace Gimmick
             }
             else　                                   
             {
-                // 管理コマンドの要素に実行不可であるものが含まれれば、実行不可に変更し早期リターンする
-                for (int i = 0;i < playCommand.Length;i++)
-                {
-                    if (controlCommand[i] == null || !controlCommand[i].CommandNullCheck())
-                    {
-                        isExecutable = false;
-                        playCommand = new MainCommand[controlCommand.Length];
-                        return;
-                    }
-                }
-
                 isExecutable = true;                                            // 実行可能に変更
                 Array.Copy(controlCommand, playCommand, controlCommand.Length); // 管理コマンドに実行コマンドの内容をコピー
 
@@ -269,7 +266,7 @@ namespace Gimmick
             // 実行コマンドリストの要素全てに初期化関数を実行
             for (int i = 0; i < playCommand.Length; i++)
             {
-                switch (playCommand[i].GetMainCommandType())
+                switch (playCommand[i]?.GetMainCommandType())
                 {
                     case MainCommandType.Move:
                         Vector3 moveValue = (Vector3)playCommand[i].InitCommand(basePos + move, CreateInterval);
