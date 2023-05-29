@@ -9,15 +9,9 @@ namespace Player
     {
         public event Action accessEndEvent;
 
-        private void Awake()
-        {
-            //Locator<AccessManager>.Bind(this);
-        }
-
         //アクセス終了時処理
         public void AccessEnd()
         {
-            Debug.Log("終了");
             accessEndEvent();
         }
     }

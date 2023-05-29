@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Player
 {
-    public class PlayerDizzy : MonoBehaviour,IStateChange
+    public class PlayerDizzy : MonoBehaviour, IStateChange
     {
         [Inject]
         private IInteractUIControllable interactUIControllable;
@@ -27,23 +27,19 @@ namespace Player
             stateGetter = GetComponent<IStateGetter>();
         }
 
-        public void Act_Dizzy(bool isMove,bool isInteract)
+        public void Act_Dizzy(bool isMove, bool isInteract)
         {
-            if(isMove)
+            if (isMove)
             {
                 //Debug.Log("‚Ó‚ç‚Â‚«");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
                 Vector3 pos = transform.position;
                 pos.y += stateGetter.PlayerUI_OffsetYGetter();
                 interactUIControllable.SetPosition(pos);
-                interactUIControllable.ShowCrossMarkUI();
-                interactUIControllable.ShowSkullMark();
                 interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)dizzyUI);
 
                 if (stateGetter.GroundCheckGetter().CheckDeathHeight())
                 {
-                    interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)alertUI);
-                    interactUIControllable.ShowCrossMarkUI();
                     interactUIControllable.ShowSkullMark();
                 }
                 else
@@ -55,7 +51,8 @@ namespace Player
                         interactUIControllable.HideUI();
                         interactUIControllable.HideLockUI();
                     }
-                }    
+                    interactUIControllable.HideLockUI();
+                }
             }
             else
             {

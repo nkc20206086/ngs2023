@@ -112,7 +112,7 @@ namespace Gimmick
                 accessPoints[i].GimmickActivate();
             }
 
-            laserManageable.LaserInit(laserInfoList);
+            //laserManageable.LaserInit(laserInfoList);
         }
 
         /// <summary>
@@ -270,6 +270,11 @@ namespace Gimmick
             archiveIndex++;                 // セーブ参照インデックスを加算
 
             return accessPoints[index].transform.position;
+        }
+
+        void IGimmickAccess.SetExecute(bool isExecute)
+        {
+            this.isExecute = isExecute;
         }
     }
 }
