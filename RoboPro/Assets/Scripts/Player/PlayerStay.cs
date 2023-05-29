@@ -7,6 +7,7 @@ namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
+        private Goal goal;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -14,15 +15,24 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnChangeInteractingTime += (value) => 
+            {
+                Vector3 pos = goal.gameObject.transform.position;
+                pos.y = this.transform.position.y;
+                transform.LookAt(pos);
+                stateChangeEvent(PlayerStateEnum.Access);
+            };
             defaultScale = transform.lossyScale;
             stateGetter = GetComponent<IStateGetter>();
         }
 
         public void Act_Stay(bool isMove, bool isInteract)
         {
-            
+            //stateChangeEvent(PlayerStateEnum.Goal_Jump);
+
             //Debug.Log("‘Ò‚Â");
-            if(isMove)
+            if (isMove)
             {
                 stateChangeEvent(PlayerStateEnum.Move);
             }

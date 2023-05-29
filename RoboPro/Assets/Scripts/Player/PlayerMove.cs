@@ -15,6 +15,7 @@ namespace Player
         private ICameraVectorGetter cameraVectorGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
+        private Goal goal;
 
         private Vector3 moveForward;
 
@@ -26,6 +27,16 @@ namespace Player
             defaultScale = transform.lossyScale;
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
+
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnChangeInteractingTime += (value) =>
+            {
+                stateGetter.PlayerAnimatorGeter().SetBool("PlayerMove", false);
+                Vector3 pos = goal.gameObject.transform.position;
+                pos.y = this.transform.position.y;
+                transform.LookAt(pos);
+                stateChangeEvent(PlayerStateEnum.Access);
+            };
         }
 
         /// <summary>
