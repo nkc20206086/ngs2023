@@ -219,7 +219,7 @@ namespace Gimmick
         /// </summary>
         public void Redo(Unit unit)
         {
-            if (archiveIndex >= maxArchiveCount - 1|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+            if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 

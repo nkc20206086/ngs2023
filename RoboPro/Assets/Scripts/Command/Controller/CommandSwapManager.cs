@@ -170,17 +170,28 @@ namespace Command
 
         public void SetMainCommandIndex(int main,int sub)
         {
+            if (mainCommands[main] == null || 
+                mainCommands[main].GetMainCommandType() == MainCommandType.None) return;
+
             mainIndexNum = main;
-            swapCommandType = (CommandType)sub;
 
             if (sub >= (int)CommandType.Value)
             {
-                mainCommands[mainIndexNum].value.SignChange();
+                mainCommands[mainIndexNum]?.value.SignChange();
 
                 action(mainCommands);
             }
             else
             {
+                swapCommandType = (CommandType)sub;
+
+                switch (sub)
+                {
+                    case 0: if (mainCommands[main].lockMenber) return; break;
+                    case 1: if (mainCommands[main].lockCoordinateAxis) return; break;
+                    case 2: if (mainCommands[main].lockValue) return; break;
+                }
+
                 CommandSwap();
             }
         }
