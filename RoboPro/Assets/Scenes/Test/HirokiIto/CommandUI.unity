@@ -385,6 +385,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2121796292498593871, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630541804879696558, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3630541804995797703, guid: f7403e251c7057c4bb07ec2d4f115373,
         type: 3}
       propertyPath: m_Pivot.x
@@ -494,6 +504,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ProgramCanvasUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050430260100104125, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060679798133154328, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984387666786821232, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6090776763769943055, guid: f7403e251c7057c4bb07ec2d4f115373,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7403e251c7057c4bb07ec2d4f115373, type: 3}
