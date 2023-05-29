@@ -11,6 +11,7 @@ namespace Player
         private AccessManager accessManager;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
+        private Goal goal;
 
         // Start is called before the first frame update
         void Start()
@@ -18,6 +19,15 @@ namespace Player
             accessManager = accessManager.GetComponent<AccessManager>();
             stateGetter = GetComponent<IStateGetter>();
             accessManager.accessEndEvent += Finish_Access;
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnClear += Goal_OnClear; 
+        }
+
+        private void Goal_OnClear()
+        {
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            stateChangeEvent(PlayerStateEnum.Stay);
+            Invoke("Access_Goal", 1);
         }
 
         /// <summary>
@@ -35,6 +45,11 @@ namespace Player
         {
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
             stateChangeEvent(PlayerStateEnum.Stay);
+        }
+
+        public void Access_Goal()
+        {   
+            stateChangeEvent(PlayerStateEnum.Goal_Jump);
         }
     }
 }

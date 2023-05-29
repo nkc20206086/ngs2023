@@ -20,6 +20,8 @@ namespace Player
         LaddderClimb,
         LadderDown,
         LadderFinish_Climb,
+        Goal_Jump,
+        Goal_Dance,
         Die,
         Count
     }
