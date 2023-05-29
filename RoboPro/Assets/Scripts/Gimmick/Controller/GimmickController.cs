@@ -169,7 +169,11 @@ namespace Gimmick
             state = playState;
 
             if (playCommand[playIndex] == null ||
-                playCommand[playIndex].GetMainCommandType() == MainCommandType.None) IndexSwitching();
+                playCommand[playIndex].GetMainCommandType() == MainCommandType.None ||
+                !playCommand[playIndex].CommandNullCheck())
+            {
+                IndexSwitching();
+            }
         }
 
         public void IntializeAction()
@@ -196,7 +200,8 @@ namespace Gimmick
                     isExecutable = false;
                 }
                 else if (playCommand[playIndex] == null ||
-                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None)
+                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None || 
+                         !playCommand[playIndex].CommandNullCheck())
                 {
                     IndexSwitching();
                 }
@@ -210,7 +215,8 @@ namespace Gimmick
                     isExecutable = false;
                 }
                 else if (playCommand[playIndex] == null ||
-                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None)
+                         playCommand[playIndex].GetMainCommandType() == MainCommandType.None ||
+                         !playCommand[playIndex].CommandNullCheck())
                 {
                     IndexSwitching();
                 }
@@ -266,6 +272,9 @@ namespace Gimmick
             // 実行コマンドリストの要素全てに初期化関数を実行
             for (int i = 0; i < playCommand.Length; i++)
             {
+                if (playCommand[i] == null ||
+                    !playCommand[i].CommandNullCheck()) continue;
+
                 switch (playCommand[i]?.GetMainCommandType())
                 {
                     case MainCommandType.Move:

@@ -42,6 +42,7 @@ namespace Gimmick
 
             foreach (GameObject obj in objList)
             {
+                Debug.Log(obj.name);
                 gimmickControllers.Add(obj.GetComponent<GimmickController>());
             }
         }
