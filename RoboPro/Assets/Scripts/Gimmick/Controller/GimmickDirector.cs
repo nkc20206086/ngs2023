@@ -48,6 +48,10 @@ namespace Gimmick
         private bool isExecute = false;         // 実行可能であるか
         private CommandState state = CommandState.INACTIVE;
 
+        private Action undoPlayerAction;
+        private Action redoPlayerAction;
+        private Action savePlayerAction;
+
         private void Update()
         {
             if (isExecute)
@@ -146,6 +150,8 @@ namespace Gimmick
                 maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
                 storage.AddArchiveCommand(archiveIndex, storage.controlCommand);                // ストレージコマンドのアーカイブを追加する
 
+                savePlayerAction?.Invoke();
+
                 state = CommandState.INACTIVE;
 
                 foreach (AccessPoint accessPoint in accessPoints)
@@ -184,6 +190,8 @@ namespace Gimmick
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
+            undoPlayerAction?.Invoke();
+
             // 減算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
             {
@@ -205,6 +213,8 @@ namespace Gimmick
             if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
+
+            redoPlayerAction?.Invoke();
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
@@ -282,6 +292,13 @@ namespace Gimmick
         void IGimmickAccess.SetExecute(bool isExecute)
         {
             this.isExecute = isExecute;
+        }
+
+        void IGimmickAccess.SetAction(Action undoAct, Action redoAct, Action saveAct)
+        {
+            undoPlayerAction = undoAct;
+            redoPlayerAction = redoAct;
+            savePlayerAction = saveAct;
         }
     }
 }

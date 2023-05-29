@@ -223,5 +223,10 @@ namespace Gimmick
         {
             this.isExecute = isExecute;
         }
+
+        void IGimmickAccess.SetAction(Action undoAct, Action redoAct, Action saveAct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

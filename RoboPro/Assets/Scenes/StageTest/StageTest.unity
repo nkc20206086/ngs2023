@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d1b6a19c3050a4a966a9c619c16581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageJson: {fileID: 4900000, guid: ec51c3710712352458b6972f34a102cb, type: 3}
+  stageJson: {fileID: 4900000, guid: 28910a6ce8374cf4da80cde369c386b8, type: 3}
   blockDB: {fileID: 11400000, guid: 05e147f5714b0b94eaa910d5bcfc2234, type: 2}
   cameraTarget: {fileID: 1891237204}
 --- !u!1 &800803502

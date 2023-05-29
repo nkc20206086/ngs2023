@@ -72,24 +72,46 @@ namespace Stage
                 if (!dictionary.ContainsKey(id)) continue;
                 for (int i = 0;i < dictionary[id].Count;i++)
                 {
-                    Vector3Int[] positions = new Vector3Int[dictionary[id].Count];
+                    List<Vector3Int> positions = new List<Vector3Int>();
 
                     for (int j = 0;j < dictionary[id].Count; j++)
                     {
-                        positions[i] = new Vector3Int((int)dictionary[id][i].transform.position.x,
-                                                      (int)dictionary[id][i].transform.position.y,
-                                                      (int)dictionary[id][i].transform.position.z);
+                        positions.Add(new Vector3Int((int)dictionary[id][i].transform.position.x,
+                                                     (int)dictionary[id][i].transform.position.y,
+                                                     (int)dictionary[id][i].transform.position.z));
                     }
 
+                    List<int> indexs = new List<int>();
 
+                    Calc(positions,indexs,i);
+
+                    if (indexs.Count > 0)
+                    {
+                        GameObject parent = new GameObject();
+                        for (int j = 0; j < indexs.Count; j++)
+                        {
+                            dictionary[id][indexs[j]].transform.SetParent(parent.transform);
+                        }
+
+                        // 子オブジェクト削除
+                    }
                 }
             }
 
             Destroy(this);
         }
-        private void Calc(List<GameObject> l)
+        private void Calc(List<Vector3Int> positions, List<int> indexs,int index)
         {
-
+            for (int i = 0;i < positions.Count;i++)
+            {
+                if (index == i) continue;
+                if (indexs.IndexOf(i) >= 0) continue;
+                if ((int)Vector3Int.Distance(positions[index],positions[i]) == 1)
+                {
+                    indexs.Add(i);
+                    Calc(positions,indexs,i);
+                }
+            }
         }
     }
 
