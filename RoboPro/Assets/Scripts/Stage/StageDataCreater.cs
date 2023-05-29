@@ -14,6 +14,9 @@ namespace Stage
         [SerializeField]
         private BlockDB blockDB;
 
+        [SerializeField]
+        private GameObject obj;
+
         public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
             string json = null;
@@ -25,6 +28,8 @@ namespace Stage
             var data = JsonUtility.FromJson<StageData>(json);
 
             datas = data.AccessPointDatas;
+
+            obj.transform.position = new Vector3(data.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f,data.Blocks.Blocks[0].Blocks.Count * 0.5f,data.Blocks.Blocks.Count * 0.5f);
 
             for (int z = 0;z < data.Blocks.Blocks.Count; z++)
             {
