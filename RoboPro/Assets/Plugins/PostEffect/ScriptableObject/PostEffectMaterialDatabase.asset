@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materials:
   - key: 0
-    shader: {fileID: -6465566751694194690, guid: 81a04da8db186b648a1036d0087fa4a5, type: 3}
+    shader: {fileID: -6465566751694194690, guid: 81a04da8db186b648a1036d0087fa4a5,
+      type: 3}
   - key: 1
-    shader: {fileID: -6465566751694194690, guid: f5f98cc99b9922742a5f09e51d981368, type: 3}
+    shader: {fileID: -6465566751694194690, guid: f5f98cc99b9922742a5f09e51d981368,
+      type: 3}
   - key: 2
-    shader: {fileID: -6465566751694194690, guid: 0bdf32e9c20a8974eb880775e39dedb2, type: 3}
+    shader: {fileID: -6465566751694194690, guid: 0bdf32e9c20a8974eb880775e39dedb2,
+      type: 3}
+  - key: 3
+    shader: {fileID: -6465566751694194690, guid: 531ced0d809594e47ac056ce4bc9f440,
+      type: 3}

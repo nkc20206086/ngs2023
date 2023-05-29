@@ -72,7 +72,7 @@ MonoBehaviour:
   iconParent: {fileID: 6334534646497389692}
   icon: {fileID: 8073266499804284777}
   waitTime: 1
-  moveIconDuration: 1
+  moveIconDuration: 0.5
   groundCleared: {fileID: 1908073074197804749}
   groundNotCleared: {fileID: 3305539766541498690}
 --- !u!1 &2898420812100294923
