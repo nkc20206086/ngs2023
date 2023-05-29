@@ -58,7 +58,7 @@ namespace Player
             Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
             RaycastHit ray = new RaycastHit();
             floatingFlg = Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, GroundMask);
-            Debug.DrawRay(playerPosition, Vector3.down * landingLength);
+            //Debug.DrawRay(playerPosition, Vector3.down * landingLength);
             return floatingFlg;
         }
 
@@ -67,13 +67,17 @@ namespace Player
         /// </summary>
         /// <param name="playerDir"></param>
         /// <returns></returns>
-        public bool CheckGround(Vector3 playerDir)
+        public bool CheckGround()
         {
-            playerDir = playerDir / 4;
             //落下判定用レイの原点の計算
-            originVector = transform.position + playerDir + new Vector3(0, 0.1f, 0f);
+            Vector3 playerForwardVec = gameObject.transform.position;
+            playerForwardVec.x += transform.forward.x * 0.2f;
+            playerForwardVec.z += transform.forward.z * 0.2f;
+            playerForwardVec.y += 0.2f;
+
             //原点から90度下向きにレイを出す
-            floorFlg = Physics.Raycast(originVector, -transform.up, rayLength);
+            floorFlg = Physics.Raycast(playerForwardVec, Vector3.down, rayLength);
+            Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
 
             return floorFlg;
         }
@@ -86,17 +90,18 @@ namespace Player
         {
             //Rayの発射位置の設定
             Vector3 splitVec = gameObject.transform.position;
-            splitVec.x += gameObject.transform.forward.x * 0.2f;
-            splitVec.z += gameObject.transform.forward.z * 0.2f;
+            //splitVec.x += gameObject.transform.forward.x * 0.1f;
+            //splitVec.z += gameObject.transform.forward.z * 0.1f;
 
             RaycastHit ray = new RaycastHit();
-            for(int i = 0; i < splitHeightVectorArray.Length;i++)
+            for (int i = 0; i < splitHeightVectorArray.Length; i++)
             {
+                splitVec.y = gameObject.transform.position.y;
                 //Y値を計算した値に設定
-                splitVec.y = splitHeightVectorArray[i];
+                splitVec.y += splitHeightVectorArray[i] + 0.1f;
                 //コライダーの直径分Rayを発射
-                Physics.Raycast(splitVec, transform.forward, out ray,capsuleCollider.radius * 2);
-                //Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 2);
+                Physics.Raycast(splitVec, transform.forward, out ray, capsuleCollider.radius * 3f);
+                Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 3f);
                 //1本でもRayが引っかかったら壁あり即break
                 if (ray.collider == null)
                 {
@@ -117,14 +122,12 @@ namespace Player
         /// <returns></returns>
         public bool CheckDeathHeight()
         {
-            bool deathFlg;
-            
             RaycastHit ray = new RaycastHit();
 
             rayPosition = gameObject.transform.position;
             rayPosition.x += transform.forward.x * 0.5f;
             rayPosition.z += transform.forward.z * 0.5f;
-            
+
             Physics.Raycast(rayPosition, Vector3.down, out ray, liveRayLength, GroundMask);
 
             //Nullなら死ぬから飛び降りれない
@@ -151,26 +154,26 @@ namespace Player
         /// <summary>
         /// 床が親子関係になるべき床なのかを判定する
         /// </summary>
-        public void  CheckParentGround()
+        public void CheckParentGround()
         {
-            Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
+            Vector3 playerPosition = gameObject.transform.position + new Vector3(0f, 0.1f, 0f);
             RaycastHit ray = new RaycastHit();
             Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, parentMask);
 
             //nullかつ初期化できていない
             if (ray.collider == null)
             {
-                if(string.IsNullOrWhiteSpace(parentOldName) == false)
+                if (string.IsNullOrWhiteSpace(parentOldName) == false)
                 {
                     gameObject.transform.parent = null;
                     parentOldName = "";
                     parentResetFlg = true;
-                }               
+                }
             }
             //null、または名前が同じならreturn
             else
             {
-                if(ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
+                if (ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
                 parentOldName = ray.collider.gameObject.name;
                 gameObject.transform.parent = ray.collider.gameObject.transform;
             }

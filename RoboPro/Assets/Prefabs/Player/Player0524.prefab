@@ -141,7 +141,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3805582077870317513}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2de7bf0c9b23d0c4484638a6bb542b45, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.23
@@ -176,6 +176,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpPower: {x: 1.2, y: 2}
   deathHeight: 3.2
+  playerUI_Yvector: 0
   animator: {fileID: 0}
   rigidbody: {fileID: 0}
 --- !u!114 &3805582077870317522
@@ -190,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81bf65a3ce8b794488e070605b246e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableObjectUI: {fileID: 0}
 --- !u!114 &3805582077870317525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94fda53e68091274ca31e355c033b10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableObjectUI: {fileID: 0}
 --- !u!114 &3805582077870317524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,9 +343,12 @@ MonoBehaviour:
   landingLength: 0.15
   liveRayLength: 3.1
   splitHeightVectorNum: 0
-  layerMask:
+  GroundMask:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 0
+  parentMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &3805582077870317531
 MonoBehaviour:
   m_ObjectHideFlags: 0
