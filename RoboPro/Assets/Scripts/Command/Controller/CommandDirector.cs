@@ -13,9 +13,11 @@ namespace Command
         [SerializeField, Tooltip("")]
         private CommandStorage commandStorage;
 
-        public event Action<MainCommand[]> UIEvent_MainCommands;
-        public event Action<CommandBase[]> UIEvent_StorageCommands;
-        public event Action<bool> UIOpen; 
+        public event Action showUI;
+        public event Action hideUI;
+
+        public event Action<MainCommand[]> swapUI_MainCommand;
+        public event Action<CommandBase[]> swapUI_Storage;
 
         /// <summary>
         /// コマンド入れ替えを有効化する
@@ -24,12 +26,12 @@ namespace Command
         /// <param name="item">セーブ情報クラス</param>
         public void CommandActivation(MainCommand[] mainCommands)
         {
+            commandSwapManager.action += SetCommandText;
             // 入れ替えクラスを有効化する
             commandSwapManager.SwapActivation(mainCommands);
+            SetCommandText(mainCommands);
 
-            UIOpen?.Invoke(true);
-            UIEvent_MainCommands?.Invoke(mainCommands);
-            UIEvent_StorageCommands?.Invoke(commandStorage.controlCommand);
+            showUI?.Invoke();
         }
 
         /// <summary>
@@ -38,17 +40,26 @@ namespace Command
         /// <returns>変更が行われたか</returns>
         public bool CommandInvalidation()
         {
-            UIOpen?.Invoke(false);
             // 入れ替えクラスを無効化し、変更の有無を受け取り送信
             bool retValue = commandSwapManager.SwapInvalidation();
+            hideUI?.Invoke();
             return retValue;
         }
 
-        private void UIChange(MainCommand[] mainCommands)
+        public Action<int,int> GetMainCommandIndexSet()
         {
-            UIEvent_MainCommands(mainCommands);
-            UIEvent_StorageCommands(commandStorage.controlCommand);
+            return commandSwapManager.SetMainCommandIndex;
+        }
+
+        public Action<int,int> GetStorageIndexSet()
+        {
+            return commandSwapManager.SetStorageIndex;
+        }
+
+        private void SetCommandText(MainCommand[] mainCommands)
+        {
+            swapUI_MainCommand?.Invoke(mainCommands);
+            swapUI_Storage?.Invoke(commandStorage.controlCommand);
         }
     }
-
 }

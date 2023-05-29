@@ -53,6 +53,14 @@ namespace Player
                     }
                     interactUIControllable.HideLockUI();
                 }
+
+                if(stateGetter.GroundCheckGetter().CheckGround() || stateGetter.GroundCheckGetter().CheckWall())
+                {
+                    stateChangeEvent(PlayerStateEnum.Stay);
+                    stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", false);
+                    interactUIControllable.HideUI();
+                    interactUIControllable.HideLockUI();
+                }
             }
             else
             {

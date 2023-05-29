@@ -14,7 +14,7 @@ namespace Command
         /// <returns>生成したコマンド構造体</returns>
         public static MainCommand CreateCommand(CommandContainer status)
         {
-            MainCommand command = default;  // メインコマンドのローカル変数を作成
+            MainCommand command = new MainCommand();  // メインコマンドのローカル変数を作成
 
             // コマンドタイプを元にコマンドを作成
             switch (status.commandType)

@@ -7,6 +7,7 @@ using UniRx;
 using Command;
 using Command.Entity;
 using Gimmick.Interface;
+using InteractUI;
 using ScanMode;
 
 namespace Gimmick
@@ -16,17 +17,22 @@ namespace Gimmick
     /// </summary>
     public class GimmickDirector : MonoBehaviour, IGimmickAccess
     {
+        [Inject]
+        private IScanModeLaserManageable laserManageable;
+
+        [Inject]
+        private IInteractUIControllable uIControllable;
+
         [SerializeField, Tooltip("ストレージコマンド管理クラス")]
         private CommandStorage storage;
 
         [SerializeField, Tooltip("コマンド管理クラス")]
         private CommandDirector commandDirector;
-       
-        [Tooltip("使用するアクセスポイント")]
-        private List<AccessPoint> accessPoints;
 
-        [Inject]
-        private IScanModeLaserManageable laserManageable;
+        [SerializeField]
+        private DisplayInteractCanvasAsset displayInteract;
+
+        private List<AccessPoint> accessPoints;
 
         [Header("値確認用　数値変更非推奨")]
         [SerializeField]
@@ -35,6 +41,8 @@ namespace Gimmick
         private int swappingGimmickIndex = -1;  // 入れ替え中のギミックインデックス
         [SerializeField]
         private int maxArchiveCount = 0;      　// 記録している入れ替えの数
+
+        private int uiActive = -1;              // UIを表示しているか
 
         private bool isSwapping = false;        // コマンド入れ替え実行中であるかを管理する変数 
         private bool isExecute = false;         // 実行可能であるか
@@ -112,7 +120,7 @@ namespace Gimmick
                 accessPoints[i].GimmickActivate();
             }
 
-            //laserManageable.LaserInit(laserInfoList);
+            laserManageable.LaserInit(laserInfoList);
         }
 
         /// <summary>
@@ -211,7 +219,7 @@ namespace Gimmick
         /// </summary>
         public void Redo(Unit unit)
         {
-            if (archiveIndex >= maxArchiveCount - 1|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+            if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 
@@ -249,6 +257,22 @@ namespace Gimmick
                 }
             }
 
+            if (uiActive != retIndex)
+            {
+                if (retIndex >= 0)
+                {
+                    uIControllable.HideUI();
+                    uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
+                    uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
+                }
+                else
+                {
+                    uIControllable.HideUI();
+                }
+
+                uiActive = retIndex;
+            }
+
             return retIndex;
         }
 
@@ -268,6 +292,9 @@ namespace Gimmick
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
+
+            uIControllable.HideUI();
+            uiActive = -1;
 
             return accessPoints[index].transform.position;
         }

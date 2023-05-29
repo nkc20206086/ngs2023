@@ -20,10 +20,16 @@ namespace Player
         /// <summary>
         /// íÖínä÷êî
         /// </summary>
-        public void Act_Landing()
+        public void Act_Landing(bool isMove)
         {
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Landing", true);
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
+
+            if(isMove)
+            {
+                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Landing", false);
+                stateChangeEvent(PlayerStateEnum.Stay);
+            }
         }
 
         /// <summary>

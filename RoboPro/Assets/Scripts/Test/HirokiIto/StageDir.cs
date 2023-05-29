@@ -28,10 +28,10 @@ namespace Stage
             {
                 // 初期コマンド設定
                 setCommands.Add(new CommandContainer[4]);
-                setCommands[i][0] = new CommandContainer(MainCommandType.Scale, false, false, false, -30, CoordinateAxis.X, 1);
-                setCommands[i][1] = new CommandContainer(MainCommandType.Scale, false, false, false, 10, CoordinateAxis.Y, 1);
-                setCommands[i][2] = new CommandContainer(MainCommandType.Scale, false, false, false, -10, CoordinateAxis.X, 1);
-                setCommands[i][3] = new CommandContainer(MainCommandType.None, false, false, false, default, default, default);
+                setCommands[i][0] = new CommandContainer(MainCommandType.Scale, false, false, false, -30, CoordinateAxis.X);
+                setCommands[i][1] = new CommandContainer(MainCommandType.Scale, false, false, false, 10, CoordinateAxis.Y);
+                setCommands[i][2] = new CommandContainer(MainCommandType.Scale, false, false, false, -10, CoordinateAxis.X);
+                setCommands[i][3] = new CommandContainer(MainCommandType.None, false, false, false, default, default);
             }
 
             gimmickDirector.GimmickInstance(setCommands);  // ギミック管理クラスにギミック生成を依頼
