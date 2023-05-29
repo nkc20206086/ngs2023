@@ -14,9 +14,11 @@ namespace CommandUI
         [SerializeField] private Sprite[] sprites; //使う画像
         [SerializeField] private GameObject[] inventryBehavior = new GameObject[3];//コマンド
         [SerializeField] private GameObject[] inventryAxis = new GameObject[3];//軸
+        [SerializeField] private GameObject[] inventryAxisLock = new GameObject[3];//軸ロック
         [SerializeField] private Image[] inventryAxisColor = new Image[3]; //軸カラー
         [SerializeField] private GameObject[] inventryValue = new GameObject[3];//数値
-        [SerializeField] private GameObject[] inventryValuesign = new GameObject[3];//数値
+        [SerializeField] private GameObject[] inventryValueLock = new GameObject[3];//数値
+        [SerializeField] private GameObject[] inventryValuesign = new GameObject[3];//符号
 
         public event Action<int, int> InventryCommandIndexes;
 
@@ -30,10 +32,11 @@ namespace CommandUI
                     inventryAxis[i].SetActive(true);
                     inventryValue[i].SetActive(true);
 
-                    switch (commands[i].GetCommandType())
+                    MainCommand command = (MainCommand)commands[i];
+
+                    switch (command.GetCommandType())
                     {
                         case CommandType.Command:
-                            MainCommand command = (MainCommand)commands[i];
                             //アイコン判別
                             switch (command.GetMainCommandType())
                             {
@@ -75,10 +78,13 @@ namespace CommandUI
                                 inventryValuesign[i].SetActive(true);
                                 inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = command.GetValueText();
                             }
+
+                            inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
+                            inventryValueLock[i].SetActive(command.lockValue);
                             break;
 
                         case CommandType.Axis:
-                            inventryBehavior[i].gameObject.SetActive(false);
+                            inventryBehavior[i].SetActive(false);
                             switch (commands[i].GetString())
                             {
                                 case "X":
@@ -92,12 +98,15 @@ namespace CommandUI
                                     break;
                             }
                             inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetString();
-                            inventryValue[i].gameObject.SetActive(false);
+                            inventryValue[i].SetActive(false);
+
+                            inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
+
                             break;
 
                         case CommandType.Value:
-                            inventryBehavior[i].gameObject.SetActive(false);
-                            inventryAxis[i].gameObject.SetActive(false);
+                            inventryBehavior[i].SetActive(false);
+                            inventryAxis[i].SetActive(false);
                             if (int.Parse(commands[i].GetString()) < 0)
                             {
                                 inventryValuesign[i].SetActive(false);
@@ -108,6 +117,9 @@ namespace CommandUI
                                 inventryValuesign[i].SetActive(true);
                                 inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i].GetString();
                             }
+
+                            inventryValueLock[i].SetActive(command.lockValue);
+
                             break;
                     }
                 }
