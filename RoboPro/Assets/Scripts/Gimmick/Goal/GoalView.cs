@@ -20,6 +20,9 @@ public class GoalView : MonoBehaviour
     private ParticleSystem clearEffect;
 
     [SerializeField]
+    private GameObject[] clearOnHideObjects;
+
+    [SerializeField]
     private Vector3 uiOffset;
 
     [SerializeField]
@@ -56,7 +59,6 @@ public class GoalView : MonoBehaviour
         if (isClear) return;
         //slider.SetValueWithoutNotify(value);
         interactingEffect.Play();
-        Debug.Log("OK");
         interactUIControllable.SetFillAmount(value);
     }
 
@@ -88,5 +90,10 @@ public class GoalView : MonoBehaviour
         vCameraChanger.ChangeCameraTarget(VCameraType.Goal);
         clearEffect.Play();
         interactUIControllable.HideUI();
+
+        for(int i = 0; i < clearOnHideObjects.Length; i++)
+        {
+            clearOnHideObjects[i].gameObject.SetActive(false);
+        }
     }
 }
