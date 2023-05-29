@@ -37,5 +37,13 @@ namespace Command.Entity
         {
             get => value;
         }
+
+        /// <summary>
+        /// •„†•ÏXŠÖ”
+        /// </summary>
+        public void SignChange()
+        {
+            value *= -1;
+        }
     }
 }

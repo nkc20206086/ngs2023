@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using Command.Entity;
 
@@ -21,8 +20,10 @@ namespace Command
         [SerializeField,Tooltip("ストレージコマンドを管理するクラス")]
         private CommandStorage commandStorage;
 
-        [SerializeField,Tooltip("コマンドボタンを管理するクラス")]
-        private CommandButtonManager buttonManager;
+        //[SerializeField,Tooltip("コマンドボタンを管理するクラス")]
+        //private CommandButtonManager buttonManager;
+
+        public Action<MainCommand[]> action;
 
         private MainCommand[] mainCommands; // 入れ替え対象のメインコマンド配列を格納する変数
 
@@ -31,7 +32,7 @@ namespace Command
         private void Start()
         {
             isChanged = true;                                                      // 入れ替えの有無を初期化
-            buttonManager.Intialize(SwitchTypeSet, MainIndexChange, StorageIndexChange);  // ボタン入れ替えクラスを初期化する
+            // buttonManager.Intialize(SwitchTypeSet, MainIndexChange, StorageIndexChange);  // ボタン入れ替えクラスを初期化する
         }
 
         /// <summary>
@@ -39,8 +40,7 @@ namespace Command
         /// </summary>
         private void TextRewriting()
         {
-            buttonManager.MainButtonTextRewriting(mainCommands);                 // ボタン管理クラスにメインコマンドボタンのテキスト更新を依頼
-            buttonManager.StrageButtonTextRewriting(commandStorage.controlCommand);     // ボタン管理クラスにストレージコマンドボタンのテキスト更新を依頼
+            action(mainCommands);
         }
 
         /// <summary>
@@ -49,7 +49,6 @@ namespace Command
         private void CommandSwap()
         {
             if (mainIndexNum < 0 || storageIndexNum < 0) return;                                               // どちらかのインデックスが0未満であるなら早期リターンする
-            if (mainIndexNum >= mainCommands.Length) return;
             if (mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
 
             // 入れ替えタイプがメインコマンドであるなら
@@ -123,7 +122,7 @@ namespace Command
         {
             mainCommands = obj;                // メインコマンド配列をクラス内に保存
 
-            buttonManager.CanvasDisplay();     // ボタン表示キャンバスを表示する
+            // buttonManager.CanvasDisplay();     // ボタン表示キャンバスを表示する
 
             TextRewriting();                   // テキスト更新処理
 
@@ -135,7 +134,7 @@ namespace Command
         /// <returns>変更が行われたか</returns>
         public bool SwapInvalidation()
         {
-            buttonManager.CanvasHide();                     // ボタン表示キャンバスを非表示にする
+            // buttonManager.CanvasHide();                     // ボタン表示キャンバスを非表示にする
 
             if (isChanged)                                  // 変更が行われているなら
             {
@@ -167,6 +166,41 @@ namespace Command
             storageIndexNum = index;  // ストレージコマンドインデックスを保存
 
             CommandSwap();            // コマンド入れ替え関数を実行
+        }
+
+        public void SetMainCommandIndex(int main,int sub)
+        {
+            if (mainCommands[main] == null || 
+                mainCommands[main].GetMainCommandType() == MainCommandType.None) return;
+
+            mainIndexNum = main;
+
+            if (sub >= (int)CommandType.Value)
+            {
+                mainCommands[mainIndexNum]?.value.SignChange();
+
+                action(mainCommands);
+            }
+            else
+            {
+                swapCommandType = (CommandType)sub;
+
+                switch (sub)
+                {
+                    case 0: if (mainCommands[main].lockMenber) return; break;
+                    case 1: if (mainCommands[main].lockCoordinateAxis) return; break;
+                    case 2: if (mainCommands[main].lockValue) return; break;
+                }
+
+                CommandSwap();
+            }
+        }
+
+        public void SetStorageIndex(int main,int sub)
+        {
+            storageIndexNum = main;
+
+            CommandSwap();
         }
     }
 }

@@ -24,23 +24,26 @@ namespace CommandUI
         {
             for (int i = 0; i < InventryLength; i++) // コマンドの数だけ実行
             {
-
                 if (commands[i] != null)
                 {
+                    inventryBehavior[i].SetActive(true);
+                    inventryAxis[i].SetActive(true);
+                    inventryValue[i].SetActive(true);
+
                     switch (commands[i].GetCommandType())
                     {
                         case CommandType.Command:
                             MainCommand command = (MainCommand)commands[i];
                             //アイコン判別
-                            switch (command.GetName())
+                            switch (command.GetMainCommandType())
                             {
-                                case "移動":
+                                case MainCommandType.Move:
                                     programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
                                     break;
-                                case "回転":
+                                case MainCommandType.Rotate:
                                     programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
                                     break;
-                                case "拡大":
+                                case MainCommandType.Scale:
                                     programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
                                     break;
                             }
@@ -62,7 +65,7 @@ namespace CommandUI
                             inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetAxisText();
 
                             //数値の+-変更
-                            if (int.Parse(command.GetValueText()) < 0)
+                            if (command.GetValue() < 0)
                             {
                                 inventryValuesign[i].SetActive(false);
                                 inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = command.GetValueText();
