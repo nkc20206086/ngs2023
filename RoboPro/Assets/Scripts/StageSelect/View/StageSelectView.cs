@@ -1,7 +1,9 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 using Zenject;
 
 namespace Robo
@@ -19,7 +21,13 @@ namespace Robo
         
         [SerializeField] 
         private float putDistance = 5;
-        
+
+        [SerializeField]
+        private float goToStageWaitTime = 1;
+
+        [SerializeField]
+        private float goToStageFadeTime = 1;
+
         [SerializeField] 
         private Ease moveEase = Ease.OutCirc;
 
@@ -28,6 +36,12 @@ namespace Robo
 
         [Inject]
         private DiContainer container;
+
+        [Inject]
+        private IMultiSceneLoader sceneLoader;
+
+        [Inject]
+        private IPostEffector postEffector;
 
         public event Action<int> OnSelect;
         public event Action<int> OnDeselect;
@@ -89,6 +103,22 @@ namespace Robo
         void IStageSelectView.SelectError(int idx)
         {
             Debug.Log("これ以上進めない");
+        }
+
+        public async void Play()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(goToStageWaitTime));
+            postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
+            postEffector.SetColor("_Color", Color.black);
+            Tween fade = postEffector.Fade(FadeType.Out, goToStageFadeTime, Ease.Linear);
+            fade.onComplete += async () =>
+            {
+                await sceneLoader.AddScene(SceneID.Title, true);
+                await sceneLoader.UnloadScene(SceneID.StageSelect);
+                Tween fade = postEffector.Fade(FadeType.In, goToStageFadeTime, Ease.Linear);
+            };
+            //シングルトンへ登録
+            GoToStageArgmentsSingleton.SetStage(Infos[nowSelectedIndex]);
         }
 
         private void Update()

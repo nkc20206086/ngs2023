@@ -19,5 +19,6 @@ namespace Robo
         void Initalize(StageSelectModelArgs args, StageSelectSaveData saveData);
         void Select(int idx);
         void SelectError(int idx);
+        void Play();
     }
 }

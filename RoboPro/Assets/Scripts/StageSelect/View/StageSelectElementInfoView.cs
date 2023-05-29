@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -7,22 +8,16 @@ namespace Robo
     public class StageSelectElementInfoView : MonoBehaviour, IStageSelectElementInfoView
     {
         [SerializeField] 
-        private Text stageNumber;
+        private TMP_Text stageNumber;
 
         [SerializeField]
-        private Text stageName;
+        private TMP_Text stageName;
 
         [SerializeField]
         private Transform stageIconPosition;
 
         [SerializeField]
-        private Image clearIcon;
-
-        [SerializeField]
-        private Sprite clearIconSprite;
-
-        [SerializeField]
-        private Sprite notClearIconSprite;
+        private GameObject clearPanel;
 
         [Inject]
         private IStageSelectView view;
@@ -38,15 +33,15 @@ namespace Robo
             var saveData = view.SaveData.GetSaveData(info.StageNumber);
             if(saveData == null)
             {
-                clearIcon.sprite = notClearIconSprite;
+                clearPanel.SetActive(false);
             }
             else if (!saveData.IsClear)
             {
-                clearIcon.sprite = notClearIconSprite;
+                clearPanel.SetActive(false);
             }
             else
             {
-                clearIcon.sprite = clearIconSprite;
+                clearPanel.SetActive(true);
             }
         }
     }
