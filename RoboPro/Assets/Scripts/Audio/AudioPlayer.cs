@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Robo
 {
@@ -134,10 +135,13 @@ namespace Robo
                 bgmPlayer.SetFadeInStartOffset(-fadeInMilliSec);
             bgmPlayer.SetFadeInTime(fadeInMilliSec);
             bgmPlayer.SetFadeOutTime(fadeOutMilliSec);
-            bgmPlayer.SetCue(cueSheets[sheetType].acb, sheetType.ToString());
+
+            string cueName = cueSheets[sheetType].acb.GetCueInfoList()[0].name;
+            bgmPlayer.SetCue(cueSheets[sheetType].acb, cueName);
             bgmPlayer.Start();
             isPlayingBGM = true;
             nowPlayingBGM = sheetType;
+            Debug.Log(cueName);
         }
 
         //BGM‚ðŽ~‚ß‚é
