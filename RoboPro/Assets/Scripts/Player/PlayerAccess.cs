@@ -20,6 +20,7 @@ namespace Player
             stateGetter = GetComponent<IStateGetter>();
             accessManager.accessEndEvent += Finish_Access;
             goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnEndInteract += Finish_Access;
             goal.OnClear += Goal_OnClear; 
         }
 
