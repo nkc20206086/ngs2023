@@ -22,6 +22,9 @@ namespace Stage
         [SerializeField]
         private GameObject cameraTarget;
 
+        [SerializeField]
+        private GameObject player;
+
         public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
             StageData stageData = default;
@@ -42,6 +45,8 @@ namespace Stage
             }
 
             datas = stageData.AccessPointDatas;
+
+            player.transform.position = stageData.PlayerPosition;
 
             cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
 

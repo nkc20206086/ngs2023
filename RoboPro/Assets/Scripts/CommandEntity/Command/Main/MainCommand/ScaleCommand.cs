@@ -28,7 +28,7 @@ namespace Command.Entity
 
             baseScale = (Vector3)target;                                                    // 元々の尺度を引数から取得する
 
-            targetScale = baseScale + GetDirection() * (Mathf.Abs(value.getValue) * 0.1f);  // 目標の尺度を計算して保存
+            targetScale = baseScale + GetDirection() * (Mathf.Abs(value.getValue));  // 目標の尺度を計算して保存
 
             // 目標の尺度の1未満の数字を1にする
             targetScale = new Vector3(targetScale.x < 1.0f ? 1.0f : targetScale.x, targetScale.y < 1.0f ? 1.0f : targetScale.y, targetScale.z < 1.0f ? 1.0f : targetScale.z);
@@ -44,7 +44,7 @@ namespace Command.Entity
             {
                 if (usableValue > 0)                                                                        // コマンドの持つ値が正の数なら
                 {
-                    if (Vector3.Distance(targetTransform.localScale,baseScale) >= (usableValue * 0.1f))     // 拡大値分拡大しているなら
+                    if (Vector3.Distance(targetTransform.localScale,baseScale) >= usableValue)     // 拡大値分拡大しているなら
                     {
                         targetTransform.localScale = targetScale;                                           // 尺度を目標の尺度にする
                         completeAction?.Invoke();                                                           // コマンド完了時処理を実行

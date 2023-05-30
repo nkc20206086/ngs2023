@@ -10,6 +10,8 @@ namespace Command.Entity
     /// </summary>
     public class RotateCommand : MainCommand
     {
+        const int ANGLE_MAG = 45;
+
         private Quaternion baseQuat;    // Às‘O‚Ì‰ñ“]—Ê
 
         /// <summary>
@@ -22,13 +24,13 @@ namespace Command.Entity
         {
             // Še€–Ú‚ğŒ»İ‚Ìó‘Ô‚ÅÄİ’è
             this.completeAction = completeAction;
-            usableValue = value.getValue;
+            usableValue = value.getValue * ANGLE_MAG;
             usableAxis = axis.getAxis;
 
             Quaternion quaternion = (Quaternion)target;                                         // ‰Šú‰ñ“]’l‚ğˆø”‚©‚çæ“¾‚·‚é
             baseQuat = quaternion;                                                              // •Ï”‚É•Û‘¶
 
-            return quaternion * Quaternion.Euler(GetDirection() * Mathf.Abs(value.getValue));   // ’l‚ğ”½‰f‚µ‚½‰ñ“]’l‚ğ•Ô‚·
+            return quaternion * Quaternion.Euler(GetDirection() * Mathf.Abs(value.getValue * ANGLE_MAG));   // ’l‚ğ”½‰f‚µ‚½‰ñ“]’l‚ğ•Ô‚·
         }
 
         public override void CommandExecute(CommandState state, Transform targetTransform)
