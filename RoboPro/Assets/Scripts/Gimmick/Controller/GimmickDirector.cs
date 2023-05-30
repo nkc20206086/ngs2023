@@ -89,8 +89,6 @@ namespace Gimmick
         {
             accessPoints = new List<AccessPoint>();
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
-            Debug.Log(datas[0].Commands[0].commandType);
-
 
             for (BlockID id = BlockID.Command_Red;id <= BlockID.Command_Black;id++)
             {
