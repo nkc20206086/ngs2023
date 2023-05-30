@@ -192,7 +192,7 @@ namespace Gimmick
         /// </summary>
         public void Undo(Unit unit)
         {
-            if (archiveIndex <= 0 || isSwapping) return;     // セーブ参照インデックスが0よりも小さいか、入れ替え実行中であれば早期リターンする
+            if (archiveIndex <= 1 || isSwapping) return;     // セーブ参照インデックスが1よりも小さいか、入れ替え実行中であれば早期リターンする
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
