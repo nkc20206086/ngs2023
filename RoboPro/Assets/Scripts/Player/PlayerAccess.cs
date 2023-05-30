@@ -31,6 +31,7 @@ namespace Player
         private void Goal_OnClear()
         {
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            effect.gameObject.SetActive(false);
             stateChangeEvent(PlayerStateEnum.Stay);
             Invoke("Access_Goal", 1);
         }
