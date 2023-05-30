@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6166669163029299395}
   - component: {fileID: 5464222778704961662}
   - component: {fileID: 5425823552889498848}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: YText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 465190208321857089}
   - component: {fileID: 7448473611871337417}
   - component: {fileID: 8540606168816135204}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 177359045706007355}
   - component: {fileID: 7953970487260482328}
   - component: {fileID: 765963898161244411}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: YCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.3}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &979317983241515092
 Canvas:
@@ -384,7 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e0bae733261f74289f2a4f98acb003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
   lockX: 0
   lockY: 0
   lockZ: 0
@@ -401,7 +400,7 @@ GameObject:
   - component: {fileID: 4246267915887518127}
   - component: {fileID: 8642152144591339367}
   - component: {fileID: 3067070035677924930}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +426,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5362438847453589985
 Canvas:
@@ -502,7 +501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e0bae733261f74289f2a4f98acb003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
   lockX: 0
   lockY: 0
   lockZ: 0
@@ -515,7 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 251881091778224419}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Axis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +549,7 @@ GameObject:
   - component: {fileID: 2166011433856879176}
   - component: {fileID: 9211299886765040027}
   - component: {fileID: 4497280324422795600}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: XCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +575,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -1.3, y: -0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2405459387491958378
 Canvas:
@@ -652,7 +650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e0bae733261f74289f2a4f98acb003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
   lockX: 0
   lockY: 0
   lockZ: 0
@@ -667,7 +664,7 @@ GameObject:
   - component: {fileID: 243751806434058019}
   - component: {fileID: 5936651077707306151}
   - component: {fileID: 86298669158585272}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: XText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,10 +850,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7017625328326254430, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6392131099197530670, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -5005490918245997597, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -1019849202092685158, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 763465696877920824, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8473b567f3ea3fe4285407d8405dfad6,
         type: 3}
       propertyPath: m_Name
       value: Axis
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369906136111688320, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7800894383752940350, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373669533943326743, guid: 8473b567f3ea3fe4285407d8405dfad6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8473b567f3ea3fe4285407d8405dfad6, type: 3}

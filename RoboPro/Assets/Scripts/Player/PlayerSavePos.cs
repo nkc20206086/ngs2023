@@ -17,7 +17,8 @@ namespace Player
         void Start()
         {
             savePosData = new PlayerSavePosData(saveVecList, saveQuaternionsList, callCount);
-            SaveList();
+            saveVecList.Add(gameObject.transform.position);
+            saveQuaternionsList.Add(gameObject.transform.rotation);
         }
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace Player
         public void SaveList()
         {
             //ƒJƒEƒ“ƒg‚ª“¯‚¶‚¾‚Á‚½‚ç‚»‚Ì‚Ü‚Ü“ü‚ê‚é
-            if (callCount == saveVecList.Count)
+            if (callCount == saveVecList.Count - 1)
             {
                 saveVecList.Add(gameObject.transform.position);
                 saveQuaternionsList.Add(gameObject.transform.rotation);
@@ -34,7 +35,7 @@ namespace Player
             }
             else
             {
-                for(int i = saveVecList.Count -1; i >= callCount;i--)
+                for (int i = saveVecList.Count - 1; i > callCount; i--)
                 {
                     saveVecList.RemoveAt(i);
                     saveQuaternionsList.RemoveAt(i);
