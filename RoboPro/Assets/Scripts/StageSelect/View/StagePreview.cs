@@ -8,6 +8,7 @@ public class StagePreview : MonoBehaviour
 {
     [SerializeField] private BlockDB blockDB;
     [SerializeField] private Vector3 positionMultiply = new Vector3(0.5f, 0.5f, 0);
+    [SerializeField] private Vector3 offset;
     [SerializeField] private float scale = 0.25f;
     [SerializeField] private GameObject blindBlock;
     [SerializeField] private float createBlocktime_1 = 0.5f;
@@ -102,7 +103,6 @@ public class StagePreview : MonoBehaviour
             Destroy(blocks[i]);
         }
         blocks.Clear();
-        makedPos.Clear();
 
         float xMax = 0;
         float yMax = 0;
@@ -126,6 +126,7 @@ public class StagePreview : MonoBehaviour
                     if (blockData.Obj_Odd == null) continue;
 
                     putList.Add((blockData, new Vector3Int(x, y, z), blockIndex));
+                    if(makedPos.Count < blockIndex + 1)
                     makedPos.Add(new Vector3Int(x, y, z));
                     blockIndex++;
                 }
@@ -135,9 +136,9 @@ public class StagePreview : MonoBehaviour
         isUpdate = true;
 
         Vector3 stageSize = new Vector3(xMax * positionMultiply.x, yMax * positionMultiply.y, zMax * positionMultiply.z) * scale;
-        transform.position -= stageSize / 2;
+        transform.localPosition = -stageSize / 2 + offset;
 
-        Vector3 centerPosition = transform.position;
+        Vector3 centerPosition = Vector3.zero;
         for (int i = 0; i < blockIndex; i++)
         {
             PutBlock(putList[i].Item1, putList[i].Item2.x, putList[i].Item2.y, putList[i].Item2.z, putList[i].Item3, centerPosition);
@@ -149,6 +150,7 @@ public class StagePreview : MonoBehaviour
             tweens.Remove(tw);
         });
         tweens.Add(tw);
+        //makedPos.Clear();
     }
 
     private void PutBlock(BlockData blockData, int x, int y, int z, int idx, Vector3 centerPos)
@@ -166,7 +168,6 @@ public class StagePreview : MonoBehaviour
         block.transform.localPosition = new Vector3(x, y, z) * scale;
         block.transform.localScale = new Vector3(scale, scale, scale);
         blocks.Add(block);
-        makedPos[idx] = block.transform.position;
 
         Vector3 firstPos = makedPos[idx];
         Vector3 secondPos = (centerPos - makedPos[idx]).normalized* UnityEngine.Random.Range(blindBlockMovePowerMin, blindBlockMovePowerMax);
