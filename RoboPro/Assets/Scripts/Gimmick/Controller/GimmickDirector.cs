@@ -265,6 +265,7 @@ namespace Gimmick
                 if (retIndex >= 0)
                 {
                     uIControllable.HideUI();
+                    uIControllable.HideLockUI();
                     uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
                     uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
                 }
