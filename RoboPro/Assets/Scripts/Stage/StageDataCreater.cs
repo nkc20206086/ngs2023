@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using System.Collections.Generic;
 using Zenject;
+using Cinemachine;
 using Robo;
 
 namespace Stage
@@ -24,6 +25,9 @@ namespace Stage
 
         [SerializeField]
         private GameObject player;
+
+        [SerializeField]
+        private CinemachineVirtualCamera goalCamera;
 
         public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
@@ -47,6 +51,7 @@ namespace Stage
             datas = stageData.AccessPointDatas;
 
             player.transform.position = stageData.PlayerPosition;
+            goalCamera.transform.position = stageData.CameraPosition;
 
             cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
 
@@ -64,7 +69,11 @@ namespace Stage
                         {
                             GameObject instance = diContainer.InstantiatePrefab(prefabs, new Vector3(x, y, z), Quaternion.identity, null);
 
-                            if (blockId >= BlockID.Command_Red)
+                            if (blockId == BlockID.Goal)
+                            {
+                                goalCamera.LookAt = instance.transform;
+                            }
+                            else if (blockId >= BlockID.Command_Red)
                             {
                                 if (!dictionary.ContainsKey(blockId)) dictionary[blockId] = new List<GameObject>();
                                 dictionary[blockId].Add(instance);
