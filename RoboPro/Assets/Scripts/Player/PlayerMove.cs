@@ -100,16 +100,18 @@ namespace Player
                 Debug.Log(index);
                 if (index >= 0)
                 {
-                    bool access = stateGetter.GimmickAccessGetter().Access(index);
-
-                    if (access)
+                    if (isInteract)
                     {
-                        if (isInteract)
+                        bool access = stateGetter.GimmickAccessGetter().Access(index);
+                        if (access)
                         {
+                            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
+                            stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                             //アクセスポイントに接続する
                             Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
                             pos.y = this.transform.position.y;
                             transform.LookAt(pos);
+
                             stateChangeEvent(PlayerStateEnum.Access);
                         }
                     }

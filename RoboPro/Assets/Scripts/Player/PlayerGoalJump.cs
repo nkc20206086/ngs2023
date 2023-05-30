@@ -18,6 +18,7 @@ namespace Player
 
         Vector3 jumpVec;
         private bool isJump = false;
+        private bool isVectorCalc;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
 
@@ -28,8 +29,6 @@ namespace Player
             goal = GameObject.FindObjectOfType<Goal>();
 
             jumpVec = stateGetter.JumpPowerGetter();
-            //二点間の距離を代入(スピード調整に使う)
-            distanceVec = Vector3.Distance(transform.position, goal.gameObject.transform.position);
         }
 
         private void Act_GoalJump()
@@ -39,13 +38,24 @@ namespace Player
 
         public void Act_GoTo_Goal()
         {
-            stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_GoalJump");
+            if(isVectorCalc == false)
+            {
+                //二点間の距離を代入(スピード調整に使う)
+                distanceVec = Vector3.Distance(gameObject.transform.position, goal.gameObject.transform.position);
+                stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_GoalJump");
+                Act_GoalJump();
+
+                isVectorCalc = true;
+            }
+            
             // 現在の位置
             float currentPos = (Time.deltaTime * speed) / distanceVec;
             transform.position = Vector3.Lerp(transform.position, goal.gameObject.transform.position, currentPos);
-            if (isJump) return;
-            Act_GoalJump();
-            isJump = true;
+
+            //Vector3 middleVector
+            //Vector3 cameraPos = GoalCameraPositionGetter.GetPosition;
+            //cameraPos.y = gameObject.transform.position.y;
+            //transform.LookAt(cameraPos);
         }
 
         public void Finish_GoTo_Goal()
