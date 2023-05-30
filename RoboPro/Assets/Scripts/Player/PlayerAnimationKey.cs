@@ -10,6 +10,9 @@ namespace Player
         [SerializeField]
         private GameObject player;
 
+        [SerializeField]
+        private GameObject goalCrackerEffect;
+
         private PlayerStepOff playerStepOff;
         private PlayerLanding playerLanding;
         private PlayerLadderStepOn playerLadderStepOn;
@@ -55,7 +58,7 @@ namespace Player
 
         public void Finish_GoalDance_AnimatinKey()
         {
-
+            goalCrackerEffect.gameObject.SetActive(true);
         }
     }
 }
