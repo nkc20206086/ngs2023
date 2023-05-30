@@ -1,6 +1,8 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Robo
 {
@@ -12,6 +14,16 @@ namespace Robo
         private Slider bgm_volume_slider;
         [SerializeField]
         private Slider se_volume_slider;
+
+        [SerializeField]
+        private TMP_Text master_volume_text;
+        [SerializeField]
+        private TMP_Text bgm_volume_text;
+        [SerializeField]
+        private TMP_Text se_volume_text;
+
+        [Inject]
+        private IAudioPlayer audioPlayer;
 
         public event Func<IGetSettingsData> GetSettingsData;
         public event Action<float> OnSetMasterVolume;
@@ -36,6 +48,20 @@ namespace Robo
             master_volume_slider.SetValueWithoutNotify(GetSettingsData().MasterVolume);
             bgm_volume_slider.SetValueWithoutNotify(GetSettingsData().BGMVolume);
             se_volume_slider.SetValueWithoutNotify(GetSettingsData().SEVolume);
+
+            master_volume_text.text = ((int)(GetSettingsData().MasterVolume * 100)).ToString();
+            bgm_volume_text.text = ((int)(GetSettingsData().BGMVolume * 100)).ToString();
+            se_volume_text.text = ((int)(GetSettingsData().SEVolume * 100)).ToString();
+
+            master_volume_slider.GetComponent<SliderHelper>().OnEndDrag += data => PlayCheckVolumeSound();
+            bgm_volume_slider.GetComponent<SliderHelper>().OnEndDrag += data => PlayCheckVolumeSound();
+            se_volume_slider.GetComponent<SliderHelper>().OnEndDrag += data => PlayCheckVolumeSound();
+
+        }
+
+        private void PlayCheckVolumeSound()
+        {
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
         }
 
         private void SetAudioMixerVolume(AudioType type, float volume)
@@ -44,12 +70,15 @@ namespace Robo
             {
                 case AudioType.Master:
                     OnSetMasterVolume?.Invoke(volume);
+                    master_volume_text.text = ((int)(GetSettingsData().MasterVolume * 100)).ToString();
                     break;
                 case AudioType.BGM:
                     OnSetBGMVolume?.Invoke(volume);
+                    bgm_volume_text.text = ((int)(GetSettingsData().BGMVolume * 100)).ToString();
                     break;
                 case AudioType.SE:
                     OnSetSEVolume?.Invoke(volume);
+                    se_volume_text.text = ((int)(GetSettingsData().SEVolume * 100)).ToString();
                     break;
             }
         }

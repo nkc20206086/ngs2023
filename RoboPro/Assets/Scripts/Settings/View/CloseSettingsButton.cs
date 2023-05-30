@@ -10,6 +10,9 @@ namespace Robo
         private Button button;
 
         [Inject]
+        private IAudioPlayer audioPlayer;
+
+        [Inject]
         private IMultiSceneLoader multiSceneLoader;
 
         private bool unloading = false;
@@ -21,6 +24,7 @@ namespace Robo
 
         private void CloseSettings()
         {
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
             //Settingsシーンをアンロード中であれば早期リターン
             if (unloading) return;
             unloading = true;

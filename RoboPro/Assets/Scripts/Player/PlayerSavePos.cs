@@ -30,21 +30,22 @@ namespace Player
             {
                 saveVecList.Add(gameObject.transform.position);
                 saveQuaternionsList.Add(gameObject.transform.rotation);
+                //Debug.Log("保存" + callCount);
             }
             else
             {
-                //戻った所から値を入れる
-                saveVecList.Insert(callCount, gameObject.transform.position);
-                saveQuaternionsList.Insert(callCount, gameObject.transform.rotation);
-
-                //カウントの差が2以上で消さなければいけない要素が存在する
-                if (1 < saveVecList.Count - callCount)
+                for(int i = saveVecList.Count -1; i >= callCount;i--)
                 {
-                    saveVecList.RemoveRange(callCount + 1, saveVecList.Count - 1);
-                    saveQuaternionsList.RemoveRange(callCount + 1, saveVecList.Count - 1);
+                    saveVecList.RemoveAt(i);
+                    saveQuaternionsList.RemoveAt(i);
                 }
+                //戻った所から値を入れる
+                saveVecList.Add(gameObject.transform.position);
+                saveQuaternionsList.Add(gameObject.transform.rotation);
             }
             callCount++;
+            Debug.Log("callCount " + callCount);
+            Debug.Log("List.Count " + saveVecList.Count);
             //Listを保存する
             savePosData.SaveData(saveVecList, saveQuaternionsList, callCount);
         }
