@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using Zenject;
 using Command.Entity;
+using Robo;
 
 namespace Command
 {
@@ -9,6 +11,9 @@ namespace Command
     /// </summary>
     public class CommandSwapManager : MonoBehaviour
     {
+        [Inject]
+        private IAudioPlayer audioPlayer;
+
         [Header("デバッグ用表示変数群(変更しないでください)")]
         [SerializeField,Tooltip("メインコマンドの入れ替えインデックス")]
         int mainIndexNum = -1;
@@ -50,6 +55,9 @@ namespace Command
         {
             if (mainIndexNum < 0 || storageIndexNum < 0) return;                                               // どちらかのインデックスが0未満であるなら早期リターンする
             if (mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
+
+            if (mainCommands[mainIndexNum] == null) audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Attach_02");
+            else audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Remove");
 
             // 入れ替えタイプがメインコマンドであるなら
             if (swapCommandType == CommandType.Command)
