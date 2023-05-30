@@ -1,3 +1,4 @@
+using InteractUI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,25 @@ public class GoalView : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private Slider slider;
-
-    [SerializeField]
     private ParticleSystem interactingEffect;
 
     [SerializeField]
     private ParticleSystem clearEffect;
 
+    [SerializeField]
+    private GameObject[] clearOnHideObjects;
+
+    [SerializeField]
+    private Vector3 uiOffset;
+
+    [SerializeField]
+    private DisplayInteractCanvasAsset interactAsset;
+
     [Inject]
     private IVCameraTargetChanger vCameraChanger;
+
+    [Inject]
+    private IInteractUIControllable interactUIControllable;
 
     private bool isClear = false;
 
@@ -32,23 +42,24 @@ public class GoalView : MonoBehaviour
         goal.OnExitGoal += OnExitGoal;
         goal.OnChangeInteractingTime += OnChangeInteractingTime;
         goal.OnClear += OnClear;
+        interactUIControllable.SetPosition(transform.position + uiOffset);
     }
 
-    private void Update()
-    {
-        // 現オブジェクトからメインカメラ方向のベクトルを取得する
-        Vector3 direction = Camera.main.transform.position - slider.transform.position;
+    //private void Update()
+    //{
+    //    // 現オブジェクトからメインカメラ方向のベクトルを取得する
+    //    Vector3 direction = Camera.main.transform.position - slider.transform.position;
 
-        // オブジェクトをベクトル方向に従って回転させる
-        slider.transform.rotation = Quaternion.LookRotation(direction);
-    }
+    //    // オブジェクトをベクトル方向に従って回転させる
+    //    slider.transform.rotation = Quaternion.LookRotation(direction);
+    //}
 
     private void OnChangeInteractingTime(float value)
     {
         if (isClear) return;
-        slider.SetValueWithoutNotify(value);
+        //slider.SetValueWithoutNotify(value);
         interactingEffect.Play();
-        Debug.Log("OK");
+        interactUIControllable.SetFillAmount(value);
     }
 
     private void OnHitGoal()
@@ -56,6 +67,11 @@ public class GoalView : MonoBehaviour
         if (isClear) return;
         animator.SetTrigger("Show");
         interactingEffect.gameObject.SetActive(true);
+
+        var controllerNames = Input.GetJoystickNames();
+        ControllerType type = ControllerType.Controller;
+        if (controllerNames.Length == 0) type = ControllerType.Keyboard;
+        interactUIControllable.ShowUI(type, interactAsset);
     }
 
     private void OnExitGoal()
@@ -63,6 +79,7 @@ public class GoalView : MonoBehaviour
         if (isClear) return;
         animator.SetTrigger("Hide");
         interactingEffect.gameObject.SetActive(false);
+        interactUIControllable.HideUI();
     }
 
     private void OnClear()
@@ -72,5 +89,11 @@ public class GoalView : MonoBehaviour
 
         vCameraChanger.ChangeCameraTarget(VCameraType.Goal);
         clearEffect.Play();
+        interactUIControllable.HideUI();
+
+        for(int i = 0; i < clearOnHideObjects.Length; i++)
+        {
+            clearOnHideObjects[i].gameObject.SetActive(false);
+        }
     }
 }

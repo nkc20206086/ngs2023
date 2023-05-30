@@ -85,6 +85,12 @@ namespace Player
                 }
 
             }
+
+            if (-1 < gameObject.transform.position.y) return;
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
+            stateChangeEvent(PlayerStateEnum.Die);
+            stateGetter.RigidbodyGetter().useGravity = false;
+            stateGetter.RigidbodyGetter().velocity = Vector3.zero;
         }
     }
 }

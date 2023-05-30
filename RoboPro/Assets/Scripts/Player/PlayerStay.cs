@@ -2,18 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
-using InteractUI;
 
 namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
-        [Inject]
-        private IInteractUIControllable interactUIControllable;
-
-        [SerializeField]
-        private ScriptableObject scriptableObjectUI;
+        private Goal goal;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         Vector3 defaultScale;
@@ -21,15 +15,24 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnChangeInteractingTime += (value) => 
+            {
+                Vector3 pos = goal.gameObject.transform.position;
+                pos.y = this.transform.position.y;
+                transform.LookAt(pos);
+                stateChangeEvent(PlayerStateEnum.Access);
+            };
             defaultScale = transform.lossyScale;
             stateGetter = GetComponent<IStateGetter>();
         }
 
         public void Act_Stay(bool isMove, bool isInteract)
         {
-            
+            //stateChangeEvent(PlayerStateEnum.Goal_Jump);
+
             //Debug.Log("待つ");
-            if(isMove)
+            if (isMove)
             {
                 stateChangeEvent(PlayerStateEnum.Move);
             }
@@ -50,23 +53,19 @@ namespace Player
                 }
             }
 
+            //アクセスポイントの何番が近くにあるか
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
             if (index >= 0)
             {
-                Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                interactUIControllable.SetPosition(pos);
-                //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                 if (isInteract)
                 {
+                    //アクセスポイントに接続する
+                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                     pos.y = this.transform.position.y;
                     transform.LookAt(pos);
 
                     stateChangeEvent(PlayerStateEnum.Access);
                 }
-            }
-            else
-            {
-                interactUIControllable.HideUI();
             }
 
             //床にいるかどうかを判定する

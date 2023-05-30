@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace Gimmick.Interface
 {
@@ -16,5 +17,13 @@ namespace Gimmick.Interface
         /// </summary>
         /// <param name="index">実行インデックス</param>
         public Vector3 Access(int index);
+
+        /// <summary>
+        /// 実行状態の切り替え関数
+        /// </summary>
+        /// <param name="isExecute">変更状況</param>
+        public void SetExecute(bool isExecute);
+
+        public void SetAction(Action undoAct,Action redoAct,Action saveAct);
     }
 }

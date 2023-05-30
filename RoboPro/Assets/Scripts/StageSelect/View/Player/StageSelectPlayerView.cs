@@ -15,6 +15,9 @@ namespace Robo
         [SerializeField] 
         private Ease moveEase = Ease.Linear;
 
+        [SerializeField]
+        private Animator animator;
+
         [Inject]
         private IStageSelectView view;
 
@@ -38,11 +41,17 @@ namespace Robo
             {
                 transform.DORotate(new Vector3(0, -90, 0), rotateDuration);
             };
+
+            view.OnPlay += () =>
+            {
+                animator.Play("StageSelectPlayer_GoToStage");
+            };
         }
 
         private void MoveTo(Transform target)
         {
             stopped = false;
+            animator.Play("Player_Walk");
             tween?.Kill();
             transform.SetParent(target);
             tween = transform.DOLocalMove(Vector3.zero, moveDuration).SetEase(moveEase);
@@ -50,6 +59,7 @@ namespace Robo
             {
                 stopped = true;
                 transform.DORotate(new Vector3(0, 180, 0), rotateDuration);
+                animator.Play("Player_Idle");
             };
         }
     }

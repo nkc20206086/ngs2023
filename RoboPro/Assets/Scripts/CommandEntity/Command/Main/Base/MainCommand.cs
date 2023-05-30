@@ -24,6 +24,13 @@ namespace Command.Entity
 
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
 
+        public MainCommand() 
+        {
+            lockMenber = false;
+            lockCoordinateAxis = false;
+            lockValue = false;
+        }
+
         /// <summary>
         /// コンストラクタ 数値直接設定用
         /// </summary>
@@ -138,6 +145,24 @@ namespace Command.Entity
         public string GetAxisText()
         {
             return axis != null ? axis.GetString() : default;
+        }
+
+        /// <summary>
+        /// コマンドの持つ値を返す
+        /// </summary>
+        /// <returns></returns>
+        public int GetValue()
+        {
+            return value != null ? value.getValue : 0;
+        }
+
+        /// <summary>
+        /// コマンドの持つ軸を返す
+        /// </summary>
+        /// <returns></returns>
+        public CoordinateAxis GetAxis()
+        {
+            return axis != null ? axis.getAxis : CoordinateAxis.NONE;
         }
 
         /// <summary>

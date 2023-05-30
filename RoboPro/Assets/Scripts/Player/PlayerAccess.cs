@@ -7,16 +7,28 @@ namespace Player
 {
     public class PlayerAccess : MonoBehaviour,IStateChange
     {
+        [SerializeField]
+        private AccessManager accessManager;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-        private AccessManager accessManager;
+        private Goal goal;
 
         // Start is called before the first frame update
         void Start()
         {
-            accessManager = Locator<AccessManager>.GetT();
+            accessManager = accessManager.GetComponent<AccessManager>();
             stateGetter = GetComponent<IStateGetter>();
             accessManager.accessEndEvent += Finish_Access;
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnEndInteract += Finish_Access;
+            goal.OnClear += Goal_OnClear; 
+        }
+
+        private void Goal_OnClear()
+        {
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            stateChangeEvent(PlayerStateEnum.Stay);
+            Invoke("Access_Goal", 1);
         }
 
         /// <summary>
@@ -32,7 +44,13 @@ namespace Player
 
         public void Finish_Access()
         {
-            
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            stateChangeEvent(PlayerStateEnum.Stay);
+        }
+
+        public void Access_Goal()
+        {   
+            stateChangeEvent(PlayerStateEnum.Goal_Jump);
         }
     }
 }

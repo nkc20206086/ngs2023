@@ -4,23 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using MainCamera;
 using Zenject;
-using InteractUI;
 
 namespace Player
 {
     public class PlayerMove : MonoBehaviour, IStateChange
     {
-        [Inject]
-        private IInteractUIControllable interactUIControllable;
-
-        [SerializeField]
-        ScriptableObject scriptableObjectUI;
-
         private GroundColliCheck colliCheck;
         private IStateGetter stateGetter;
+        [Inject]
         private ICameraVectorGetter cameraVectorGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
+        private Goal goal;
 
         private Vector3 moveForward;
 
@@ -30,9 +25,18 @@ namespace Player
         void Start()
         {
             defaultScale = transform.lossyScale;
-            cameraVectorGetter = Locator<ICameraVectorGetter>.GetT();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
+
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnChangeInteractingTime += (value) =>
+            {
+                stateGetter.PlayerAnimatorGeter().SetBool("PlayerMove", false);
+                Vector3 pos = goal.gameObject.transform.position;
+                pos.y = this.transform.position.y;
+                transform.LookAt(pos);
+                stateChangeEvent(PlayerStateEnum.Access);
+            };
         }
 
         /// <summary>
@@ -89,35 +93,29 @@ namespace Player
 
                 //アクセスポイントの何番が近くにあるか
                 int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+                Debug.Log(index);
                 if (index >= 0)
                 {
-                    //UI表示
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    interactUIControllable.SetPosition(pos);
-                    //interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)scriptableObjectUI);
                     if (isInteract)
                     {
                         //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
                         pos.y = this.transform.position.y;
                         transform.LookAt(pos);
 
                         stateChangeEvent(PlayerStateEnum.Access);
                     }
                 }
-                else
-                {
-                    interactUIControllable.HideUI();
-                }
 
                 //目の前が崖か判定
-                if (stateGetter.GroundCheckGetter().CheckGround(moveForward) == false)
+                if (stateGetter.GroundCheckGetter().CheckGround() == false)
                 {
                     if(stateGetter.LadderCheckGetter().LadderClimbCheck() || stateGetter.LadderCheckGetter().LadderDownCheck())
                     {
                         stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                     }
                     //自分の乗っている床でふらつけるかどうかの判定
-                    else if (stateGetter.GroundCheckGetter().DizzyGroundFlg() == false)
+                    else if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
                     {
                         //ふらつくステートに変更
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);

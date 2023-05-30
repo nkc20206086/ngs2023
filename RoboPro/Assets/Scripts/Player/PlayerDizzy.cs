@@ -3,11 +3,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
-    public class PlayerDizzy : MonoBehaviour,IStateChange
+    public class PlayerDizzy : MonoBehaviour, IStateChange
     {
+        [Inject]
+        private IInteractUIControllable interactUIControllable;
+
+        [SerializeField]
+        private ScriptableObject dizzyUI;
+
+        [SerializeField]
+        private ScriptableObject alertUI;
+
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
 
@@ -17,23 +27,45 @@ namespace Player
             stateGetter = GetComponent<IStateGetter>();
         }
 
-        public void Act_Dizzy(bool isMove,bool isInteract)
+        public void Act_Dizzy(bool isMove, bool isInteract)
         {
-            if(isMove)
+            if (isMove)
             {
                 //Debug.Log("Ç”ÇÁÇ¬Ç´");
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", true);
+                Vector3 pos = transform.position;
+                pos.y += stateGetter.PlayerUI_OffsetYGetter();
+                interactUIControllable.SetPosition(pos);
+                interactUIControllable.ShowUI(ControllerType.Keyboard, (DisplayInteractCanvasAsset)dizzyUI);
 
-                if (stateGetter.GroundCheckGetter().CheckDeathHeight()) return;
-                if (isInteract)
+                if (stateGetter.GroundCheckGetter().CheckDeathHeight())
                 {
-                   // Debug.Log("ç~ÇËÇÈ");
-                    stateChangeEvent(PlayerStateEnum.StepOff);
+                    interactUIControllable.ShowSkullMark();
+                }
+                else
+                {
+                    if (isInteract)
+                    {
+                        // Debug.Log("ç~ÇËÇÈ");
+                        stateChangeEvent(PlayerStateEnum.StepOff);
+                        interactUIControllable.HideUI();
+                        interactUIControllable.HideLockUI();
+                    }
+                    interactUIControllable.HideLockUI();
+                }
+
+                if(stateGetter.GroundCheckGetter().CheckGround() || stateGetter.GroundCheckGetter().CheckWall())
+                {
+                    stateChangeEvent(PlayerStateEnum.Stay);
+                    stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", false);
+                    interactUIControllable.HideUI();
+                    interactUIControllable.HideLockUI();
                 }
             }
             else
             {
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Cliff", false);
+                interactUIControllable.HideUI();
                 stateChangeEvent(PlayerStateEnum.Stay);
             }
 

@@ -21,6 +21,15 @@ namespace InteractUI
 		[SerializeField]
 		private Image holdImage;
 
+		[SerializeField]
+		private Image lockImage;
+
+		[SerializeField]
+		private Sprite crossMark;
+
+		[SerializeField]
+		private Sprite skullMark;
+
 		private string beforeDisplayText;
 
 		private Sprite beforeSprite;
@@ -29,6 +38,7 @@ namespace InteractUI
 		{
 			((IInteractUIControllable)this).SetFillAmount(0f);
 			((IInteractUIControllable)this).HideUI();
+			((IInteractUIControllable)this).HideLockUI();
 		}
 
 		void IInteractUIControllable.SetPosition(Vector3 pos)
@@ -66,7 +76,26 @@ namespace InteractUI
         {
 			value = Mathf.Clamp01(value);
 			holdImage.fillAmount = value;
+		}
 
+		void IInteractUIControllable.ShowCrossMarkUI()
+		{
+			lockImage.gameObject.SetActive(true);
+			lockImage.sprite = crossMark;
+			lockImage.enabled = true;
+		}
+
+		void IInteractUIControllable.ShowSkullMark()
+        {
+			lockImage.gameObject.SetActive(true);
+			lockImage.sprite = skullMark;
+			lockImage.enabled = true;
+		}
+
+		void IInteractUIControllable.HideLockUI()
+		{
+			lockImage.gameObject.SetActive(false);
+			lockImage.enabled = false;
 		}
 	}
 }

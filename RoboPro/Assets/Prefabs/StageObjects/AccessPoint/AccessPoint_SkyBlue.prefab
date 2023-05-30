@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4016157870454701230}
   - component: {fileID: 5517180642292491}
   - component: {fileID: 2879892057156519873}
+  - component: {fileID: -66090529350931378}
   m_Layer: 0
   m_Name: AccessPoint_SkyBlue
   m_TagString: Untagged
@@ -84,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-66090529350931378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4393141458281375252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eef9cc8b2c56b440b0bcc36462bc6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &3474240350015585947
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using UniRx;
 using Command;
 using Command.Entity;
 using Gimmick.Interface;
+using InteractUI;
 using ScanMode;
 
 namespace Gimmick
@@ -16,17 +17,22 @@ namespace Gimmick
     /// </summary>
     public class GimmickDirector : MonoBehaviour, IGimmickAccess
     {
+        [Inject]
+        private IScanModeLaserManageable laserManageable;
+
+        [Inject]
+        private IInteractUIControllable uIControllable;
+
         [SerializeField, Tooltip("ストレージコマンド管理クラス")]
         private CommandStorage storage;
 
         [SerializeField, Tooltip("コマンド管理クラス")]
         private CommandDirector commandDirector;
-       
-        [SerializeField, Tooltip("使用するアクセスポイント")]
-        private List<AccessPoint> accessPoints;
 
-        [Inject]
-        private IScanModeLaserManageable laserManageable;
+        [SerializeField]
+        private DisplayInteractCanvasAsset displayInteract;
+
+        private List<AccessPoint> accessPoints;
 
         [Header("値確認用　数値変更非推奨")]
         [SerializeField]
@@ -36,9 +42,15 @@ namespace Gimmick
         [SerializeField]
         private int maxArchiveCount = 0;      　// 記録している入れ替えの数
 
+        private int uiActive = -1;              // UIを表示しているか
+
         private bool isSwapping = false;        // コマンド入れ替え実行中であるかを管理する変数 
         private bool isExecute = false;         // 実行可能であるか
         private CommandState state = CommandState.INACTIVE;
+
+        private Action undoPlayerAction;
+        private Action redoPlayerAction;
+        private Action savePlayerAction;
 
         private void Update()
         {
@@ -48,12 +60,16 @@ namespace Gimmick
                 {
                     foreach (AccessPoint accessPoint in accessPoints)
                     {
-                        accessPoint.controlGimmick.CommandUpdate();   // 各ギミックのコマンドを実行する
+                        accessPoint.ControlGimmicksUpdate();   // 各ギミックのコマンドを実行する
                     }
 
                     foreach (AccessPoint accessPoint in accessPoints)
                     {
-                        if (accessPoint.controlGimmick.GetExecutionStatus) return;
+                        // !
+                        foreach (GimmickController gimmick in accessPoint.controlGimmicks)
+                        {
+                            if (gimmick.GetExecutionStatus) return;
+                        }
                     }
 
                     isExecute = false;
@@ -69,16 +85,41 @@ namespace Gimmick
         /// <summary>
         /// ギミックインスタンス処理
         /// </summary>
-        public void GimmickInstance()
+        public void GimmickInstance(Dictionary<BlockID,List<GameObject>> dic, List<AccessPointData> datas)
         {
+            accessPoints = new List<AccessPoint>();
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
+            Debug.Log(datas[0].Commands[0].commandType);
+
+
+            for (BlockID id = BlockID.Command_Red;id <= BlockID.Command_Black;id++)
+            {
+                if (dic.ContainsKey(id))
+                {
+                    accessPoints.Add(dic[id][0].GetComponent<AccessPoint>());
+                    int index = datas.FindIndex(list => list.ColorID == (ColorID)((int)id - 100));
+                    accessPoints[accessPoints.Count - 1].StartUp(datas[index]);
+
+                    if (dic.ContainsKey(id + 100))
+                    {
+                        accessPoints[accessPoints.Count - 1].GimmickSubscrive(dic[id + 100]);
+                    }
+                    
+                    if (dic.ContainsKey(id + 200))
+                    {
+                        accessPoints[accessPoints.Count - 1].GimmickSubscrive(dic[id + 200]);
+                    }
+                }
+            }
 
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
             for (int i = 0;i <  accessPoints.Count;i++)
             {
-                laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform,accessPoints[i].controlGimmick.transform,accessPoints[i].color));
-
-                accessPoints[i].GimmickActivate();
+                // !
+                foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
+                {
+                    laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform, gimmick.transform, accessPoints[i].color));
+                }
             }
 
             laserManageable.LaserInit(laserInfoList);
@@ -103,24 +144,23 @@ namespace Gimmick
             {
                 for (int i = 0;i < accessPoints.Count;i++)                         // ギミック数分回す
                 {
-                    if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
-                    {
-                        accessPoints[i].controlGimmick.AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
-                    }
-                    else
-                    {
-                        accessPoints[i].controlGimmick.AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
-                    }
+                    accessPoints[i].ArchiveAdd(archiveIndex);
                 }
 
                 maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
                 storage.AddArchiveCommand(archiveIndex, storage.controlCommand);                // ストレージコマンドのアーカイブを追加する
 
+                savePlayerAction?.Invoke();
+
                 state = CommandState.INACTIVE;
 
                 foreach (AccessPoint accessPoint in accessPoints)
                 {
-                    accessPoint.controlGimmick.IntializeAction();
+                    // !
+                    foreach (GimmickController gimmick in accessPoint.controlGimmicks)
+                    {
+                        gimmick.IntializeAction();
+                    }
                 }
             }
         }
@@ -133,7 +173,11 @@ namespace Gimmick
 
             foreach (AccessPoint accessPoint in accessPoints)
             {
-                accessPoint.controlGimmick.StartingAction(state);
+                // !
+                foreach (GimmickController gimmick in accessPoint.controlGimmicks)
+                {
+                    gimmick.StartingAction(state);
+                }
             }
         }
 
@@ -146,11 +190,17 @@ namespace Gimmick
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
 
+            undoPlayerAction?.Invoke();
+
             // 減算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
             {
-                accessPoint.controlGimmick.IntializeAction();
-                accessPoint.controlGimmick.OverwriteControlCommand(archiveIndex);
+                // !
+                foreach (GimmickController gimmick in accessPoint.controlGimmicks)
+                {
+                    gimmick.IntializeAction();
+                }
+                accessPoint.ArchiveSet(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -160,15 +210,22 @@ namespace Gimmick
         /// </summary>
         public void Redo(Unit unit)
         {
-            if (archiveIndex >= maxArchiveCount - 1|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+            if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
+
+            redoPlayerAction?.Invoke();
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
             {
-                accessPoint.controlGimmick.IntializeAction();
-                accessPoint.controlGimmick.OverwriteControlCommand(archiveIndex);
+                // !
+                foreach (GimmickController gimmick in accessPoint.controlGimmicks)
+                {
+                    gimmick.IntializeAction();
+                }
+                accessPoint.ArchiveSet(archiveIndex);
+
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -193,23 +250,55 @@ namespace Gimmick
                 }
             }
 
+            if (uiActive != retIndex)
+            {
+                if (retIndex >= 0)
+                {
+                    uIControllable.HideUI();
+                    uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
+                    uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
+                }
+                else
+                {
+                    uIControllable.HideUI();
+                }
+
+                uiActive = retIndex;
+            }
+
             return retIndex;
         }
 
         Vector3 IGimmickAccess.Access(int index)
         {
+            if (isExecute) return Vector3.zero;
             if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            commandDirector.CommandActivation(accessPoints[index].controlGimmick.controlCommand);
+            commandDirector.CommandActivation(accessPoints[index].controlCommands);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
 
+            uIControllable.HideUI();
+            uiActive = -1;
+
             return accessPoints[index].transform.position;
+        }
+
+        void IGimmickAccess.SetExecute(bool isExecute)
+        {
+            this.isExecute = isExecute;
+        }
+
+        void IGimmickAccess.SetAction(Action undoAct, Action redoAct, Action saveAct)
+        {
+            undoPlayerAction = undoAct;
+            redoPlayerAction = redoAct;
+            savePlayerAction = saveAct;
         }
     }
 }

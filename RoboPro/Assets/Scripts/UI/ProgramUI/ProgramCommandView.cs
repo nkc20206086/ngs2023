@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Command.Entity;
+using System;
 
 namespace CommandUI
 {
@@ -10,34 +11,53 @@ namespace CommandUI
         private int ProgramPanelLength = 3;
         [SerializeField] private Image[] programPanelIcon = new Image[3];  //アイコン
         [SerializeField] private Sprite[] sprites; //使う画像
-        [SerializeField] private GameObject[] ProgramCommand = new GameObject[3]; //コマンド
+        [SerializeField] private GameObject[] LockObject; //コマンド枠ロック
+        [SerializeField] private GameObject[] programCommand = new GameObject[3]; //コマンド
+        [SerializeField] private GameObject[] programCommandLock = new GameObject[3]; //コマンドロック
         [SerializeField] private GameObject[] programPanelAxis = new GameObject[3]; //軸
+        [SerializeField] private GameObject[] programPanelAxisLock = new GameObject[3]; //軸ロック
         [SerializeField] private Image[] programPanelAxisColor = new Image[3]; //軸カラー
         [SerializeField] private GameObject[] programPanelValue = new GameObject[3]; //数値
+        [SerializeField] private GameObject[] programPanelValueLock = new GameObject[3];//数値ロック
         [SerializeField] private GameObject[] programPanelValuesign = new GameObject[3];//数値
 
+        public event Action<int, int> ProgramCommandIndexes;
 
         public void ProgramCommandTextChange(MainCommand[] commands)
         {
             for (int i = 0; i < ProgramPanelLength; i++) // コマンドの数だけ実行
             {
-                if (commands[i] != null)
+                if (commands[i] == null)
                 {
+                    programCommand[i].SetActive(false);
+                    programPanelAxis[i].SetActive(false);
+                    programPanelValue[i].SetActive(false);
+                    programCommandLock[i].SetActive(false);
+                    programPanelValueLock[i].SetActive(false);
+                    continue;
+                }
+
+                if (commands[i].GetMainCommandType() != MainCommandType.None)
+                {
+                    programCommand[i].SetActive(true);
+                    programPanelAxis[i].SetActive(true);
+                    programPanelValue[i].SetActive(true);
+
                     switch (commands[i].GetName())
                     {
-                        case "Move": 
+                        case "移動": 
                             programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
                             break;
-                        case "Rotate":
+                        case "回転":
                             programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
                             break;
-                        case "Scale":
+                        case "拡大":
                             programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
                             break;
                     }
 
 
-                    ProgramCommand[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetName(); //コマンド表示
+                    programCommand[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetName(); //コマンド表示
 
                     if(commands[i].GetAxisText() !="NONE") //プログラム内に軸があるかどうか
                     {
@@ -62,30 +82,49 @@ namespace CommandUI
 
                     if (commands[i].GetValueText() != "0")　//プログラム内に値があるかどうか
                     {
-                        if (int.Parse(commands[i].GetValueText()) < 0)
+                        int showValue = Mathf.Abs(commands[i].GetValue());
+
+                        if (commands[i].GetValue() < 0)
                         {
                             programPanelValuesign[i].SetActive(false);
-                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = commands[i].GetValueText(); //値を表示
+                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = showValue.ToString(); //値を表示
                         }
                         else
                         {
                             programPanelValuesign[i].SetActive(true);
-                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i].GetValueText(); //値を表示
+                            programPanelValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = showValue.ToString(); //値を表示
                         }
                     }
                     else
                     {
                         programPanelValue[i].SetActive(false); //値を非表示
                     }
+
+                        programCommandLock[i].SetActive(commands[i].lockMenber);
+                        programPanelAxisLock[i].SetActive(commands[i].lockCoordinateAxis);
+                        programPanelValueLock[i].SetActive(commands[i].lockValue);
                 }
                 else
                 {
                     //全非表示
-                    ProgramCommand[i].SetActive(false);
+                    programCommand[i].SetActive(false);
                     programPanelAxis[i].SetActive(false);
                     programPanelValue[i].SetActive(false);
+                    if (commands[i].lockMenber&&commands[i].lockCoordinateAxis&&commands[i].lockValue)
+                    {
+                        LockObject[i].SetActive(true);
+                    }
+                    else
+                    {
+                        LockObject[i].SetActive(false);
+                    }
                 }
             }
+        }
+
+        public void ButtonIndexget(int mainIndex,int subIndex)
+        {
+            ProgramCommandIndexes(mainIndex, subIndex);
         }
     }
 }
