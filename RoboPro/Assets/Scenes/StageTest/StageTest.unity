@@ -1775,6 +1775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player0524
       objectReference: {fileID: 0}
+    - target: {fileID: 3805582077870317513, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3805582077870317522, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
         type: 3}
       propertyPath: scriptableObjectUI
