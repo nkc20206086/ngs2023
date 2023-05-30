@@ -88,7 +88,7 @@ namespace Player
 
                 //アクセスポイントの何番が近くにあるか
                 int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-                Debug.Log(index);
+                //Debug.Log(index);
                 if (index >= 0)
                 {
                     if (isInteract)
