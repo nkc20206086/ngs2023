@@ -100,13 +100,18 @@ namespace Player
                 Debug.Log(index);
                 if (index >= 0)
                 {
-                    if (isInteract)
+                    bool access = stateGetter.GimmickAccessGetter().Access(index);
+
+                    if (access)
                     {
-                        //アクセスポイントに接続する
-                        Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                        pos.y = this.transform.position.y;
-                        transform.LookAt(pos);
-                        stateChangeEvent(PlayerStateEnum.Access);
+                        if (isInteract)
+                        {
+                            //アクセスポイントに接続する
+                            Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
+                            pos.y = this.transform.position.y;
+                            transform.LookAt(pos);
+                            stateChangeEvent(PlayerStateEnum.Access);
+                        }
                     }
                 }
 
