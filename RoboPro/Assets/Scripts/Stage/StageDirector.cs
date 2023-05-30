@@ -20,7 +20,7 @@ namespace Stage
         private StageUIManager uiManager;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             Dictionary<BlockID, List<GameObject>> obj = new Dictionary<BlockID, List<GameObject>>();
             List<AccessPointData> datas = new List<AccessPointData>();

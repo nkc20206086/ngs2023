@@ -59,12 +59,16 @@ namespace Player
             {
                 if (isInteract)
                 {
-                    //アクセスポイントに接続する
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    pos.y = this.transform.position.y;
-                    transform.LookAt(pos);
+                    bool access = stateGetter.GimmickAccessGetter().Access(index);
+                    if (access)
+                    {
+                        //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
 
-                    stateChangeEvent(PlayerStateEnum.Access);
+                        stateChangeEvent(PlayerStateEnum.Access);
+                    }
                 }
             }
 
