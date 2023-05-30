@@ -16,7 +16,7 @@ namespace Gimmick
     /// <summary>
     /// ギミック関連の処理を管理するクラス
     /// </summary>
-    public class GimmickDirector : MonoBehaviour, IGimmickAccess
+    public class GimmickDirector1 : MonoBehaviour, IGimmickAccess
     {
         [Inject]
         private IScanModeLaserManageable laserManageable;
@@ -82,7 +82,7 @@ namespace Gimmick
         /// <summary>
         /// ギミックインスタンス処理
         /// </summary>
-        public void GimmickInstance(Dictionary<BlockID, List<GameObject>> dic, List<AccessPointData> datas)
+        public void GimmickInstance(Dictionary<BlockID,List<GameObject>> dic, List<AccessPointData> datas)
         {
             accessPoints = new List<AccessPoint>();
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
@@ -158,7 +158,7 @@ namespace Gimmick
             }
 
             // 各要素に入れ替えの開始処理と終了処理を預け、生成インデックスを登録する
-            for (int i = 0; i < accessPoints.Count; i++)
+            for (int i = 0;i <  accessPoints.Count;i++)
             {
                 // !
                 foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
@@ -189,7 +189,7 @@ namespace Gimmick
             }
             else　                                                                              // 入れ替えが実行されているなら
             {
-                for (int i = 0; i < accessPoints.Count; i++)                         // ギミック数分回す
+                for (int i = 0;i < accessPoints.Count;i++)                         // ギミック数分回す
                 {
                     if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
                     {
@@ -268,7 +268,7 @@ namespace Gimmick
         /// </summary>
         public void Redo(Unit unit)
         {
-            if (archiveIndex + 1 > maxArchiveCount || isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+            if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 

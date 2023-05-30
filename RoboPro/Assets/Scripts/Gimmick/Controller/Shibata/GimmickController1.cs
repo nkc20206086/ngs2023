@@ -12,7 +12,7 @@ namespace Gimmick
     /// <summary>
     /// ギミック管理クラス
     /// </summary>
-    public class GimmickController : MonoBehaviour
+    public class GimmickController1 : MonoBehaviour
     {
         public MainCommand[] controlCommand = new MainCommand[CommandUtility.commandCount]; // 管理コマンドの配列
 
@@ -34,7 +34,6 @@ namespace Gimmick
         private CommandState state;                                                         // 動き方の状態変数
 
         public bool GetExecutionStatus { get => isExecutable; }
-        
         public bool IsInitalized { get; private set; }
 
         public void Initalize()

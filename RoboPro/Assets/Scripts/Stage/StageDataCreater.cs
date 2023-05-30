@@ -42,6 +42,8 @@ namespace Stage
                         if (prefabs != null)
                         {
                             GameObject instance = Instantiate(prefabs, new Vector3(x, y, z), Quaternion.identity);
+                            StageObject obj = instance.AddComponent<StageObject>();
+                            obj.Initalize(new Vector3Int(x, y, z));
 
                             if (blockId >= BlockID.Command_Red)
                             {
