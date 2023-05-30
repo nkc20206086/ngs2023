@@ -113,7 +113,7 @@ namespace Robo
             Tween fade = postEffector.Fade(FadeType.Out, goToStageFadeTime, Ease.Linear);
             fade.onComplete += async () =>
             {
-                await sceneLoader.AddScene(SceneID.Title, true);
+                await sceneLoader.AddScene(SceneID.Stage, true);
                 await sceneLoader.UnloadScene(SceneID.StageSelect);
                 Tween fade = postEffector.Fade(FadeType.In, goToStageFadeTime, Ease.Linear);
             };
@@ -135,7 +135,7 @@ namespace Robo
                 OnSelectPreviousKey?.Invoke();
             }
             //Spaceでステージをプレイ
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 OnPlay?.Invoke();
             }
