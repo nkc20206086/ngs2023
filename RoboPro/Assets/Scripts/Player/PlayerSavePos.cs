@@ -42,17 +42,6 @@ namespace Player
                 //戻った所から値を入れる
                 saveVecList.Add(gameObject.transform.position);
                 saveQuaternionsList.Add(gameObject.transform.rotation);
-                //Debug.Log("消して保存" + callCount);
-                //カウントの差が2以上で消さなければいけない要素が存在する
-                //if (1 < saveVecList.Count - callCount)
-                //{
-                //    for(int i = callCount + 1;i < saveVecList.Count;i++)
-                //    {
-                //        saveVecList.Remove()
-                //    }
-                //    saveVecList.RemoveRange(callCount + 1, saveVecList.Count - 1);
-                //    saveQuaternionsList.RemoveRange(callCount + 1, saveVecList.Count - 1);
-                //}
             }
             callCount++;
             Debug.Log("callCount " + callCount);
