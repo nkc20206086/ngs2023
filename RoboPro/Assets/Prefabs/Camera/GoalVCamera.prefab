@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 5332480559048679268}
   - component: {fileID: 5332480559048679271}
   - component: {fileID: 5332480559048679269}
+  - component: {fileID: 3922625065774985985}
   m_Layer: 0
   m_Name: GoalVCamera
   m_TagString: Untagged
@@ -142,3 +143,15 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5332480558558268063}
+--- !u!114 &3922625065774985985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332480559048679270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cbedca34224c614a8f1f2470d39132d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
