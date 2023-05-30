@@ -45,6 +45,8 @@ namespace Stage
 
             cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
 
+            GameObject field = new GameObject("FieldObject");
+
             for (int z = 0;z < stageData.Blocks.Blocks.Count; z++)
             {
                 for (int y = 0;y < stageData.Blocks.Blocks[z].Blocks.Count;y++)
@@ -62,6 +64,10 @@ namespace Stage
                                 if (!dictionary.ContainsKey(blockId)) dictionary[blockId] = new List<GameObject>();
                                 dictionary[blockId].Add(instance);
                             }
+                            else
+                            {
+                                instance.transform.SetParent(field.transform);
+                            }
                         }
                     }
                 }
@@ -69,16 +75,16 @@ namespace Stage
 
             for (BlockID id = BlockID.Command_Red; id <= BlockID.Command_Black;id++)
             {
-                if (!dictionary.ContainsKey(id)) continue;
-                for (int i = 0;i < dictionary[id].Count;i++)
+                if (!dictionary.ContainsKey(id + 100)) continue;
+                for (int i = 0;i < dictionary[id + 100].Count;i++)
                 {
                     List<Vector3Int> positions = new List<Vector3Int>();
 
-                    for (int j = 0;j < dictionary[id].Count; j++)
+                    for (int j = 0;j < dictionary[id + 100].Count; j++)
                     {
-                        positions.Add(new Vector3Int((int)dictionary[id][i].transform.position.x,
-                                                     (int)dictionary[id][i].transform.position.y,
-                                                     (int)dictionary[id][i].transform.position.z));
+                        positions.Add(new Vector3Int((int)dictionary[id + 100][j].transform.position.x,
+                                                     (int)dictionary[id + 100][j].transform.position.y,
+                                                     (int)dictionary[id + 100][j].transform.position.z));
                     }
 
                     List<int> indexs = new List<int>();
@@ -87,13 +93,26 @@ namespace Stage
 
                     if (indexs.Count > 0)
                     {
-                        GameObject parent = new GameObject();
+                        Vector3 position = Vector3.zero;
                         for (int j = 0; j < indexs.Count; j++)
                         {
-                            dictionary[id][indexs[j]].transform.SetParent(parent.transform);
+                            position += positions[indexs[i]];
                         }
 
-                        // 子オブジェクト削除
+                        GameObject parent = new GameObject("ParentObject");
+                        parent.transform.position = position / indexs.Count;
+
+                        for (int j = 0; j < indexs.Count; j++)
+                        {
+                            dictionary[id + 100][indexs[j]].transform.SetParent(parent.transform);
+                        }
+
+                        foreach (Transform chind in parent.transform)
+                        {
+                            dictionary[id + 100].Remove(chind.gameObject);
+                        }
+
+                        dictionary[id + 100].Add(parent);
                     }
                 }
             }
@@ -106,7 +125,7 @@ namespace Stage
             {
                 if (index == i) continue;
                 if (indexs.IndexOf(i) >= 0) continue;
-                if ((int)Vector3Int.Distance(positions[index],positions[i]) == 1)
+                if ((int)Mathf.Abs(Vector3Int.Distance(positions[index], positions[i])) == 1)
                 {
                     indexs.Add(i);
                     Calc(positions,indexs,i);
