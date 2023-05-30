@@ -86,6 +86,11 @@ namespace Player
 
             }
 
+            Fall_Abyss();
+        }
+
+        private void Fall_Abyss()
+        {
             if (-1 < gameObject.transform.position.y) return;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", false);
             stateChangeEvent(PlayerStateEnum.Die);

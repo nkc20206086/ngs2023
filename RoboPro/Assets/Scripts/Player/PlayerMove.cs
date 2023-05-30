@@ -16,7 +16,6 @@ namespace Player
         private IStateGetter stateGetter;
         private Goal goal;
         private GroundColliCheck colliCheck;
-        private PlayerEffectData playerEffect;
 
         private Vector3 moveForward;
         private GameObject moveEffect;
@@ -24,21 +23,13 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            playerEffect = GetComponent<PlayerEffectData>();
             colliCheck = GetComponent<GroundColliCheck>();
             stateGetter = GetComponent<IStateGetter>();
 
             moveEffect = transform.GetChild(1).gameObject;
 
             goal = GameObject.FindObjectOfType<Goal>();
-            goal.OnChangeInteractingTime += (value) =>
-            {
-                stateGetter.PlayerAnimatorGeter().SetBool("PlayerMove", false);
-                Vector3 pos = goal.gameObject.transform.position;
-                pos.y = this.transform.position.y;
-                transform.LookAt(pos);
-                stateChangeEvent(PlayerStateEnum.Access);
-            };
+            goal.OnStartInteract += Act_GoalPoint;
         }
 
         /// <summary>
@@ -135,6 +126,14 @@ namespace Player
                     }
                 }
             }
+        }
+        private void Act_GoalPoint()
+        {
+            stateGetter.PlayerAnimatorGeter().SetBool("PlayerMove", false);
+            Vector3 pos = goal.gameObject.transform.position;
+            pos.y = this.transform.position.y;
+            transform.LookAt(pos);
+            stateChangeEvent(PlayerStateEnum.Access);
         }
     }
 }

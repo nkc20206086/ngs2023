@@ -18,14 +18,11 @@ namespace Player
 
         public event Action<PlayerStateEnum> stateChangeEvent;
 
-        private PlayerEffectData playerEffect;
-
         private bool isExplosion;
 
         // Start is called before the first frame update
         void Start()
         {
-            playerEffect = GetComponent<PlayerEffectData>();
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -37,8 +34,8 @@ namespace Player
             if (isExplosion) return;
             isExplosion = true;
             stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_Die");
-            Instantiate(playerEffect.explosionEffect, gameObject.transform.position, Quaternion.identity);
-            playerEffect.explosionEffect.gameObject.SetActive(true);
+            //Instantiate(playerEffect.explosionEffect, gameObject.transform.position, Quaternion.identity);
+            //playerEffect.explosionEffect.gameObject.SetActive(true);
         }
     }
 }

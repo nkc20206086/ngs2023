@@ -10,20 +10,13 @@ namespace Player
         private Goal goal;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
             goal = GameObject.FindObjectOfType<Goal>();
-            goal.OnChangeInteractingTime += (value) => 
-            {
-                Vector3 pos = goal.gameObject.transform.position;
-                pos.y = this.transform.position.y;
-                transform.LookAt(pos);
-                stateChangeEvent(PlayerStateEnum.Access);
-            };
-            defaultScale = transform.lossyScale;
+            goal.OnStartInteract += Act_GoalPoint;
+
             stateGetter = GetComponent<IStateGetter>();
         }
 
@@ -78,6 +71,14 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.ThroughFall);
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
             }
+        }
+
+        private void Act_GoalPoint()
+        {
+            Vector3 pos = goal.gameObject.transform.position;
+            pos.y = this.transform.position.y;
+            transform.LookAt(pos);
+            stateChangeEvent(PlayerStateEnum.Access);
         }
     }
 }
