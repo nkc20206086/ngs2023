@@ -101,7 +101,7 @@ namespace Player
                 splitVec.y += splitHeightVectorArray[i] + 0.1f;
                 //コライダーの直径分Rayを発射
                 Physics.Raycast(splitVec, transform.forward, out ray, capsuleCollider.radius * 3f);
-                Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 3f);
+                //Debug.DrawRay(splitVec, transform.forward * capsuleCollider.radius * 3f);
                 //1本でもRayが引っかかったら壁あり即break
                 if (ray.collider == null)
                 {
