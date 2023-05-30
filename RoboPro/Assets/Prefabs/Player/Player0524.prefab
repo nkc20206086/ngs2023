@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 416113926417054058}
   - component: {fileID: 416113926417054101}
   - component: {fileID: 416113926417054057}
+  - component: {fileID: 8446477414620224352}
   m_Layer: 0
   m_Name: PlayerAnimationController
   m_TagString: Untagged
@@ -71,6 +72,18 @@ MonoBehaviour:
     type: 3}
   explosionEffect: {fileID: 1803612781166473478, guid: 0aea2727f6da1ad4882905552b7c3eec,
     type: 3}
+--- !u!114 &8446477414620224352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416113926417054056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f7ef4ec4c67a949af461dba137535e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3805582077870317513
 GameObject:
   m_ObjectHideFlags: 0

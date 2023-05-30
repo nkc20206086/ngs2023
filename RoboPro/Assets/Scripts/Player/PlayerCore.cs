@@ -1,4 +1,5 @@
 using Gimmick.Interface;
+using Robo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,9 @@ namespace Player
         private float deathHeight;
         [SerializeField]
         private float playerUI_Yvector;
+
+        [Inject]
+        private IAudioPlayer audioPlayer;
 
         [Inject]
         private IGimmickAccess gimmickAccess;
@@ -107,6 +111,11 @@ namespace Player
         float IStateGetter.PlayerUI_OffsetYGetter()
         {
             return playerUI_Yvector;
+        }
+
+        IAudioPlayer IStateGetter.AudioGetter()
+        {
+            return audioPlayer;
         }
     }
 }
