@@ -42,20 +42,22 @@ namespace Player
             {
                 //二点間の距離を代入(スピード調整に使う)
                 distanceVec = Vector3.Distance(gameObject.transform.position, goal.gameObject.transform.position);
+                float middleVector = distanceVec / 2;
                 stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_GoalJump");
                 Act_GoalJump();
 
                 isVectorCalc = true;
             }
-            
-            // 現在の位置
-            float currentPos = (Time.deltaTime * speed) / distanceVec;
-            transform.position = Vector3.Lerp(transform.position, goal.gameObject.transform.position, currentPos);
 
-            //Vector3 middleVector
-            //Vector3 cameraPos = GoalCameraPositionGetter.GetPosition;
-            //cameraPos.y = gameObject.transform.position.y;
-            //transform.LookAt(cameraPos);
+            // 現在の位置
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, goal.gameObject.transform.position, 1f * Time.deltaTime);
+            //float currentPos = (Time.deltaTime * speed) / distanceVec;
+            //transform.position = Vector3.Lerp(transform.position, goal.gameObject.transform.position, currentPos);
+
+
+            Vector3 cameraPos = GoalCameraPositionGetter.GetPosition;
+            cameraPos.y = gameObject.transform.position.y;
+            transform.LookAt(cameraPos);
         }
 
         public void Finish_GoTo_Goal()
