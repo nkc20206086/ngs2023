@@ -44,6 +44,7 @@ namespace Robo
 
             view.OnPlay += () =>
             {
+                transform.DORotate(new Vector3(0, 180, 0), rotateDuration);
                 animator.Play("StageSelectPlayer_GoToStage");
             };
         }

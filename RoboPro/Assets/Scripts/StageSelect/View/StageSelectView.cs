@@ -38,6 +38,9 @@ namespace Robo
         private DiContainer container;
 
         [Inject]
+        private IAudioPlayer audioPlayer;
+
+        [Inject]
         private IMultiSceneLoader sceneLoader;
 
         [Inject]
@@ -97,6 +100,7 @@ namespace Robo
             OnDeselect?.Invoke(nowSelectedIndex);
             OnSelect?.Invoke(idx);
             nowSelectedIndex = idx;
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_Decision");
         }
 
         //選択不可能範囲に移動すると警告が出る
@@ -119,6 +123,7 @@ namespace Robo
             };
             //シングルトンへ登録
             GoToStageArgmentsSingleton.SetStage(Infos[nowSelectedIndex]);
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_ScanStaret_2");
         }
 
         private void Update()
