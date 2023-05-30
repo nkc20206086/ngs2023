@@ -16,6 +16,9 @@ namespace Robo
         private SceneID[] unloadSceneID;
 
         [Inject]
+        private IAudioPlayer audioPlayer;
+
+        [Inject]
         private IMultiSceneLoader multiSceneLoader;
 
         private void Start()
@@ -25,8 +28,9 @@ namespace Robo
 
         private async void ShowSettings()
         {
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
             //既に設定シーンが開かれている場合、開けなくする
-            for(int i = 0; i < SceneManager.sceneCount; i++)
+            for (int i = 0; i < SceneManager.sceneCount; i++)
             {
                 if (SceneManager.GetSceneAt(i).name == sceneId.ToString()) 
                     return;
