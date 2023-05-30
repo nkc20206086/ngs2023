@@ -9,13 +9,17 @@ namespace Player
     {
         [SerializeField]
         private AccessManager accessManager;
+
+        [SerializeField]
+        private GameObject effect;
+
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
         private Goal goal;
-
         // Start is called before the first frame update
         void Start()
         {
+            effect.gameObject.SetActive(false);
             accessManager = accessManager.GetComponent<AccessManager>();
             stateGetter = GetComponent<IStateGetter>();
             accessManager.accessEndEvent += Finish_Access;
@@ -27,6 +31,7 @@ namespace Player
         private void Goal_OnClear()
         {
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
+            effect.gameObject.SetActive(false);
             stateChangeEvent(PlayerStateEnum.Stay);
             Invoke("Access_Goal", 1);
         }
@@ -38,12 +43,12 @@ namespace Player
         {
             //Debug.Log("アクセスポイントにアクセスしました");
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", true);
-            
-            //stateChangeEvent(PlayerStateEnum.Stay);
+            effect.gameObject.SetActive(true);
         }
 
         public void Finish_Access()
         {
+            effect.gameObject.SetActive(false);
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
             stateChangeEvent(PlayerStateEnum.Stay);
         }

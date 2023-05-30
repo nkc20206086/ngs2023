@@ -18,6 +18,8 @@ namespace Player
 
         public event Action<PlayerStateEnum> stateChangeEvent;
 
+        private bool isExplosion;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -28,7 +30,12 @@ namespace Player
         {
             deathCameraSettable.DeathCameraEnable(true);
             deathCameraSettable.DrawingByDeathCamera(skinnedMeshRenderer);
+            
+            if (isExplosion) return;
+            isExplosion = true;
             stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_Die");
+            //Instantiate(playerEffect.explosionEffect, gameObject.transform.position, Quaternion.identity);
+            //playerEffect.explosionEffect.gameObject.SetActive(true);
         }
     }
 }

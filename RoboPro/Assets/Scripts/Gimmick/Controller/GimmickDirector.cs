@@ -89,8 +89,6 @@ namespace Gimmick
         {
             accessPoints = new List<AccessPoint>();
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
-            Debug.Log(datas[0].Commands[0].commandType);
-
 
             for (BlockID id = BlockID.Command_Red;id <= BlockID.Command_Black;id++)
             {
@@ -269,10 +267,10 @@ namespace Gimmick
             return retIndex;
         }
 
-        Vector3 IGimmickAccess.Access(int index)
+        bool IGimmickAccess.Access(int index)
         {
-            if (isExecute) return Vector3.zero;
-            if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
+            if (isExecute) return false;
+            if (isSwapping) return false;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
@@ -286,7 +284,13 @@ namespace Gimmick
             uIControllable.HideUI();
             uiActive = -1;
 
-            return accessPoints[index].transform.position;
+            return true;
+        }
+
+        Vector3 IGimmickAccess.GetPosition(int index)
+        {
+            Vector3 retPosition = accessPoints[index].transform.position;
+            return retPosition;
         }
 
         void IGimmickAccess.SetExecute(bool isExecute)

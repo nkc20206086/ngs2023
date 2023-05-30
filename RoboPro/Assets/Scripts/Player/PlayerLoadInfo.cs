@@ -25,6 +25,7 @@ namespace Player
             playerSavePos.callCount--;
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
+            Debug.Log("Undo call" + playerSavePos.callCount);
         }
 
         /// <summary>
@@ -34,8 +35,11 @@ namespace Player
         {
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
+            Debug.Log("Redo call" + playerSavePos.callCount);
             playerSavePos.callCount++;
         }
+
+        //public void Death
     }
 
 }
