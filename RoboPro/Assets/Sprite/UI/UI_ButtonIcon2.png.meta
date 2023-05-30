@@ -329,8 +329,8 @@ TextureImporter:
       name: UI_ButtonIcon2_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 256
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -350,8 +350,8 @@ TextureImporter:
       name: UI_ButtonIcon2_11
       rect:
         serializedVersion: 2
-        x: 128
-        y: 128
+        x: 384
+        y: 256
         width: 128
         height: 128
       alignment: 0
@@ -371,7 +371,7 @@ TextureImporter:
       name: UI_ButtonIcon2_12
       rect:
         serializedVersion: 2
-        x: 256
+        x: 0
         y: 128
         width: 128
         height: 128
@@ -392,7 +392,7 @@ TextureImporter:
       name: UI_ButtonIcon2_13
       rect:
         serializedVersion: 2
-        x: 384
+        x: 128
         y: 128
         width: 128
         height: 128
@@ -409,6 +409,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_ButtonIcon2_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4cb9fd5e46df64cbb0f9f386f64b2c
+      internalID: -1316671045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_ButtonIcon2_15
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 206a56319ec200747ad00f2dfbe3b65c
+      internalID: -104331505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -421,8 +463,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_ButtonIcon2_13: 460018918
+      UI_ButtonIcon2_14: -1316671045
       UI_ButtonIcon2_0: 35258795
       UI_ButtonIcon2_12: 1022270705
+      UI_ButtonIcon2_15: -104331505
       UI_ButtonIcon2_4: -2020039508
       UI_ButtonIcon2_5: -866692788
       UI_ButtonIcon2_10: 629250745
