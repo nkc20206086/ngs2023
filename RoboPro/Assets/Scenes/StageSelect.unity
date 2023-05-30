@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17277,15 +17277,15 @@ MonoBehaviour:
   - stageName: "\u62FE\u3063\u3066\u4ED8\u3051\u3066"
     stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2606\u2606\u2606\u2606"
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
+    stageJsonData: {fileID: 4900000, guid: d1914f3b36232e1489d743470fc6237f, type: 3}
   - stageName: "\u5411\u304D\u3092\u5909\u3048\u308B"
     stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2606\u2606\u2606\u2606"
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 2d92e83f641e3494ba441fd7625c0f6e, type: 3}
+    stageJsonData: {fileID: 4900000, guid: e441a3c7ac797c34592146fea61f7d70, type: 3}
   - stageName: 
     stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
+    stageJsonData: {fileID: 4900000, guid: 28910a6ce8374cf4da80cde369c386b8, type: 3}
   - stageName: "\u307E\u308F\u3057\u3066\u6E21\u3063\u3066"
     stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
