@@ -10,7 +10,7 @@ public class AudioTest : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            audioPlayer.PlaySE(CueSheetType.yuboku, "yuboku");
+            // audioPlayer.PlaySE(CueSheetType.yuboku, "yuboku");
         }
     }
 }
