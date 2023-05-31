@@ -27,10 +27,10 @@ namespace Robo
                     transform.position = goalPos + new Vector3(-goalCameraOffset.x, goalCameraOffset.y, 0);
                     break;
                 case GoalCameraPosition.South:
-                    transform.position = goalPos + new Vector3(0, goalCameraOffset.y, goalCameraOffset.x);
+                    transform.position = goalPos + new Vector3(0, goalCameraOffset.y, -goalCameraOffset.x);
                     break;
                 case GoalCameraPosition.North:
-                    transform.position = goalPos + new Vector3(0, goalCameraOffset.y, -goalCameraOffset.x);
+                    transform.position = goalPos + new Vector3(0, goalCameraOffset.y, goalCameraOffset.x);
                     break;
             }
         }

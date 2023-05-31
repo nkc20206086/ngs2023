@@ -29,6 +29,9 @@ namespace Stage
         [SerializeField]
         private CinemachineVirtualCamera goalCamera;
 
+        [SerializeField]
+        private Vector3 goalCameraOffset = new Vector3(0, 2);
+
         public void StageCreate(Dictionary<BlockID, List<GameObject>> dictionary, ref List<AccessPointData> datas)
         {
             StageData stageData = default;
@@ -54,16 +57,21 @@ namespace Stage
 
             goalCamera.GetComponent<GoalCameraView>().Initalize(stageData.CameraPosition2);
 
-            cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
+            int xMax = 0;
+            int yMax = 0;
+            int zMax = 0;
 
             GameObject field = new GameObject("FieldObject");
 
             for (int z = 0;z < stageData.Blocks.Blocks.Count; z++)
             {
+                zMax = Mathf.Max(z, zMax);
                 for (int y = 0;y < stageData.Blocks.Blocks[z].Blocks.Count;y++)
                 {
+                    yMax = Mathf.Max(y, yMax);
                     for (int x = 0;x < stageData.Blocks.Blocks[z].Blocks[y].Blocks.Count;x++)
                     {
+                        xMax = Mathf.Max(x, xMax);
                         BlockID blockId = stageData.Blocks.Blocks[z].Blocks[y].Blocks[x];
                         GameObject prefabs = blockDB.GetPrefab(blockId, x + y + z);
                         if (prefabs != null)
@@ -72,7 +80,10 @@ namespace Stage
 
                             if (blockId == BlockID.Goal)
                             {
-                                goalCamera.LookAt = instance.transform;
+                                GameObject goalCameraTarget = new GameObject("GoalCameraTarget");
+                                goalCameraTarget.transform.SetParent(instance.transform);
+                                goalCameraTarget.transform.localPosition = goalCameraOffset;
+                                goalCamera.LookAt = goalCameraTarget.transform;
                             }
                             else if (blockId >= BlockID.Command_Red)
                             {
@@ -87,6 +98,8 @@ namespace Stage
                     }
                 }
             }
+
+            cameraTarget.transform.position = new Vector3(xMax, yMax, zMax) / 2;
 
             for (BlockID id = BlockID.Command_Red; id <= BlockID.Command_Black;id++)
             {
