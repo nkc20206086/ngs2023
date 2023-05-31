@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -151}
-  m_SizeDelta: {x: 1744.6621, y: 4}
+  m_AnchoredPosition: {x: 0, y: 70.7}
+  m_SizeDelta: {x: 664.8, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3738232935094431237
 CanvasRenderer:
@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 769680224040522190}
   - component: {fileID: 125188389188063556}
   - component: {fileID: 4789865161651087132}
+  - component: {fileID: 3176938085293277701}
   m_Layer: 5
   m_Name: StageClearPanel
   m_TagString: Untagged
@@ -155,6 +156,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &3176938085293277701
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367282311905551317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b07257e228d80cf4bb4fc9afb80e3e3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3376771354906994800
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,14 +187,13 @@ GameObject:
   - component: {fileID: 4098670669774488852}
   - component: {fileID: 6931657928035936246}
   - component: {fileID: 5400542593585887375}
-  - component: {fileID: 6079698371190375838}
   m_Layer: 5
   m_Name: StageName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4098670669774488852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -191,7 +211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -256}
+  m_AnchoredPosition: {x: 0, y: -386.18}
   m_SizeDelta: {x: 1385.7815, y: 184.1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6931657928035936246
@@ -292,53 +312,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6079698371190375838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3376771354906994800}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c314998cc366c84288666a4fafabd6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vAlignment: 2
-  hAlignment: 1
-  vertexCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.34087354
-      outSlope: 0.34087354
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.15
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.07540055
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.31745374
-      outSlope: -0.31745374
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.18333328
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &9075162115823147479
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +323,6 @@ GameObject:
   - component: {fileID: 4245827754755270174}
   - component: {fileID: 988334668341642084}
   - component: {fileID: 2462531661103654770}
-  - component: {fileID: 1987646220137011073}
   m_Layer: 5
   m_Name: STAGE_CLEAR
   m_TagString: Untagged
@@ -375,7 +347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -121}
+  m_AnchoredPosition: {x: 0, y: 50}
   m_SizeDelta: {x: 1762.3611, y: 286.00623}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &988334668341642084
@@ -434,8 +406,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 160
-  m_fontSizeBase: 160
+  m_fontSize: 58.1
+  m_fontSizeBase: 58.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -476,50 +448,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1987646220137011073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9075162115823147479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c314998cc366c84288666a4fafabd6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vAlignment: 2
-  hAlignment: 1
-  vertexCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.34087354
-      outSlope: 0.34087354
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.15
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.07540055
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.31745374
-      outSlope: -0.31745374
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.18333328
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

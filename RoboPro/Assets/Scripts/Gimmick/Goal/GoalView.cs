@@ -35,6 +35,9 @@ public class GoalView : MonoBehaviour
     [SerializeField]
     private float goalAnimationTime = 2f;
 
+    [SerializeField]
+    private GameObject goalUI;
+
     [Inject]
     private IVCameraTargetChanger vCameraChanger;
 
@@ -109,7 +112,7 @@ public class GoalView : MonoBehaviour
             clearOnHideObjects[i].gameObject.SetActive(false);
         }
         GoToStageArgmentsSingleton.Clear();
-
+        goalUI.gameObject.SetActive(true);
         await UniTask.Delay(TimeSpan.FromSeconds(goalAnimationTime));
         BackToStageSelect();
     }
