@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PostEffect
-  m_Shader: {fileID: -6465566751694194690, guid: f5f98cc99b9922742a5f09e51d981368, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: -6465566751694194690, guid: 531ced0d809594e47ac056ce4bc9f440,
+    type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -25,6 +27,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _CameraColorTexture:
         m_Texture: {fileID: 8400000, guid: 60dd34e78a394d349b597803a2cee6aa, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Icon:
+        m_Texture: {fileID: 2800000, guid: f68f40d330e99bc49a5fc8db29be6674, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -55,11 +61,14 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _Fade: 0
+    - _IconSize: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RotatePower: 1
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _Offset: {r: 0, g: 0.2, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2297482877125556872

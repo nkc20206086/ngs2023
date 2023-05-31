@@ -250,6 +250,7 @@ MonoBehaviour:
   cameraTarget: {fileID: 1168073219823265762}
   player: {fileID: 2658795978628239518}
   goalCamera: {fileID: 6500122214540158649}
+  goalCameraOffset: {x: 0, y: 2, z: 0}
 --- !u!1 &1168073220146496472
 GameObject:
   m_ObjectHideFlags: 0
