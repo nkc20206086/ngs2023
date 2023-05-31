@@ -218,6 +218,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0048374515
       objectReference: {fileID: 0}
+    - target: {fileID: 5738588190357647, guid: 36640f743079adf43a7a9de4ee597cd1, type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738588190357647, guid: 36640f743079adf43a7a9de4ee597cd1, type: 3}
+      propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1089020291}
     - target: {fileID: 1168073219465023408, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_Name
@@ -283,6 +291,11 @@ PrefabInstance:
       propertyPath: stageJson
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2474608075027090033, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8531012653674377742, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_Enabled
@@ -320,6 +333,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36640f743079adf43a7a9de4ee597cd1, type: 3}
+--- !u!20 &1089020291 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8531012653674377743, guid: 36640f743079adf43a7a9de4ee597cd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089020290}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1720857613
 PrefabInstance:
   m_ObjectHideFlags: 0
