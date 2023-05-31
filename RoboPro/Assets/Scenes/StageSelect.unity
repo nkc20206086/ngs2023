@@ -17324,21 +17324,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infos:
   - stageName: "\u62FE\u3063\u3066\u4ED8\u3051\u3066"
-    stageNumber: 1-1
+    stageNumber: 1 - 1
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: d1914f3b36232e1489d743470fc6237f, type: 3}
   - stageName: "\u5411\u304D\u3092\u5909\u3048\u308B"
-    stageNumber: 1-2
+    stageNumber: 1 - 2
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: e441a3c7ac797c34592146fea61f7d70, type: 3}
+    stageJsonData: {fileID: 4900000, guid: 749129a835579094eb6009bf6f45f80e, type: 3}
   - stageName: 
-    stageNumber: 1-3
+    stageNumber: 1 - 3
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 18595ac8590d1394cbe8b4764d2561c4, type: 3}
+    stageJsonData: {fileID: 4900000, guid: 42a58642a46249a44940adbd5a675b44, type: 3}
   - stageName: "\u307E\u308F\u3057\u3066\u6E21\u3063\u3066"
-    stageNumber: 1-4
+    stageNumber: 1 - 4
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: ec51c3710712352458b6972f34a102cb, type: 3}
+    stageJsonData: {fileID: 4900000, guid: 74fe794cf8bb2da4a8ba8215bded589b, type: 3}
   - stageName: 
     stageNumber: 1-5
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
