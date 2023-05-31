@@ -56,7 +56,7 @@ namespace Command
             if (mainIndexNum < 0 || storageIndexNum < 0) return;                                               // どちらかのインデックスが0未満であるなら早期リターンする
             if (mainCommands[mainIndexNum] == null && commandStorage.controlCommand[storageIndexNum] == null) return; // 対象のメインコマンドとストレージコマンドに値がないなら早期リターンする
 
-            if (mainCommands[mainIndexNum] == null) audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Attach_02");
+            if (mainCommands[mainIndexNum] == null) audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Attach02");
             else audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Remove");
 
             // 入れ替えタイプがメインコマンドであるなら

@@ -20,9 +20,6 @@ namespace Player
         [Inject]
         private ICameraBackGroundChanger cameraBackGroundChanger;
 
-        [SerializeField]
-        private SkinnedMeshRenderer skinnedMeshRenderer;
-
         private IStateGetter stateGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -39,7 +36,7 @@ namespace Player
         {
             if (stateGetter.CheckDeathBoolGetter() == false) return;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", true);
-            //Stop_BGM();
+            Stop_BGM();
         }
 
         public void ReturnToDeath()
@@ -47,12 +44,12 @@ namespace Player
             stateChangeEvent(PlayerStateEnum.Stay);
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", false);
             stateGetter.RigidbodyGetter().useGravity = true;
-            //ReStart_BGM();
+            ReStart_BGM();
         }
 
         private void ReStart_BGM()
         {
-            audioPlayer.PlaySE(CueSheetType.StageBGM, "BGM_Stage_01");
+            audioPlayer.PlayBGM(CueSheetType.StageBGM);
         }
 
         private void Stop_BGM()

@@ -58,7 +58,7 @@ public class GoalView : MonoBehaviour
         goal.OnExitGoal += OnExitGoal;
         goal.OnChangeInteractingTime += OnChangeInteractingTime;
         goal.OnClear += OnClear;
-        interactUIControllable.SetPosition(transform.position + uiOffset);
+       
     }
 
     //private void Update()
@@ -87,6 +87,7 @@ public class GoalView : MonoBehaviour
         var controllerNames = Input.GetJoystickNames();
         ControllerType type = ControllerType.Controller;
         if (controllerNames.Length == 0) type = ControllerType.Keyboard;
+        interactUIControllable.SetPosition(transform.position + uiOffset);
         interactUIControllable.ShowUI(type, interactAsset);
     }
 
