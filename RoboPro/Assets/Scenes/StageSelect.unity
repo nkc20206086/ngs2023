@@ -17324,31 +17324,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infos:
   - stageName: "\u62FE\u3063\u3066\u4ED8\u3051\u3066"
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2606\u2606\u2606\u2606"
+    stageNumber: 1-1
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: d1914f3b36232e1489d743470fc6237f, type: 3}
   - stageName: "\u5411\u304D\u3092\u5909\u3048\u308B"
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2606\u2606\u2606\u2606"
+    stageNumber: 1-2
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: e441a3c7ac797c34592146fea61f7d70, type: 3}
   - stageName: 
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
+    stageNumber: 1-3
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: 18595ac8590d1394cbe8b4764d2561c4, type: 3}
   - stageName: "\u307E\u308F\u3057\u3066\u6E21\u3063\u3066"
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
+    stageNumber: 1-4
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: ec51c3710712352458b6972f34a102cb, type: 3}
   - stageName: 
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
+    stageNumber: 1-5
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
   - stageName: 
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
+    stageNumber: 1-6
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: 18595ac8590d1394cbe8b4764d2561c4, type: 3}
   - stageName: "\u4F38\u3070\u3057\u3066\u7E2E\u3081\u3066"
-    stageNumber: "\u30CA\u30F3\u30A4\u30C9\u2605\u2605\u2606\u2606\u2606"
+    stageNumber: 1-7
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
 --- !u!114 &927245769
@@ -28264,7 +28264,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1512603168}
   - component: {fileID: 1512603167}
-  - component: {fileID: 1512603166}
   - component: {fileID: 1512603169}
   - component: {fileID: 1512603170}
   - component: {fileID: 1512603171}
@@ -28275,14 +28274,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1512603166
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512603165}
-  m_Enabled: 1
 --- !u!20 &1512603167
 Camera:
   m_ObjectHideFlags: 0

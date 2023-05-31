@@ -51,6 +51,7 @@ namespace Robo
         public event Action OnSelectNextKey;
         public event Action OnSelectPreviousKey;
         public event Action OnPlay;
+        public event Action<string> OnClear;
         public event Action OnSave;
 
         public IReadOnlyList<StageSelectElementInfo> Infos { get; private set; }
@@ -76,6 +77,11 @@ namespace Robo
             }
             OnSelect += StageSelectElementOnSelect;
             OnDeselect += StageSelectElementOnDeselect;
+
+            if(GoToStageArgmentsSingleton.Get() != null && GoToStageArgmentsSingleton.IsClear())
+            {
+                OnClear?.Invoke(GoToStageArgmentsSingleton.Get().StageNumber);
+            }
         }
 
         private void StageSelectElementOnSelect(int idx)

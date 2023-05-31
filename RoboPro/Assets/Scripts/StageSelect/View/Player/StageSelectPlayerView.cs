@@ -63,5 +63,10 @@ namespace Robo
                 animator.Play("Player_Idle");
             };
         }
+
+        public void Move_SE()
+        {
+
+        }
     }
 }
