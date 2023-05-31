@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICameraBackGroundChanger : MonoBehaviour
+namespace MainCamera
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface ICameraBackGroundChanger
     {
-        
-    }
+        /// <summary>
+        /// €‚ñ‚¾‚Æ‚«‚Ì”wŒi‚ÌF‚É•ÏX
+        /// </summary>
+        public void Death_BackGroundChange();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        /// <summary>
+        /// ’Êí‚Ì”wŒi‚ÌF‚É•ÏX
+        /// </summary>
+        public void Default_BackGroundChange();
     }
 }
+

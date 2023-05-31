@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraBackGroundChanger : MonoBehaviour
+namespace MainCamera
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CameraBackGroundChanger : MonoBehaviour,ICameraBackGroundChanger
     {
-        
-    }
+        [SerializeField]
+        private Color defaultBackColor;
+        [SerializeField]
+        private Color deathBackColor;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private Camera cameraObj;
+
+        void Start()
+        {
+            cameraObj = GetComponent<Camera>();
+        }
+
+        void ICameraBackGroundChanger.Death_BackGroundChange()
+        {
+            cameraObj.backgroundColor = deathBackColor;
+        }
+
+        void ICameraBackGroundChanger.Default_BackGroundChange()
+        {
+            cameraObj.backgroundColor = defaultBackColor;
+        }
     }
 }
