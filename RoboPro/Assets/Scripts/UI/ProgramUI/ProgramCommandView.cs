@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using Command.Entity;
@@ -23,8 +24,11 @@ namespace CommandUI
 
         public event Action<int, int> ProgramCommandIndexes;
 
+        [SerializeField] private UnityEvent SelectCrea = new UnityEvent();
+
         public void ProgramCommandTextChange(MainCommand[] commands)
         {
+            SelectCrea.Invoke();
             for (int i = 0; i < ProgramPanelLength; i++) // コマンドの数だけ実行
             {
                 if (commands[i] == null)

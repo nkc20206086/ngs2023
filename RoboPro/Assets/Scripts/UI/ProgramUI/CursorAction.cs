@@ -2,18 +2,13 @@ using UnityEngine;
 
 public class CursorAction : MonoBehaviour
 {
-    public void CursorShow()
+    [SerializeField]
+    private BehaviorButtonSelectView bbsv;
+    public void Update()
     {
-        transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-    public void CursorHide()
-    {
-        transform.GetChild(0).gameObject.SetActive(false);
-    }
-
-    public void CursorSelect()
-    {
-
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            bbsv.SelectCrea();
+        }
     }
 }
