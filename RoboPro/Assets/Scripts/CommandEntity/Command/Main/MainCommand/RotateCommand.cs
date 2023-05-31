@@ -10,7 +10,7 @@ namespace Command.Entity
     /// </summary>
     public class RotateCommand : MainCommand
     {
-        const int ANGLE_MAG = 45;
+        const int ANGLE_MAG = 90;
 
         private Quaternion baseQuat;    // Às‘O‚Ì‰ñ“]—Ê
 
