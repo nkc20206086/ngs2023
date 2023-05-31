@@ -66,6 +66,12 @@ namespace Robo
         {
             Infos = args.Infos;
             this.saveData = saveData;
+
+            if (GoToStageArgmentsSingleton.Get() != null && GoToStageArgmentsSingleton.IsClear())
+            {
+                OnClear?.Invoke(GoToStageArgmentsSingleton.Get().StageNumber);
+            }
+
             for (int i = 0; i < args.Infos.Count; i++)
             {
                 StageSelectElementView element = container.InstantiatePrefab(elementPrefab).GetComponent<StageSelectElementView>();
@@ -77,11 +83,6 @@ namespace Robo
             }
             OnSelect += StageSelectElementOnSelect;
             OnDeselect += StageSelectElementOnDeselect;
-
-            if(GoToStageArgmentsSingleton.Get() != null && GoToStageArgmentsSingleton.IsClear())
-            {
-                OnClear?.Invoke(GoToStageArgmentsSingleton.Get().StageNumber);
-            }
         }
 
         private void StageSelectElementOnSelect(int idx)
