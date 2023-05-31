@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MainCamera;
+using Zenject;
 
 namespace Player
 {
     public class PlayerLoadInfo : MonoBehaviour
     {
+        [Inject]
+        private ICameraBackGroundChanger cameraBackGroundChanger;
         private IStateGetter stateGetter;
         private PlayerSavePos playerSavePos;
         // Start is called before the first frame update
@@ -26,6 +30,10 @@ namespace Player
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
             Debug.Log("Undo call" + playerSavePos.callCount);
+
+            if (stateGetter.StateGetter() != PlayerStateEnum.Die) return;
+            //cameraBackGroundChanger.Default_BackGroundChange();
+
         }
 
         /// <summary>
