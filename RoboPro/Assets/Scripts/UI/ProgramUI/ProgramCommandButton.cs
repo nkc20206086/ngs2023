@@ -1,4 +1,6 @@
 using UnityEngine;
+using Zenject;
+using Robo;
 
 namespace CommandUI
 {
@@ -12,8 +14,15 @@ namespace CommandUI
         [SerializeField]
         private ProgramCommandView programCommandView;
 
+        [Inject] private IAudioPlayer audioPlayer;
+
+        private void Start()
+        {
+            Debug.Log(audioPlayer + "AAA");
+        }
         public void SelectButton()
         {
+            audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Select");
             programCommandView.ButtonIndexget(mainIndex, subIndex);
         }
     }
