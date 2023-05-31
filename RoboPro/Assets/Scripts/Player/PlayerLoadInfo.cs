@@ -33,10 +33,10 @@ namespace Player
         /// </summary>
         public void Redo_PlayerPos()
         {
+            playerSavePos.callCount++;
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
             Debug.Log("Redo call" + playerSavePos.callCount);
-            playerSavePos.callCount++;
         }
 
         //public void Death
