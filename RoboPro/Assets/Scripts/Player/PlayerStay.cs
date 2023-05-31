@@ -7,22 +7,25 @@ namespace Player
 {
     public class PlayerStay : MonoBehaviour,IStateChange
     {
+        private Goal goal;
         private IStateGetter stateGetter;
         public event Action<PlayerStateEnum> stateChangeEvent;
-        Vector3 defaultScale;
 
         // Start is called before the first frame update
         void Start()
         {
-            defaultScale = transform.lossyScale;
+            goal = GameObject.FindObjectOfType<Goal>();
+            goal.OnStartInteract += Act_GoalPoint;
+
             stateGetter = GetComponent<IStateGetter>();
         }
 
         public void Act_Stay(bool isMove, bool isInteract)
         {
-            
+            //stateChangeEvent(PlayerStateEnum.Goal_Jump);
+
             //Debug.Log("待つ");
-            if(isMove)
+            if (isMove)
             {
                 stateChangeEvent(PlayerStateEnum.Move);
             }
@@ -49,12 +52,16 @@ namespace Player
             {
                 if (isInteract)
                 {
-                    //アクセスポイントに接続する
-                    Vector3 pos = stateGetter.GimmickAccessGetter().Access(index);
-                    pos.y = this.transform.position.y;
-                    transform.LookAt(pos);
+                    bool access = stateGetter.GimmickAccessGetter().Access(index);
+                    if (access)
+                    {
+                        //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
 
-                    stateChangeEvent(PlayerStateEnum.Access);
+                        stateChangeEvent(PlayerStateEnum.Access);
+                    }
                 }
             }
 
@@ -64,6 +71,14 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.ThroughFall);
                 stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
             }
+        }
+
+        private void Act_GoalPoint()
+        {
+            Vector3 pos = goal.gameObject.transform.position;
+            pos.y = this.transform.position.y;
+            transform.LookAt(pos);
+            stateChangeEvent(PlayerStateEnum.Access);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Gimmick.Interface;
+using Robo;
 using UnityEngine;
 
 namespace Player
@@ -66,5 +67,7 @@ namespace Player
         public float DeathHeightGetter();
 
         public float PlayerUI_OffsetYGetter();
+
+        public IAudioPlayer AudioGetter();
     }
 }

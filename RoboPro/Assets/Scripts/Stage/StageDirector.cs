@@ -20,7 +20,7 @@ namespace Stage
         private StageUIManager uiManager;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             Dictionary<BlockID, List<GameObject>> obj = new Dictionary<BlockID, List<GameObject>>();
             List<AccessPointData> datas = new List<AccessPointData>();
@@ -41,6 +41,24 @@ namespace Stage
             Subject<Unit> play = new Subject<Unit>();
             play.Subscribe(gimmickDirector.StartCommandAction);
             uiManager.play = play;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                gimmickDirector.Undo(default);
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                gimmickDirector.Redo(default);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                gimmickDirector.StartCommandAction(default);
+            }
         }
     }
 

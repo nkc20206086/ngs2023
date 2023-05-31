@@ -114,10 +114,14 @@ namespace Robo
             Debug.Log(infos[nowSelectedIndex].StageName + "をプレイ");
 
             saveData.OnPlayStage(infos[nowSelectedIndex].StageNumber);
-            //プレイしたらクリアしたことにするテスト(ステージが完成したら削除する)
-            saveData.OnClearStage(infos[nowSelectedIndex].StageNumber);
 
             OnPlay?.Invoke();
+        }
+
+        //クリア
+        void IStageSelectModel.Clear(string stageNumber)
+        {
+            saveData.OnClearStage(stageNumber);
         }
 
         //ゲームデータをセーブ

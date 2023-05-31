@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+
+#if UNITY_EDITOR
 namespace Ladder
 {
     [CustomEditor(typeof(LadderController), true)]
@@ -21,3 +23,4 @@ namespace Ladder
 
     }
 }
+#endif

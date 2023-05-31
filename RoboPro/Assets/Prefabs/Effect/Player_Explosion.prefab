@@ -14622,7 +14622,7 @@ GameObject:
   - component: {fileID: 1803612781166473477}
   - component: {fileID: 1803612781166473476}
   - component: {fileID: 1803612781166473479}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player_Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14637,7 +14637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803612781166473478}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -2.48, y: 0.71, z: -1.9200001}
+  m_LocalPosition: {x: 2.009078, y: 5, z: -0.2283573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14659,7 +14659,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}

@@ -9,6 +9,7 @@ using Command.Entity;
 using Gimmick.Interface;
 using InteractUI;
 using ScanMode;
+using Robo;
 
 namespace Gimmick
 {
@@ -22,6 +23,9 @@ namespace Gimmick
 
         [Inject]
         private IInteractUIControllable uIControllable;
+
+        [Inject]
+        private IAudioPlayer audioPlayer;
 
         [SerializeField, Tooltip("ストレージコマンド管理クラス")]
         private CommandStorage storage;
@@ -47,6 +51,10 @@ namespace Gimmick
         private bool isSwapping = false;        // コマンド入れ替え実行中であるかを管理する変数 
         private bool isExecute = false;         // 実行可能であるか
         private CommandState state = CommandState.INACTIVE;
+
+        private Action undoPlayerAction;
+        private Action redoPlayerAction;
+        private Action savePlayerAction;
 
         private void Update()
         {
@@ -85,8 +93,6 @@ namespace Gimmick
         {
             accessPoints = new List<AccessPoint>();
             List<ScanModeLaserTargetInfo> laserInfoList = new List<ScanModeLaserTargetInfo>();
-            Debug.Log(datas[0].Commands[0].commandType);
-
 
             for (BlockID id = BlockID.Command_Red;id <= BlockID.Command_Black;id++)
             {
@@ -116,8 +122,6 @@ namespace Gimmick
                 {
                     laserInfoList.Add(new ScanModeLaserTargetInfo(accessPoints[i].transform, gimmick.transform, accessPoints[i].color));
                 }
-
-                accessPoints[i].GimmickActivate();
             }
 
             laserManageable.LaserInit(laserInfoList);
@@ -131,6 +135,8 @@ namespace Gimmick
             if (!isSwapping) return;                                                            // 入れ替え実行中でないなら早期リターンする
             isSwapping = false;                                                                 // 入れ替え終了に変更
 
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_Cancel");
+
             bool isSwap = commandDirector.CommandInvalidation();                                // コマンド管理クラスに処理の終了を依頼し、入れ替えの有無をローカル変数に保存する
 
             if (!isSwap)                                                                        // コマンド入れ替えが行われていないなら
@@ -142,26 +148,13 @@ namespace Gimmick
             {
                 for (int i = 0;i < accessPoints.Count;i++)                         // ギミック数分回す
                 {
-                    if (i == swappingGimmickIndex)                                              // 現在の入れ替えインデックスと同一のものなら
-                    {
-                        // !
-                        foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
-                        {
-                            gimmick.AddControlCommandToArchive(archiveIndex);  // 書き換えられた管理コマンドをコピーしてアーカイブに登録する
-                        }
-                    }
-                    else
-                    {
-                        // !
-                        foreach (GimmickController gimmick in accessPoints[i].controlGimmicks)
-                        {
-                            gimmick.AddNewCommandsToArchive(archiveIndex);     // コマンドアーカイブに前回と同様の内容を追加する
-                        }
-                    }
+                    accessPoints[i].ArchiveAdd(archiveIndex);
                 }
 
                 maxArchiveCount = archiveIndex;                                                 // 記録数をセーブ参照インデックスと同様の値に変更
                 storage.AddArchiveCommand(archiveIndex, storage.controlCommand);                // ストレージコマンドのアーカイブを追加する
+
+                savePlayerAction?.Invoke();
 
                 state = CommandState.INACTIVE;
 
@@ -182,6 +175,8 @@ namespace Gimmick
             isExecute = true;
             state = state != CommandState.MOVE_ON ? CommandState.MOVE_ON : CommandState.RETURN;
 
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
+
             foreach (AccessPoint accessPoint in accessPoints)
             {
                 // !
@@ -197,9 +192,13 @@ namespace Gimmick
         /// </summary>
         public void Undo(Unit unit)
         {
-            if (archiveIndex <= 0 || isSwapping) return;     // セーブ参照インデックスが0よりも小さいか、入れ替え実行中であれば早期リターンする
+            if (archiveIndex <= 0 || isSwapping) return;     // セーブ参照インデックスが1よりも小さいか、入れ替え実行中であれば早期リターンする
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
+
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_UnDo");
+
+            undoPlayerAction?.Invoke();
 
             // 減算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
@@ -208,8 +207,8 @@ namespace Gimmick
                 foreach (GimmickController gimmick in accessPoint.controlGimmicks)
                 {
                     gimmick.IntializeAction();
-                    gimmick.OverwriteControlCommand(archiveIndex);
                 }
+                accessPoint.ArchiveSet(archiveIndex);
             }
             storage.OverwriteControlCommand(archiveIndex);
         }
@@ -221,7 +220,11 @@ namespace Gimmick
         {
             if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
 
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_ReDo");
+
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
+
+            redoPlayerAction?.Invoke();
 
             // 加算したセーブ情報に格納されていたコマンド情報を反映
             foreach (AccessPoint accessPoint in accessPoints)
@@ -230,8 +233,8 @@ namespace Gimmick
                 foreach (GimmickController gimmick in accessPoint.controlGimmicks)
                 {
                     gimmick.IntializeAction();
-                    gimmick.OverwriteControlCommand(archiveIndex);
                 }
+                accessPoint.ArchiveSet(archiveIndex);
 
             }
             storage.OverwriteControlCommand(archiveIndex);
@@ -262,6 +265,7 @@ namespace Gimmick
                 if (retIndex >= 0)
                 {
                     uIControllable.HideUI();
+                    uIControllable.HideLockUI();
                     uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
                     uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
                 }
@@ -276,19 +280,16 @@ namespace Gimmick
             return retIndex;
         }
 
-        Vector3 IGimmickAccess.Access(int index)
+        bool IGimmickAccess.Access(int index)
         {
-            if (isSwapping) return Vector3.zero;         // 入れ替え実行中であるなら早期リターンする
+            if (isExecute) return false;
+            if (isSwapping) return false;         // 入れ替え実行中であるなら早期リターンする
             isSwapping = true;              // 入れ替え実行中に変更
 
             swappingGimmickIndex = index;   // ギミック入れ替えインデックスを設定
 
             // コマンド管理クラスの入れ替え有効化関数を実行
-            // !
-            foreach (GimmickController gimmick in accessPoints[index].controlGimmicks)
-            {
-                commandDirector.CommandActivation(gimmick.controlCommand);
-            }
+            commandDirector.CommandActivation(accessPoints[index].controlCommands);
 
             maxArchiveCount++;              // 記録数加算
             archiveIndex++;                 // セーブ参照インデックスを加算
@@ -296,12 +297,25 @@ namespace Gimmick
             uIControllable.HideUI();
             uiActive = -1;
 
-            return accessPoints[index].transform.position;
+            return true;
+        }
+
+        Vector3 IGimmickAccess.GetPosition(int index)
+        {
+            Vector3 retPosition = accessPoints[index].transform.position;
+            return retPosition;
         }
 
         void IGimmickAccess.SetExecute(bool isExecute)
         {
             this.isExecute = isExecute;
+        }
+
+        void IGimmickAccess.SetAction(Action undoAct, Action redoAct, Action saveAct)
+        {
+            undoPlayerAction = undoAct;
+            redoPlayerAction = redoAct;
+            savePlayerAction = saveAct;
         }
     }
 }

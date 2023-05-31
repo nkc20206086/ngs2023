@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace Robo
         private Toggle isFullScreenToggle;
         
         [SerializeField]
-        private Dropdown screenResolutionsDropdown;
+        private TMP_Dropdown screenResolutionsDropdown;
 
         public event Func<IGetSettingsData> GetSettingsData;
         public event Func<Resolution[]> GetResolutions;
@@ -24,12 +25,12 @@ namespace Robo
             screenResolutionsDropdown.onValueChanged.AddListener(SetScreenResolution);
 
             //モデルから取得した画面解像度一覧を、ドロップダウンに設定
-            List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+            List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
             foreach (Resolution resolution in GetResolutions())
             {
                 //1920x1080のような、ドロップダウンのオプションを作成
                 string text = string.Format("{0}x{1}", resolution.width, resolution.height);
-                options.Add(new Dropdown.OptionData(text));
+                options.Add(new TMP_Dropdown.OptionData(text));
             }
             //オプションを反映
             screenResolutionsDropdown.AddOptions(options);

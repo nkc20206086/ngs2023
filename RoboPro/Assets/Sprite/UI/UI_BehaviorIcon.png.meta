@@ -283,6 +283,111 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UI_BehaviorIcon_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce30dd9939cceb44198611e94dd11e6c
+      internalID: 1221029342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BehaviorIcon_9
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b79ec2877b5be4eb3c5b37988acc62
+      internalID: -1491726309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BehaviorIcon_10
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6b94a2adced15f4581436e61a1408f9
+      internalID: 1635830428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BehaviorIcon_11
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df96d0095a452c545a1461192cd2f188
+      internalID: 852605207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BehaviorIcon_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f9893bbd33a2e94897acd7a5e467551
+      internalID: 1030272477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -294,13 +399,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      UI_BehaviorIcon_12: 1030272477
       UI_BehaviorIcon_7: 1483653271
       UI_BehaviorIcon_4: -2133659032
+      UI_BehaviorIcon_10: 1635830428
       UI_BehaviorIcon_5: -1132313182
       UI_BehaviorIcon_6: 1455981055
       UI_BehaviorIcon_2: -79459153
+      UI_BehaviorIcon_11: 852605207
       UI_BehaviorIcon_1: 2049296254
+      UI_BehaviorIcon_9: -1491726309
       UI_BehaviorIcon_0: -1256585038
+      UI_BehaviorIcon_8: 1221029342
       UI_BehaviorIcon_3: 1644750209
   spritePackingTag: 
   pSDRemoveMatte: 0

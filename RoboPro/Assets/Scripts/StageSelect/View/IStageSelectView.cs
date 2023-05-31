@@ -14,6 +14,7 @@ namespace Robo
         event Action OnSelectNextKey;
         event Action OnSelectPreviousKey;
         event Action OnPlay;
+        event Action<string> OnClear;
         event Action OnSave;
 
         void Initalize(StageSelectModelArgs args, StageSelectSaveData saveData);

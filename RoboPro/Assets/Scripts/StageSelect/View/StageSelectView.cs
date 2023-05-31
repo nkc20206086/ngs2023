@@ -38,6 +38,9 @@ namespace Robo
         private DiContainer container;
 
         [Inject]
+        private IAudioPlayer audioPlayer;
+
+        [Inject]
         private IMultiSceneLoader sceneLoader;
 
         [Inject]
@@ -48,6 +51,7 @@ namespace Robo
         public event Action OnSelectNextKey;
         public event Action OnSelectPreviousKey;
         public event Action OnPlay;
+        public event Action<string> OnClear;
         public event Action OnSave;
 
         public IReadOnlyList<StageSelectElementInfo> Infos { get; private set; }
@@ -62,6 +66,12 @@ namespace Robo
         {
             Infos = args.Infos;
             this.saveData = saveData;
+
+            if (GoToStageArgmentsSingleton.Get() != null && GoToStageArgmentsSingleton.IsClear())
+            {
+                OnClear?.Invoke(GoToStageArgmentsSingleton.Get().StageNumber);
+            }
+
             for (int i = 0; i < args.Infos.Count; i++)
             {
                 StageSelectElementView element = container.InstantiatePrefab(elementPrefab).GetComponent<StageSelectElementView>();
@@ -97,6 +107,7 @@ namespace Robo
             OnDeselect?.Invoke(nowSelectedIndex);
             OnSelect?.Invoke(idx);
             nowSelectedIndex = idx;
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_Decision");
         }
 
         //選択不可能範囲に移動すると警告が出る
@@ -113,12 +124,13 @@ namespace Robo
             Tween fade = postEffector.Fade(FadeType.Out, goToStageFadeTime, Ease.Linear);
             fade.onComplete += async () =>
             {
-                await sceneLoader.AddScene(SceneID.Title, true);
+                await sceneLoader.AddScene(SceneID.Stage, true);
                 await sceneLoader.UnloadScene(SceneID.StageSelect);
                 Tween fade = postEffector.Fade(FadeType.In, goToStageFadeTime, Ease.Linear);
             };
             //シングルトンへ登録
             GoToStageArgmentsSingleton.SetStage(Infos[nowSelectedIndex]);
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_ScanStaret_2");
         }
 
         private void Update()
@@ -135,7 +147,7 @@ namespace Robo
                 OnSelectPreviousKey?.Invoke();
             }
             //Spaceでステージをプレイ
-            if(Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 OnPlay?.Invoke();
             }

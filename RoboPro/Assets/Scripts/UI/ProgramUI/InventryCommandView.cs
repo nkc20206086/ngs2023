@@ -36,57 +36,102 @@ namespace CommandUI
                     inventryAxis[i].SetActive(true);
                     inventryValue[i].SetActive(true);
 
-                    MainCommand command = (MainCommand)commands[i];
-
-                    switch (command.GetCommandType())
+                    switch (commands[i].GetCommandType())
                     {
                         case CommandType.Command:
-                            //アイコン判別
-                            switch (command.GetMainCommandType())
-                            {
-                                case MainCommandType.Move:
-                                    programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
-                                    break;
-                                case MainCommandType.Rotate:
-                                    programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
-                                    break;
-                                case MainCommandType.Scale:
-                                    programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
-                                    break;
-                            }
-                            inventryBehavior[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetName();
+                            #region command
+                            MainCommand command = (MainCommand)commands[i];
 
-                            //軸イメージの色変更
-                            switch (command.GetAxisText())
+                            switch (command.GetCommandType())
                             {
-                                case "X":
-                                    inventryAxisColor[i].color = Color.red;
-                                    break;
-                                case "Y":
-                                    inventryAxisColor[i].color = Color.green;
-                                    break;
-                                case "Z":
-                                    inventryAxisColor[i].color = Color.blue;
-                                    break;
-                            }
-                            inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetAxisText();
+                                case CommandType.Command:
+                                    //アイコン判別
+                                    switch (command.GetMainCommandType())
+                                    {
+                                        case MainCommandType.Move:
+                                            programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
+                                            break;
+                                        case MainCommandType.Rotate:
+                                            programPanelIcon[i].sprite = sprites[1];//Rotateのアイコン表示
+                                            break;
+                                        case MainCommandType.Scale:
+                                            programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
+                                            break;
+                                    }
+                                    inventryBehavior[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetName();
 
-                            //数値の+-変更
-                            if (command.GetValue() < 0)
-                            {
-                                inventryValuesign[i].SetActive(false);
-                                inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = command.GetValueText();
-                            }
-                            else
-                            {
-                                inventryValuesign[i].SetActive(true);
-                                inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = command.GetValueText();
-                            }
+                                    //軸イメージの色変更
+                                    switch (command.GetAxisText())
+                                    {
+                                        case "X":
+                                            inventryAxisColor[i].color = Color.red;
+                                            break;
+                                        case "Y":
+                                            inventryAxisColor[i].color = Color.green;
+                                            break;
+                                        case "Z":
+                                            inventryAxisColor[i].color = Color.blue;
+                                            break;
+                                    }
+                                    inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetAxisText();
 
-                            inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
-                            inventryValueLock[i].SetActive(command.lockValue);
+                                    //数値の+-変更
+                                    if (command.GetValue() < 0)
+                                    {
+                                        inventryValuesign[i].SetActive(false);
+                                        inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = command.GetValueText();
+                                    }
+                                    else
+                                    {
+                                        inventryValuesign[i].SetActive(true);
+                                        inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = command.GetValueText();
+                                    }
+
+                                    inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
+                                    inventryValueLock[i].SetActive(command.lockValue);
+                                    break;
+
+                                case CommandType.Axis:
+                                    inventryBehavior[i].SetActive(false);
+                                    switch (commands[i].GetString())
+                                    {
+                                        case "X":
+                                            inventryAxisColor[i].color = Color.red;
+                                            break;
+                                        case "Y":
+                                            inventryAxisColor[i].color = Color.green;
+                                            break;
+                                        case "Z":
+                                            inventryAxisColor[i].color = Color.blue;
+                                            break;
+                                    }
+                                    inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetString();
+                                    inventryValue[i].SetActive(false);
+
+                                    inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
+
+                                    break;
+
+                                case CommandType.Value:
+                                    inventryBehavior[i].SetActive(false);
+                                    inventryAxis[i].SetActive(false);
+                                    if (int.Parse(commands[i].GetString()) < 0)
+                                    {
+                                        inventryValuesign[i].SetActive(false);
+                                        inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[1].text = commands[i].GetString();
+                                    }
+                                    else
+                                    {
+                                        inventryValuesign[i].SetActive(true);
+                                        inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i].GetString();
+                                    }
+
+                                    inventryValueLock[i].SetActive(command.lockValue);
+
+                                    break;
+                            }
+                            #endregion
                             break;
-
                         case CommandType.Axis:
                             inventryBehavior[i].SetActive(false);
                             switch (commands[i].GetString())
@@ -103,11 +148,7 @@ namespace CommandUI
                             }
                             inventryAxis[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetString();
                             inventryValue[i].SetActive(false);
-
-                            inventryAxisLock[i].SetActive(command.lockCoordinateAxis);
-
                             break;
-
                         case CommandType.Value:
                             inventryBehavior[i].SetActive(false);
                             inventryAxis[i].SetActive(false);
@@ -121,9 +162,6 @@ namespace CommandUI
                                 inventryValuesign[i].SetActive(true);
                                 inventryValue[i].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i].GetString();
                             }
-
-                            inventryValueLock[i].SetActive(command.lockValue);
-
                             break;
                     }
                 }

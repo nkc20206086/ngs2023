@@ -14,6 +14,7 @@ public class StageData
 
     public Vector3 PlayerPosition = new Vector3(0, 1, 0);
     public Vector3 CameraPosition = new Vector3(4, 1, 4);
+    public GoalCameraPosition CameraPosition2 = GoalCameraPosition.East;
 
     public StageData()
     {
@@ -165,4 +166,12 @@ public enum ColorID
     Cyan,
     White,
     Black,
+}
+
+public enum GoalCameraPosition
+{
+    East,
+    West,
+    South,
+    North,
 }

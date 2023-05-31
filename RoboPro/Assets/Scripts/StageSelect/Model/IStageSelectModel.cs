@@ -14,6 +14,7 @@ namespace Robo
         void Select(string stageNumber);
         void SelectNext();
         void SelectPrevious();
+        void Clear(string stageNumber);
         void Play();
         void Save();
         void LoadSaveData();
