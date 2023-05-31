@@ -17415,18 +17415,42 @@ MonoBehaviour:
     stageNumber: 1 - 4
     stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
     stageJsonData: {fileID: 4900000, guid: 74fe794cf8bb2da4a8ba8215bded589b, type: 3}
-  - stageName: 
-    stageNumber: 1-5
-    stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
-  - stageName: 
-    stageNumber: 1-6
-    stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 18595ac8590d1394cbe8b4764d2561c4, type: 3}
-  - stageName: "\u4F38\u3070\u3057\u3066\u7E2E\u3081\u3066"
-    stageNumber: 1-7
-    stageIcon: {fileID: 21300000, guid: b82d3daf99fe1b04dbe66a59dfb561cb, type: 3}
-    stageJsonData: {fileID: 4900000, guid: 0e95c2fc758e681438bb8c89be405b65, type: 3}
+  - stageName: "\u62FE\u3063\u3066\u3064\u3051\u3066"
+    stageNumber: 1 - 1
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: c26074fc0bc6efc4c89276f932e03f29, type: 3}
+  - stageName: "\u5411\u304D\u3092\u5909\u3048\u3066(\u672A\u5B9F\u88C5)"
+    stageNumber: 1 - 2
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 0}
+  - stageName: "\u3069\u3053\u307E\u3067\u884C\u3051\u308B\uFF1F"
+    stageNumber: 1 - 3
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: 6c905619013895741b62888dec36bdae, type: 3}
+  - stageName: "\u307E\u308F\u3057\u3066\u6E21\u3063\u3066"
+    stageNumber: 1 - 4
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: 835bcba9b32f7e14f96e4bd93482cb31, type: 3}
+  - stageName: "\u306E\u3070\u3057\u3066\u7E2E\u3081\u3066"
+    stageNumber: 1 - 5
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: e11331d5e59782f488bb43e00fdf3a58, type: 3}
+  - stageName: "\u6A4B\u3092\u304B\u3051\u3088\u3046"
+    stageNumber: 1 - 6
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: 8be4eec071d3d104ab84e6a4f27c9f97, type: 3}
+  - stageName: "\u3064\u306A\u3052\u3066\u5C0E\u304F"
+    stageNumber: 1 - 7
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 0}
+  - stageName: "\u3064\u306A\u3052\u3066\u5C0E\u304F"
+    stageNumber: 1 - 8
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 0}
+  - stageName: "\u3064\u306A\u3052\u3066\u5C0E\u304F"
+    stageNumber: 1 - 9
+    stageIcon: {fileID: 0}
+    stageJsonData: {fileID: 4900000, guid: 1ea448c6b503cf94e89662342bd64cfa, type: 3}
 --- !u!114 &927245769
 MonoBehaviour:
   m_ObjectHideFlags: 0
