@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-
+using Zenject;
+using Robo;
 public class ProgramPanelView : MonoBehaviour
 {
     [SerializeField]private GameObject programPanelCanvas;
     [SerializeField] private UnityEvent UICloseEvent = new UnityEvent();
+
+    [Inject] private IAudioPlayer audioPlayer;
 
     public void Start()
     {
@@ -26,6 +29,7 @@ public class ProgramPanelView : MonoBehaviour
     /// </summary>
     public void CanvasHide()
     {
+        audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Remove");
         programPanelCanvas.transform.DOScale(Vector3.zero, 0.2f).OnComplete(CanvasCloseComplete);
     }
 

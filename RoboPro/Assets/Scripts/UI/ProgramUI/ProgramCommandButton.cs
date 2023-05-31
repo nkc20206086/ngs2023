@@ -16,10 +16,6 @@ namespace CommandUI
 
         [Inject] private IAudioPlayer audioPlayer;
 
-        private void Start()
-        {
-            Debug.Log(audioPlayer + "AAA");
-        }
         public void SelectButton()
         {
             audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Select");
