@@ -43,4 +43,9 @@ public class PlayerAudioAnimationKey : MonoBehaviour
     {
         audioPlayer.PlaySE(CueSheetType.Staging, "SE_Staging_Goal");
     }
+
+    public void Goal_BGM()
+    {
+        audioPlayer.PlayBGM(CueSheetType.ClearBGM);
+    }
 }

@@ -1,12 +1,17 @@
+using Robo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public class PlayerAccess : MonoBehaviour,IStateChange
     {
+        [Inject]
+        private IAudioPlayer audioPlayer;
+
         [SerializeField]
         private AccessManager accessManager;
 
@@ -30,6 +35,7 @@ namespace Player
 
         private void Goal_OnClear()
         {
+            audioPlayer.StopBGM();
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Access", false);
             effect.gameObject.SetActive(false);
             stateChangeEvent(PlayerStateEnum.Stay);

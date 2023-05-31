@@ -5,11 +5,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using MainCamera;
+using Robo;
 
 namespace Player
 {
     public class PlayerDie : MonoBehaviour, IStateChange
     {
+        [Inject]
+        private IAudioPlayer audioPlayer;
+
         [Inject]
         private IDeathCameraSettable deathCameraSettable;
 
@@ -35,6 +39,7 @@ namespace Player
         {
             if (stateGetter.CheckDeathBoolGetter() == false) return;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", true);
+            //Stop_BGM();
         }
 
         public void ReturnToDeath()
@@ -42,6 +47,17 @@ namespace Player
             stateChangeEvent(PlayerStateEnum.Stay);
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", false);
             stateGetter.RigidbodyGetter().useGravity = true;
+            //ReStart_BGM();
+        }
+
+        private void ReStart_BGM()
+        {
+            audioPlayer.PlaySE(CueSheetType.StageBGM, "BGM_Stage_01");
+        }
+
+        private void Stop_BGM()
+        {
+            audioPlayer.StopBGM();
         }
     }
 }
