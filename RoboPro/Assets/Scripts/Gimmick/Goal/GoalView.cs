@@ -1,4 +1,5 @@
 using InteractUI;
+using Robo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,9 @@ public class GoalView : MonoBehaviour
 
     [Inject]
     private IInteractUIControllable interactUIControllable;
+
+    [Inject]
+    private IMultiSceneLoader multiSceneLoader;
 
     private bool isClear = false;
 
@@ -95,5 +99,12 @@ public class GoalView : MonoBehaviour
         {
             clearOnHideObjects[i].gameObject.SetActive(false);
         }
+        GoToStageArgmentsSingleton.Clear();
+    }
+
+    public async void BackToStageSelect()
+    {
+        await multiSceneLoader.AddScene(SceneID.StageSelect, true);
+        await multiSceneLoader.UnloadScene(SceneID.Stage);
     }
 }
