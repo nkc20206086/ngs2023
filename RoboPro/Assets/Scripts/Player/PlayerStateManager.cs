@@ -67,6 +67,7 @@ namespace Player
         private void FixedUpdate()
         {
             Debug.Log(stateGetter.StateGetter());
+            stateGetter.GroundCheckGetter().CheckSideGround();
 
             //Statemachine
             switch (stateGetter.StateGetter())

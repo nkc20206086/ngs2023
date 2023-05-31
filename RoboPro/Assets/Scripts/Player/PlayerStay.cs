@@ -30,21 +30,21 @@ namespace Player
                 stateChangeEvent(PlayerStateEnum.Move);
             }
 
-            if (stateGetter.LadderCheckGetter().LadderClimbCheck())
-            {
-                if(isInteract)
-                {
-                    stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
-                }
-            }
+            //if (stateGetter.LadderCheckGetter().LadderClimbCheck())
+            //{
+            //    if(isInteract)
+            //    {
+            //        stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
+            //    }
+            //}
 
-            if(stateGetter.LadderCheckGetter().LadderDownCheck())
-            {
-                if (isInteract)
-                {
-                    stateChangeEvent(PlayerStateEnum.LadderDown);
-                }
-            }
+            //if(stateGetter.LadderCheckGetter().LadderDownCheck())
+            //{
+            //    if (isInteract)
+            //    {
+            //        stateChangeEvent(PlayerStateEnum.LadderDown);
+            //    }
+            //}
 
             //アクセスポイントの何番が近くにあるか
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);

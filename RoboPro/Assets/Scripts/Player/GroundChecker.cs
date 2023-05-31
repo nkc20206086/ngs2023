@@ -30,6 +30,7 @@ namespace Player
         private CapsuleCollider capsuleCollider;
 
         private float[] splitHeightVectorArray;
+
         private bool isCheckWall;
         private bool parentResetFlg;
         private string parentOldName;
@@ -80,6 +81,31 @@ namespace Player
             Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
 
             return floorFlg;
+        }
+
+        public bool CheckSideGround()
+        {
+            Vector3 playerForwardVec = gameObject.transform.position;
+            playerForwardVec.x += transform.forward.x * 0.5f;
+            playerForwardVec.z += transform.forward.z * 0.5f;
+            playerForwardVec.y += 0.2f;
+
+            Vector3 normalizedVec = playerForwardVec.normalized;
+
+            Vector3 rotateVector = Quaternion.Euler(0f, 0f, 90f) * normalizedVec;
+
+            Vector3 pointVectorX = rotateVector + playerForwardVec;
+            Vector3 pointVectorZ = rotateVector - playerForwardVec;
+
+            //Vector3 mixedVecRight = new Vector3(playerForwardVec.x * 0.2f, playerForwardVec.y, playerForwardVec.z * 0.2f);
+            //Vector3 mixedVecLeft = new Vector3(playerForwardVec.x * -0.2f, playerForwardVec.y, playerForwardVec.z * -0.2f);
+
+            Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
+            Debug.DrawRay(pointVectorX, Vector3.down * rayLength);
+            Debug.DrawRay(pointVectorZ, Vector3.down * rayLength);
+
+
+            return true;
         }
 
         /// <summary>
