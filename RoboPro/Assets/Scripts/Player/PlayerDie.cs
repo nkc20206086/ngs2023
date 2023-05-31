@@ -8,7 +8,7 @@ using MainCamera;
 
 namespace Player
 {
-    public class PlayerDie : MonoBehaviour,IStateChange
+    public class PlayerDie : MonoBehaviour, IStateChange
     {
         [Inject]
         private IDeathCameraSettable deathCameraSettable;
@@ -35,15 +35,15 @@ namespace Player
 
         public void Act_Die()
         {
-            if (isExplosion) return;
-            isExplosion = true;
-            stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_Die");
-            cameraBackGroundChanger.Death_BackGroundChange();
+            if (stateGetter.CheckDeathBoolGetter() == false) return;
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", true);
+        }
 
-            //camera.transform.position = gameObject.transform.forward;
-            //camera.transform.LookAt(gameObject.transform.position);
-            //deathCameraSettable.DeathCameraEnable(true);
-            //deathCameraSettable.DrawingByDeathCamera(skinnedMeshRenderer);
+        public void ReturnToDeath()
+        {
+            stateChangeEvent(PlayerStateEnum.Stay);
+            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Die", false);
+            stateGetter.RigidbodyGetter().useGravity = true;
         }
     }
 }

@@ -69,5 +69,7 @@ namespace Player
         public float PlayerUI_OffsetYGetter();
 
         public IAudioPlayer AudioGetter();
+
+        public bool CheckDeathBoolGetter();
     }
 }

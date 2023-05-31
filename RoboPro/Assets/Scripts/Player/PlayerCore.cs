@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Player
 {
-    public class PlayerCore : MonoBehaviour,IStateGetter
+    public class PlayerCore : MonoBehaviour, IStateGetter
     {
         [SerializeField]
         private float ladderUpDownSpeed;
@@ -36,13 +36,15 @@ namespace Player
         private GroundChecker groundChecker;
         private LadderChecker ladderChecker;
 
+        private bool isDeath;
+
         // Start is called before the first frame update
         void Start()
         {
             animator = GetComponentInChildren<Animator>();
             rigidbody = GetComponent<Rigidbody>();
             stateChangeArray = GetComponents<IStateChange>();
-            foreach(IStateChange stateChange in stateChangeArray)
+            foreach (IStateChange stateChange in stateChangeArray)
             {
                 stateChange.stateChangeEvent += StateChanger;
             }
@@ -56,6 +58,10 @@ namespace Player
             //ステートを変更
             state = newStateEnum;
             //Debug.Log(state + "ステートに変更されました");
+
+            //死ぬステートだった場合、フラグを変える
+            if (newStateEnum == PlayerStateEnum.Die) isDeath = true;
+            else isDeath = false;
         }
 
         PlayerStateEnum IStateGetter.StateGetter()
@@ -116,6 +122,11 @@ namespace Player
         IAudioPlayer IStateGetter.AudioGetter()
         {
             return audioPlayer;
+        }
+
+        bool IStateGetter.CheckDeathBoolGetter()
+        {
+            return isDeath;
         }
     }
 }
