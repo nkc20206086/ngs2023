@@ -65,7 +65,7 @@ namespace Player
                     stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                     stateChangeEvent(PlayerStateEnum.Stay);
                 }
-                
+
                 ////登る梯子の検知
                 //if (stateGetter.LadderCheckGetter().LadderClimbCheck())
                 //{
@@ -108,25 +108,47 @@ namespace Player
                     }
                 }
 
+                //梯子(使わない)
+                //if (stateGetter.LadderCheckGetter().LadderClimbCheck() || stateGetter.LadderCheckGetter().LadderDownCheck())
+                //{
+                //    stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                //}
                 //目の前が崖か判定
                 if (stateGetter.GroundCheckGetter().CheckGround() == false)
                 {
-                    if(stateGetter.LadderCheckGetter().LadderClimbCheck() || stateGetter.LadderCheckGetter().LadderDownCheck())
-                    {
-                        stateGetter.RigidbodyGetter().velocity = Vector3.zero;
-                    }
                     //自分の乗っている床でふらつけるかどうかの判定
-                    else if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
+                    if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
                     {
                         //ふらつくステートに変更
+                        Debug.Log("ふらつく");
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
                         stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                         //colliCheck.ColiCheck();
                         stateChangeEvent(PlayerStateEnum.Dizzy);
                     }
                 }
+                else
+                {
+                    if (SideCheck() == false)
+                    {
+                        stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                    }
+                }
             }
         }
+
+        public bool SideCheck()
+        {
+            if (stateGetter.GroundCheckGetter().CheckSideGround_Left() && stateGetter.GroundCheckGetter().CheckSideGround_Right())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void Act_GoalPoint()
         {
             stateGetter.PlayerAnimatorGeter().SetBool("PlayerMove", false);
