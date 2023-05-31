@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using Zenject;
+using Robo;
 namespace CommandUI
 {
     public class InventryCommandButton : MonoBehaviour
@@ -12,8 +13,10 @@ namespace CommandUI
         [SerializeField]
         private InventryCommandView inventryCommandView;
 
+        [Inject] private IAudioPlayer audioPlayer;
         public void SelectButton()
         {
+            audioPlayer.PlaySE(CueSheetType.Command, "SE_Command_Select");
             inventryCommandView.ButtonIndexget(mainIndex, subIndex);
         }
     }
