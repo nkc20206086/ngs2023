@@ -500,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 4999026225130300108, guid: ae4b46a06b72dfe40b1f9f903e81653a,
         type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4999026225130300108, guid: ae4b46a06b72dfe40b1f9f903e81653a,
         type: 3}
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -907,7 +907,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 221012231982741791}
+  m_TargetGraphic: {fileID: 221012232649998678}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -923,82 +923,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1220799588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221012231982741777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 384442730471490863}
-  - {fileID: 221012232649998678}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1220799589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221012231982741777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1220799588}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1220799588}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &221012231982741791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8715084703213985401, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221012231982741777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &221012232649998664 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8715084702010369582, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -1145,7 +1069,7 @@ MonoBehaviour:
   SelectCrea:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 287947083}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -1157,7 +1081,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1583989765}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -1169,7 +1093,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 366649125}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -1260,7 +1184,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 614428659071422565}
+  m_TargetGraphic: {fileID: 614428660259822794}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1276,133 +1200,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &614428659071422565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8315300454030374659, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614428659071422563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &614428660259822792 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8315300453344705454, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1209808130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614428660259822792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 614428660259822794}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 159167433}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1209808131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614428660259822792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1209808130}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1209808130}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1209808130}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &614428660259822794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8315300453344705452, guid: ae4b46a06b72dfe40b1f9f903e81653a,
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614428660259822792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &670329735538383355 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8263682549742567069, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376431668996252089}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -1509,216 +1313,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866955527408226813}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &866955527408226813 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8641010608296228507, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &495663155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866955527408226813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 495663156}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 495663156}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 495663156}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &495663156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866955527408226813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 866955527408226803}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1943073712}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1209808130}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 803207133}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1209808130}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 803207133}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1209808130}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 803207133}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1209808130}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 803207133}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1155062264396957850 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7774507265403170812, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -1768,7 +1368,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1786,7 +1386,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 670329735538383355}
+  m_TargetGraphic: {fileID: 9183118307882232236}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -1986,18 +1586,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2206264775805387364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7313063179239302402, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206264775805387370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2206264775805387370 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7313063179239302412, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -2041,7 +1629,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2059,7 +1647,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2206264775805387364}
+  m_TargetGraphic: {fileID: 2206264774592838189}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2075,70 +1663,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1730634206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206264775805387370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 1790985469076618836}
-  - {fileID: 2206264774592838189}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1730634207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2206264775805387370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1730634206}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1730634206}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2708224697734146378 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6806784203237641772, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -2166,98 +1690,52 @@ MonoBehaviour:
   mainIndex: 0
   subIndex: 0
   inventryCommandView: {fileID: 7960375040721947027}
---- !u!1 &2897541616090434387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6040770311121611829, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3049439749184072195 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5886991290579078501, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2008764951
+--- !u!114 &2123948167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049439749184072195}
+  m_GameObject: {fileID: 2776476104543322217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2008764952}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2008764952}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2008764952}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &2008764952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049439749184072195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 3049439749184072205}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5396133086087874684}
+  m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 849408470}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
+      - m_Target: {fileID: 775164570}
+        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
         m_MethodName: SelectButton
         m_Mode: 1
         m_Arguments:
@@ -2268,121 +1746,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 649343700}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1730634206}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 649343700}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1730634206}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 649343700}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1730634206}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 649343700}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1730634206}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!1 &2897541616090434387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6040770311121611829, guid: ae4b46a06b72dfe40b1f9f903e81653a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8926981260570158950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3049439749184072205 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5886991290579078507, guid: ae4b46a06b72dfe40b1f9f903e81653a,
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049439749184072195}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -2443,7 +1819,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2461,7 +1837,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3565941517745396274}
+  m_TargetGraphic: {fileID: 5134460707531221605}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2483,115 +1859,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3377455227697571638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &3377455227697571638 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141823068972597328, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &649343700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3377455227697571638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 3377455227697571636}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021065238}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &649343701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3377455227697571638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 649343700}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 649343700}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 649343700}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &3377455228624153499 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6141823067476184317, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3377455228624153501}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -2640,7 +1908,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2658,7 +1926,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3377455228624153499}
+  m_TargetGraphic: {fileID: 3377455227697571636}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2680,18 +1948,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3565941517745396274 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5377235016760851796, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3110765726948074096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3589243701155687144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5344800831879974286, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -2787,18 +2043,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3697502337433276640 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5238575742324406150, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3697502337433276646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3697502337433276646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5238575742324406144, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -2842,7 +2086,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2860,7 +2104,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3697502337433276640}
+  m_TargetGraphic: {fileID: 3697502338923994191}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -2876,109 +2120,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &3697502338923994189 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5238575741404707627, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &825316934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3697502338923994189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 3697502338923994191}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1758403767}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &825316935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3697502338923994189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 825316934}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 825316934}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 825316934}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &3697502338923994191 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5238575741404707625, guid: ae4b46a06b72dfe40b1f9f903e81653a,
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3697502338923994189}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -3008,216 +2156,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4025868561726312824}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4025868561726312824 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5493758264120604190, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1112958943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4025868561726312824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1112958944}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1112958944}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1112958944}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &1112958944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4025868561726312824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 4025868561726312822}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2121899690}
-        m_TargetAssemblyTypeName: CommandUI.ProgramCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825316934}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1220799588}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825316934}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1220799588}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825316934}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1220799588}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 825316934}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1220799588}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4050430260100104125 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4887820616697649371, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -3291,7 +2235,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4091511607970920858}
+  m_TargetGraphic: {fileID: 4091511608905826771}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3307,82 +2251,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &803207133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091511607970920852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 4504472594155210154}
-  - {fileID: 4091511608905826771}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &803207134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091511607970920852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 803207133}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 803207133}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4091511607970920858 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4838266820486242044, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4091511607970920852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4091511608905826765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4838266819013928619, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -3561,7 +2429,7 @@ MonoBehaviour:
   SelectCrea:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2008764952}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -3573,7 +2441,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 495663156}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -3585,7 +2453,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1112958944}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
         m_MethodName: SelectCrea
         m_Mode: 1
@@ -3597,18 +2465,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4747711025322484001 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4179411016760100423, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607957256719194467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4807443231899849399 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4131060962174531025, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -3686,18 +2542,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4886313400019610611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4047801543703661717, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886313400019610613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4886313400019610613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4047801543703661715, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -3741,7 +2585,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3759,7 +2603,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4886313400019610611}
+  m_TargetGraphic: {fileID: 4886313401476245340}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3781,108 +2625,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886313401476245342}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4886313401476245342 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4047801542749880376, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2046070413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886313401476245342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 4886313401476245340}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 222231871}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2046070414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4886313401476245342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2046070413}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2046070413}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2046070413}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &4982862708680461115 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4523211699954314333, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -3932,7 +2680,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3950,7 +2698,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 6659778685777992282}
+  m_TargetGraphic: {fileID: 3049439749184072205}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -3984,216 +2732,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5134460707531221611}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5134460707531221611 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4369132548891282701, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &366649124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5134460707531221611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 366649125}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 366649125}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 366649125}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &366649125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5134460707531221611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 5134460707531221605}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 477054485}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2046070413}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 144334350}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2046070413}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 144334350}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2046070413}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 144334350}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2046070413}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 144334350}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &5134460707715617257 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4369132549344949903, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -4212,217 +2756,13 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5396133086087874674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3531359062083661588, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &287947082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396133086087874674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 287947083}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 287947083}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 287947083}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &287947083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396133086087874674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 5396133086087874684}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 775164570}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 222884683}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1763385160}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 222884683}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1763385160}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 222884683}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1763385160}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 222884683}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1763385160}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &5396133086087874684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3531359062083661594, guid: ae4b46a06b72dfe40b1f9f903e81653a,
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5396133086087874674}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -4435,18 +2775,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5458096830236590533 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3484673469489768099, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458096830236590539}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -4495,7 +2823,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4513,7 +2841,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 5458096830236590533}
+  m_TargetGraphic: {fileID: 5458096830903908748}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4529,70 +2857,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &665408670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458096830236590539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 5619348783869787637}
-  - {fileID: 5458096830903908748}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &665408671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458096830236590539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 665408670}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 665408670}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &5458096830903908748 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3484673468286115562, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -4706,115 +2970,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5650894495720506695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &5650894495720506695 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3859304171802714657, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &222884682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5650894495720506695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 222884683}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 222884683}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 222884683}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &222884683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5650894495720506695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 5650894495720506693}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1337530371}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5650894496951372266 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3859304171142737548, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5650894496951372268}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -4863,7 +3019,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4881,7 +3037,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 5650894496951372266}
+  m_TargetGraphic: {fileID: 5650894495720506693}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4952,7 +3108,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -4970,7 +3126,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4747711025322484001}
+  m_TargetGraphic: {fileID: 4025868561726312822}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -4986,18 +3142,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6659778685777992282 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2850579856529931580, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5060679798133154328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6945367873268275686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1982117513920167552, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5041,7 +3185,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5059,7 +3203,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8806097825892655524}
+  m_TargetGraphic: {fileID: 866955527408226803}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5136,7 +3280,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5154,7 +3298,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8326794637903495692}
+  m_TargetGraphic: {fileID: 8326794638570289733}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5170,82 +3314,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &144334350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8326794637903495682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 8487691346205310524}
-  - {fileID: 8326794638570289733}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &144334351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8326794637903495682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 144334350}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 144334350}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &8326794637903495692 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 607341308742722922, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8326794637903495682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8326794638570289733 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 607341307538545955, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5436,18 +3504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8806097825892655524 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 132444388238395074, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6945367873268275686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8828956991055630718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100701743704765976, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5531,18 +3587,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8934602466269063226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8188835306508124, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934602466269063228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8934602466269063228 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8188835306508122, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5586,7 +3630,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5604,7 +3648,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8934602466269063226}
+  m_TargetGraphic: {fileID: 8934602467725108373}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5626,108 +3670,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934602467725108375}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8934602467725108375 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8188834354234353, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1703013725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934602467725108375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 8934602467725108373}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 179631307}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1703013726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934602467725108375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1703013725}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1703013725}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1703013725}
-          m_TargetAssemblyTypeName: ButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &9091950880995055682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 418301568674758436, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5817,18 +3765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9091950881938923541 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 418301567194531699, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9091950881938923547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9091950881938923547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 418301567194531709, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -5857,7 +3793,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9091950881938923547}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -5872,7 +3808,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -5890,7 +3826,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 9091950881938923541}
+  m_TargetGraphic: {fileID: 9091950880995055708}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5906,98 +3842,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1763385160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9091950881938923547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic:
-  - {fileID: 8676739882638384165}
-  - {fileID: 9091950880995055708}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1872231621}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1763385161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9091950881938923547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1763385160}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1763385160}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1763385160}
-          m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &9183118306897294456 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 329887963702203166, guid: ae4b46a06b72dfe40b1f9f903e81653a,
@@ -6010,217 +3854,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &9183118307882232226 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 329887962280922820, guid: ae4b46a06b72dfe40b1f9f903e81653a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8926981260570158950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1583989764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183118307882232226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1583989765}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: SelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1583989765}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: UnSelectingButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1583989765}
-          m_TargetAssemblyTypeName: BehaviorButtonSelectView, Assembly-CSharp
-          m_MethodName: ClickButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &1583989765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183118307882232226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 9183118307882232236}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1365203198}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703013725}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 665408670}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703013725}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 665408670}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703013725}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 665408670}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1703013725}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 665408670}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &9183118307882232236 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 329887962280922826, guid: ae4b46a06b72dfe40b1f9f903e81653a,
     type: 3}
   m_PrefabInstance: {fileID: 8926981260570158950}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9183118307882232226}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
