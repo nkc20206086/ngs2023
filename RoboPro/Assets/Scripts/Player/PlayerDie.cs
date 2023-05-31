@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using MainCamera;
 
 namespace Player
 {
@@ -14,6 +15,9 @@ namespace Player
 
         [SerializeField]
         private SkinnedMeshRenderer skinnedMeshRenderer;
+
+        [SerializeField]
+        private Camera camera;
         private IStateGetter stateGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
@@ -28,14 +32,17 @@ namespace Player
 
         public void Act_Die()
         {
-            deathCameraSettable.DeathCameraEnable(true);
-            deathCameraSettable.DrawingByDeathCamera(skinnedMeshRenderer);
+            
             
             if (isExplosion) return;
             isExplosion = true;
             stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_Die");
-            //Instantiate(playerEffect.explosionEffect, gameObject.transform.position, Quaternion.identity);
-            //playerEffect.explosionEffect.gameObject.SetActive(true);
+
+
+            //camera.transform.position = gameObject.transform.forward;
+            //camera.transform.LookAt(gameObject.transform.position);
+            //deathCameraSettable.DeathCameraEnable(true);
+            //deathCameraSettable.DrawingByDeathCamera(skinnedMeshRenderer);
         }
     }
 }

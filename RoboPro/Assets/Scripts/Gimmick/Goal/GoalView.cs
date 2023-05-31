@@ -1,8 +1,10 @@
 using InteractUI;
+using Robo;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 using Zenject;
 
 public class GoalView : MonoBehaviour
@@ -33,6 +35,12 @@ public class GoalView : MonoBehaviour
 
     [Inject]
     private IInteractUIControllable interactUIControllable;
+
+    [Inject]
+    private IMultiSceneLoader multiSceneLoader;
+
+    [Inject]
+    private IPostEffector postEffector;
 
     private bool isClear = false;
 
@@ -95,5 +103,16 @@ public class GoalView : MonoBehaviour
         {
             clearOnHideObjects[i].gameObject.SetActive(false);
         }
+        GoToStageArgmentsSingleton.Clear();
+    }
+
+    public void BackToStageSelect()
+    {
+        postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
+        postEffector.Fade(FadeType.Out, 1, DG.Tweening.Ease.Linear).onComplete += async () =>
+        {
+            await multiSceneLoader.AddScene(Robo.SceneID.StageSelect, true);
+            await multiSceneLoader.UnloadScene(Robo.SceneID.Stage);
+        };
     }
 }
