@@ -55,7 +55,7 @@ namespace Gimmick
 
         public void ArchiveAdd(int index)
         {
-            for (int i = archives.Count - 1;i >= index;i--)
+            for (int i = archives.Count - 1;i >= index;--i)
             {
                 archives.RemoveAt(i);
             }
@@ -77,7 +77,10 @@ namespace Gimmick
 
         public void ArchiveSet(int index)
         {
-            Array.Copy(archives[index],controlCommands,controlCommands.Length);
+            for (int i = 0;i < controlCommands.Length;i++)
+            {
+                controlCommands[i] = archives[index][i] != null ? archives[index][i].MainCommandClone() : null;
+            }
 
             foreach (GimmickController controller in gimmickControllers)
             {
