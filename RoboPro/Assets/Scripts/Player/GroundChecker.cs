@@ -22,6 +22,10 @@ namespace Player
         private float liveRayLength;
         [SerializeField]
         private int splitHeightVectorNum;
+        [SerializeField]
+        private GameObject rayObjLeft;
+        [SerializeField]
+        private GameObject rayObjRight;
 
         [SerializeField]
         private LayerMask GroundMask;
@@ -78,33 +82,43 @@ namespace Player
 
             //原点から90度下向きにレイを出す
             floorFlg = Physics.Raycast(playerForwardVec, Vector3.down, rayLength);
-            Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
+            //Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
 
             return floorFlg;
         }
 
-        public bool CheckSideGround()
+        public bool CheckSideGround_Left()
         {
-            Vector3 playerForwardVec = gameObject.transform.position;
-            playerForwardVec.x += transform.forward.x * 0.5f;
-            playerForwardVec.z += transform.forward.z * 0.5f;
-            playerForwardVec.y += 0.2f;
+            //Vector3 playerForwardVec = gameObject.transform.position;
+            //playerForwardVec.x += transform.forward.x * 0.5f;
+            //playerForwardVec.z += transform.forward.z * 0.5f;
+            //playerForwardVec.y += 0.2f;
 
-            Vector3 normalizedVec = playerForwardVec.normalized;
+            //Vector3 normalizedVec = playerForwardVec.normalized;
 
-            Vector3 rotateVector = Quaternion.Euler(0f, 0f, 90f) * normalizedVec;
+            //Vector3 rotateVector = Quaternion.Euler(0f, 0f, 90f) * normalizedVec;
 
-            Vector3 pointVectorX = rotateVector + playerForwardVec;
-            Vector3 pointVectorZ = rotateVector - playerForwardVec;
+            //Vector3 pointVectorX = rotateVector + playerForwardVec;
+            //Vector3 pointVectorZ = rotateVector - playerForwardVec;
 
             //Vector3 mixedVecRight = new Vector3(playerForwardVec.x * 0.2f, playerForwardVec.y, playerForwardVec.z * 0.2f);
             //Vector3 mixedVecLeft = new Vector3(playerForwardVec.x * -0.2f, playerForwardVec.y, playerForwardVec.z * -0.2f);
 
-            Debug.DrawRay(playerForwardVec, Vector3.down * rayLength);
-            Debug.DrawRay(pointVectorX, Vector3.down * rayLength);
-            Debug.DrawRay(pointVectorZ, Vector3.down * rayLength);
+            RaycastHit leftRay = new RaycastHit();
+            Physics.Raycast(rayObjLeft.gameObject.transform.position, Vector3.down ,out leftRay, 0.2f,GroundMask);
+            //Debug.DrawRay(rayObjLeft.gameObject.transform.position, Vector3.down * rayLength);
 
+            if (leftRay.collider == null) return false;
+            return true;
+        }
 
+        public bool CheckSideGround_Right()
+        {
+            RaycastHit rightRay = new RaycastHit();
+            Physics.Raycast(rayObjRight.gameObject.transform.position, Vector3.down, out rightRay, 0.2f,GroundMask);
+            //Debug.DrawRay(rayObjRight.gameObject.transform.position, Vector3.down * rayLength);
+
+            if (rightRay.collider == null) return false;
             return true;
         }
 
