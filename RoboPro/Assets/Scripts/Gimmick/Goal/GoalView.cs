@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 using Zenject;
 
 public class GoalView : MonoBehaviour
@@ -37,6 +38,9 @@ public class GoalView : MonoBehaviour
 
     [Inject]
     private IMultiSceneLoader multiSceneLoader;
+
+    [Inject]
+    private IPostEffector postEffector;
 
     private bool isClear = false;
 
@@ -102,9 +106,13 @@ public class GoalView : MonoBehaviour
         GoToStageArgmentsSingleton.Clear();
     }
 
-    public async void BackToStageSelect()
+    public void BackToStageSelect()
     {
-        await multiSceneLoader.AddScene(SceneID.StageSelect, true);
-        await multiSceneLoader.UnloadScene(SceneID.Stage);
+        postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
+        postEffector.Fade(FadeType.Out, 1, DG.Tweening.Ease.Linear).onComplete += async () =>
+        {
+            await multiSceneLoader.AddScene(Robo.SceneID.StageSelect, true);
+            await multiSceneLoader.UnloadScene(Robo.SceneID.Stage);
+        };
     }
 }
