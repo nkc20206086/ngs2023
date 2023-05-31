@@ -73,6 +73,11 @@ namespace Player
             }
         }
 
+        public void Bug_Return()
+        {
+            stateChangeEvent(PlayerStateEnum.Stay);
+        }
+
         private void Act_GoalPoint()
         {
             Vector3 pos = goal.gameObject.transform.position;

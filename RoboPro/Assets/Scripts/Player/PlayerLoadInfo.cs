@@ -12,12 +12,14 @@ namespace Player
         private ICameraBackGroundChanger cameraBackGroundChanger;
         private IStateGetter stateGetter;
         private PlayerSavePos playerSavePos;
+        private PlayerStay playerStay;
         private PlayerDie playerDie;
         // Start is called before the first frame update
         void Start()
         {
             stateGetter = GetComponent<IStateGetter>();
             playerSavePos = GetComponent<PlayerSavePos>();
+            playerStay = GetComponent<PlayerStay>();
             playerDie = GetComponent<PlayerDie>();
 
             stateGetter.GimmickAccessGetter().SetAction(Undo_PlayerPos, Redo_PlayerPos, playerSavePos.SaveList);
@@ -28,7 +30,11 @@ namespace Player
         /// </summary>
         public void Undo_PlayerPos()
         {
-            playerSavePos.callCount--;
+            if(playerSavePos.callCount != 0)
+            {
+                playerSavePos.callCount--;
+            }
+            
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
 

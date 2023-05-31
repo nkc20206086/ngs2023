@@ -50,7 +50,7 @@ namespace Player
             startFallYVector = transform.position.y;
             isThroughFall = true;
             stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
-            stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * jumpVec.x, stateGetter.RigidbodyGetter().velocity.y, transform.forward.z * jumpVec.x);
+            stateGetter.RigidbodyGetter().velocity = new Vector3(0, stateGetter.RigidbodyGetter().velocity.y, 0);
             stateChangeEvent(PlayerStateEnum.Falling);
         }
 
