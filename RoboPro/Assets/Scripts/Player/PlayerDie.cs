@@ -19,8 +19,6 @@ namespace Player
         [SerializeField]
         private SkinnedMeshRenderer skinnedMeshRenderer;
 
-        [SerializeField]
-        private Camera camera;
         private IStateGetter stateGetter;
 
         public event Action<PlayerStateEnum> stateChangeEvent;
