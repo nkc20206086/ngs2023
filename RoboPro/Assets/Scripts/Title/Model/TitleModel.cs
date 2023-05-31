@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Robo
@@ -55,6 +56,7 @@ namespace Robo
         //設定画面を開く
         async void ITitleModel.ShowSettings()
         {
+            if (SceneManager.GetSceneByName("Settings") != null) return;
             await multiSceneLoader.AddScene(SceneID.Settings, true);
             OnShowSettings?.Invoke();
             Debug.Log("Show");
