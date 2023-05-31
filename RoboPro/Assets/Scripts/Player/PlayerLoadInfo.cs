@@ -12,11 +12,13 @@ namespace Player
         private ICameraBackGroundChanger cameraBackGroundChanger;
         private IStateGetter stateGetter;
         private PlayerSavePos playerSavePos;
+        private PlayerDie playerDie;
         // Start is called before the first frame update
         void Start()
         {
             stateGetter = GetComponent<IStateGetter>();
             playerSavePos = GetComponent<PlayerSavePos>();
+            playerDie = GetComponent<PlayerDie>();
 
             stateGetter.GimmickAccessGetter().SetAction(Undo_PlayerPos, Redo_PlayerPos, playerSavePos.SaveList);
         }
@@ -29,11 +31,9 @@ namespace Player
             playerSavePos.callCount--;
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
-            Debug.Log("Undo call" + playerSavePos.callCount);
 
             if (stateGetter.StateGetter() != PlayerStateEnum.Die) return;
-            //cameraBackGroundChanger.Default_BackGroundChange();
-
+            playerDie.ReturnToDeath();
         }
 
         /// <summary>
@@ -44,10 +44,7 @@ namespace Player
             playerSavePos.callCount++;
             gameObject.transform.position = playerSavePos.saveVecList[playerSavePos.callCount];
             gameObject.transform.rotation = playerSavePos.saveQuaternionsList[playerSavePos.callCount];
-            Debug.Log("Redo call" + playerSavePos.callCount);
         }
-
-        //public void Death
     }
 
 }

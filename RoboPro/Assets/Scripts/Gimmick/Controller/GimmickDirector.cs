@@ -80,7 +80,7 @@ namespace Gimmick
                 }
             }
 
-            if (isSwapping && Input.GetKeyDown(KeyCode.Escape))
+            if (isSwapping && Input.GetKeyDown(KeyCode.E))
             {
                 Close();
             }
