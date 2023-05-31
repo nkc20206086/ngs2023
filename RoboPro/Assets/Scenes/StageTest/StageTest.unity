@@ -467,7 +467,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stageJson
       value: 
-      objectReference: {fileID: 4900000, guid: 749129a835579094eb6009bf6f45f80e, type: 3}
+      objectReference: {fileID: 4900000, guid: 64ce2b19742032d489badee4d1aa4f48, type: 3}
     - target: {fileID: 6545768839877565256, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_RaycastTarget

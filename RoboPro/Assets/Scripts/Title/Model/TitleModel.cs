@@ -65,6 +65,7 @@ namespace Robo
         //ゲーム終了
         void ITitleModel.Exit()
         {
+            Application.Quit();
             OnExit?.Invoke();
             Debug.Log("Exit");
         }
