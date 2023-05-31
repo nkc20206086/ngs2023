@@ -202,6 +202,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b49fc4fcf10294e8544863d4ede2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &287947083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 287947083, guid: f7403e251c7057c4bb07ec2d4f115373,
+    type: 3}
+  m_PrefabInstance: {fileID: 7960375040114106864}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &995378587
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1278380558}
   - component: {fileID: 1278380557}
+  - component: {fileID: 1278380559}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -378,6 +391,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1278380559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278380556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da94e7ac704916c4fb788a0bb4a80760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bbsv: {fileID: 287947083}
 --- !u!1001 &7960375040114106864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -385,16 +411,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2121796292498593871, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3630541804879696558, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3630541804995797703, guid: f7403e251c7057c4bb07ec2d4f115373,
         type: 3}
       propertyPath: m_Pivot.x
@@ -504,26 +520,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ProgramCanvasUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050430260100104125, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5060679798133154328, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5984387666786821232, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6090776763769943055, guid: f7403e251c7057c4bb07ec2d4f115373,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7403e251c7057c4bb07ec2d4f115373, type: 3}
