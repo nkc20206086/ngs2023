@@ -42,6 +42,24 @@ namespace Stage
             play.Subscribe(gimmickDirector.StartCommandAction);
             uiManager.play = play;
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                gimmickDirector.Undo(default);
+            }
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                gimmickDirector.Redo(default);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                gimmickDirector.StartCommandAction(default);
+            }
+        }
     }
 
 }

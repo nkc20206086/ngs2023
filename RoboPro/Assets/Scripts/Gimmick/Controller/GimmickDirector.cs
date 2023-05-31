@@ -9,6 +9,7 @@ using Command.Entity;
 using Gimmick.Interface;
 using InteractUI;
 using ScanMode;
+using Robo;
 
 namespace Gimmick
 {
@@ -22,6 +23,9 @@ namespace Gimmick
 
         [Inject]
         private IInteractUIControllable uIControllable;
+
+        [Inject]
+        private IAudioPlayer audioPlayer;
 
         [SerializeField, Tooltip("ストレージコマンド管理クラス")]
         private CommandStorage storage;
@@ -131,6 +135,8 @@ namespace Gimmick
             if (!isSwapping) return;                                                            // 入れ替え実行中でないなら早期リターンする
             isSwapping = false;                                                                 // 入れ替え終了に変更
 
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_Cancel");
+
             bool isSwap = commandDirector.CommandInvalidation();                                // コマンド管理クラスに処理の終了を依頼し、入れ替えの有無をローカル変数に保存する
 
             if (!isSwap)                                                                        // コマンド入れ替えが行われていないなら
@@ -169,6 +175,8 @@ namespace Gimmick
             isExecute = true;
             state = state != CommandState.MOVE_ON ? CommandState.MOVE_ON : CommandState.RETURN;
 
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
+
             foreach (AccessPoint accessPoint in accessPoints)
             {
                 // !
@@ -184,9 +192,11 @@ namespace Gimmick
         /// </summary>
         public void Undo(Unit unit)
         {
-            if (archiveIndex <= 0 || isSwapping) return;     // セーブ参照インデックスが0よりも小さいか、入れ替え実行中であれば早期リターンする
+            if (archiveIndex <= 1 || isSwapping) return;     // セーブ参照インデックスが1よりも小さいか、入れ替え実行中であれば早期リターンする
 
             archiveIndex--;                                   // セーブ参照インデックスを減算する
+
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_UnDo");
 
             undoPlayerAction?.Invoke();
 
@@ -209,6 +219,8 @@ namespace Gimmick
         public void Redo(Unit unit)
         {
             if (archiveIndex + 1 > maxArchiveCount|| isSwapping) return;   // セーブ参照インデックスが要素数限界か、入れ替え実行中であれば早期リターンする
+
+            audioPlayer.PlaySE(CueSheetType.System, "SE_System_ReDo");
 
             archiveIndex++;                                                 // セーブ参照インデックスを加算する
 
@@ -253,6 +265,7 @@ namespace Gimmick
                 if (retIndex >= 0)
                 {
                     uIControllable.HideUI();
+                    uIControllable.HideLockUI();
                     uIControllable.ShowUI(ControllerType.Keyboard, displayInteract);
                     uIControllable.SetPosition(accessPoints[retIndex].transform.position + Vector3.up);
                 }
