@@ -18,6 +18,8 @@ namespace Gimmick
     /// </summary>
     public class GimmickDirector : MonoBehaviour, IGimmickAccess
     {
+        const float ACCESS_HEIGHT = 0.5f;
+
         [Inject]
         private IScanModeLaserManageable laserManageable;
 
@@ -250,6 +252,8 @@ namespace Gimmick
                 // yÀ•W‚Ì‚È‚¢•½–Êã‚ÌÀ•W‚ğì¬
                 Vector2 posA = new Vector2(position.x, position.z);
                 Vector2 posB = new Vector2(accessPoints[i].transform.position.x, accessPoints[i].transform.position.z);
+
+                if (Mathf.Abs(position.y - accessPoints[i].transform.position.y) > ACCESS_HEIGHT) continue;
 
                 float distance = Mathf.Abs(Vector2.Distance(posA, posB));   // x,zÀ•W‚Ì‹——£‚ğæ“¾
 
