@@ -13,6 +13,9 @@ namespace Player
         [Inject]
         private IDeathCameraSettable deathCameraSettable;
 
+        [Inject]
+        private ICameraBackGroundChanger cameraBackGroundChanger;
+
         [SerializeField]
         private SkinnedMeshRenderer skinnedMeshRenderer;
 
@@ -32,12 +35,10 @@ namespace Player
 
         public void Act_Die()
         {
-            
-            
             if (isExplosion) return;
             isExplosion = true;
             stateGetter.PlayerAnimatorGeter().SetTrigger("Trigger_Die");
-
+            cameraBackGroundChanger.Death_BackGroundChange();
 
             //camera.transform.position = gameObject.transform.forward;
             //camera.transform.LookAt(gameObject.transform.position);

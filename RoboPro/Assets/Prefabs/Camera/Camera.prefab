@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1162411736121202649}
   - component: {fileID: 1162411736121202470}
   - component: {fileID: 1162411736121202469}
+  - component: {fileID: 6653984902785319372}
   - component: {fileID: 1162411736121202468}
   - component: {fileID: 6090095134604955297}
   m_Layer: 0
@@ -29,8 +30,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162411736121202650}
-  m_LocalRotation: {x: 0.36581522, y: 0.000000032027526, z: -0.000000012588711, w: 0.9306875}
-  m_LocalPosition: {x: 0, y: 8.34, z: -15}
+  m_LocalRotation: {x: 0.36569074, y: 0.024281103, z: -0.009543911, w: 0.9303707}
+  m_LocalPosition: {x: -3.682415, y: 15, z: -14.97958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,7 +50,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.60784316, g: 0.8392157, b: 0.84313726, a: 0}
+  m_BackGroundColor: {r: 0.16470589, g: 0.42745098, b: 0.85882354, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -158,6 +159,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6653984902785319372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162411736121202650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9aa40597737f1646ae7a1ae49a6f7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathBackColor: {r: 0.16470589, g: 0.42745098, b: 0.85882354, a: 1}
 --- !u!114 &1162411736121202468
 MonoBehaviour:
   m_ObjectHideFlags: 0
