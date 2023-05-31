@@ -123,48 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &96082778 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6545768839290249414, guid: 36640f743079adf43a7a9de4ee597cd1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1168073221171288758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &339633438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1168073220636309490, guid: 36640f743079adf43a7a9de4ee597cd1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1168073221171288758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f43a313bf8407540ac4b9eb51b8b055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &690648319 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3944539922720696531, guid: 36640f743079adf43a7a9de4ee597cd1,
     type: 3}
   m_PrefabInstance: {fileID: 1168073221171288758}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &690648320 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1168073219576658464, guid: 36640f743079adf43a7a9de4ee597cd1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1168073221171288758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 690648319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b348d7694c5dadd4084640acb061c7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &690648324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,143 +200,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04cfc039fc98db842959c0ada77e6602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetGrafic: {fileID: 96082778}
-  selectingColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 0}
-  ClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 690648320}
-        m_TargetAssemblyTypeName: CommandUI.InventryCommandButton, Assembly-CSharp
-        m_MethodName: SelectButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1621012035}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 339633438}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorUnSelectingEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1621012035}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 339633438}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: UnSelectingButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  BehaviorClickEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1621012035}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 339633438}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: BehaviorClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  CreaEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1621012035}
-        m_TargetAssemblyTypeName: AxisButtonSelectView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 339633438}
-        m_TargetAssemblyTypeName: ValueButtonView, Assembly-CSharp
-        m_MethodName: SelectCrea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1621012035 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1168073220171996145, guid: 36640f743079adf43a7a9de4ee597cd1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1168073221171288758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 061b71d9e74ff6342985997a97f79b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1674056537
@@ -490,6 +317,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &1752752465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1168073220511027224, guid: 36640f743079adf43a7a9de4ee597cd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1168073221171288758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1752752472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752752465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9156fea08075ea43bc02727a1b72429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraBackGroundChanger: {fileID: 1922798772}
+--- !u!114 &1922798772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5504067678822870629, guid: 36640f743079adf43a7a9de4ee597cd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1168073221171288758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9aa40597737f1646ae7a1ae49a6f7fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1168073221171288758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +453,21 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ClickButton
       objectReference: {fileID: 0}
+    - target: {fileID: 1168073220511027205, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: _monoInstallers.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168073220511027205, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: _monoInstallers.Array.data[4]
+      value: 
+      objectReference: {fileID: 1752752472}
+    - target: {fileID: 1168073221299972707, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: stageJson
+      value: 
+      objectReference: {fileID: 4900000, guid: 749129a835579094eb6009bf6f45f80e, type: 3}
     - target: {fileID: 6545768839877565256, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_RaycastTarget
@@ -603,12 +476,12 @@ PrefabInstance:
     - target: {fileID: 8565856863607892765, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.012392969
+      value: -0.012392923
       objectReference: {fileID: 0}
     - target: {fileID: 8565856863607892765, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.004613404
+      value: 0.0046133874
       objectReference: {fileID: 0}
     - target: {fileID: 8565856865188199956, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
@@ -623,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 8565856865565544003, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.012217182
+      value: -0.012217183
       objectReference: {fileID: 0}
     - target: {fileID: 8565856865565544003, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}

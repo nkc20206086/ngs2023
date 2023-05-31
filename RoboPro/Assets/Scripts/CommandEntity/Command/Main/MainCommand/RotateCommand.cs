@@ -11,6 +11,7 @@ namespace Command.Entity
     public class RotateCommand : MainCommand
     {
         const int ANGLE_MAG = 90;
+        const float ROTATE_MAG = 2.0f;
 
         private Quaternion baseQuat;    // é¿çsëOÇÃâÒì]ó 
 
@@ -46,7 +47,7 @@ namespace Command.Entity
                 }
                 else
                 {
-                    targetTransform.Rotate(GetDirection());                                                             // âÒì]Ç∑ÇÈ
+                    targetTransform.Rotate(GetDirection() * ROTATE_MAG);                                                        // ãtâÒì]Ç∑ÇÈ
                 }
             }
             else if (state == CommandState.RETURN)
@@ -58,7 +59,7 @@ namespace Command.Entity
                 }
                 else
                 {
-                    targetTransform.Rotate(GetDirection() * -1);                                                        // ãtâÒì]Ç∑ÇÈ
+                    targetTransform.Rotate(GetDirection() * -ROTATE_MAG);                                                        // ãtâÒì]Ç∑ÇÈ
                 }
             }
         }
