@@ -8,6 +8,6 @@ public class GoalCameraPositionGetter : MonoBehaviour
     
     public void Update()
     {
-        GetPosition = transform.position;    
+        GetPosition = transform.position;
     }
 }

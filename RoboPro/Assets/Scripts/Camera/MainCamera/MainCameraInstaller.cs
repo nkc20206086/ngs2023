@@ -10,7 +10,7 @@ namespace MainCamera
 
         public override void InstallBindings()
         {
-            Container.Bind<ICameraVectorGetter>().FromInstance((ICameraVectorGetter)cameraBackGroundChanger);
+            Container.Bind<ICameraBackGroundChanger>().FromInstance(cameraBackGroundChanger);
         }
     }
 
