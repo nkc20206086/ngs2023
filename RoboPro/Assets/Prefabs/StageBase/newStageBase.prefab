@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 1168073220511027207}
   - component: {fileID: 1168073220511027206}
   - component: {fileID: 1168073220511027225}
+  - component: {fileID: 1976921125599400339}
   m_Layer: 0
   m_Name: cameraContext
   m_TagString: Untagged
@@ -396,6 +397,7 @@ MonoBehaviour:
   - {fileID: 1168073220511027207}
   - {fileID: 1168073220511027206}
   - {fileID: 1168073220511027225}
+  - {fileID: 1976921125599400339}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -466,6 +468,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactUIObj: {fileID: 1958664952466087472}
+--- !u!114 &1976921125599400339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168073220511027224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9156fea08075ea43bc02727a1b72429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraBackGroundChanger: {fileID: 5504067678822870629}
 --- !u!1 &1168073220781565358
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +686,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0048374515
       objectReference: {fileID: 0}
+    - target: {fileID: 1162411736121202648, guid: d76b5b66e29117a4f837fe60d21862a0,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.98039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162411736121202648, guid: d76b5b66e29117a4f837fe60d21862a0,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.85882354
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162411736121202648, guid: d76b5b66e29117a4f837fe60d21862a0,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.52156866
+      objectReference: {fileID: 0}
     - target: {fileID: 1162411737203839240, guid: d76b5b66e29117a4f837fe60d21862a0,
         type: 3}
       propertyPath: m_RootOrder
@@ -767,6 +797,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e00d544eff39ce540b0007c27d23abc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5504067678822870629 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6653984902785319372, guid: d76b5b66e29117a4f837fe60d21862a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1168073219780308905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9aa40597737f1646ae7a1ae49a6f7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1168073219949160634
@@ -1182,6 +1224,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3805582077870317513, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3805582077870317526, guid: c73ea3b136bf61b478a8c9c995f2ba6a,
         type: 3}
       propertyPath: accessManager
@@ -1276,12 +1323,12 @@ PrefabInstance:
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.012392969
+      value: -0.012392923
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791520417421, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.004613404
+      value: 0.0046133874
       objectReference: {fileID: 0}
     - target: {fileID: 7410071791716475859, guid: b83cd72eb83875a4d95321c0967d90f7,
         type: 3}

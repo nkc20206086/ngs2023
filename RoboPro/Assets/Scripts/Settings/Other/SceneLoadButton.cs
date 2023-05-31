@@ -23,13 +23,13 @@ namespace Robo
 
         private void Start()
         {
-            GetComponent<Button>().onClick.AddListener(ShowSettings);
+            GetComponent<Button>().onClick.AddListener(LoadScene);
         }
 
-        private async void ShowSettings()
+        public async void LoadScene()
         {
             audioPlayer.PlaySE(CueSheetType.System, "SE_System_PlayGimmick");
-            //既に設定シーンが開かれている場合、開けなくする
+            //既にシーンが開かれている場合、開けなくする
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {
                 if (SceneManager.GetSceneAt(i).name == sceneId.ToString()) 

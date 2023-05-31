@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 201939369453138694}
   uiOffset: {x: 0, y: 2.8, z: 0}
   interactAsset: {fileID: 11400000, guid: cf2355f946dedf3448f8926dd77cca32, type: 2}
+  goalAnimationTime: 5
 --- !u!95 &5401220845805765024
 Animator:
   serializedVersion: 4

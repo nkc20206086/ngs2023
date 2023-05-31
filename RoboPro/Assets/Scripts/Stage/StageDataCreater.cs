@@ -51,7 +51,8 @@ namespace Stage
             datas = stageData.AccessPointDatas;
 
             player.transform.position = stageData.PlayerPosition;
-            goalCamera.transform.position = stageData.CameraPosition;
+
+            goalCamera.GetComponent<GoalCameraView>().Initalize(stageData.CameraPosition2);
 
             cameraTarget.transform.position = new Vector3(stageData.Blocks.Blocks[0].Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks[0].Blocks.Count * 0.5f, stageData.Blocks.Blocks.Count * 0.5f);
 
