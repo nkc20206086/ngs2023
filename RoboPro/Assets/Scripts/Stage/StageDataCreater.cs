@@ -96,9 +96,9 @@ namespace Stage
 
                     for (int j = 0;j < dictionary[id + 100].Count; j++)
                     {
-                        positions.Add(new Vector3Int((int)dictionary[id + 100][j].transform.position.x,
-                                                     (int)dictionary[id + 100][j].transform.position.y,
-                                                     (int)dictionary[id + 100][j].transform.position.z));
+                        positions.Add(new Vector3Int((int)dictionary[id + 100][j].transform.localPosition.x,
+                                                     (int)dictionary[id + 100][j].transform.localPosition.y,
+                                                     (int)dictionary[id + 100][j].transform.localPosition.z));
                     }
 
                     List<int> indexs = new List<int>();
@@ -110,11 +110,12 @@ namespace Stage
                         Vector3 position = Vector3.zero;
                         for (int j = 0; j < indexs.Count; j++)
                         {
-                            position += positions[indexs[i]];
+                            position += positions[indexs[j]];
                         }
 
                         GameObject parent = new GameObject("ParentObject");
                         parent.transform.position = position / indexs.Count;
+                        Debug.Log($"{id}:{position}");
 
                         for (int j = 0; j < indexs.Count; j++)
                         {

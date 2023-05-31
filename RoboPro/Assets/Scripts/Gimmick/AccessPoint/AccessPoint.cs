@@ -39,7 +39,10 @@ namespace Gimmick
 
             foreach (GameObject obj in objList)
             {
-                gimmickControllers.Add(obj.AddComponent<GimmickController>());
+                GameObject parent = new GameObject(obj.name);
+                parent.transform.position = obj.transform.position + new Vector3(0,0.5f,0);
+                obj.transform.SetParent(parent.transform);
+                gimmickControllers.Add(parent.AddComponent<GimmickController>());
             }
 
             ArchiveAdd(0);
