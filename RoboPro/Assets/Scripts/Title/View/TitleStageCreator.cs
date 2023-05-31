@@ -22,15 +22,15 @@ public class TitleStageCreator : MonoBehaviour
         
         for (int z = 0; z < stageData.Blocks.Blocks.Count; z++)
         {
-            maxZ = Mathf.Max(stageData.Blocks.Blocks.Count, maxZ);
+            maxZ = Mathf.Max(z, maxZ);
             
             for (int y = 0; y < stageData.Blocks.Blocks[z].Blocks.Count; y++)
             {
-                maxY = Mathf.Max(stageData.Blocks.Blocks.Count, maxY);
+                maxY = Mathf.Max(y, maxY);
                 
                 for (int x = 0; x < stageData.Blocks.Blocks[z].Blocks[y].Blocks.Count; x++)
                 {
-                    maxX = Mathf.Max(stageData.Blocks.Blocks.Count, maxX);
+                    maxX = Mathf.Max(x, maxX);
 
                     BlockID blockId = stageData.Blocks.Blocks[z].Blocks[y].Blocks[x];
                     GameObject prefabs = blockDB.GetPrefab(blockId, x + y + z);
@@ -42,10 +42,9 @@ public class TitleStageCreator : MonoBehaviour
                 }
             }
         }
-
-        transform.position = new Vector3(maxX, maxY, maxZ) / 2;
         foreach(GameObject instance in objects)
         {
+            instance.transform.position -= new Vector3(maxX, maxY, maxZ) / 2;
             instance.transform.SetParent(transform);
         }
     }
