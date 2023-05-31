@@ -226,6 +226,16 @@ PrefabInstance:
       propertyPath: m_Cameras.Array.data[1]
       value: 
       objectReference: {fileID: 1089020291}
+    - target: {fileID: 63730718638130796, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 63730718638130796, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1168073219465023408, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_Name
@@ -290,11 +300,31 @@ PrefabInstance:
         type: 3}
       propertyPath: stageJson
       value: 
+      objectReference: {fileID: 4900000, guid: d1914f3b36232e1489d743470fc6237f, type: 3}
+    - target: {fileID: 2142300886017505360, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2474608075027090033, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406872331416389288, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4406872331416389288, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438305667850914667, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: 8531012653674377742, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
@@ -330,6 +360,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.005060523
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599244027712649712, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599244027712649712, guid: 36640f743079adf43a7a9de4ee597cd1,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36640f743079adf43a7a9de4ee597cd1, type: 3}
