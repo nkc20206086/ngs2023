@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using InteractUI;
 using Robo;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +31,12 @@ public class GoalView : MonoBehaviour
 
     [SerializeField]
     private DisplayInteractCanvasAsset interactAsset;
+
+    [SerializeField]
+    private float goalAnimationTime = 2f;
+
+    [SerializeField]
+    private GameObject goalUI;
 
     [Inject]
     private IVCameraTargetChanger vCameraChanger;
@@ -90,7 +98,7 @@ public class GoalView : MonoBehaviour
         interactUIControllable.HideUI();
     }
 
-    private void OnClear()
+    private async void OnClear()
     {
         isClear = true;
         animator.SetTrigger("Hide");
@@ -104,6 +112,9 @@ public class GoalView : MonoBehaviour
             clearOnHideObjects[i].gameObject.SetActive(false);
         }
         GoToStageArgmentsSingleton.Clear();
+        goalUI.gameObject.SetActive(true);
+        await UniTask.Delay(TimeSpan.FromSeconds(goalAnimationTime));
+        BackToStageSelect();
     }
 
     public void BackToStageSelect()
@@ -113,6 +124,7 @@ public class GoalView : MonoBehaviour
         {
             await multiSceneLoader.AddScene(Robo.SceneID.StageSelect, true);
             await multiSceneLoader.UnloadScene(Robo.SceneID.Stage);
+            postEffector.Fade(FadeType.In, 1, DG.Tweening.Ease.Linear);
         };
     }
 }

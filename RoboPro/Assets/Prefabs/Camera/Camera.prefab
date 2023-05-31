@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1162411736121202471}
   - component: {fileID: 1162411736121202648}
-  - component: {fileID: 1162411736121202649}
   - component: {fileID: 1162411736121202470}
   - component: {fileID: 1162411736121202469}
   - component: {fileID: 6653984902785319372}
@@ -30,8 +29,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162411736121202650}
-  m_LocalRotation: {x: 0.36569074, y: 0.024281103, z: -0.009543911, w: 0.9303707}
-  m_LocalPosition: {x: -3.682415, y: 15, z: -14.97958}
+  m_LocalRotation: {x: 0.3657833, y: -0.012307183, z: 0.0048374515, w: 0.9306061}
+  m_LocalPosition: {x: 0.3966787, y: 15, z: -14.994754}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -83,14 +82,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1162411736121202649
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162411736121202650}
-  m_Enabled: 1
 --- !u!114 &1162411736121202470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +304,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8132924646546286344, guid: fd0428285c8b4d048b1db77880090507, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fd0428285c8b4d048b1db77880090507, type: 3}
 --- !u!4 &7372932075281276325 stripped
 Transform:

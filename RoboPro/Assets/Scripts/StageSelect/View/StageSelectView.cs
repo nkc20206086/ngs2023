@@ -83,6 +83,7 @@ namespace Robo
             }
             OnSelect += StageSelectElementOnSelect;
             OnDeselect += StageSelectElementOnDeselect;
+            preview.CreatePreview(Infos[0].StageData);
         }
 
         private void StageSelectElementOnSelect(int idx)

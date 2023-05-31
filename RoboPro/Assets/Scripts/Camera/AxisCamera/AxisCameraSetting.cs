@@ -20,7 +20,7 @@ namespace AxisCamera
             axisCamera = GetComponent<Camera>();
 
             mainCameraRot.Value = mainCamera.gameObject.transform.rotation;
-            mainCameraRot.Subscribe(r => axisObj.transform.localRotation = r)
+            mainCameraRot.Subscribe(r => axisObj.transform.localRotation = Quaternion.Inverse(r))
                          .AddTo(gameObject);
         }
 

@@ -30,5 +30,13 @@ namespace Robo
             unloading = true;
             multiSceneLoader.UnloadScene(SceneID.Settings);
         }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                CloseSettings();
+            }
+        }
     }
 }
