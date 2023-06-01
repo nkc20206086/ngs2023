@@ -467,7 +467,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stageJson
       value: 
-      objectReference: {fileID: 4900000, guid: 64ce2b19742032d489badee4d1aa4f48, type: 3}
+      objectReference: {fileID: 4900000, guid: 835bcba9b32f7e14f96e4bd93482cb31, type: 3}
     - target: {fileID: 6545768839877565256, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_RaycastTarget
@@ -496,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 8565856865565544003, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.012217183
+      value: -0.012217182
       objectReference: {fileID: 0}
     - target: {fileID: 8565856865565544003, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}

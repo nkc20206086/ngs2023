@@ -8,6 +8,7 @@ namespace Command.Entity
     /// </summary>
     public class ScaleCommand : MainCommand
     {
+        private const float SCALE_SPEED = 2.0f;
         private const float TOLERANCE = 0.3f;
 
         private Vector3 baseScale;      // 元々の尺度
@@ -51,7 +52,7 @@ namespace Command.Entity
                     }
                     else
                     {
-                        targetTransform.localScale += GetDirection() * Time.deltaTime;                      // 徐々に拡大する
+                        targetTransform.localScale += GetDirection() * SCALE_SPEED * Time.deltaTime;                      // 徐々に拡大する
                     }
                 }
                 else                                                                                        // コマンドの持つ値が負の数なら
@@ -63,7 +64,7 @@ namespace Command.Entity
                     }
                     else
                     {
-                        targetTransform.localScale += GetDirection() * Time.deltaTime;                      // 徐々に縮小する(方向がマイナスであるため加算)
+                        targetTransform.localScale += GetDirection() * SCALE_SPEED * Time.deltaTime;                      // 徐々に縮小する(方向がマイナスであるため加算)
                     }
                 }
             }
