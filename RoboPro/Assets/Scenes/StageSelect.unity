@@ -17402,7 +17402,7 @@ MonoBehaviour:
   - stageName: "\u62FE\u3063\u3066\u3064\u3051\u3066"
     stageNumber: 1 - 1
     stageIcon: {fileID: 0}
-    stageJsonData: {fileID: 4900000, guid: c26074fc0bc6efc4c89276f932e03f29, type: 3}
+    stageJsonData: {fileID: 4900000, guid: ec51c3710712352458b6972f34a102cb, type: 3}
   - stageName: "\u5411\u304D\u3092\u5909\u3048\u3066"
     stageNumber: 1 - 2
     stageIcon: {fileID: 0}
