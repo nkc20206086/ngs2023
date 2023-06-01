@@ -23,12 +23,12 @@ namespace Command.Entity
         {
             // 各項目を現在の状態で再設定
             this.completeAction = completeAction;
-            usableValue = value.getValue;
+            usableValue = value.getValue * 2;
             usableAxis = axis.getAxis;
 
             baseScale = (Vector3)target;                                                    // 元々の尺度を引数から取得する
 
-            targetScale = baseScale + GetDirection() * (Mathf.Abs(value.getValue));  // 目標の尺度を計算して保存
+            targetScale = baseScale + GetDirection() * (Mathf.Abs(value.getValue) * 2);  // 目標の尺度を計算して保存
 
             // 目標の尺度の1未満の数字を1にする
             targetScale = new Vector3(targetScale.x < 1.0f ? 1.0f : targetScale.x, targetScale.y < 1.0f ? 1.0f : targetScale.y, targetScale.z < 1.0f ? 1.0f : targetScale.z);
