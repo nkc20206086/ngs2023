@@ -41,19 +41,15 @@ namespace Player
         {
             stateGetter.GroundCheckGetter().CheckWall();
             //床にいるかどうかを判定する
-            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
+            if (stateGetter.GroundCheckGetter().LandingCheck())
             {
-                //Move中に落下しているということはふらつきを無視している　→　ThroughFall
-                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
-                stateChangeEvent(PlayerStateEnum.ThroughFall);
-            }
-            else
-            {
+                //カメラの角度から移動ベクトルを補正
                 moveForward = cameraVectorGetter.VectorYGetter() * vec.y + cameraVectorGetter.VectorXGetter() * vec.x;
                 moveForward = moveForward.normalized;
 
                 if (isMove)
                 {
+                    //移動する
                     stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", true);
                     moveEffect.SetActive(true);
                     transform.LookAt(transform.position + moveForward);
@@ -61,83 +57,74 @@ namespace Player
                 }
                 else
                 {
+                    //Stay状態にする
                     stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
                     stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                     stateChangeEvent(PlayerStateEnum.Stay);
                 }
+                AccesPoint_Check(isInteract);
+                Dizzy_Check();
+            }
+            else
+            {
+                //Move中に落下しているということはふらつきを無視している　→　ThroughFall
+                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
+                stateChangeEvent(PlayerStateEnum.ThroughFall);
+            }
+        }
 
-                ////登る梯子の検知
-                //if (stateGetter.LadderCheckGetter().LadderClimbCheck())
-                //{
-                //    if (isInteract)
-                //    {
-                //        stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
-                //        playerEffect.moveEffect.SetActive(false);
-                //        stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
-                //    }
-                //}
-
-                ////下る梯子の検知
-                //if (stateGetter.LadderCheckGetter().LadderDownCheck())
-                //{
-                //    if (isInteract)
-                //    {
-                //        stateChangeEvent(PlayerStateEnum.LadderDown);
-                //    }
-                //}
-
-                //アクセスポイントの何番が近くにあるか
-                int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
-                //Debug.Log(index);
-                if (index >= 0)
+        /// <summary>
+        /// アクセスポイントの何番が近くにあるか
+        /// </summary>
+        private void AccesPoint_Check(bool isInteract)
+        {
+            int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
+            if (index >= 0)
+            {
+                if (isInteract)
                 {
-                    if (isInteract)
+                    bool access = stateGetter.GimmickAccessGetter().Access(index);
+                    if (access)
                     {
-                        bool access = stateGetter.GimmickAccessGetter().Access(index);
-                        if (access)
-                        {
-                            stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
-                            stateGetter.RigidbodyGetter().velocity = Vector3.zero;
-                            //アクセスポイントに接続する
-                            Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
-                            pos.y = this.transform.position.y;
-                            transform.LookAt(pos);
-
-                            stateChangeEvent(PlayerStateEnum.Access);
-                        }
-                    }
-                }
-
-                //梯子(使わない)
-                //if (stateGetter.LadderCheckGetter().LadderClimbCheck() || stateGetter.LadderCheckGetter().LadderDownCheck())
-                //{
-                //    stateGetter.RigidbodyGetter().velocity = Vector3.zero;
-                //}
-                //目の前が崖か判定
-                if (stateGetter.GroundCheckGetter().CheckGround() == false)
-                {
-                    //自分の乗っている床でふらつけるかどうかの判定
-                    if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
-                    {
-                        //ふらつくステートに変更
-                        Debug.Log("ふらつく");
                         stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
                         stateGetter.RigidbodyGetter().velocity = Vector3.zero;
-                        //colliCheck.ColiCheck();
-                        stateChangeEvent(PlayerStateEnum.Dizzy);
-                    }
-                }
-                else
-                {
-                    if (SideCheck() == false)
-                    {
-                        stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                        //アクセスポイントに接続する
+                        Vector3 pos = stateGetter.GimmickAccessGetter().GetPosition(index);
+                        pos.y = this.transform.position.y;
+                        transform.LookAt(pos);
+
+                        stateChangeEvent(PlayerStateEnum.Access);
                     }
                 }
             }
         }
 
-        public bool SideCheck()
+        /// <summary>
+        ///         //目の前が崖か判定
+        /// </summary>
+        private void Dizzy_Check()
+        {
+            if (stateGetter.GroundCheckGetter().CheckGround() == false)
+            {
+                //自分の乗っている床でふらつけるかどうかの判定
+                if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
+                {
+                    //ふらつくステートに変更
+                    stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
+                    stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                    stateChangeEvent(PlayerStateEnum.Dizzy);
+                }
+            }
+            else
+            {
+                if (SideCheck() == false)
+                {
+                    stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                }
+            }
+        }
+
+        private bool SideCheck()
         {
             if (stateGetter.GroundCheckGetter().CheckSideGround_Left() && stateGetter.GroundCheckGetter().CheckSideGround_Right())
             {
