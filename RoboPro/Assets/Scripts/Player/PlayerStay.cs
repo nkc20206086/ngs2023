@@ -22,31 +22,51 @@ namespace Player
 
         public void Act_Stay(bool isMove, bool isInteract)
         {
-            //stateChangeEvent(PlayerStateEnum.Goal_Jump);
-
-            //Debug.Log("待つ");
             if (isMove)
             {
                 stateChangeEvent(PlayerStateEnum.Move);
             }
 
-            //if (stateGetter.LadderCheckGetter().LadderClimbCheck())
-            //{
-            //    if(isInteract)
-            //    {
-            //        stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
-            //    }
-            //}
 
-            //if(stateGetter.LadderCheckGetter().LadderDownCheck())
-            //{
-            //    if (isInteract)
-            //    {
-            //        stateChangeEvent(PlayerStateEnum.LadderDown);
-            //    }
-            //}
+            Ladder_Check(isInteract);
+            AccessPoint_Check(isInteract);
 
-            //アクセスポイントの何番が近くにあるか
+            //床にいるかどうかを判定する
+            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
+            {
+                stateChangeEvent(PlayerStateEnum.ThroughFall);
+            }
+        }
+
+        /// <summary>
+        /// 梯子が近くにあるかどうか
+        /// </summary>
+        /// <param name="isInteract"></param>
+        private void Ladder_Check(bool isInteract)
+        {
+            if (stateGetter.LadderCheckGetter().LadderClimbCheck())
+            {
+                if (isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderStepOn_Climb);
+                }
+            }
+
+            if (stateGetter.LadderCheckGetter().LadderDownCheck())
+            {
+                if (isInteract)
+                {
+                    stateChangeEvent(PlayerStateEnum.LadderDown);
+                }
+            }
+        }
+
+        /// <summary>
+        /// アクセスポイントの何番が近くにあるか
+        /// </summary>
+        /// <param name="isInteract"></param>
+        private void AccessPoint_Check(bool isInteract)
+        {
             int index = stateGetter.GimmickAccessGetter().GetAccessPointIndex(transform.position);
             if (index >= 0)
             {
@@ -64,18 +84,6 @@ namespace Player
                     }
                 }
             }
-
-            //床にいるかどうかを判定する
-            if (stateGetter.GroundCheckGetter().LandingCheck() == false)
-            {
-                stateChangeEvent(PlayerStateEnum.ThroughFall);
-                stateGetter.PlayerAnimatorGeter().SetBool("Flg_Fall", true);
-            }
-        }
-
-        public void Bug_Return()
-        {
-            stateChangeEvent(PlayerStateEnum.Stay);
         }
 
         private void Act_GoalPoint()
