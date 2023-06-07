@@ -31,7 +31,6 @@ namespace Player
             {
                 saveVecList.Add(gameObject.transform.position);
                 saveQuaternionsList.Add(gameObject.transform.rotation);
-                //Debug.Log("•Û‘¶" + callCount);
             }
             else
             {
@@ -45,8 +44,6 @@ namespace Player
                 saveQuaternionsList.Add(gameObject.transform.rotation);
             }
             callCount++;
-            Debug.Log("callCount " + callCount);
-            Debug.Log("List.Count " + saveVecList.Count);
             //List‚ð•Û‘¶‚·‚é
             savePosData.SaveData(saveVecList, saveQuaternionsList, callCount);
         }

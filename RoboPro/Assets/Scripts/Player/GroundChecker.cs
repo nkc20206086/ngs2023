@@ -60,10 +60,9 @@ namespace Player
         public bool LandingCheck()
         {
             bool floatingFlg;
-            Vector3 playerPosition = transform.position + new Vector3(0f, 0.1f, 0f);
+            Vector3 playerPosition = transform.position + new Vector3(0f, 0.3f, 0f);
             RaycastHit ray = new RaycastHit();
             floatingFlg = Physics.Raycast(playerPosition, Vector3.down, out ray, landingLength, GroundMask);
-            //Debug.DrawRay(playerPosition, Vector3.down * landingLength);
             return floatingFlg;
         }
 

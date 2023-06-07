@@ -260,10 +260,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ladderUpDownSpeed: 3
-  moveSpeed: 4
+  moveSpeed: 3
   jumpPower: {x: 1.2, y: 2}
   deathHeight: 3.2
-  playerUI_Yvector: 0
+  playerUI_Yvector: 1.3
   animator: {fileID: 0}
   rigidbody: {fileID: 0}
 --- !u!114 &3805582077870317522
@@ -402,8 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a9f7a016508c5b4cb25be27e646ab0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1398343540076601383}
-  camera: {fileID: 0}
 --- !u!114 &2337206033664801042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +468,7 @@ MonoBehaviour:
   rayLength: 0.5
   landingLength: 0.15
   liveRayLength: 3.1
-  splitHeightVectorNum: 0
+  splitHeightVectorNum: 5
   rayObjLeft: {fileID: 2039559089584728577}
   rayObjRight: {fileID: 2169761957548499507}
   GroundMask:
@@ -1729,12 +1727,6 @@ PrefabInstance:
 --- !u!4 &165766857695025822 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2c1ca7770cab5243bb5dedb065d90d4,
-    type: 3}
-  m_PrefabInstance: {fileID: 416113926427426165}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1398343540076601383 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: a2c1ca7770cab5243bb5dedb065d90d4,
     type: 3}
   m_PrefabInstance: {fileID: 416113926427426165}
   m_PrefabAsset: {fileID: 0}
