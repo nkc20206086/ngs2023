@@ -99,7 +99,7 @@ namespace Command
                 if (commands != null)
                 {
                     // メインコマンドボタンにそれぞれの情報を反映
-                    useMainCommandButtons[i, 0].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetName();
+                    useMainCommandButtons[i, 0].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetString();
                     useMainCommandButtons[i, 1].GetComponentInChildren<TextMeshProUGUI>().text = commands[i]?.GetAxisText();
                     useMainCommandButtons[i, 2].GetComponentsInChildren<TextMeshProUGUI>()[2].text = commands[i]?.GetValueText();
                 }

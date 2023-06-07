@@ -441,10 +441,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4531691343191361279, guid: 81b403c748d7e9b478cd05fa570ea805,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4780830953906283282, guid: 81b403c748d7e9b478cd05fa570ea805,
         type: 3}
       propertyPath: m_Name
       value: InventryPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136475064131663966, guid: 81b403c748d7e9b478cd05fa570ea805,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81b403c748d7e9b478cd05fa570ea805, type: 3}

@@ -117,7 +117,7 @@ namespace Stage
 
                     List<int> indexs = new List<int>();
 
-                    Calc(positions,indexs,i);
+                    NearObjectSearch(positions,indexs,i);
 
                     if (indexs.Count > 0)
                     {
@@ -129,7 +129,6 @@ namespace Stage
 
                         GameObject parent = new GameObject("ParentObject");
                         parent.transform.position = position / indexs.Count;
-                        Debug.Log($"{id}:{position}");
 
                         for (int j = 0; j < indexs.Count; j++)
                         {
@@ -148,7 +147,7 @@ namespace Stage
 
             Destroy(this);
         }
-        private void Calc(List<Vector3Int> positions, List<int> indexs,int index)
+        private void NearObjectSearch(List<Vector3Int> positions, List<int> indexs,int index)
         {
             for (int i = 0;i < positions.Count;i++)
             {
@@ -157,7 +156,7 @@ namespace Stage
                 if ((int)Mathf.Abs(Vector3Int.Distance(positions[index], positions[i])) == 1)
                 {
                     indexs.Add(i);
-                    Calc(positions,indexs,i);
+                    NearObjectSearch(positions,indexs,i);
                 }
             }
         }
