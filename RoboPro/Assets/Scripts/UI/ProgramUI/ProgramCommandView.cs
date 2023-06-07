@@ -47,7 +47,7 @@ namespace CommandUI
                     programPanelAxis[i].SetActive(true);
                     programPanelValue[i].SetActive(true);
 
-                    switch (commands[i].GetName())
+                    switch (commands[i].GetString())
                     {
                         case "移動": 
                             programPanelIcon[i].sprite = sprites[0]; //Moveのアイコン表示
@@ -61,7 +61,7 @@ namespace CommandUI
                     }
 
 
-                    programCommand[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetName(); //コマンド表示
+                    programCommand[i].GetComponentInChildren<TextMeshProUGUI>().text = commands[i].GetString(); //コマンド表示
 
                     if(commands[i].GetAxisText() !="NONE") //プログラム内に軸があるかどうか
                     {

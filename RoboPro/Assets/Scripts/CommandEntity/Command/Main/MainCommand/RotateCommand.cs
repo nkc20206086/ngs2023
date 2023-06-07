@@ -13,6 +13,7 @@ namespace Command.Entity
         const int ANGLE_MAG = 90;
         const float ROTATE_MAG = 2.0f;
 
+        private float angle;
         private Quaternion baseQuat;    // 実行前の回転量
 
         /// <summary>
@@ -40,26 +41,28 @@ namespace Command.Entity
 
             if (state == CommandState.MOVE_ON)
             {
-                if (Mathf.Abs(Quaternion.Angle(baseQuat, targetTransform.rotation)) > Mathf.Abs(usableValue))           // 指定された角度分回転していれば
+                if (angle >= Mathf.Abs(usableValue))                                                                    // 指定された角度分回転していれば
                 {
                     targetTransform.rotation = baseQuat * Quaternion.Euler(GetDirection() * Mathf.Abs(usableValue));    // eulerAngleを初期回転値に回転を反映した値にする
                     completeAction?.Invoke();                                                                           // コマンド完了時アクションを実行する
                 }
                 else
                 {
-                    targetTransform.Rotate(GetDirection() * ROTATE_MAG);                                                        // 逆回転する
+                    angle += ROTATE_MAG;                                                                                // 角度加算
+                    targetTransform.rotation *= Quaternion.Euler(GetDirection() * ROTATE_MAG);                          // 回転する
                 }
             }
             else if (state == CommandState.RETURN)
             {
-                if (Mathf.Abs(Quaternion.Angle(baseQuat, targetTransform.rotation)) < 1)                                // 実行前回転量に近づいたら
+                if (angle <= 1)                                                                                         // 角度が元の値に近づいたなら
                 {
                     targetTransform.rotation = baseQuat;                                                                // 初期回転値に戻す
                     completeAction?.Invoke();                                                                           // コマンド完了時アクションを実行する
                 }
                 else
                 {
-                    targetTransform.Rotate(GetDirection() * -ROTATE_MAG);                                                        // 逆回転する
+                    angle -= ROTATE_MAG;                                                                                // 角度減算
+                    targetTransform.rotation *= Quaternion.Euler(GetDirection() * -ROTATE_MAG);                         // 逆回転する
                 }
             }
         }

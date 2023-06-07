@@ -61,6 +61,7 @@ namespace Robo
         private List<StageSelectElementView> elements = new List<StageSelectElementView>();
         private StageSelectSaveData saveData;
         private int nowSelectedIndex = 0;
+        private bool loadScene = false;
 
         void IStageSelectView.Initalize(StageSelectModelArgs args, StageSelectSaveData saveData)
         {
@@ -119,6 +120,8 @@ namespace Robo
 
         public async void Play()
         {
+            if (loadScene) return;
+            loadScene = true;
             await UniTask.Delay(TimeSpan.FromSeconds(goToStageWaitTime));
             postEffector.SetMaterial(PostEffectMaterialKey.ImageFade);
             postEffector.SetColor("_Color", Color.black);

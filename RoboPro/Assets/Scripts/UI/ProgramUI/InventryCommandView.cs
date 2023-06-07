@@ -58,7 +58,7 @@ namespace CommandUI
                                             programPanelIcon[i].sprite = sprites[2];//Scaleのアイコン表示
                                             break;
                                     }
-                                    inventryBehavior[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetName();
+                                    inventryBehavior[i].GetComponentInChildren<TextMeshProUGUI>().text = command.GetString();
 
                                     //軸イメージの色変更
                                     switch (command.GetAxisText())
