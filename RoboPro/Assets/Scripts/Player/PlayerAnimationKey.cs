@@ -61,6 +61,7 @@ namespace Player
 
         public void Finish_GoalDance_AnimatinKey()
         {
+            Instantiate(goalCrackerEffect, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z), Quaternion.identity);
             goalCrackerEffect.gameObject.SetActive(true);
         }
 

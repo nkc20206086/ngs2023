@@ -27,6 +27,7 @@ namespace Player
         private IStateGetter stateGetter;
 
         Vector3 defaultScale = Vector3.zero;
+        Vector3 defaultLocalScale = Vector3.zero;
         private Vector2 inputVec;
         private bool isMove;
         private bool isInteract;
@@ -34,7 +35,8 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
-            defaultScale = transform.lossyScale;
+            defaultScale = gameObject.transform.lossyScale;
+            //defaultLocalScale = gameObject.transform.localScale;
 
             playerStay = GetComponent<PlayerStay>();
             playerMove = GetComponent<PlayerMove>();
@@ -156,14 +158,39 @@ namespace Player
         /// </summary>
         private void DefaultScaleCalc()
         {
-            Vector3 lossScale = transform.lossyScale;
-            Vector3 localScale = transform.localScale;
+            if (transform.parent == null) return;
+            Transform parent = transform;
+            while (true)
+            {
+                if (parent.transform.parent == null) break;
+                else parent = parent.transform.parent;
+            }
 
-            //プレイヤーのLocalScaleを常に均一にする
-            transform.localScale = new Vector3(
-                    localScale.x / lossScale.x * defaultScale.x,
-                    localScale.y / lossScale.y * defaultScale.y,
-                    localScale.z / lossScale.z * defaultScale.z);
+            transform.localScale = new Vector3(defaultScale.x / parent.lossyScale.x,
+            defaultScale.y / parent.lossyScale.y,
+            defaultScale.z / parent.lossyScale.z
+            );
+
+
+            //Vector3 lossyScale = transform.lossyScale;
+            //Vector3 localScale = transform.localScale;
+
+            ////プレイヤーのLocalScaleを常に均一にする
+            //transform.localScale = new Vector3(
+            //        localScale.x / lossyScale.x * defaultScale.x,
+            //        localScale.y / lossyScale.y * defaultScale.y,
+            //        localScale.z / lossyScale.z * defaultScale.z);
+
+            //Debug.Log(localScale.x);
+            //Debug.Log(localScale.z);
+            //Debug.Log(lossyScale.z);
+            //Debug.Log(lossyScale.z);
+
+            //transform.localScale = new Vector3(
+            //    1f,
+            //    1f,
+            //    1f);
+
         }
     }
 }
