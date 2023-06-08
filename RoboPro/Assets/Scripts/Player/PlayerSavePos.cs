@@ -34,6 +34,7 @@ namespace Player
             }
             else
             {
+                //–ß‚Á‚½Š‚Ü‚Å‚Ìƒf[ƒ^‚ðíœ
                 for (int i = saveVecList.Count - 1; i > callCount; i--)
                 {
                     saveVecList.RemoveAt(i);

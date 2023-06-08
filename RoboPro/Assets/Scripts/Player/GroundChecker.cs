@@ -212,9 +212,16 @@ namespace Player
             //nullA‚Ü‚½‚Í–¼‘O‚ª“¯‚¶‚È‚çreturn
             else
             {
+
                 if (ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
+                Transform parent = transform;
+                while (true)
+                {
+                    if (parent.transform.parent == null) break;
+                    else parent = parent.transform.parent;
+                }
                 parentOldName = ray.collider.gameObject.name;
-                gameObject.transform.parent = ray.collider.gameObject.transform;
+                gameObject.transform.parent = parent.transform;
             }
         }
     }

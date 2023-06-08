@@ -7,12 +7,17 @@ public class TestPlayerMove : MonoBehaviour
     Animator playerAnimator;
 
     [SerializeField] float speed = 5;
-
+    [SerializeField] GameObject parrent;
     bool moveFlg = false;
-
+    Rigidbody rigidbody;
+    Vector3 defaultScale = Vector3.zero;
+    Vector3 parrentDefaultScale;
     void Start()
     {
         playerAnimator = this.GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
+        defaultScale = gameObject.transform.lossyScale;
+        parrentDefaultScale = parrent.transform.lossyScale;
     }
 
     void Update()
@@ -29,7 +34,12 @@ public class TestPlayerMove : MonoBehaviour
 
         PlayerController();
 
-        AnimationTest();
+        transform.localScale = new Vector3(defaultScale.x / parrent.transform.lossyScale.x,
+            defaultScale.y / parrent.transform.lossyScale.y,
+            defaultScale.z / parrent.transform.lossyScale.z
+            );
+        //DefaultScaleCalc();
+        //AnimationTest();
     }
 
     private void PlayerController()
@@ -38,7 +48,7 @@ public class TestPlayerMove : MonoBehaviour
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
         // 前後左右の入力（WASDキー）から、移動のためのベクトルを計算
-        // Input.GetAxis("Vertical") は前後（WSキー）の入力値
+        //Input.GetAxis("Vertical") は前後（WSキー）の入力値
         // Input.GetAxis("Horizontal") は左右（ADキー）の入力値
         Vector3 moveZ = cameraForward * Input.GetAxis("Vertical") * speed;  //　前後（カメラ基準)
         Vector3 moveX = Camera.main.transform.right * Input.GetAxis("Horizontal") * speed; // 左右（カメラ基準）
@@ -49,8 +59,9 @@ public class TestPlayerMove : MonoBehaviour
         // 正面に進む
         if (moveFlg == true)
         {
-            gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
+            gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime; 
         }
+        
     }
 
     private void AnimationTest()
@@ -100,6 +111,30 @@ public class TestPlayerMove : MonoBehaviour
         {
             playerAnimator.SetBool("Flg_Landing", false);
         }
+
+    }
+
+    private void DefaultScaleCalc()
+    {
+        Vector3 lossyScale = transform.lossyScale;
+        Vector3 localScale = transform.localScale;
+
+        //プレイヤーのLocalScaleを常に均一にする
+        transform.localScale = new Vector3(
+                localScale.x / lossyScale.x * defaultScale.x,
+                localScale.y / lossyScale.y * defaultScale.y,
+                localScale.z / lossyScale.z * defaultScale.z);
+
+        //if (transform.parent == null) return;
+        Debug.Log(localScale.x);
+        Debug.Log(localScale.z);
+        Debug.Log(lossyScale.z);
+        Debug.Log(lossyScale.z);
+
+        //transform.localScale = new Vector3(
+        //    1f,
+        //    1f,
+        //    1f);
 
     }
 }
