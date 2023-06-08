@@ -20,6 +20,8 @@ namespace Gimmick
             pointObject = pointPrefab;
             roadObject = roadPrefab;
 
+            Debug.Log($"{pointObject.name},{roadObject.name}");
+
             gameObject.SetActive(false);
         }
     }

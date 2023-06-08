@@ -70,7 +70,7 @@ namespace Command.Entity
         /// <returns></returns>
         public MainCommand MainCommandClone()
         {
-            value = value.BaseClone() as ValueCommand;
+            value = value?.BaseClone() as ValueCommand;
             return (MainCommand)MemberwiseClone();
         }
 

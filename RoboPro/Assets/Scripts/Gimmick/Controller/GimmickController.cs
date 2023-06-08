@@ -212,6 +212,8 @@ namespace Gimmick
 
         private void FutureObjectCreate()
         {
+            if (FutureGimmickMoveGetter.pointObject == null) return;
+
             Vector3 position = basePos;
             Vector3 direction = Vector3.zero;
             Vector3 distance = Vector3.zero;
