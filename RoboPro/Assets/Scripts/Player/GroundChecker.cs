@@ -214,6 +214,7 @@ namespace Player
             {
 
                 if (ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
+                transform.parent = ray.collider.gameObject.transform;
                 Transform parent = transform;
                 while (true)
                 {
