@@ -25,9 +25,6 @@ namespace Command
         [SerializeField,Tooltip("ストレージコマンドを管理するクラス")]
         private CommandStorage commandStorage;
 
-        //[SerializeField,Tooltip("コマンドボタンを管理するクラス")]
-        //private CommandButtonManager buttonManager;
-
         public Action<MainCommand[]> action;
 
         private MainCommand[] mainCommands; // 入れ替え対象のメインコマンド配列を格納する変数
@@ -36,8 +33,7 @@ namespace Command
 
         private void Start()
         {
-            isChanged = true;                                                      // 入れ替えの有無を初期化
-            // buttonManager.Intialize(SwitchTypeSet, MainIndexChange, StorageIndexChange);  // ボタン入れ替えクラスを初期化する
+            isChanged = true;   // 入れ替えの有無を初期化
         }
 
         /// <summary>
@@ -91,9 +87,9 @@ namespace Command
                     switch (swapCommandType)
                     {
                         case CommandType.Value:
-                            ValueCommand num = mainCommands[mainIndexNum].value;
+                            ValueCommand value = mainCommands[mainIndexNum].value;
                             mainCommands[mainIndexNum].value = commandStorage.controlCommand[storageIndexNum] as ValueCommand;
-                            commandStorage.controlCommand[storageIndexNum] = num;
+                            commandStorage.controlCommand[storageIndexNum] = value;
                             break;
                         case CommandType.Axis:
                             AxisCommand axis = mainCommands[mainIndexNum].axis;
@@ -130,8 +126,6 @@ namespace Command
         {
             mainCommands = obj;                // メインコマンド配列をクラス内に保存
 
-            // buttonManager.CanvasDisplay();     // ボタン表示キャンバスを表示する
-
             TextRewriting();                   // テキスト更新処理
 
         }
@@ -142,8 +136,6 @@ namespace Command
         /// <returns>変更が行われたか</returns>
         public bool SwapInvalidation()
         {
-            // buttonManager.CanvasHide();                     // ボタン表示キャンバスを非表示にする
-
             if (isChanged)                                  // 変更が行われているなら
             {
                 isChanged = false;                          // 変更状況を初期化
@@ -154,33 +146,13 @@ namespace Command
             return false;                                   // 変更されていないと送信
         }
 
-        /// <summary>
-        /// メインコマンドインデックスを登録する関数
-        /// </summary>
-        /// <param name="index">対象インデックス</param>
-        private void MainIndexChange(int index)
-        {
-            mainIndexNum = index; // メインコマンドインデックスを保存
-
-            CommandSwap();        // コマンド入れ替え関数を実行
-        }
-
-        /// <summary>
-        /// ストレージコマンドインデックスを登録する関数
-        /// </summary>
-        /// <param name="index">対象インデックス</param>
-        private void StorageIndexChange(int index)
-        {
-            storageIndexNum = index;  // ストレージコマンドインデックスを保存
-
-            CommandSwap();            // コマンド入れ替え関数を実行
-        }
-
         public void SetMainCommandIndex(int main,int sub)
         {
             if (sub > (int)CommandType.Value)
             {
                 if (mainCommands[main] != null) mainCommands[main].value.SignChange();
+
+                isChanged = true;
 
                 action?.Invoke(mainCommands);
             }

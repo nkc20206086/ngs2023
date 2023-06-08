@@ -19,8 +19,8 @@ namespace Gimmick
         [SerializeField]
         private int playIndex = -1;                                                         // 実行されているコマンドのインデックス
         private float timeCount = 0;                                                        // 時間計測用変数
-        public MainCommand[] playCommand = new MainCommand[CommandUtility.commandCount];   // 実行コマンドの配列
-        private List<GimmickArchive> gimmickArchives = new List<GimmickArchive>();          // 記録用構造体のリスト
+        public MainCommand[] playCommand = new MainCommand[CommandUtility.commandCount];    // 実行コマンドの配列
+        private List<GameObject> instanceList = new List<GameObject>();                     // インスタンスしたオブジェクトのリスト
 
         // 各実行時点での原点
         private Vector3 basePos;
@@ -42,6 +42,8 @@ namespace Gimmick
             basePos = transform.position;
             baseQuat = transform.rotation;
             baseScale = transform.localScale;
+
+            FutureObjectCreate();
         }
 
         /// <summary>
@@ -117,6 +119,8 @@ namespace Gimmick
             }
 
             playCommand = newArray;
+
+            FutureObjectCreate();
         }
 
         /// <summary>
@@ -202,6 +206,45 @@ namespace Gimmick
                         Vector3 scaleValue = (Vector3)playCommand[i].InitCommand(scale, CreateInterval);
                         scale = scaleValue;
                         break;
+                }
+            }
+        }
+
+        private void FutureObjectCreate()
+        {
+            Vector3 position = basePos;
+            Vector3 direction = Vector3.zero;
+            Vector3 distance = Vector3.zero;
+
+            foreach (GameObject instance in instanceList)
+            {
+                if (instance != null) Destroy(instance);
+            }
+
+            foreach (MainCommand command in playCommand)
+            {
+                if (command?.GetMainCommandType() == MainCommandType.Move)
+                {
+                    switch (command.GetAxis())
+                    {
+                        case CoordinateAxis.X: direction = Vector3.right; break;
+                        case CoordinateAxis.Y: direction = Vector3.up; break;
+                        case CoordinateAxis.Z: direction = Vector3.forward; break;
+                    }
+
+                    instanceList.Add(Instantiate(FutureGimmickMoveGetter.pointObject, position, Quaternion.identity));
+                    instanceList.Add(Instantiate(FutureGimmickMoveGetter.pointObject, position + (direction * command.GetValue()), Quaternion.identity));
+
+                    distance = direction * Mathf.Abs(command.GetValue()) / (command.GetValue() * 2f);
+
+                    for (int i = 1;i < Mathf.Abs(command.GetValue()) * 2;i++)
+                    {
+                        Vector3 instancePos = position + (distance * i);
+                        instanceList.Add(Instantiate(FutureGimmickMoveGetter.roadObject, instancePos, Quaternion.identity));
+                        instanceList[instanceList.Count - 1].transform.localScale = direction + new Vector3(0.15f,0.15f,0.15f);
+                    }
+
+                    position += direction * command.GetValue();
                 }
             }
         }

@@ -467,12 +467,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stageJson
       value: 
-      objectReference: {fileID: 4900000, guid: 835bcba9b32f7e14f96e4bd93482cb31, type: 3}
-    - target: {fileID: 2658795978628239496, guid: 36640f743079adf43a7a9de4ee597cd1,
-        type: 3}
-      propertyPath: landingLength
-      value: 0.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4900000, guid: b74331ee391d7e04ea82d4c8e2d4b256, type: 3}
     - target: {fileID: 6545768839877565256, guid: 36640f743079adf43a7a9de4ee597cd1,
         type: 3}
       propertyPath: m_RaycastTarget

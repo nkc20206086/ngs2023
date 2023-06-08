@@ -14,12 +14,12 @@ namespace Command.Entity
         public bool lockMenber { get; protected set; }
         public bool lockValue { get; protected set; }
         public bool lockCoordinateAxis { get; protected set; }
+        public bool sigined { get; protected set; }
 
-        protected string commandName;            // コマンドの名称
-        public ValueCommand value;       // 数値を持ったコマンドクラス
-        public AxisCommand axis;     // 軸を持ったコマンドクラス
+        public ValueCommand value;      // 数値を持ったコマンドクラス
+        public AxisCommand axis;        // 軸を持ったコマンドクラス
 
-        protected int usableValue;                // コマンドが用いる数値
+        protected int usableValue;              // コマンドが用いる数値
         protected CoordinateAxis usableAxis;    // コマンドが用いる軸
 
         protected Action completeAction;        // コマンド完了時に実行するアクションを保存する変数
@@ -40,15 +40,14 @@ namespace Command.Entity
         /// <param name="commandName">コマンドの名称</param>
         /// <param name="value">数値に用いる値</param>
         /// <param name="axis">軸に用いる値</param>
-        /// <param name="capacity">このコマンドが要する容量</param>
-        public MainCommand(bool lockMenber,bool lockValue,bool lockCoordinateAxis,string commandName,int value,int axis,int capacity) 
+        public MainCommand(bool lockMenber,bool lockValue,bool lockCoordinateAxis,string commandName,int value,int axis) 
         {
             this.lockMenber = lockMenber;
             this.lockValue = lockValue;
             this.lockCoordinateAxis = lockCoordinateAxis;
-            this.commandName = commandName;
             this.value = new ValueCommand(value);
             this.axis = new AxisCommand((CoordinateAxis)axis);
+            sigined = value > 0 ? true : false;
         }
 
         /// <summary>
@@ -60,9 +59,9 @@ namespace Command.Entity
             lockMenber = status.lockCommand;
             lockValue = status.lockNumber;
             lockCoordinateAxis = status.lockCoordinateAxis;
-            commandName = status.commandType.ToString();
             value = new ValueCommand(status.value);
             axis = new AxisCommand(status.axis);
+            sigined = value.getValue > 0 ? true : false;
         }
 
         /// <summary>
@@ -71,6 +70,7 @@ namespace Command.Entity
         /// <returns></returns>
         public MainCommand MainCommandClone()
         {
+            value = value.BaseClone() as ValueCommand;
             return (MainCommand)MemberwiseClone();
         }
 
@@ -120,13 +120,9 @@ namespace Command.Entity
             return returnVec;
         }
 
-        /// <summary>
-        /// コマンドの名称を取得する関数
-        /// </summary>
-        /// <returns></returns>
-        public string GetName()
+        public void SignChange()
         {
-            return commandName;
+            sigined = sigined ? false : true;
         }
 
         /// <summary>
@@ -176,7 +172,7 @@ namespace Command.Entity
 
         public override string GetString()
         {
-            return commandName;
+            return GetCommandType().ToString();
         }
 
         public override CommandType GetCommandType()
