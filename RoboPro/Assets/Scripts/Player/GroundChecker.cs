@@ -38,7 +38,10 @@ namespace Player
         private bool isCheckWall;
         private bool parentResetFlg;
         private string parentOldName;
+        private Vector3 defaultScale;
 
+        Vector3 tempVec;
+        Quaternion tempRot;
         private void Start()
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
@@ -51,6 +54,7 @@ namespace Player
             {
                 splitHeightVectorArray[i] = splitVec * i;
             }
+            defaultScale = Vector3.one;
         }
 
         /// <summary>
@@ -104,7 +108,7 @@ namespace Player
             //Vector3 mixedVecLeft = new Vector3(playerForwardVec.x * -0.2f, playerForwardVec.y, playerForwardVec.z * -0.2f);
 
             RaycastHit leftRay = new RaycastHit();
-            Physics.Raycast(rayObjLeft.gameObject.transform.position, Vector3.down ,out leftRay, 0.2f,GroundMask);
+            Physics.Raycast(rayObjLeft.gameObject.transform.position, Vector3.down, out leftRay, 0.2f, GroundMask);
             //Debug.DrawRay(rayObjLeft.gameObject.transform.position, Vector3.down * rayLength);
 
             if (leftRay.collider == null) return false;
@@ -114,7 +118,7 @@ namespace Player
         public bool CheckSideGround_Right()
         {
             RaycastHit rightRay = new RaycastHit();
-            Physics.Raycast(rayObjRight.gameObject.transform.position, Vector3.down, out rightRay, 0.2f,GroundMask);
+            Physics.Raycast(rayObjRight.gameObject.transform.position, Vector3.down, out rightRay, 0.2f, GroundMask);
             //Debug.DrawRay(rayObjRight.gameObject.transform.position, Vector3.down * rayLength);
 
             if (rightRay.collider == null) return false;
@@ -212,17 +216,41 @@ namespace Player
             //nullÅAÇ‹ÇΩÇÕñºëOÇ™ìØÇ∂Ç»ÇÁreturn
             else
             {
-
                 if (ray.collider == null || ray.collider.gameObject.name == parentOldName) return;
                 transform.parent = ray.collider.gameObject.transform;
-                Transform parent = transform;
+                Transform parent = ray.collider.gameObject.transform;
                 while (true)
                 {
                     if (parent.transform.parent == null) break;
                     else parent = parent.transform.parent;
                 }
+                parent.gameObject.name = "Parent";
                 parentOldName = ray.collider.gameObject.name;
                 gameObject.transform.parent = parent.transform;
+
+                //if (ray.collider == null) return;
+                //GameObject parent = ray.collider.transform.root.gameObject;
+
+                //if (tempVec == Vector3.zero)
+                //{
+                //    tempVec = parent.transform.position;
+                //    tempRot = parent.transform.rotation;
+                //}
+                //parent.gameObject.name = "Parent";
+                //Vector3 movementVec = parent.transform.position - tempVec;
+                //tempVec = parent.transform.position;
+
+                //Quaternion rotation = parent.transform.rotation;
+                //Quaternion rotationNum = Quaternion.Euler(0,rotation.y,0);
+
+                //Debug.Log(movementVec);
+                //var matrix = Matrix4x4.TRS(movementVec, rotationNum, parent.transform.localScale);
+                //gameObject.transform.position = matrix.MultiplyPoint(gameObject.transform.position);
+
+
+                //Vector3 angle = rotation.eulerAngles;
+                //Debug.Log(angle.y);
+                //Debug.Log(rotationNum.y);
             }
         }
     }
