@@ -55,7 +55,7 @@ namespace Player
         /// <param name="newStateEnum"></param>
         public void StateChanger(PlayerStateEnum newStateEnum)
         {
-            Debug.Log(newStateEnum);
+            //Debug.Log(newStateEnum);
             //ステートを変更
             state = newStateEnum;
             //Debug.Log(state + "ステートに変更されました");

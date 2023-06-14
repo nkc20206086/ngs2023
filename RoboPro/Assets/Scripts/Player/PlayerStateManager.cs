@@ -36,7 +36,6 @@ namespace Player
         void Start()
         {
             defaultScale = gameObject.transform.lossyScale;
-            //defaultLocalScale = gameObject.transform.localScale;
 
             playerStay = GetComponent<PlayerStay>();
             playerMove = GetComponent<PlayerMove>();
@@ -64,12 +63,12 @@ namespace Player
 
             //足元のオブジェクトを親オブジェクトにする
             stateGetter.GroundCheckGetter().CheckParentGround();
+            DefaultScaleCalc();
         }
 
         private void FixedUpdate()
         {
             //Debug.Log(stateGetter.StateGetter());
-
             //Statemachine
             switch (stateGetter.StateGetter())
             {
@@ -80,12 +79,37 @@ namespace Player
                     }
                 case PlayerStateEnum.Move:
                     {
-                        playerMove.Act_Move(isMove,isInteract,inputVec);
+                        if(inputVec.x != 0)
+                        {
+                            if(inputVec.x > 0)
+                            {
+                                inputVec.x = 1;
+                            }
+                            else
+                            {
+                                inputVec.x = -1;
+                            }
+                            inputVec.y = 0;
+                        }
+
+                        if(inputVec.y != 0)
+                        {
+                            if (inputVec.y > 0)
+                            {
+                                inputVec.y = 1;
+                            }
+                            else
+                            {
+                                inputVec.y = -1;
+                            }
+                            inputVec.x = 0;
+                        }
+                        playerMove.Act_Move(isMove, isInteract, inputVec);
                         break;
                     }
                 case PlayerStateEnum.Dizzy:
                     {
-                        playerDizzy.Act_Dizzy(isMove,isInteract);
+                        playerDizzy.Act_Dizzy(isMove, isInteract);
                         break;
                     }
                 case PlayerStateEnum.StepOff:
@@ -150,7 +174,7 @@ namespace Player
                     }
             }
             //AnyStateとしてどのStateでも処理を行う
-            DefaultScaleCalc();
+
         }
 
         /// <summary>
@@ -158,39 +182,29 @@ namespace Player
         /// </summary>
         private void DefaultScaleCalc()
         {
-            if (transform.parent == null) return;
-            Transform parent = transform;
-            while (true)
+            if (transform.parent == null)
             {
-                if (parent.transform.parent == null) break;
-                else parent = parent.transform.parent;
+                defaultScale = transform.lossyScale;
+                transform.localScale = defaultScale;
+
+                transform.localScale = new Vector3(1f, 1f, 1f);
             }
+            else
+            {
+                var local = transform.localScale;
+                var lossy = transform.lossyScale;
 
-            transform.localScale = new Vector3(defaultScale.x / parent.lossyScale.x,
-            defaultScale.y / parent.lossyScale.y,
-            defaultScale.z / parent.lossyScale.z
-            );
-
-
-            //Vector3 lossyScale = transform.lossyScale;
-            //Vector3 localScale = transform.localScale;
-
-            ////プレイヤーのLocalScaleを常に均一にする
-            //transform.localScale = new Vector3(
-            //        localScale.x / lossyScale.x * defaultScale.x,
-            //        localScale.y / lossyScale.y * defaultScale.y,
-            //        localScale.z / lossyScale.z * defaultScale.z);
-
-            //Debug.Log(localScale.x);
-            //Debug.Log(localScale.z);
-            //Debug.Log(lossyScale.z);
-            //Debug.Log(lossyScale.z);
-
-            //transform.localScale = new Vector3(
-            //    1f,
-            //    1f,
-            //    1f);
-
+                transform.localScale = new Vector3(
+                    (local.x / lossy.x) * defaultScale.x,
+                    (local.y / lossy.y) * defaultScale.y,
+                    (local.z / lossy.z) * defaultScale.z);
+                //Transform parent = gameObject.transform.parent;
+                //var culScale = Quaternion.Inverse(transform.rotation) * parent.localScale;
+                //var signScale = new Vector3(defaultScale.x / culScale.x,
+                //    defaultScale.y / culScale.y,
+                //    defaultScale.z / culScale.z);
+                //transform.localScale = new Vector3(Mathf.Abs(signScale.x), Mathf.Abs(signScale.y), Mathf.Abs(signScale.z));
+            }
         }
     }
 }

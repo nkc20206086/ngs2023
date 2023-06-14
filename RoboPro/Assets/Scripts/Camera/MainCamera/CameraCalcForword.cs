@@ -11,9 +11,9 @@ namespace MainCamera
         private Vector3[] cameraVectorYArray;
         private Vector3[] cameraVectorXArray;
 
-        private readonly int settingAngle = 45;
+        private readonly int settingAngle = 90;
         private float angleY = 0;
-        private float angleX = 45;
+        private float angleX = 90;
         private float rad = 0;
 
         private void Awake()
@@ -24,8 +24,8 @@ namespace MainCamera
         // Start is called before the first frame update
         void Start()
         {
-            cameraVectorYArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum.vector_360];
-            cameraVectorXArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum.vector_360];
+            cameraVectorYArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum_90.vector_360];
+            cameraVectorXArray = new Vector3[(int)CameraVectorEnumDatas.CameraVectorEnum_90.vector_360];
 
             //カメラのY角度補正値を計算
             for (int i = 0; i < cameraVectorYArray.Length; i++)
@@ -41,10 +41,11 @@ namespace MainCamera
             for (int i = 0; i < cameraVectorXArray.Length; i++)
             {
                 //45度から45度ずつ計算
-                angleX += settingAngle;
                 rad = angleX * Mathf.Deg2Rad;
                 Vector3 direction = new Vector3(Mathf.Sin(rad), 0, Mathf.Cos(rad));
                 cameraVectorXArray[i] = direction;
+                angleX += settingAngle;
+                Debug.Log(direction);
             }
         }
 
@@ -57,7 +58,7 @@ namespace MainCamera
             // カメラの角度の取得
             var cameraRot = Camera.main.transform.localEulerAngles.y;
 
-            if (cameraRot < (int)CameraVectorEnumDatas.CameraVectorEnum.vector_0)
+            if (cameraRot < (int)CameraVectorEnumDatas.CameraVectorEnum_90.vector_0)
             {
                 cameraRot = 360 - Mathf.Abs(cameraRot);
             }
@@ -69,9 +70,9 @@ namespace MainCamera
             int cameraPoint = (int)Math.Round(divisionAngle, MidpointRounding.AwayFromZero);
 
             // 360度 = 0度
-            if (cameraPoint == (int)CameraVectorEnumDatas.CameraVectorEnum.vector_360)
+            if (cameraPoint == (int)CameraVectorEnumDatas.CameraVectorEnum_90.vector_360)
             {
-                cameraPoint = (int)CameraVectorEnumDatas.CameraVectorEnum.vector_0;
+                cameraPoint = (int)CameraVectorEnumDatas.CameraVectorEnum_90.vector_0;
             }
             return cameraPoint;
         }

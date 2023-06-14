@@ -22,6 +22,16 @@ public class TestPlayerMove : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.parent = null;
+        }
+
+        if(Input.GetKey(KeyCode.RightShift))
+        {
+
+            transform.parent = parrent.transform;
+        }
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
@@ -34,10 +44,18 @@ public class TestPlayerMove : MonoBehaviour
 
         PlayerController();
 
-        transform.localScale = new Vector3(defaultScale.x / parrent.transform.lossyScale.x,
+        if(transform.parent == null)
+        {
+            transform.localScale = new Vector3(defaultScale.x * defaultScale.x, defaultScale.y * defaultScale.y, defaultScale.z * defaultScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(defaultScale.x / parrent.transform.lossyScale.x,
             defaultScale.y / parrent.transform.lossyScale.y,
             defaultScale.z / parrent.transform.lossyScale.z
             );
+        }
+        
         //DefaultScaleCalc();
         //AnimationTest();
     }

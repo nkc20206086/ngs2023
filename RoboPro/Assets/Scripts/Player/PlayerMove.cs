@@ -46,6 +46,7 @@ namespace Player
                 //カメラの角度から移動ベクトルを補正
                 moveForward = cameraVectorGetter.VectorYGetter() * vec.y + cameraVectorGetter.VectorXGetter() * vec.x;
                 moveForward = moveForward.normalized;
+                Debug.Log(moveForward);
 
                 if (isMove)
                 {
@@ -53,6 +54,7 @@ namespace Player
                     stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", true);
                     moveEffect.SetActive(true);
                     transform.LookAt(transform.position + moveForward);
+                    
                     stateGetter.RigidbodyGetter().velocity = new Vector3(transform.forward.x * stateGetter.SpeedGetter(), stateGetter.RigidbodyGetter().velocity.y, transform.forward.z * stateGetter.SpeedGetter());
                 }
                 else

@@ -21,5 +21,14 @@ namespace MainCamera
             vector_315,
             vector_360
         }
+
+        public enum CameraVectorEnum_90
+        {
+            vector_0,
+            vector_90,
+            vector_180,
+            vector_270,
+            vector_360
+        }
     }
 }
