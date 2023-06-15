@@ -31,6 +31,8 @@ namespace Player
             Ladder_Check(isInteract);
             AccessPoint_Check(isInteract);
 
+            Dizzy_Check(isInteract);
+
             //床にいるかどうかを判定する
             if (stateGetter.GroundCheckGetter().LandingCheck() == false)
             {
@@ -92,6 +94,21 @@ namespace Player
             pos.y = this.transform.position.y;
             transform.LookAt(pos);
             stateChangeEvent(PlayerStateEnum.Access);
+        }
+
+        private void Dizzy_Check(bool isInteract)
+        {
+            if (isInteract == false) return;
+            if (stateGetter.GroundCheckGetter().CheckGround() == false)
+            {
+                //自分の乗っている床でふらつけるかどうかの判定
+                if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
+                {
+                    //ふらつくステートに変更
+                    stateGetter.RigidbodyGetter().velocity = Vector3.zero;
+                    stateChangeEvent(PlayerStateEnum.Dizzy);
+                }
+            }
         }
     }
 }

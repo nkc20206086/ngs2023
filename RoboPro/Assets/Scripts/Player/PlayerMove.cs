@@ -19,6 +19,7 @@ namespace Player
 
         private Vector3 moveForward;
         private GameObject moveEffect;
+        private bool isDizzy;
 
         // Start is called before the first frame update
         void Start()
@@ -64,8 +65,9 @@ namespace Player
                     stateGetter.RigidbodyGetter().velocity = Vector3.zero;
                     stateChangeEvent(PlayerStateEnum.Stay);
                 }
-                AccesPoint_Check(isInteract);
+
                 Dizzy_Check();
+                AccesPoint_Check(isInteract);
             }
             else
             {
@@ -96,6 +98,7 @@ namespace Player
                         transform.LookAt(pos);
 
                         stateChangeEvent(PlayerStateEnum.Access);
+                        //isDizzy = false;
                     }
                 }
             }
@@ -111,6 +114,7 @@ namespace Player
                 //自分の乗っている床でふらつけるかどうかの判定
                 if (stateGetter.GroundCheckGetter().DizzyGroundFlg())
                 {
+                    isDizzy = true;
                     //ふらつくステートに変更
                     stateGetter.PlayerAnimatorGeter().SetBool("Flg_Walk", false);
                     stateGetter.RigidbodyGetter().velocity = Vector3.zero;

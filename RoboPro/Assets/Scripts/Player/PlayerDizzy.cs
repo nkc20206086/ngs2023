@@ -44,6 +44,7 @@ namespace Player
                 }
                 else
                 {
+                    if (stateGetter.PlayerAnimatorGeter().GetBool("Flg_Cliff") == false) return;
                     if (isInteract)
                     {
                         // Debug.Log("ç~ÇËÇÈ");
