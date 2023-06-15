@@ -10,7 +10,7 @@ namespace Gimmick
 {
     public class AccessPoint : MonoBehaviour
     {
-        public const float RADIUS = 1.5f;   // 当たり判定の有効範囲の半径
+        public const float RADIUS = 0.8f;   // 当たり判定の有効範囲の半径
 
         [Tooltip("APとギミックを繋ぐラインの色")]
         public Color color;
